@@ -9,13 +9,13 @@ using namespace std;
 
 const int SCREEN_WIDTH = 1200;
 const int SCREEN_HEIGHT = 750;
-const int TOTAL_MODEBUTTONS = 3;
+const int TOTAL_MODEBUTTON = 2;
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 Texture startgame, choosemode;
 CircleButton startbomb;
-RectButton modebuttons[TOTAL_MODEBUTTONS];
+RectButton modebuttons[TOTAL_MODEBUTTON];
 
 void init() {
     SDL_Init(SDL_INIT_VIDEO);
@@ -27,21 +27,21 @@ void loadMedia(){
     startgame.loadFromFile("../start_image/startbackground.png");
     choosemode.loadFromFile("../start_image/modebackground.png");
     const int BUTTON_START_RADIUS = 180;
-    const int BUTTON_MODE_WIDTH = 200;
-    const int BUTTON_MODE_HEIGHT = 100;
+    const int BUTTON_MODE_WIDTH = 300;
+    const int BUTTON_MODE_HEIGHT = 150;
     SDL_Point startbuttoncenter = {600, 520};
     SDL_Rect startbuttondest = {420,190 , 360, 512};
     startbomb = CircleButton(startbuttondest, startbuttoncenter, BUTTON_START_RADIUS);
-    SDL_Rect modebutton_dest[TOTAL_MODEBUTTONS];
-    for(int i = 0; i<TOTAL_MODEBUTTONS; i++){
-        modebutton_dest[i].x = 300*i+200;
+    SDL_Rect modebutton_dest[TOTAL_MODEBUTTON];
+    for(int i = 0; i<TOTAL_MODEBUTTON; i++){
+        modebutton_dest[i].x = 500*i+200;
         modebutton_dest[i].y = 500;
         modebutton_dest[i].w = BUTTON_MODE_WIDTH;
         modebutton_dest[i].h = BUTTON_MODE_HEIGHT;
     }
-    for(int i = 0; i<TOTAL_MODEBUTTONS; i++) modebuttons[i] = RectButton(modebutton_dest[i]);
+    for(int i = 0; i<TOTAL_MODEBUTTON; i++) modebuttons[i] = RectButton(modebutton_dest[i]);
     startbomb.buttontexture.loadFromFile("../start_image/startbomb.png");
-    for(int i = 0; i<TOTAL_MODEBUTTONS; i++) modebuttons[i].buttontexture.loadFromFile("../start_image/modebutton.png");
+    for(int i = 0; i<TOTAL_MODEBUTTON; i++) modebuttons[i].buttontexture.loadFromFile("../start_image/modebutton.png");
 }
 void close(){
     startgame.free();
@@ -63,7 +63,7 @@ int main( int argc, char* args[] ){
         while(1){
             while(SDL_PollEvent(&startevent) != 0){
                 if(startevent.type == SDL_QUIT) quit = true;
-                for(int i = 0; i < TOTAL_MODEBUTTONS; i++) startbomb.handleEvent(&startevent);
+                startbomb.handleEvent(&startevent);
             }
             if(startevent.type == SDL_QUIT) break;
             SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -84,13 +84,13 @@ int main( int argc, char* args[] ){
         while(1){
             while(SDL_PollEvent(&modeevent) != 0){
                 if(modeevent.type == SDL_QUIT) quit = true;
-                for(int i = 0; i < TOTAL_MODEBUTTONS; i++) modebuttons[i].handleEvent(&modeevent);
+                for(int i = 0; i < TOTAL_MODEBUTTON; i++) modebuttons[i].handleEvent(&modeevent);
             }
             if(modeevent.type == SDL_QUIT) break;
             SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
             SDL_RenderClear(gRenderer);
             choosemode.render(NULL);
-            for(int i = 0; i < TOTAL_MODEBUTTONS; i++) {
+            for(int i = 0; i < TOTAL_MODEBUTTON; i++) {
                 bool big = 1;
                 if(modebuttons[i].CurrentSprite==BUTTON_SPRITE_MOUSE_OUT) big = 0;
                 modebuttons[i].rectrender(big);

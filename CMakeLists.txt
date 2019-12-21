@@ -12,5 +12,5 @@ include_directories(${SDL2_IMAGE_INCLUDE_DIR})
 include_directories(${SDL2_TTF_INCLUDE_DIR})
 include_directories(${SDL2_MIXER_INCLUDE_DIR})
 
-add_executable(bombEEr_man main.cpp texture.cpp texture.h button.cpp button.h PVE1.cpp PVE1.h PVEn.cpp PVEn.h PVP.cpp PVP.h)
+add_executable(bombEEr_man main.cpp texture.cpp texture.h button.cpp button.h PVE.cpp PVE.h PVP.cpp PVP.h)
 target_link_libraries(bombEEr_man ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2_TTF_LIBRARY} ${SDL2_MIXER_LIBRARY})
