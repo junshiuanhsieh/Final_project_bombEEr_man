@@ -5,6 +5,8 @@
 #include <cmath>
 #include "button.h"
 #include "texture.h"
+#include "PVE.h"
+#include "PVP.h"
 using namespace std;
 
 const int SCREEN_WIDTH = 1200;
@@ -96,6 +98,16 @@ int main( int argc, char* args[] ){
                 modebuttons[i].rectrender(big);
             }
             SDL_RenderPresent( gRenderer );
+            if(modebuttons[0].CurrentSprite==BUTTON_SPRITE_MOUSE_UP) {
+                PVE();
+                quit = 1;
+                break;
+            }
+            if(modebuttons[1].CurrentSprite==BUTTON_SPRITE_MOUSE_UP) {
+                PVP();
+                quit = 1;
+                break;
+            }
         }
         if(quit) break;
     }
