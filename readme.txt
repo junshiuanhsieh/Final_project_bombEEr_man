@@ -8,9 +8,6 @@ Global Variable:
   RectButton modebuttons[TOTAL_MODEBUTTONS]
   const int SCREEN_WIDTH = 1200;
   const int SCREEN_HEIGHT = 750;
-  const int BUTTON_START_RADIUS = 180;
-  const int BUTTON_MODE_WIDTH = 200;
-  const int BUTTON_MODE_HEIGHT = 100;
   const int TOTAL_MODEBUTTONS = 3;
 
 Class:
