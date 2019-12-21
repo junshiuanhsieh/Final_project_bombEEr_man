@@ -12,7 +12,7 @@ Texture::~Texture(){
     free();
 }
 
-bool Texture::loadFromFile( std::string path ){
+void Texture::loadFromFile( std::string path ){
     free();
     SDL_Texture* newTexture = NULL;
     SDL_Surface* loadedSurface = IMG_Load(path.c_str());
@@ -22,7 +22,6 @@ bool Texture::loadFromFile( std::string path ){
     mHeight = loadedSurface->h;
     SDL_FreeSurface(loadedSurface);
     mTexture = newTexture;
-    return mTexture != NULL;
 }
 
 #if defined(_SDL_TTF_H) || defined(SDL_TTF_H)

@@ -9,7 +9,7 @@ class Texture{
     public:
         Texture();
         ~Texture();
-        bool loadFromFile(string path);
+        void loadFromFile(string path);
 
         #if defined(_SDL_TTF_H) || defined(SDL_TTF_H)
             bool loadFromRenderedText(string textureText, SDL_Color textColor );
