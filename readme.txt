@@ -9,6 +9,7 @@ Global Variable:
   const int SCREEN_WIDTH = 1200;
   const int SCREEN_HEIGHT = 750;
   const int TOTAL_MODEBUTTONS = 3;
+  Bool PVE_quit, PVP_quit;
 
 Class:
   Rectbutton

@@ -30,7 +30,7 @@ int Choosenumber(){
             if (numberevent.type == SDL_QUIT) PVE_quit = true;
             for(int i = 0; i < TOTAL_NUMBERBUTTON; i++) numberbuttons[i].handleEvent(&numberevent);
         }
-        if (numberevent.type == SDL_QUIT) break;
+        if (numberevent.type == SDL_QUIT) return 0;
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         choosenumber.render(NULL);
@@ -45,13 +45,15 @@ int Choosenumber(){
         SDL_RenderPresent( gRenderer );
         if(num != 0) return num;
      }
+    return num;
 }
 void PVE(){
     int number = 0;
     while(!PVE_quit){
         number = Choosenumber();
         cout << number << endl;
-        break;
+        if(number == 1) {}
+        else if(number == 2) {}
+        else if(number == 3) {}
     }
-
 }
