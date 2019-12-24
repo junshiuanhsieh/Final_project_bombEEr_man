@@ -4,4 +4,8 @@
 #include <SDL_ttf.h>
 #include "button.h"
 #include "texture.h"
-void PVP();
+void PVP(int);
+void PVP1(int);
+void PVP2(int);
+void PVP3(int);
+void PVPScrolling(int);

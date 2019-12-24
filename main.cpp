@@ -18,6 +18,7 @@ SDL_Renderer* gRenderer = NULL;
 Texture startgame, choosemode;
 CircleButton startbomb;
 RectButton modebuttons[TOTAL_MODEBUTTON];
+bool quit;
 
 void init() {
     SDL_Init(SDL_INIT_VIDEO);
@@ -56,10 +57,56 @@ void close(){
     SDL_Quit();
 }
 
+int Choosenumber(){
+    int num = 0;
+    int TOTAL_NUMBERBUTTON = 3;
+    const int BUTTON_NUMBER_WIDTH = 200;
+    const int BUTTON_NUMBER_HEIGHT = 100;
+    Texture choosenumber;
+    RectButton numberbuttons[TOTAL_NUMBERBUTTON];
+    SDL_Rect numberbutton_dest[TOTAL_NUMBERBUTTON];
+    for(int i = 0; i<TOTAL_NUMBERBUTTON; i++){
+        numberbutton_dest[i].x = 300*i+200;
+        numberbutton_dest[i].y = 500;
+        numberbutton_dest[i].w = BUTTON_NUMBER_WIDTH;
+        numberbutton_dest[i].h = BUTTON_NUMBER_HEIGHT;
+    }
+    for(int i = 0; i<TOTAL_NUMBERBUTTON; i++) numberbuttons[i] = RectButton(numberbutton_dest[i]);
+    choosenumber.loadFromFile("../PVE_image/choosenumber_background.png");
+    for(int i = 0; i<TOTAL_NUMBERBUTTON; i++) numberbuttons[i].buttontexture.loadFromFile("../PVE_image/choosenumber_button.png");
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(gRenderer);
+    choosenumber.render(NULL);
+    SDL_RenderPresent( gRenderer );
+
+    SDL_Event numberevent;
+    while(!quit) {
+        while (SDL_PollEvent(&numberevent) != 0) {
+            if (numberevent.type == SDL_QUIT) quit = true;
+            for(int i = 0; i < TOTAL_NUMBERBUTTON; i++) numberbuttons[i].handleEvent(&numberevent);
+        }
+        if (numberevent.type == SDL_QUIT) return 0;
+        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+        SDL_RenderClear(gRenderer);
+        choosenumber.render(NULL);
+        for(int i = 0; i < TOTAL_NUMBERBUTTON; i++) {
+            bool big = 1;
+            if(numberbuttons[i].CurrentSprite==BUTTON_SPRITE_MOUSE_OUT) big = 0;
+            numberbuttons[i].rectrender(big);
+            if(numberbuttons[i].CurrentSprite==BUTTON_SPRITE_MOUSE_UP) {
+                num = i+1;
+            }
+        }
+        SDL_RenderPresent( gRenderer );
+        if(num != 0) return num;
+    }
+    return num;
+}
+
 int main( int argc, char* args[] ){
     init();
     loadMedia();
-    bool quit = false;
+    quit = false;
     SDL_Event startevent, modeevent;
     while(!quit){
         while(1){
@@ -98,18 +145,23 @@ int main( int argc, char* args[] ){
                 modebuttons[i].rectrender(big);
             }
             SDL_RenderPresent( gRenderer );
+            int number = 0;
             if(modebuttons[0].CurrentSprite==BUTTON_SPRITE_MOUSE_UP) {
-                PVE();
+                number = Choosenumber();
+                if(number==0) break;
+                PVE(number);
                 quit = 1;
                 break;
             }
             if(modebuttons[1].CurrentSprite==BUTTON_SPRITE_MOUSE_UP) {
-                PVP();
+                number = Choosenumber();
+                if(number==0) break;
+                PVP(number);
                 quit = 1;
                 break;
             }
         }
-        if(quit) break;
+        //if(quit) break;
     }
     close();
     return 0;
