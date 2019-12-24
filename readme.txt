@@ -8,10 +8,16 @@ Global Variable:
   RectButton modebuttons[TOTAL_MODEBUTTONS]
   const int SCREEN_WIDTH = 1200;
   const int SCREEN_HEIGHT = 750;
-  const int TOTAL_MODEBUTTONS = 3;
+  const int TOTAL_MODEBUTTONS = 2;
   Bool PVE_quit, PVP_quit;
 
 Class:
   Rectbutton
   Circlebutton
   Texture
+
+cpp file:
+  texture.cpp
+  button.cpp
+  PVE.cpp
+  PVP.cpp

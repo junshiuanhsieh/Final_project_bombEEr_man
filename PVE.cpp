@@ -49,11 +49,43 @@ int Choosenumber(){
 }
 void PVE(){
     int number = 0;
+    number = Choosenumber();
+    cout << number << endl;
     while(!PVE_quit){
-        number = Choosenumber();
-        cout << number << endl;
-        if(number == 1) {}
-        else if(number == 2) {}
-        else if(number == 3) {}
+        if(number == 1) PVE1(1);
+        else if(number == 2) PVE2(2);
+        else if(number == 3) PVE3(3);
+    }
+}
+
+void PVE1(int num){
+    Scrolling(num);
+}
+void PVE2(int num){
+    Scrolling(num);
+}
+void PVE3(int num){
+    Scrolling(num);
+}
+
+void Scrolling(int num){
+    Texture scrolling;
+    scrolling.loadFromFile("../PVE_image/scrolling_background.png");
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(gRenderer);
+    scrolling.render(NULL);
+    SDL_RenderPresent( gRenderer );
+
+    SDL_Event scrollingevent;
+    while(!PVE_quit) {
+        while (SDL_PollEvent(&scrollingevent) != 0) {
+            if (scrollingevent.type == SDL_QUIT) PVE_quit = true;
+        }
+        if(num==1){
+
+        }
+        else{
+
+        }
     }
 }
