@@ -21,7 +21,7 @@ RectButton modebuttons[TOTAL_MODEBUTTON];
 bool quit;
 
 void init() {
-    SDL_Init(SDL_INIT_VIDEO);
+    if( SDL_Init(SDL_INIT_VIDEO) < 0 ) printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
     gWindow = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -70,8 +70,8 @@ int Choosenumber(){
         numberbutton_dest[i].y = 500;
         numberbutton_dest[i].w = BUTTON_NUMBER_WIDTH;
         numberbutton_dest[i].h = BUTTON_NUMBER_HEIGHT;
+        numberbuttons[i] = RectButton(numberbutton_dest[i]);
     }
-    for(int i = 0; i<TOTAL_NUMBERBUTTON; i++) numberbuttons[i] = RectButton(numberbutton_dest[i]);
     choosenumber.loadFromFile("../PVE_image/choosenumber_background.png");
     for(int i = 0; i<TOTAL_NUMBERBUTTON; i++) numberbuttons[i].buttontexture.loadFromFile("../PVE_image/choosenumber_button.png");
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -147,21 +147,24 @@ int main( int argc, char* args[] ){
             SDL_RenderPresent( gRenderer );
             int number = 0;
             if(modebuttons[0].CurrentSprite==BUTTON_SPRITE_MOUSE_UP) {
+                cout << "PVE" << endl;
                 number = Choosenumber();
+                cout << "number = " << number << endl;
                 if(number==0) break;
                 PVE(number);
                 quit = 1;
                 break;
             }
             if(modebuttons[1].CurrentSprite==BUTTON_SPRITE_MOUSE_UP) {
+                cout << "PVP" << endl;
                 number = Choosenumber();
+                cout << "number = " << number << endl;
                 if(number==0) break;
                 PVP(number);
                 quit = 1;
                 break;
             }
         }
-        //if(quit) break;
     }
     close();
     return 0;

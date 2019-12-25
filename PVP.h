@@ -9,3 +9,4 @@ void PVP1(int);
 void PVP2(int);
 void PVP3(int);
 void PVPScrolling(int);
+void PVPchoosecharacter(int);

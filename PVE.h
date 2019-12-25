@@ -10,4 +10,5 @@ void PVE1(int);
 void PVE2(int);
 void PVE3(int);
 void PVEScrolling(int);
+void PVEchoosecharacter(int);
 
