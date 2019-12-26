@@ -44,7 +44,8 @@ void loadMedia(){
     }
     for(int i = 0; i<TOTAL_MODEBUTTON; i++) modebuttons[i] = RectButton(modebutton_dest[i]);
     startbomb.buttontexture.loadFromFile("../start_image/startbomb.png");
-    for(int i = 0; i<TOTAL_MODEBUTTON; i++) modebuttons[i].buttontexture.loadFromFile("../start_image/modebutton.png");
+    modebuttons[0].buttontexture.loadFromFile("../start_image/PVEbutton.png");
+    modebuttons[1].buttontexture.loadFromFile("../start_image/PVPbutton.png");
 }
 void close(){
     startgame.free();
@@ -56,7 +57,6 @@ void close(){
     IMG_Quit();
     SDL_Quit();
 }
-
 int Choosenumber(){
     int num = 0;
     int TOTAL_NUMBERBUTTON = 3;
@@ -73,7 +73,9 @@ int Choosenumber(){
         numberbuttons[i] = RectButton(numberbutton_dest[i]);
     }
     choosenumber.loadFromFile("../start_image/choosenumber_background.png");
-    for(int i = 0; i<TOTAL_NUMBERBUTTON; i++) numberbuttons[i].buttontexture.loadFromFile("../start_image/choosenumber_button.png");
+    numberbuttons[0].buttontexture.loadFromFile("../start_image/choosenumber_button1.png");
+    numberbuttons[1].buttontexture.loadFromFile("../start_image/choosenumber_button2.png");
+    numberbuttons[2].buttontexture.loadFromFile("../start_image/choosenumber_button3.png");
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
     choosenumber.render(NULL);
@@ -102,7 +104,6 @@ int Choosenumber(){
     }
     return num;
 }
-
 int main( int argc, char* args[] ){
     init();
     loadMedia();
