@@ -18,6 +18,28 @@ void PVE(int number){
 
 }
 
+void PVEScrolling(int number){
+    Texture scrolling, TextTexture;
+    scrolling.loadFromFile("../PVE_image/scrolling_background.png");
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(gRenderer);
+    scrolling.render(NULL);
+    SDL_RenderPresent( gRenderer );
+
+    SDL_Event scrollingevent;
+
+    while(!quit) {
+        while (SDL_PollEvent(&scrollingevent) != 0) {
+            if (scrollingevent.type == SDL_QUIT) quit = true;
+        }
+        if(number==1){
+
+        }
+        else{
+
+        }
+    }
+}
 void PVEchoosecharacter(int number){
     character = new int[number];
     for(int i = 0; i< number; i++) character[i] = -1;
@@ -187,25 +209,4 @@ void PVE2(int number){
 void PVE3(int number){
 }
 
-void PVEScrolling(int number){
-    Texture scrolling, TextTexture;
-    scrolling.loadFromFile("../PVE_image/scrolling_background.png");
-    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-    SDL_RenderClear(gRenderer);
-    scrolling.render(NULL);
-    SDL_RenderPresent( gRenderer );
 
-    SDL_Event scrollingevent;
-
-    while(!quit) {
-        while (SDL_PollEvent(&scrollingevent) != 0) {
-            if (scrollingevent.type == SDL_QUIT) quit = true;
-        }
-        if(number==1){
-
-        }
-        else{
-
-        }
-    }
-}

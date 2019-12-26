@@ -18,6 +18,7 @@ void PVP(int number){
 
 }
 
+void PVPScrolling(int number);
 void PVPchoosecharacter(int number){
     character = new int[number];
     for(int i = 0; i< number; i++) character[i] = -1;
