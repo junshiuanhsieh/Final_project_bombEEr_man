@@ -11,7 +11,6 @@ using namespace std;
 
 const int SCREEN_WIDTH = 1200;
 const int SCREEN_HEIGHT = 750;
-const int TOTAL_MODEBUTTON = 2;
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 bool quit;
@@ -23,7 +22,7 @@ void close();
 void Start();
 void Choosemode();
 void Choosenumber();
-void Scrolling(int);
+void Scrolling();
 void Choosecharacter();
 void Tutorial_start();
 void Tutorial();
@@ -84,18 +83,18 @@ void Start(){
     }
 }
 void Choosemode(){
-    RectButton modebuttons[TOTAL_MODEBUTTON];
+    RectButton modebuttons[2];
     Texture choosemode;
     const int BUTTON_MODE_WIDTH = 300;
     const int BUTTON_MODE_HEIGHT = 150;
-    SDL_Rect modebutton_dest[TOTAL_MODEBUTTON];
-    for(int i = 0; i<TOTAL_MODEBUTTON; i++){
+    SDL_Rect modebutton_dest[2];
+    for(int i = 0; i<2; i++){
         modebutton_dest[i].x = 500*i+200;
         modebutton_dest[i].y = 500;
         modebutton_dest[i].w = BUTTON_MODE_WIDTH;
         modebutton_dest[i].h = BUTTON_MODE_HEIGHT;
     }
-    for(int i = 0; i<TOTAL_MODEBUTTON; i++) modebuttons[i] = RectButton(modebutton_dest[i]);
+    for(int i = 0; i<2; i++) modebuttons[i] = RectButton(modebutton_dest[i]);
     modebuttons[0].buttontexture.loadFromFile("../start_image/PVEbutton.png");
     modebuttons[1].buttontexture.loadFromFile("../start_image/PVPbutton.png");
     choosemode.loadFromFile("../start_image/modebackground.png");
@@ -103,13 +102,13 @@ void Choosemode(){
     while(!quit){
         while(SDL_PollEvent(&modeevent) != 0){
             if(modeevent.type == SDL_QUIT) quit = true;
-            for(int i = 0; i < TOTAL_MODEBUTTON; i++) modebuttons[i].handleEvent(&modeevent);
+            for(int i = 0; i < 2; i++) modebuttons[i].handleEvent(&modeevent);
         }
         if(modeevent.type == SDL_QUIT) return;
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         choosemode.render(NULL);
-        for(int i = 0; i < TOTAL_MODEBUTTON; i++) {
+        for(int i = 0; i < 2; i++) {
             bool big = 1;
             if(modebuttons[i].CurrentSprite==BUTTON_SPRITE_MOUSE_OUT) big = 0;
             modebuttons[i].rectrender(big);
@@ -120,24 +119,12 @@ void Choosemode(){
             Mode = 1;
             cout << "PVE" << endl;
             Choosenumber();
-//            if(quit) return;
-//            Scrolling(Mode);
-//            if(quit) return;
-//            Choosecharacter();
-//            if(quit) return;
-//            Tutorial_start();
             break;
         }
         if(modebuttons[1].CurrentSprite==BUTTON_SPRITE_MOUSE_UP) {
             Mode = 2;
             cout << "PVP" << endl;
             Choosenumber();
-//            if(quit) return;
-            //Scrolling(Mode);
-            //if(quit) return;
-//            Choosecharacter();
-//            if(quit) return;
-//            Tutorial_start();
             break;
         }
     }
@@ -196,7 +183,7 @@ void Choosenumber(){
         }
     }
 }
-void Scrolling(int mode){}
+void Scrolling(){}
 void Choosecharacter(){
     character = new int[Player_number];
     for(int i = 0; i< Player_number; i++) character[i] = -1;

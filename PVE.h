@@ -9,7 +9,3 @@ void PVE();
 void PVE1();
 void PVE2();
 void PVE3();
-//void PVEScrolling(int);
-//void PVEchoosecharacter();
-//void PVE_tutorial_start();
-//void PVE_tutorial();
