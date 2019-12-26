@@ -84,16 +84,11 @@ void PVEchoosecharacter(int number){
                         }
                     }
                     else if (chooseevent.key.keysym.sym==SDLK_RETURN || chooseevent.key.keysym.sym==SDLK_SPACE || chooseevent.key.keysym.sym==SDLK_TAB) {
-                        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
-                        SDL_RenderFillRect(gRenderer, &frame[tempchoose]);
-                        characteroption[tempchoose].rectrender();
-                        SDL_RenderPresent(gRenderer);
                         character[i] = tempchoose;
                         choosen[tempchoose] = 1;
                         tempchoose = 0;
                         while (choosen[tempchoose] == 1) tempchoose++;
                         nextplayer = 1;
-                        break;
                     }
                 }
             }
