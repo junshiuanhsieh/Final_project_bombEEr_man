@@ -72,8 +72,8 @@ int Choosenumber(){
         numberbutton_dest[i].h = BUTTON_NUMBER_HEIGHT;
         numberbuttons[i] = RectButton(numberbutton_dest[i]);
     }
-    choosenumber.loadFromFile("../PVE_image/choosenumber_background.png");
-    for(int i = 0; i<TOTAL_NUMBERBUTTON; i++) numberbuttons[i].buttontexture.loadFromFile("../PVE_image/choosenumber_button.png");
+    choosenumber.loadFromFile("../start_image/choosenumber_background.png");
+    for(int i = 0; i<TOTAL_NUMBERBUTTON; i++) numberbuttons[i].buttontexture.loadFromFile("../start_image/choosenumber_button.png");
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
     choosenumber.render(NULL);
@@ -130,7 +130,7 @@ int main( int argc, char* args[] ){
         choosemode.render(NULL);
         SDL_RenderPresent( gRenderer );
 
-        while(1){
+        while(!quit){
             while(SDL_PollEvent(&modeevent) != 0){
                 if(modeevent.type == SDL_QUIT) quit = true;
                 for(int i = 0; i < TOTAL_MODEBUTTON; i++) modebuttons[i].handleEvent(&modeevent);

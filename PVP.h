@@ -10,3 +10,5 @@ void PVP2(int);
 void PVP3(int);
 void PVPScrolling(int);
 void PVPchoosecharacter(int);
+void PVP_tutorial_start();
+void PVP_tutorial();

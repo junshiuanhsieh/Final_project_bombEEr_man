@@ -11,4 +11,5 @@ void PVE2(int);
 void PVE3(int);
 void PVEScrolling(int);
 void PVEchoosecharacter(int);
-
+void PVE_tutorial_start();
+void PVE_tutorial();

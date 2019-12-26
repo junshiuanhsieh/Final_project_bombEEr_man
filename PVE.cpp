@@ -9,17 +9,13 @@ void PVE(int number){
     if(quit) return;
     PVEchoosecharacter(number);
     if(quit) return;
+    PVE_tutorial_start();
+    if(quit) return;
+
     if(number == 1) PVE1(1);
     else if(number == 2) PVE2(2);
     else if(number == 3) PVE3(3);
 
-    //for testing
-    SDL_Event testtemp;
-    while(!quit){
-        while (SDL_PollEvent(&testtemp) != 0) {
-            if (testtemp.type == SDL_QUIT) quit = true;
-        }
-    }
 }
 
 void PVEchoosecharacter(int number){
@@ -109,6 +105,78 @@ void PVEchoosecharacter(int number){
         }
         cout << "character[" << i << "] = " << character[i] << endl;
         SDL_Delay(400);
+    }
+}
+void PVE_tutorial_start(){
+    SDL_Rect tutorial_dest = {200, 500, 300, 150}, startgame_dest = {700, 400, 300, 300};
+    SDL_Point startgame_center = {850, 550};
+    Texture tutorial_start;
+    RectButton tutorial(tutorial_dest);
+    CircleButton start_game(startgame_dest, startgame_center, 150);
+    tutorial_start.loadFromFile("../PVE_image/tutorial_start_background.png");
+    tutorial.buttontexture.loadFromFile("../PVE_image/tutorial.png");
+    start_game.buttontexture.loadFromFile(("../PVE_image/start_game.png"));
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(gRenderer);
+    tutorial_start.render(NULL);
+    SDL_RenderPresent( gRenderer );
+    SDL_Event tutorial_start_event;
+    while(!quit) {
+        while (SDL_PollEvent(&tutorial_start_event) != 0) {
+            if (tutorial_start_event.type == SDL_QUIT) quit = true;
+            tutorial.handleEvent(&tutorial_start_event);
+            start_game.handleEvent(&tutorial_start_event);
+        }
+        if (tutorial_start_event.type == SDL_QUIT) return;
+        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+        SDL_RenderClear(gRenderer);
+        tutorial_start.render(NULL);
+        bool big_tutorial = 1, big_startgame = 1;
+        if(tutorial.CurrentSprite==BUTTON_SPRITE_MOUSE_OUT) big_tutorial = 0;
+        if(start_game.CurrentSprite==BUTTON_SPRITE_MOUSE_OUT) big_startgame = 0;
+        tutorial.rectrender(big_tutorial);
+        start_game.circlerender(big_startgame);
+        SDL_RenderPresent(gRenderer);
+        if(start_game.CurrentSprite==BUTTON_SPRITE_MOUSE_UP) {
+            cout << "start game" << endl;
+            break;
+        }
+        if(tutorial.CurrentSprite==BUTTON_SPRITE_MOUSE_UP) {
+            PVE_tutorial();
+            break;
+        }
+    }
+}
+void PVE_tutorial(){
+    cout << "tutorial" << endl;
+    SDL_Rect back_dest = {900, 550, 200, 100};
+    Texture tutorial;
+    RectButton back(back_dest);
+    tutorial.loadFromFile("../PVE_image/tutorial_background.png");
+    back.buttontexture.loadFromFile("../PVE_image/tutorial_back.png");
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(gRenderer);
+    tutorial.render(NULL);
+    SDL_RenderPresent( gRenderer );
+    SDL_Event tutorial_event;
+    while(!quit) {
+        while (SDL_PollEvent(&tutorial_event) != 0) {
+            if (tutorial_event.type == SDL_QUIT) quit = true;
+            back.handleEvent(&tutorial_event);
+        }
+        if (tutorial_event.type == SDL_QUIT) return;
+        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+        SDL_RenderClear(gRenderer);
+        tutorial.render(NULL);
+        bool big = 1;
+        if(back.CurrentSprite==BUTTON_SPRITE_MOUSE_OUT) big = 0;
+        if(back.CurrentSprite==BUTTON_SPRITE_MOUSE_OUT) big = 0;
+        back.rectrender(big);
+        SDL_RenderPresent(gRenderer);
+        if(back.CurrentSprite==BUTTON_SPRITE_MOUSE_UP) {
+            PVE_tutorial_start();
+            break;
+        }
     }
 }
 
