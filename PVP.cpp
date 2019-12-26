@@ -52,11 +52,12 @@ void PVPchoosecharacter(int number){
     choosecharacter.render(NULL);
     SDL_RenderPresent(gRenderer);
     SDL_Event chooseevent;
-    bool choosen[TOTAL_CHARACTER_OPTION];
+    bool choosen[TOTAL_CHARACTER_OPTION], nextplayer;
     for (int i = 0; i < TOTAL_CHARACTER_OPTION; i++) choosen[i] = 0;
 
     int start_choose, tempchoose, end_choose;
     for(int i = 0; i < number; i++) {
+        nextplayer = 0;
         start_choose = 0;
         end_choose = 4;
         while (choosen[start_choose] == 1) start_choose++;
@@ -65,36 +66,36 @@ void PVPchoosecharacter(int number){
 
         while (!quit) {
             while (SDL_PollEvent(&chooseevent) != 0) {
-                if (chooseevent.type == SDL_QUIT) quit = true;
-            }
-            if (chooseevent.type == SDL_QUIT) return;
-            else if(chooseevent.type == SDL_KEYDOWN) {
-                while(chooseevent.type != SDL_KEYUP) {
-                    SDL_PollEvent(&chooseevent);
-                    if (chooseevent.type == SDL_QUIT) {quit=true; break;}
-                }
-                if (chooseevent.key.keysym.sym==SDLK_RIGHT || chooseevent.key.keysym.sym==SDLK_d || chooseevent.key.keysym.sym==SDLK_l) {
-                    if (tempchoose < end_choose) {
-                        tempchoose++;
+                if (chooseevent.type == SDL_QUIT) {quit = true; return;}
+                else if(chooseevent.type == SDL_KEYDOWN) {
+                    while(chooseevent.type != SDL_KEYUP) {
+                        SDL_PollEvent(&chooseevent);
+                        if (chooseevent.type == SDL_QUIT) {quit=true; break;}
+                    }
+                    if (chooseevent.key.keysym.sym==SDLK_RIGHT || chooseevent.key.keysym.sym==SDLK_d || chooseevent.key.keysym.sym==SDLK_l) {
+                        if (tempchoose < end_choose) {
+                            tempchoose++;
+                            while (choosen[tempchoose] == 1) tempchoose++;
+                        }
+                    }
+                    else if (chooseevent.key.keysym.sym==SDLK_LEFT || chooseevent.key.keysym.sym==SDLK_a || chooseevent.key.keysym.sym==SDLK_j) {
+                        if (tempchoose > start_choose) {
+                            tempchoose--;
+                            while (choosen[tempchoose] == 1) tempchoose--;
+                        }
+                    }
+                    else if (chooseevent.key.keysym.sym==SDLK_RETURN || chooseevent.key.keysym.sym==SDLK_SPACE || chooseevent.key.keysym.sym==SDLK_TAB) {
+                        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
+                        SDL_RenderFillRect(gRenderer, &frame[tempchoose]);
+                        characteroption[tempchoose].rectrender();
+                        SDL_RenderPresent(gRenderer);
+                        character[i] = tempchoose;
+                        choosen[tempchoose] = 1;
+                        tempchoose = 0;
                         while (choosen[tempchoose] == 1) tempchoose++;
+                        nextplayer = 1;
+                        break;
                     }
-                }
-                else if (chooseevent.key.keysym.sym==SDLK_LEFT || chooseevent.key.keysym.sym==SDLK_a || chooseevent.key.keysym.sym==SDLK_j) {
-                    if (tempchoose > start_choose) {
-                        tempchoose--;
-                        while (choosen[tempchoose] == 1) tempchoose--;
-                    }
-                }
-                else if (chooseevent.key.keysym.sym==SDLK_RETURN || chooseevent.key.keysym.sym==SDLK_SPACE || chooseevent.key.keysym.sym==SDLK_TAB) {
-                    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
-                    SDL_RenderFillRect(gRenderer, &frame[tempchoose]);
-                    characteroption[tempchoose].rectrender();
-                    SDL_RenderPresent(gRenderer);
-                    character[i] = tempchoose;
-                    choosen[tempchoose] = 1;
-                    tempchoose = 0;
-                    while (choosen[tempchoose] == 1) tempchoose++;
-                    break;
                 }
             }
             SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -110,6 +111,7 @@ void PVPchoosecharacter(int number){
                 characteroption[j].rectrender();
             }
             SDL_RenderPresent(gRenderer);
+            if(nextplayer) break;
         }
         cout << "character[" << i << "] = " << character[i] << endl;
         SDL_Delay(400);
