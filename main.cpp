@@ -221,7 +221,7 @@ void Choosecharacter(){
     characteroption[2].buttontexture.loadFromFile("../character_image/character2.png");
     characteroption[3].buttontexture.loadFromFile("../character_image/character3.png");
     characteroption[4].buttontexture.loadFromFile("../character_image/character4.png");
-    choosecharacter.loadFromFile("../PVE_image/choosecharacter_background.png");
+    choosecharacter.loadFromFile("../start_image/choosecharacter_background.png");
     backto_number.buttontexture.loadFromFile("../start_image/back.png");
 
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -304,10 +304,10 @@ void Tutorial_start(){
     Texture tutorial_start;
     RectButton tutorial(tutorial_dest), backto_character(back_dest);
     CircleButton start_game(startgame_dest, startgame_center, 150);
-    tutorial_start.loadFromFile("../PVE_image/tutorial_start_background.png");
+    tutorial_start.loadFromFile("../start_image/tutorial_start_background.png");
     backto_character.buttontexture.loadFromFile("../start_image/back.png");
-    tutorial.buttontexture.loadFromFile("../PVE_image/tutorial.png");
-    start_game.buttontexture.loadFromFile(("../PVE_image/start_game.png"));
+    tutorial.buttontexture.loadFromFile("../start_image/tutorial.png");
+    start_game.buttontexture.loadFromFile(("../start_image/start_game.png"));
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
     tutorial_start.render(NULL);
@@ -356,8 +356,8 @@ void Tutorial(){
     SDL_Rect back_dest = {900, 600, 200, 100};
     Texture tutorial;
     RectButton back(back_dest);
-    tutorial.loadFromFile("../PVE_image/tutorial_background.png");
-    back.buttontexture.loadFromFile("../PVE_image/tutorial_back.png");
+    tutorial.loadFromFile("../start_image/tutorial_background.png");
+    back.buttontexture.loadFromFile("../start_image/back.png");
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
     tutorial.render(NULL);
