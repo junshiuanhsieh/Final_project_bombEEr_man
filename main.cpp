@@ -228,7 +228,7 @@ void Choosecharacter(){
         while (choosen[start_choose] == 1) start_choose++;
         while (choosen[end_choose] == 1) end_choose--;
         tempchoose = start_choose;
-        int big = 1;
+        int big;
         while (!quit) {
             while (SDL_PollEvent(&chooseevent) != 0) {
                 backto_number.handleEvent(&chooseevent);
@@ -258,7 +258,8 @@ void Choosecharacter(){
                         nextplayer = 1;
                     }
                 }
-                else if(backto_number.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) big = 0;
+                //else if(backto_number.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) big = 0;
+
                 else if(backto_number.CurrentSprite == BUTTON_SPRITE_MOUSE_UP){
                     Choosenumber();
                     return;
@@ -267,6 +268,8 @@ void Choosecharacter(){
             SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
             SDL_RenderClear(gRenderer);
             choosecharacter.render(NULL);
+            big = 1;
+            if(backto_number.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) big = 0;
             backto_number.rectrender(big);
             SDL_SetRenderDrawColor(gRenderer, 0x00, 0xFF, 0x00, 0xFF);
             if(character[Player_number-1] == -1) SDL_RenderFillRect(gRenderer, &frame[tempchoose]);

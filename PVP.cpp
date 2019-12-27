@@ -18,26 +18,3 @@ void PVP2(){
 void PVP3(){
 }
 
-//void PVPScrolling(int number){
-//    Texture scrolling, TextTexture;
-//    scrolling.loadFromFile("../PVP_image/scrolling_background.png");
-//    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-//    SDL_RenderClear(gRenderer);
-//    scrolling.render(NULL);
-//    SDL_RenderPresent( gRenderer );
-//
-//    SDL_Event scrollingevent;
-//
-//    while(!quit) {
-//        while (SDL_PollEvent(&scrollingevent) != 0) {
-//            if (scrollingevent.type == SDL_QUIT) quit = true;
-//        }
-//        if(number==1){
-//
-//        }
-//        else{
-//
-//        }
-//    }
-//}
-
