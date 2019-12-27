@@ -88,6 +88,36 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.cpp">
+			<Option target="bombEEr_man"/>
+		</Unit>
+		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h">
+			<Option target="bombEEr_man"/>
+		</Unit>
+		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/Character.cpp">
+			<Option target="bombEEr_man"/>
+		</Unit>
+		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/Character.h">
+			<Option target="bombEEr_man"/>
+		</Unit>
+		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.cpp">
+			<Option target="bombEEr_man"/>
+		</Unit>
+		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h">
+			<Option target="bombEEr_man"/>
+		</Unit>
+		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/PVE.cpp">
+			<Option target="bombEEr_man"/>
+		</Unit>
+		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/PVE.h">
+			<Option target="bombEEr_man"/>
+		</Unit>
+		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/PVP.cpp">
+			<Option target="bombEEr_man"/>
+		</Unit>
+		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/PVP.h">
+			<Option target="bombEEr_man"/>
+		</Unit>
 		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/button.cpp">
 			<Option target="bombEEr_man"/>
 		</Unit>

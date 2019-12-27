@@ -96,11 +96,81 @@ CMakeFiles/bombEEr_man.dir/button.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bombEEr_man.dir/button.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/shiuanhsieh/CLionProjects/bombEEr_man/button.cpp -o CMakeFiles/bombEEr_man.dir/button.cpp.s
 
+CMakeFiles/bombEEr_man.dir/PVE.cpp.o: CMakeFiles/bombEEr_man.dir/flags.make
+CMakeFiles/bombEEr_man.dir/PVE.cpp.o: ../PVE.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/shiuanhsieh/CLionProjects/bombEEr_man/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/bombEEr_man.dir/PVE.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/bombEEr_man.dir/PVE.cpp.o -c /Users/shiuanhsieh/CLionProjects/bombEEr_man/PVE.cpp
+
+CMakeFiles/bombEEr_man.dir/PVE.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/bombEEr_man.dir/PVE.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/shiuanhsieh/CLionProjects/bombEEr_man/PVE.cpp > CMakeFiles/bombEEr_man.dir/PVE.cpp.i
+
+CMakeFiles/bombEEr_man.dir/PVE.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bombEEr_man.dir/PVE.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/shiuanhsieh/CLionProjects/bombEEr_man/PVE.cpp -o CMakeFiles/bombEEr_man.dir/PVE.cpp.s
+
+CMakeFiles/bombEEr_man.dir/PVP.cpp.o: CMakeFiles/bombEEr_man.dir/flags.make
+CMakeFiles/bombEEr_man.dir/PVP.cpp.o: ../PVP.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/shiuanhsieh/CLionProjects/bombEEr_man/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/bombEEr_man.dir/PVP.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/bombEEr_man.dir/PVP.cpp.o -c /Users/shiuanhsieh/CLionProjects/bombEEr_man/PVP.cpp
+
+CMakeFiles/bombEEr_man.dir/PVP.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/bombEEr_man.dir/PVP.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/shiuanhsieh/CLionProjects/bombEEr_man/PVP.cpp > CMakeFiles/bombEEr_man.dir/PVP.cpp.i
+
+CMakeFiles/bombEEr_man.dir/PVP.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bombEEr_man.dir/PVP.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/shiuanhsieh/CLionProjects/bombEEr_man/PVP.cpp -o CMakeFiles/bombEEr_man.dir/PVP.cpp.s
+
+CMakeFiles/bombEEr_man.dir/Map.cpp.o: CMakeFiles/bombEEr_man.dir/flags.make
+CMakeFiles/bombEEr_man.dir/Map.cpp.o: ../Map.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/shiuanhsieh/CLionProjects/bombEEr_man/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/bombEEr_man.dir/Map.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/bombEEr_man.dir/Map.cpp.o -c /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.cpp
+
+CMakeFiles/bombEEr_man.dir/Map.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/bombEEr_man.dir/Map.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.cpp > CMakeFiles/bombEEr_man.dir/Map.cpp.i
+
+CMakeFiles/bombEEr_man.dir/Map.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bombEEr_man.dir/Map.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.cpp -o CMakeFiles/bombEEr_man.dir/Map.cpp.s
+
+CMakeFiles/bombEEr_man.dir/Character.cpp.o: CMakeFiles/bombEEr_man.dir/flags.make
+CMakeFiles/bombEEr_man.dir/Character.cpp.o: ../Character.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/shiuanhsieh/CLionProjects/bombEEr_man/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/bombEEr_man.dir/Character.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/bombEEr_man.dir/Character.cpp.o -c /Users/shiuanhsieh/CLionProjects/bombEEr_man/Character.cpp
+
+CMakeFiles/bombEEr_man.dir/Character.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/bombEEr_man.dir/Character.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/shiuanhsieh/CLionProjects/bombEEr_man/Character.cpp > CMakeFiles/bombEEr_man.dir/Character.cpp.i
+
+CMakeFiles/bombEEr_man.dir/Character.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bombEEr_man.dir/Character.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/shiuanhsieh/CLionProjects/bombEEr_man/Character.cpp -o CMakeFiles/bombEEr_man.dir/Character.cpp.s
+
+CMakeFiles/bombEEr_man.dir/Bomb.cpp.o: CMakeFiles/bombEEr_man.dir/flags.make
+CMakeFiles/bombEEr_man.dir/Bomb.cpp.o: ../Bomb.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/shiuanhsieh/CLionProjects/bombEEr_man/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/bombEEr_man.dir/Bomb.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/bombEEr_man.dir/Bomb.cpp.o -c /Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.cpp
+
+CMakeFiles/bombEEr_man.dir/Bomb.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/bombEEr_man.dir/Bomb.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.cpp > CMakeFiles/bombEEr_man.dir/Bomb.cpp.i
+
+CMakeFiles/bombEEr_man.dir/Bomb.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bombEEr_man.dir/Bomb.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.cpp -o CMakeFiles/bombEEr_man.dir/Bomb.cpp.s
+
 # Object files for target bombEEr_man
 bombEEr_man_OBJECTS = \
 "CMakeFiles/bombEEr_man.dir/main.cpp.o" \
 "CMakeFiles/bombEEr_man.dir/texture.cpp.o" \
-"CMakeFiles/bombEEr_man.dir/button.cpp.o"
+"CMakeFiles/bombEEr_man.dir/button.cpp.o" \
+"CMakeFiles/bombEEr_man.dir/PVE.cpp.o" \
+"CMakeFiles/bombEEr_man.dir/PVP.cpp.o" \
+"CMakeFiles/bombEEr_man.dir/Map.cpp.o" \
+"CMakeFiles/bombEEr_man.dir/Character.cpp.o" \
+"CMakeFiles/bombEEr_man.dir/Bomb.cpp.o"
 
 # External object files for target bombEEr_man
 bombEEr_man_EXTERNAL_OBJECTS =
@@ -108,9 +178,14 @@ bombEEr_man_EXTERNAL_OBJECTS =
 bombEEr_man: CMakeFiles/bombEEr_man.dir/main.cpp.o
 bombEEr_man: CMakeFiles/bombEEr_man.dir/texture.cpp.o
 bombEEr_man: CMakeFiles/bombEEr_man.dir/button.cpp.o
+bombEEr_man: CMakeFiles/bombEEr_man.dir/PVE.cpp.o
+bombEEr_man: CMakeFiles/bombEEr_man.dir/PVP.cpp.o
+bombEEr_man: CMakeFiles/bombEEr_man.dir/Map.cpp.o
+bombEEr_man: CMakeFiles/bombEEr_man.dir/Character.cpp.o
+bombEEr_man: CMakeFiles/bombEEr_man.dir/Bomb.cpp.o
 bombEEr_man: CMakeFiles/bombEEr_man.dir/build.make
 bombEEr_man: CMakeFiles/bombEEr_man.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/shiuanhsieh/CLionProjects/bombEEr_man/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable bombEEr_man"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/shiuanhsieh/CLionProjects/bombEEr_man/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable bombEEr_man"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/bombEEr_man.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

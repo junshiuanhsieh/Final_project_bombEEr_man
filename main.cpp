@@ -15,7 +15,7 @@ SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 bool quit;
 int Player_number = 0, Mode = 0;
-int* character = NULL;
+int* character_picture = NULL;
 
 void init();
 void close();
@@ -185,8 +185,8 @@ void Choosenumber(){
 }
 void Scrolling(){}
 void Choosecharacter(){
-    character = new int[Player_number];
-    for(int i = 0; i< Player_number; i++) character[i] = -1;
+    character_picture = new int[Player_number];
+    for(int i = 0; i< Player_number; i++) character_picture[i] = -1;
     int TOTAL_CHARACTER_OPTION = 5;
     Texture choosecharacter;
     RectButton characteroption[TOTAL_CHARACTER_OPTION], backto_number;
@@ -251,7 +251,7 @@ void Choosecharacter(){
                         }
                     }
                     else if (chooseevent.key.keysym.sym==SDLK_RETURN || chooseevent.key.keysym.sym==SDLK_SPACE || chooseevent.key.keysym.sym==SDLK_TAB) {
-                        character[i] = tempchoose;
+                        character_picture[i] = tempchoose;
                         choosen[tempchoose] = 1;
                         tempchoose = 0;
                         while (choosen[tempchoose] == 1) tempchoose++;
@@ -272,7 +272,7 @@ void Choosecharacter(){
             if(backto_number.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) big = 0;
             backto_number.rectrender(big);
             SDL_SetRenderDrawColor(gRenderer, 0x00, 0xFF, 0x00, 0xFF);
-            if(character[Player_number-1] == -1) SDL_RenderFillRect(gRenderer, &frame[tempchoose]);
+            if(character_picture[Player_number-1] == -1) SDL_RenderFillRect(gRenderer, &frame[tempchoose]);
             for (int j = 0; j<TOTAL_CHARACTER_OPTION; j++) {
                 if (choosen[j] == 1) {
                     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
@@ -283,7 +283,7 @@ void Choosecharacter(){
             SDL_RenderPresent(gRenderer);
             if(nextplayer) break;
         }
-        cout << "character[" << i << "] = " << character[i] << endl;
+        cout << "character[" << i << "] = " << character_picture[i] << endl;
         SDL_Delay(400);
     }
     Tutorial_start();
@@ -327,7 +327,7 @@ void Tutorial_start(){
             else if(Mode==2) cout << endl << "Final mode = PVP" << endl;
             cout << "Final total player = " << Player_number << endl;
             cout << "Character = ";
-            for(int i = 0; i<Player_number; i++) cout << character[i] << " ";
+            for(int i = 0; i<Player_number; i++) cout << character_picture[i] << " ";
             cout << endl << "start game!!!" << endl;
             break;
         }

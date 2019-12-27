@@ -123,6 +123,141 @@ bombEEr_man/fast:
 	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/build
 .PHONY : bombEEr_man/fast
 
+Bomb.o: Bomb.cpp.o
+
+.PHONY : Bomb.o
+
+# target to build an object file
+Bomb.cpp.o:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Bomb.cpp.o
+.PHONY : Bomb.cpp.o
+
+Bomb.i: Bomb.cpp.i
+
+.PHONY : Bomb.i
+
+# target to preprocess a source file
+Bomb.cpp.i:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Bomb.cpp.i
+.PHONY : Bomb.cpp.i
+
+Bomb.s: Bomb.cpp.s
+
+.PHONY : Bomb.s
+
+# target to generate assembly for a file
+Bomb.cpp.s:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Bomb.cpp.s
+.PHONY : Bomb.cpp.s
+
+Character.o: Character.cpp.o
+
+.PHONY : Character.o
+
+# target to build an object file
+Character.cpp.o:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Character.cpp.o
+.PHONY : Character.cpp.o
+
+Character.i: Character.cpp.i
+
+.PHONY : Character.i
+
+# target to preprocess a source file
+Character.cpp.i:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Character.cpp.i
+.PHONY : Character.cpp.i
+
+Character.s: Character.cpp.s
+
+.PHONY : Character.s
+
+# target to generate assembly for a file
+Character.cpp.s:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Character.cpp.s
+.PHONY : Character.cpp.s
+
+Map.o: Map.cpp.o
+
+.PHONY : Map.o
+
+# target to build an object file
+Map.cpp.o:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Map.cpp.o
+.PHONY : Map.cpp.o
+
+Map.i: Map.cpp.i
+
+.PHONY : Map.i
+
+# target to preprocess a source file
+Map.cpp.i:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Map.cpp.i
+.PHONY : Map.cpp.i
+
+Map.s: Map.cpp.s
+
+.PHONY : Map.s
+
+# target to generate assembly for a file
+Map.cpp.s:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Map.cpp.s
+.PHONY : Map.cpp.s
+
+PVE.o: PVE.cpp.o
+
+.PHONY : PVE.o
+
+# target to build an object file
+PVE.cpp.o:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/PVE.cpp.o
+.PHONY : PVE.cpp.o
+
+PVE.i: PVE.cpp.i
+
+.PHONY : PVE.i
+
+# target to preprocess a source file
+PVE.cpp.i:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/PVE.cpp.i
+.PHONY : PVE.cpp.i
+
+PVE.s: PVE.cpp.s
+
+.PHONY : PVE.s
+
+# target to generate assembly for a file
+PVE.cpp.s:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/PVE.cpp.s
+.PHONY : PVE.cpp.s
+
+PVP.o: PVP.cpp.o
+
+.PHONY : PVP.o
+
+# target to build an object file
+PVP.cpp.o:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/PVP.cpp.o
+.PHONY : PVP.cpp.o
+
+PVP.i: PVP.cpp.i
+
+.PHONY : PVP.i
+
+# target to preprocess a source file
+PVP.cpp.i:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/PVP.cpp.i
+.PHONY : PVP.cpp.i
+
+PVP.s: PVP.cpp.s
+
+.PHONY : PVP.s
+
+# target to generate assembly for a file
+PVP.cpp.s:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/PVP.cpp.s
+.PHONY : PVP.cpp.s
+
 button.o: button.cpp.o
 
 .PHONY : button.o
@@ -213,6 +348,21 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... bombEEr_man"
+	@echo "... Bomb.o"
+	@echo "... Bomb.i"
+	@echo "... Bomb.s"
+	@echo "... Character.o"
+	@echo "... Character.i"
+	@echo "... Character.s"
+	@echo "... Map.o"
+	@echo "... Map.i"
+	@echo "... Map.s"
+	@echo "... PVE.o"
+	@echo "... PVE.i"
+	@echo "... PVE.s"
+	@echo "... PVP.o"
+	@echo "... PVP.i"
+	@echo "... PVP.s"
 	@echo "... button.o"
 	@echo "... button.i"
 	@echo "... button.s"

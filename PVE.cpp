@@ -1,4 +1,8 @@
 #include "PVE.h"
+#include "Map.h"
+#include "Character.h"
+#include "Bomb.h"
+
 extern SDL_Window* gWindow;
 extern SDL_Renderer* gRenderer;
 extern bool quit;
