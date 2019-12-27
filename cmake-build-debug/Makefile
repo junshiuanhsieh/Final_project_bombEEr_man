@@ -177,6 +177,33 @@ Character.cpp.s:
 	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Character.cpp.s
 .PHONY : Character.cpp.s
 
+Item.o: Item.cpp.o
+
+.PHONY : Item.o
+
+# target to build an object file
+Item.cpp.o:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Item.cpp.o
+.PHONY : Item.cpp.o
+
+Item.i: Item.cpp.i
+
+.PHONY : Item.i
+
+# target to preprocess a source file
+Item.cpp.i:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Item.cpp.i
+.PHONY : Item.cpp.i
+
+Item.s: Item.cpp.s
+
+.PHONY : Item.s
+
+# target to generate assembly for a file
+Item.cpp.s:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Item.cpp.s
+.PHONY : Item.cpp.s
+
 Map.o: Map.cpp.o
 
 .PHONY : Map.o
@@ -354,6 +381,9 @@ help:
 	@echo "... Character.o"
 	@echo "... Character.i"
 	@echo "... Character.s"
+	@echo "... Item.o"
+	@echo "... Item.i"
+	@echo "... Item.s"
 	@echo "... Map.o"
 	@echo "... Map.i"
 	@echo "... Map.s"

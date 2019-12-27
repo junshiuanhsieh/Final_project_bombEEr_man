@@ -7,6 +7,11 @@ CMakeFiles/bombEEr_man.dir/Bomb.cpp.o: ../Bomb.h
 CMakeFiles/bombEEr_man.dir/Character.cpp.o: ../Character.cpp
 CMakeFiles/bombEEr_man.dir/Character.cpp.o: ../Character.h
 
+CMakeFiles/bombEEr_man.dir/Item.cpp.o: ../Item.cpp
+CMakeFiles/bombEEr_man.dir/Item.cpp.o: ../Item.h
+
+CMakeFiles/bombEEr_man.dir/Map.cpp.o: ../Bomb.h
+CMakeFiles/bombEEr_man.dir/Map.cpp.o: ../Character.h
 CMakeFiles/bombEEr_man.dir/Map.cpp.o: ../Map.cpp
 CMakeFiles/bombEEr_man.dir/Map.cpp.o: ../Map.h
 

@@ -1,6 +1,6 @@
 #include "PVP.h"
 #include "Map.h"
-#include "Character.h"
+#include "Player.h"
 #include "Bomb.h"
 
 extern SDL_Window* gWindow;
