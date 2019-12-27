@@ -135,7 +135,7 @@ void Choosenumber(){
     const int BUTTON_NUMBER_HEIGHT = 100;
     Texture choosenumber;
     RectButton numberbuttons[TOTAL_NUMBERBUTTON], backto_choosemode;
-    SDL_Rect numberbutton_dest[TOTAL_NUMBERBUTTON], backbuttondest={900, 600, 200, 100};
+    SDL_Rect numberbutton_dest[TOTAL_NUMBERBUTTON], backbuttondest={100, 600, 200, 100};
     for(int i = 0; i<TOTAL_NUMBERBUTTON; i++){
         numberbutton_dest[i].x = 300*i+200;
         numberbutton_dest[i].y = 450;
@@ -168,7 +168,7 @@ void Choosenumber(){
             if(numberbuttons[i].CurrentSprite==BUTTON_SPRITE_MOUSE_UP) {
                 Player_number = i+1;
                 cout << "Total player = " << Player_number << endl;
-                Choosecharacter();
+                Scrolling();
                 return;
             }
         }
@@ -183,14 +183,131 @@ void Choosenumber(){
         }
     }
 }
-void Scrolling(){}
+void Scrolling(){
+    Texture scrolling, TextTexture;
+    scrolling.loadFromFile("../start_image/scrolling_background.png");
+    SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF);
+    SDL_RenderClear(gRenderer);
+    scrolling.render(NULL);
+    SDL_RenderPresent( gRenderer );
+
+
+    SDL_Surface * pTextSurface[4] = {NULL};
+    SDL_Texture* pTextTexture[4] = {NULL};
+    SDL_Rect rcText[4], back_dest = {100, 600, 200, 100}, next_dest = {900, 600, 200, 100};
+    RectButton backto_number(back_dest), next_button(next_dest);
+    backto_number.buttontexture.loadFromFile("../start_image/back.png");
+    next_button.buttontexture.loadFromFile("../start_image/next.png");
+    TTF_Init();
+    TTF_Font *font;
+    font = TTF_OpenFont("../fonts/GenJyuuGothic-P-Heavy.ttf", 200);
+    Uint16 text[][4] = {{0x65e9,0x5b89,0x0021,0x0000}, {0x65e9,0x5b89,0x0021,0x0000}, {0x65e9,0x5b89,0x0021,0x0000}, {0x65e9,0x5b89,0x0021,0x0000}};
+    SDL_Color color = {0,0,0};
+    for(int j = 0; j<4; j++){
+        rcText[j].x = 100;
+        rcText[j].w = 200;
+        rcText[j].h = 100;
+    }
+
+    SDL_Event scrollingevent;
+
+    int i = 0;
+    bool next = 0;
+    while(i<500 && !quit && !next){
+        while (SDL_PollEvent(&scrollingevent) != 0) {
+            if (scrollingevent.type == SDL_QUIT) {quit = true; return;}
+            backto_number.handleEvent(&scrollingevent);
+            next_button.handleEvent(&scrollingevent);
+        }
+        rcText[0].y = 100 - i;
+        rcText[1].y = 200 - i;
+        rcText[2].y = 300 - i;
+        rcText[3].y = 400 - i;
+
+        SDL_RenderClear(gRenderer);
+        scrolling.render(NULL);
+        for(int j = 0; j<4; j++) {
+            pTextSurface[j] = TTF_RenderUNICODE_Solid(font, text[j], color);
+            pTextTexture[j] = SDL_CreateTextureFromSurface(gRenderer, pTextSurface[j]);
+            SDL_RenderCopy(gRenderer, pTextTexture[j], NULL, &rcText[j]);
+        }
+        int big_back = 1, big_next = 1;
+        if(backto_number.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) big_back = 0;
+        backto_number.rectrender(big_back);
+        if(next_button.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) big_next = 0;
+        next_button.rectrender(big_next);
+        if(backto_number.CurrentSprite == BUTTON_SPRITE_MOUSE_UP){
+            Choosenumber();
+            TTF_CloseFont(font);
+            TTF_Quit();
+            for(int j = 0; j<4; j++){
+                SDL_DestroyTexture(pTextTexture[j]);
+                SDL_FreeSurface(pTextSurface[j]);
+            }
+            return;
+        }
+        if(next_button.CurrentSprite == BUTTON_SPRITE_MOUSE_UP){
+            next = 1;
+            Choosecharacter();
+            TTF_CloseFont(font);
+            TTF_Quit();
+            for(int j = 0; j<4; j++){
+                SDL_DestroyTexture(pTextTexture[j]);
+                SDL_FreeSurface(pTextSurface[j]);
+            }
+            return;
+        }
+        SDL_RenderPresent( gRenderer );
+        SDL_Delay(10);
+        i += 5;
+        //cout << i << endl;
+    }
+
+    while(!next && !quit){
+        //cout << "hello" << endl;
+        int big_next = 1, big_back = 1;
+        while (SDL_PollEvent(&scrollingevent) != 0) {
+            if (scrollingevent.type == SDL_QUIT) {quit = true; return;}
+            next_button.handleEvent(&scrollingevent);
+            backto_number.handleEvent(&scrollingevent);
+        }
+        SDL_RenderClear(gRenderer);
+        scrolling.render(NULL);
+        if(backto_number.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) big_back = 0;
+        backto_number.rectrender(big_back);
+        if(next_button.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) big_next = 0;
+        next_button.rectrender(big_next);
+        if(backto_number.CurrentSprite == BUTTON_SPRITE_MOUSE_UP){
+            Choosenumber();
+            TTF_CloseFont(font);
+            TTF_Quit();
+            for(int j = 0; j<4; j++){
+                SDL_DestroyTexture(pTextTexture[j]);
+                SDL_FreeSurface(pTextSurface[j]);
+            }
+            return;
+        }
+        if(next_button.CurrentSprite == BUTTON_SPRITE_MOUSE_UP){
+            next = 1;
+            Choosecharacter();
+            TTF_CloseFont(font);
+            TTF_Quit();
+            for(int j = 0; j<4; j++){
+                SDL_DestroyTexture(pTextTexture[j]);
+                SDL_FreeSurface(pTextSurface[j]);
+            }
+            return;
+        }
+        SDL_RenderPresent( gRenderer );
+    }
+}
 void Choosecharacter(){
     character_picture = new int[Player_number];
     for(int i = 0; i< Player_number; i++) character_picture[i] = -1;
     int TOTAL_CHARACTER_OPTION = 5;
     Texture choosecharacter;
-    RectButton characteroption[TOTAL_CHARACTER_OPTION], backto_number;
-    SDL_Rect characteroption_dest[TOTAL_CHARACTER_OPTION], frame[TOTAL_CHARACTER_OPTION], backbuttondest={900, 600, 200, 100};;
+    RectButton characteroption[TOTAL_CHARACTER_OPTION], backto_scrolling;
+    SDL_Rect characteroption_dest[TOTAL_CHARACTER_OPTION], frame[TOTAL_CHARACTER_OPTION], backbuttondest={100, 600, 200, 100};
     for (int i = 0; i < TOTAL_CHARACTER_OPTION; i++) {
         characteroption_dest[i].x = 125 + i * 200;
         characteroption_dest[i].y = 300;
@@ -202,14 +319,14 @@ void Choosecharacter(){
         frame[i].h = 170;
         characteroption[i] = RectButton(characteroption_dest[i]);
     }
-    backto_number = RectButton(backbuttondest);
+    backto_scrolling = RectButton(backbuttondest);
     characteroption[0].buttontexture.loadFromFile("../character_image/character0.png");
     characteroption[1].buttontexture.loadFromFile("../character_image/character1.png");
     characteroption[2].buttontexture.loadFromFile("../character_image/character2.png");
     characteroption[3].buttontexture.loadFromFile("../character_image/character3.png");
     characteroption[4].buttontexture.loadFromFile("../character_image/character4.png");
     choosecharacter.loadFromFile("../start_image/choosecharacter_background.png");
-    backto_number.buttontexture.loadFromFile("../start_image/back.png");
+    backto_scrolling.buttontexture.loadFromFile("../start_image/back.png");
 
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
@@ -231,7 +348,7 @@ void Choosecharacter(){
         int big;
         while (!quit) {
             while (SDL_PollEvent(&chooseevent) != 0) {
-                backto_number.handleEvent(&chooseevent);
+                backto_scrolling.handleEvent(&chooseevent);
                 if (chooseevent.type == SDL_QUIT) {quit = true; return;}
                 else if(chooseevent.type == SDL_KEYDOWN) {
                     while(chooseevent.type != SDL_KEYUP) {
@@ -258,10 +375,8 @@ void Choosecharacter(){
                         nextplayer = 1;
                     }
                 }
-                //else if(backto_number.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) big = 0;
-
-                else if(backto_number.CurrentSprite == BUTTON_SPRITE_MOUSE_UP){
-                    Choosenumber();
+                else if(backto_scrolling.CurrentSprite == BUTTON_SPRITE_MOUSE_UP){
+                    Scrolling();
                     return;
                 }
             }
@@ -269,8 +384,8 @@ void Choosecharacter(){
             SDL_RenderClear(gRenderer);
             choosecharacter.render(NULL);
             big = 1;
-            if(backto_number.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) big = 0;
-            backto_number.rectrender(big);
+            if(backto_scrolling.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) big = 0;
+            backto_scrolling.rectrender(big);
             SDL_SetRenderDrawColor(gRenderer, 0x00, 0xFF, 0x00, 0xFF);
             if(character_picture[Player_number-1] == -1) SDL_RenderFillRect(gRenderer, &frame[tempchoose]);
             for (int j = 0; j<TOTAL_CHARACTER_OPTION; j++) {
@@ -289,7 +404,7 @@ void Choosecharacter(){
     Tutorial_start();
 }
 void Tutorial_start(){
-    SDL_Rect tutorial_dest = {100, 600, 200, 100}, startgame_dest = {450, 400, 300, 300}, back_dest = {900, 600, 200, 100};
+    SDL_Rect tutorial_dest = {900, 600, 200, 100}, startgame_dest = {450, 400, 300, 300}, back_dest = {100, 600, 200, 100};
     SDL_Point startgame_center = {600, 550};
     Texture tutorial_start;
     RectButton tutorial(tutorial_dest), backto_character(back_dest);
@@ -343,7 +458,7 @@ void Tutorial_start(){
 }
 void Tutorial(){
     cout << "tutorial" << endl;
-    SDL_Rect back_dest = {900, 600, 200, 100};
+    SDL_Rect back_dest = {100, 600, 200, 100};
     Texture tutorial;
     RectButton back(back_dest);
     tutorial.loadFromFile("../start_image/tutorial_background.png");

@@ -94,12 +94,6 @@
 		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h">
 			<Option target="bombEEr_man"/>
 		</Unit>
-		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/Character.cpp">
-			<Option target="bombEEr_man"/>
-		</Unit>
-		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/Character.h">
-			<Option target="bombEEr_man"/>
-		</Unit>
 		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.cpp">
 			<Option target="bombEEr_man"/>
 		</Unit>
@@ -122,6 +116,12 @@
 			<Option target="bombEEr_man"/>
 		</Unit>
 		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/PVP.h">
+			<Option target="bombEEr_man"/>
+		</Unit>
+		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.cpp">
+			<Option target="bombEEr_man"/>
+		</Unit>
+		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.h">
 			<Option target="bombEEr_man"/>
 		</Unit>
 		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/button.cpp">

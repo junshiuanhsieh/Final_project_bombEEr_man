@@ -1,12 +1,13 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-#include "Player.h"
-#include "Bomb.h"
+//#include "Player.h"
+//#include "Bomb.h"
+//#include "Item.h"
 
 class Map {
     friend class Character;
-    friend class bomb;
+    friend class Bomb;
     friend class Item;
     public:
         void collapse();

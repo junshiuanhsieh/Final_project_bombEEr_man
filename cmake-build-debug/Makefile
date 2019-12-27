@@ -150,33 +150,6 @@ Bomb.cpp.s:
 	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Bomb.cpp.s
 .PHONY : Bomb.cpp.s
 
-Character.o: Character.cpp.o
-
-.PHONY : Character.o
-
-# target to build an object file
-Character.cpp.o:
-	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Character.cpp.o
-.PHONY : Character.cpp.o
-
-Character.i: Character.cpp.i
-
-.PHONY : Character.i
-
-# target to preprocess a source file
-Character.cpp.i:
-	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Character.cpp.i
-.PHONY : Character.cpp.i
-
-Character.s: Character.cpp.s
-
-.PHONY : Character.s
-
-# target to generate assembly for a file
-Character.cpp.s:
-	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Character.cpp.s
-.PHONY : Character.cpp.s
-
 Item.o: Item.cpp.o
 
 .PHONY : Item.o
@@ -285,6 +258,33 @@ PVP.cpp.s:
 	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/PVP.cpp.s
 .PHONY : PVP.cpp.s
 
+Player.o: Player.cpp.o
+
+.PHONY : Player.o
+
+# target to build an object file
+Player.cpp.o:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Player.cpp.o
+.PHONY : Player.cpp.o
+
+Player.i: Player.cpp.i
+
+.PHONY : Player.i
+
+# target to preprocess a source file
+Player.cpp.i:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Player.cpp.i
+.PHONY : Player.cpp.i
+
+Player.s: Player.cpp.s
+
+.PHONY : Player.s
+
+# target to generate assembly for a file
+Player.cpp.s:
+	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Player.cpp.s
+.PHONY : Player.cpp.s
+
 button.o: button.cpp.o
 
 .PHONY : button.o
@@ -378,9 +378,6 @@ help:
 	@echo "... Bomb.o"
 	@echo "... Bomb.i"
 	@echo "... Bomb.s"
-	@echo "... Character.o"
-	@echo "... Character.i"
-	@echo "... Character.s"
 	@echo "... Item.o"
 	@echo "... Item.i"
 	@echo "... Item.s"
@@ -393,6 +390,9 @@ help:
 	@echo "... PVP.o"
 	@echo "... PVP.i"
 	@echo "... PVP.s"
+	@echo "... Player.o"
+	@echo "... Player.i"
+	@echo "... Player.s"
 	@echo "... button.o"
 	@echo "... button.i"
 	@echo "... button.s"

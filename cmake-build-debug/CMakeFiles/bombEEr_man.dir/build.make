@@ -135,18 +135,18 @@ CMakeFiles/bombEEr_man.dir/Map.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bombEEr_man.dir/Map.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.cpp -o CMakeFiles/bombEEr_man.dir/Map.cpp.s
 
-CMakeFiles/bombEEr_man.dir/Character.cpp.o: CMakeFiles/bombEEr_man.dir/flags.make
-CMakeFiles/bombEEr_man.dir/Character.cpp.o: ../Character.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/shiuanhsieh/CLionProjects/bombEEr_man/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/bombEEr_man.dir/Character.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/bombEEr_man.dir/Character.cpp.o -c /Users/shiuanhsieh/CLionProjects/bombEEr_man/Character.cpp
+CMakeFiles/bombEEr_man.dir/Player.cpp.o: CMakeFiles/bombEEr_man.dir/flags.make
+CMakeFiles/bombEEr_man.dir/Player.cpp.o: ../Player.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/shiuanhsieh/CLionProjects/bombEEr_man/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/bombEEr_man.dir/Player.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/bombEEr_man.dir/Player.cpp.o -c /Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.cpp
 
-CMakeFiles/bombEEr_man.dir/Character.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/bombEEr_man.dir/Character.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/shiuanhsieh/CLionProjects/bombEEr_man/Character.cpp > CMakeFiles/bombEEr_man.dir/Character.cpp.i
+CMakeFiles/bombEEr_man.dir/Player.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/bombEEr_man.dir/Player.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.cpp > CMakeFiles/bombEEr_man.dir/Player.cpp.i
 
-CMakeFiles/bombEEr_man.dir/Character.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bombEEr_man.dir/Character.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/shiuanhsieh/CLionProjects/bombEEr_man/Character.cpp -o CMakeFiles/bombEEr_man.dir/Character.cpp.s
+CMakeFiles/bombEEr_man.dir/Player.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bombEEr_man.dir/Player.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.cpp -o CMakeFiles/bombEEr_man.dir/Player.cpp.s
 
 CMakeFiles/bombEEr_man.dir/Bomb.cpp.o: CMakeFiles/bombEEr_man.dir/flags.make
 CMakeFiles/bombEEr_man.dir/Bomb.cpp.o: ../Bomb.cpp
@@ -182,7 +182,7 @@ bombEEr_man_OBJECTS = \
 "CMakeFiles/bombEEr_man.dir/PVE.cpp.o" \
 "CMakeFiles/bombEEr_man.dir/PVP.cpp.o" \
 "CMakeFiles/bombEEr_man.dir/Map.cpp.o" \
-"CMakeFiles/bombEEr_man.dir/Character.cpp.o" \
+"CMakeFiles/bombEEr_man.dir/Player.cpp.o" \
 "CMakeFiles/bombEEr_man.dir/Bomb.cpp.o" \
 "CMakeFiles/bombEEr_man.dir/Item.cpp.o"
 
@@ -195,7 +195,7 @@ bombEEr_man: CMakeFiles/bombEEr_man.dir/button.cpp.o
 bombEEr_man: CMakeFiles/bombEEr_man.dir/PVE.cpp.o
 bombEEr_man: CMakeFiles/bombEEr_man.dir/PVP.cpp.o
 bombEEr_man: CMakeFiles/bombEEr_man.dir/Map.cpp.o
-bombEEr_man: CMakeFiles/bombEEr_man.dir/Character.cpp.o
+bombEEr_man: CMakeFiles/bombEEr_man.dir/Player.cpp.o
 bombEEr_man: CMakeFiles/bombEEr_man.dir/Bomb.cpp.o
 bombEEr_man: CMakeFiles/bombEEr_man.dir/Item.cpp.o
 bombEEr_man: CMakeFiles/bombEEr_man.dir/build.make
