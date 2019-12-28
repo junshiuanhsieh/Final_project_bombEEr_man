@@ -51,6 +51,11 @@ CMakeFiles/bombEEr_man.dir/Bomb.cpp.o: /Library/Frameworks/SDL2_image.framework/
 CMakeFiles/bombEEr_man.dir/Bomb.cpp.o: /Library/Frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h
 CMakeFiles/bombEEr_man.dir/Bomb.cpp.o: ../Bomb.cpp
 CMakeFiles/bombEEr_man.dir/Bomb.cpp.o: ../Bomb.h
+CMakeFiles/bombEEr_man.dir/Bomb.cpp.o: ../Item.h
+CMakeFiles/bombEEr_man.dir/Bomb.cpp.o: ../Location.h
+CMakeFiles/bombEEr_man.dir/Bomb.cpp.o: ../Map.h
+CMakeFiles/bombEEr_man.dir/Bomb.cpp.o: ../Player.h
+CMakeFiles/bombEEr_man.dir/Bomb.cpp.o: ../texture.h
 
 CMakeFiles/bombEEr_man.dir/Item.cpp.o: /Library/Frameworks/SDL2.framework/Headers/SDL.h
 CMakeFiles/bombEEr_man.dir/Item.cpp.o: /Library/Frameworks/SDL2.framework/Headers/SDL_assert.h
@@ -100,8 +105,16 @@ CMakeFiles/bombEEr_man.dir/Item.cpp.o: /Library/Frameworks/SDL2.framework/Header
 CMakeFiles/bombEEr_man.dir/Item.cpp.o: /Library/Frameworks/SDL2.framework/Headers/close_code.h
 CMakeFiles/bombEEr_man.dir/Item.cpp.o: /Library/Frameworks/SDL2_image.framework/Headers/SDL_image.h
 CMakeFiles/bombEEr_man.dir/Item.cpp.o: /Library/Frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h
+CMakeFiles/bombEEr_man.dir/Item.cpp.o: ../Bomb.h
 CMakeFiles/bombEEr_man.dir/Item.cpp.o: ../Item.cpp
 CMakeFiles/bombEEr_man.dir/Item.cpp.o: ../Item.h
+CMakeFiles/bombEEr_man.dir/Item.cpp.o: ../Location.h
+CMakeFiles/bombEEr_man.dir/Item.cpp.o: ../Map.h
+CMakeFiles/bombEEr_man.dir/Item.cpp.o: ../Player.h
+CMakeFiles/bombEEr_man.dir/Item.cpp.o: ../texture.h
+
+CMakeFiles/bombEEr_man.dir/Location.cpp.o: ../Location.cpp
+CMakeFiles/bombEEr_man.dir/Location.cpp.o: ../Location.h
 
 CMakeFiles/bombEEr_man.dir/Map.cpp.o: /Library/Frameworks/SDL2.framework/Headers/SDL.h
 CMakeFiles/bombEEr_man.dir/Map.cpp.o: /Library/Frameworks/SDL2.framework/Headers/SDL_assert.h
@@ -151,8 +164,13 @@ CMakeFiles/bombEEr_man.dir/Map.cpp.o: /Library/Frameworks/SDL2.framework/Headers
 CMakeFiles/bombEEr_man.dir/Map.cpp.o: /Library/Frameworks/SDL2.framework/Headers/close_code.h
 CMakeFiles/bombEEr_man.dir/Map.cpp.o: /Library/Frameworks/SDL2_image.framework/Headers/SDL_image.h
 CMakeFiles/bombEEr_man.dir/Map.cpp.o: /Library/Frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h
+CMakeFiles/bombEEr_man.dir/Map.cpp.o: ../Bomb.h
+CMakeFiles/bombEEr_man.dir/Map.cpp.o: ../Item.h
+CMakeFiles/bombEEr_man.dir/Map.cpp.o: ../Location.h
 CMakeFiles/bombEEr_man.dir/Map.cpp.o: ../Map.cpp
 CMakeFiles/bombEEr_man.dir/Map.cpp.o: ../Map.h
+CMakeFiles/bombEEr_man.dir/Map.cpp.o: ../Player.h
+CMakeFiles/bombEEr_man.dir/Map.cpp.o: ../texture.h
 
 CMakeFiles/bombEEr_man.dir/PVE.cpp.o: /Library/Frameworks/SDL2.framework/Headers/SDL.h
 CMakeFiles/bombEEr_man.dir/PVE.cpp.o: /Library/Frameworks/SDL2.framework/Headers/SDL_assert.h
@@ -203,6 +221,8 @@ CMakeFiles/bombEEr_man.dir/PVE.cpp.o: /Library/Frameworks/SDL2.framework/Headers
 CMakeFiles/bombEEr_man.dir/PVE.cpp.o: /Library/Frameworks/SDL2_image.framework/Headers/SDL_image.h
 CMakeFiles/bombEEr_man.dir/PVE.cpp.o: /Library/Frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h
 CMakeFiles/bombEEr_man.dir/PVE.cpp.o: ../Bomb.h
+CMakeFiles/bombEEr_man.dir/PVE.cpp.o: ../Item.h
+CMakeFiles/bombEEr_man.dir/PVE.cpp.o: ../Location.h
 CMakeFiles/bombEEr_man.dir/PVE.cpp.o: ../Map.h
 CMakeFiles/bombEEr_man.dir/PVE.cpp.o: ../PVE.cpp
 CMakeFiles/bombEEr_man.dir/PVE.cpp.o: ../PVE.h
@@ -259,6 +279,8 @@ CMakeFiles/bombEEr_man.dir/PVP.cpp.o: /Library/Frameworks/SDL2.framework/Headers
 CMakeFiles/bombEEr_man.dir/PVP.cpp.o: /Library/Frameworks/SDL2_image.framework/Headers/SDL_image.h
 CMakeFiles/bombEEr_man.dir/PVP.cpp.o: /Library/Frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h
 CMakeFiles/bombEEr_man.dir/PVP.cpp.o: ../Bomb.h
+CMakeFiles/bombEEr_man.dir/PVP.cpp.o: ../Item.h
+CMakeFiles/bombEEr_man.dir/PVP.cpp.o: ../Location.h
 CMakeFiles/bombEEr_man.dir/PVP.cpp.o: ../Map.h
 CMakeFiles/bombEEr_man.dir/PVP.cpp.o: ../PVP.cpp
 CMakeFiles/bombEEr_man.dir/PVP.cpp.o: ../PVP.h
@@ -314,8 +336,13 @@ CMakeFiles/bombEEr_man.dir/Player.cpp.o: /Library/Frameworks/SDL2.framework/Head
 CMakeFiles/bombEEr_man.dir/Player.cpp.o: /Library/Frameworks/SDL2.framework/Headers/close_code.h
 CMakeFiles/bombEEr_man.dir/Player.cpp.o: /Library/Frameworks/SDL2_image.framework/Headers/SDL_image.h
 CMakeFiles/bombEEr_man.dir/Player.cpp.o: /Library/Frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h
+CMakeFiles/bombEEr_man.dir/Player.cpp.o: ../Bomb.h
+CMakeFiles/bombEEr_man.dir/Player.cpp.o: ../Item.h
+CMakeFiles/bombEEr_man.dir/Player.cpp.o: ../Location.h
+CMakeFiles/bombEEr_man.dir/Player.cpp.o: ../Map.h
 CMakeFiles/bombEEr_man.dir/Player.cpp.o: ../Player.cpp
 CMakeFiles/bombEEr_man.dir/Player.cpp.o: ../Player.h
+CMakeFiles/bombEEr_man.dir/Player.cpp.o: ../texture.h
 
 CMakeFiles/bombEEr_man.dir/button.cpp.o: /Library/Frameworks/SDL2.framework/Headers/SDL.h
 CMakeFiles/bombEEr_man.dir/button.cpp.o: /Library/Frameworks/SDL2.framework/Headers/SDL_assert.h
@@ -364,6 +391,7 @@ CMakeFiles/bombEEr_man.dir/button.cpp.o: /Library/Frameworks/SDL2.framework/Head
 CMakeFiles/bombEEr_man.dir/button.cpp.o: /Library/Frameworks/SDL2.framework/Headers/begin_code.h
 CMakeFiles/bombEEr_man.dir/button.cpp.o: /Library/Frameworks/SDL2.framework/Headers/close_code.h
 CMakeFiles/bombEEr_man.dir/button.cpp.o: /Library/Frameworks/SDL2_image.framework/Headers/SDL_image.h
+CMakeFiles/bombEEr_man.dir/button.cpp.o: /Library/Frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h
 CMakeFiles/bombEEr_man.dir/button.cpp.o: ../button.cpp
 CMakeFiles/bombEEr_man.dir/button.cpp.o: ../button.h
 CMakeFiles/bombEEr_man.dir/button.cpp.o: ../texture.h
@@ -416,8 +444,13 @@ CMakeFiles/bombEEr_man.dir/main.cpp.o: /Library/Frameworks/SDL2.framework/Header
 CMakeFiles/bombEEr_man.dir/main.cpp.o: /Library/Frameworks/SDL2.framework/Headers/close_code.h
 CMakeFiles/bombEEr_man.dir/main.cpp.o: /Library/Frameworks/SDL2_image.framework/Headers/SDL_image.h
 CMakeFiles/bombEEr_man.dir/main.cpp.o: /Library/Frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h
+CMakeFiles/bombEEr_man.dir/main.cpp.o: ../Bomb.h
+CMakeFiles/bombEEr_man.dir/main.cpp.o: ../Item.h
+CMakeFiles/bombEEr_man.dir/main.cpp.o: ../Location.h
+CMakeFiles/bombEEr_man.dir/main.cpp.o: ../Map.h
 CMakeFiles/bombEEr_man.dir/main.cpp.o: ../PVE.h
 CMakeFiles/bombEEr_man.dir/main.cpp.o: ../PVP.h
+CMakeFiles/bombEEr_man.dir/main.cpp.o: ../Player.h
 CMakeFiles/bombEEr_man.dir/main.cpp.o: ../button.h
 CMakeFiles/bombEEr_man.dir/main.cpp.o: ../main.cpp
 CMakeFiles/bombEEr_man.dir/main.cpp.o: ../texture.h
@@ -469,6 +502,7 @@ CMakeFiles/bombEEr_man.dir/texture.cpp.o: /Library/Frameworks/SDL2.framework/Hea
 CMakeFiles/bombEEr_man.dir/texture.cpp.o: /Library/Frameworks/SDL2.framework/Headers/begin_code.h
 CMakeFiles/bombEEr_man.dir/texture.cpp.o: /Library/Frameworks/SDL2.framework/Headers/close_code.h
 CMakeFiles/bombEEr_man.dir/texture.cpp.o: /Library/Frameworks/SDL2_image.framework/Headers/SDL_image.h
+CMakeFiles/bombEEr_man.dir/texture.cpp.o: /Library/Frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h
 CMakeFiles/bombEEr_man.dir/texture.cpp.o: ../texture.cpp
 CMakeFiles/bombEEr_man.dir/texture.cpp.o: ../texture.h
 

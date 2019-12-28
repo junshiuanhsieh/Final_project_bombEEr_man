@@ -4,8 +4,11 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include "Map.h"
+#include "Location.h"
 
 class Bomb {
+    friend class Player;
     public:
         Bomb();
         SDL_Point bomb_right();
@@ -15,7 +18,7 @@ class Bomb {
         void changemap(SDL_Point);
 
     private:
-        SDL_Point bomb_loc;
+        Location bomb_loc;
         int bomb_distance;
 
 };

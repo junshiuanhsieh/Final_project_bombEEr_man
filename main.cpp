@@ -16,7 +16,6 @@ SDL_Renderer* gRenderer = NULL;
 bool quit;
 int Player_number = 0, Mode = 0;
 int* character_picture = NULL;
-const int Total_item = 12;
 
 void init();
 void close();
@@ -35,7 +34,6 @@ int main( int argc, char* args[] ){
     if(quit) return 0;
     Choosemode();
     if(quit) return 0;
-
     if(Mode == 1) PVE();
     else if(Mode == 2) PVP();
     close();
@@ -43,7 +41,9 @@ int main( int argc, char* args[] ){
 }
 
 void init() {
-    if( SDL_Init(SDL_INIT_VIDEO) < 0 ) printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
+    SDL_Init(SDL_INIT_VIDEO);
+    TTF_Init();
+    IMG_Init(IMG_INIT_PNG);
     gWindow = SDL_CreateWindow("bombEEr_man", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -55,6 +55,7 @@ void close(){
     gRenderer = NULL;
     IMG_Quit();
     SDL_Quit();
+    TTF_Quit();
 }
 void Start(){
     CircleButton startbomb;
@@ -192,14 +193,13 @@ void Scrolling(){
     scrolling.render(NULL);
     SDL_RenderPresent( gRenderer );
 
-
     SDL_Surface * pTextSurface[4] = {NULL};
     SDL_Texture* pTextTexture[4] = {NULL};
     SDL_Rect rcText[4], back_dest = {100, 600, 200, 100}, next_dest = {900, 600, 200, 100};
     RectButton backto_number(back_dest), next_button(next_dest);
     backto_number.buttontexture.loadFromFile("../start_image/back.png");
     next_button.buttontexture.loadFromFile("../start_image/next.png");
-    TTF_Init();
+    //TTF_Init();
     TTF_Font *font;
     font = TTF_OpenFont("../fonts/GenJyuuGothic-P-Heavy.ttf", 200);
     Uint16 text[][4] = {{0x65e9,0x5b89,0x0021,0x0000}, {0x65e9,0x5b89,0x0021,0x0000}, {0x65e9,0x5b89,0x0021,0x0000}, {0x65e9,0x5b89,0x0021,0x0000}};
@@ -290,7 +290,7 @@ void Scrolling(){
             next = 1;
             Choosecharacter();
             TTF_CloseFont(font);
-            TTF_Quit();
+            //TTF_Quit();
             for(int j = 0; j<4; j++){
                 SDL_DestroyTexture(pTextTexture[j]);
                 SDL_FreeSurface(pTextSurface[j]);

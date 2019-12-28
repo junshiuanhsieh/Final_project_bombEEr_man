@@ -4,17 +4,21 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include "Map.h"
+#include "Location.h"
+#include "Bomb.h"
+
 class Item {
+    friend class Player;
     protected:
-        int item_num;
-        int owner;
-        SDL_Point item_loc;
-        bool revealed;
+        int owner, item_num;
+        Location item_loc;
+        bool revealed, taken;
     public:
-        Item(int item_num);
+        Item(Location, int num);
         void show();
         virtual void used();
-        void taken(int player);
+        void taken_by_player(int player_num);
 };
 
 class item0 : public Item {

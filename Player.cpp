@@ -1,39 +1,63 @@
 #include "Player.h"
 
-extern const int SCREEN_WIDTH = 1200;
-extern const int SCREEN_HEIGHT = 750;
-extern SDL_Window* gWindow;
+extern const int SCREEN_WIDTH;
+extern const int SCREEN_HEIGHT;
 extern SDL_Renderer* gRenderer;
-extern bool quit;
-extern int Player_number, Mode;
 extern int* character_picture;
-extern const int Total_item;
-
+extern const int Total_item = 12;
+extern Map** map;
 
 Player::Player(){
     alive = true;
-    for(int i = 0; i<Total_item; i++) item[i] = 0;
+    for(int i = 0; i<Total_item; i++) item_owned[i] = 0;
     score = 0;
 }
-Player::Player(int num){
+Player::Player(int num) : player_num(num){
     alive = true;
-    for(int i = 0; i<Total_item; i++) item[i] = 0;
+    for(int i = 0; i<Total_item; i++) item_owned[i] = 0;
     score = 0;
     form = character_picture[num];
+    if(form==0) picture.loadFromFile("../character_image/character0.png");
+    if(form==1) picture.loadFromFile("../character_image/character1.png");
+    if(form==2) picture.loadFromFile("../character_image/character2.png");
+    if(form==3) picture.loadFromFile("../character_image/character3.png");
+    if(form==4) picture.loadFromFile("../character_image/character4.png");
 }
 bool Player::dead(){
     alive = false;
+    for(int i = 0; i<Total_item; i++) item_owned[i] = 0;
 }
-void Player::placebomb(int x, int y, Bomb newbomb){
+//void Player::placebomb(int x, int y, Bomb & newbomb){
+//    newbomb.bomb_loc = player_loc;
+//}
+void Player::move(Direction dir, int s){
+    if(dir == UP) {
+        if(player_point.y > 0) {player_point.y -= s;}
+    }
+    else if(dir == DOWN){
+        if(player_point.y < 600) {player_point.y += s;}
+    }
+    else if(dir == LEFT){
+        if(player_point.x > 0) {player_point.x -= s;}
+    }
+    else if(dir == RIGHT){
+        if(player_point.x < 900) {player_point.x += s;}
+    }
+    determine_loc();
 
 }
-void Player::move(int dir, int s){
-
+void Player::determine_loc(){
+    player_loc.x = (player_point.x-10) / 60;
+    player_loc.y = (player_point.y-60) / 60;
 }
-void Player::get_item(int item){
-
-}
-void Player::useitem(int item_num){
+//void Player::get_item(Item &item){
+//    item_owned[item.item_num]++;
+//    item.taken_by_player(player_num);
+//}
+//void Player::useitem(Item &item){
+//    item_owned[item.item_num]--;
+//}
+void Player::player_render(){
 
 }
 //bool Player::operator! (){

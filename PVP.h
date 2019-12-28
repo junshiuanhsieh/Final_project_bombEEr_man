@@ -7,10 +7,12 @@
 #include <SDL_ttf.h>
 #include "button.h"
 #include "texture.h"
+#include "Map.h"
+
 void PVP();
 void PVP1();
 void PVP2();
 void PVP3();
-void Show_data();
+void PVP_Show_data();
 
 #endif

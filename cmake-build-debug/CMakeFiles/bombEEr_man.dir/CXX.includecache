@@ -661,6 +661,10 @@ SDL_image.h
 -
 SDL_ttf.h
 -
+Map.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
+Location.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.h
 
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.cpp
 Item.h
@@ -673,28 +677,40 @@ SDL_image.h
 -
 SDL_ttf.h
 -
+Map.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
+Location.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.h
+Bomb.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
+
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.h
 
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.cpp
 Map.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
 
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
+iostream
+-
 SDL.h
 -
 SDL_image.h
 -
 SDL_ttf.h
 -
-
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/PVE.cpp
-PVE.h
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/PVE.h
-Map.h
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
 Player.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.h
 Bomb.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
+Item.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.h
+Location.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.h
+
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/PVE.cpp
+PVE.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/PVE.h
 
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/PVE.h
 iostream
@@ -711,16 +727,12 @@ button.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/button.h
 texture.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/texture.h
+Map.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
 
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/PVP.cpp
 PVP.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/PVP.h
-Map.h
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
-Player.h
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.h
-Bomb.h
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
 
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/PVP.h
 iostream
@@ -735,6 +747,8 @@ button.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/button.h
 texture.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/texture.h
+Map.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
 
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.cpp
 Player.h
@@ -747,6 +761,16 @@ SDL_image.h
 -
 SDL_ttf.h
 -
+texture.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/texture.h
+Map.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
+Bomb.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
+Item.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.h
+Location.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.h
 
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/button.h
 iostream
@@ -784,5 +808,7 @@ iostream
 SDL.h
 -
 SDL_image.h
+-
+SDL_ttf.h
 -
 

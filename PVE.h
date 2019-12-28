@@ -8,10 +8,12 @@
 #include <SDL_ttf.h>
 #include "button.h"
 #include "texture.h"
+#include "Map.h"
+
 void PVE();
 void PVE1();
 void PVE2();
 void PVE3();
-void Show_data();
+void PVE_Show_data();
 
 #endif
