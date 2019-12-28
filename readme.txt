@@ -5,10 +5,10 @@ circular including is not allowed!!!
   button.h  include  =>  texture.h
   PVE.h     include  =>  Map.h  Player.h  Item.h  Bomb.h
   PVP.h     include  =>  Map.h  Player.h  Item.h  Bomb.h
-  Map.h     include
-  Player.h  include  =>  Map.h  Item.h
-  Bomb.h    include  =>  Map.h  Item.h  Player.h
-  Item.h    include  =>  Map.h
+  Map.h     include  =>  Location.h  Item.h
+  Player.h  include  =>  Location.h  Item.h  Bomb.h
+  Bomb.h    include  =>  Location.h
+  Item.h    include  =>  Location.h
 
 
 

@@ -1,4 +1,7 @@
 #include "Item.h"
+#include "Bomb.h"
+#include "Map.h"
+#include "Player.h"
 
 extern const int SCREEN_WIDTH;
 extern const int SCREEN_HEIGHT;

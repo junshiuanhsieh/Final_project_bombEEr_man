@@ -12,6 +12,7 @@
 #include "Player.h"
 #include "Bomb.h"
 #include "Item.h"
+#include "Location.h"
 
 void PVE();
 void PVE1();

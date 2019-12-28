@@ -4,11 +4,12 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-#include "Map.h"
-
+#include "Location.h"
 
 class Item {
     friend class Player;
+    friend class Map;
+    friend class Bomb;
     protected:
         int owner, item_num;  //owner由player呼叫  item_num由constructor初始
         Location item_loc;  //由constructor初始

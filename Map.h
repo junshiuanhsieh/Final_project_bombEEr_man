@@ -5,12 +5,10 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include "Location.h"
+#include "Item.h"
+#include "Bomb.h"
 
-class Location {
-public:
-    int x, y;
-    Location();
-};
 class Map {
     friend class Player;
     friend class Bomb;
@@ -23,8 +21,10 @@ class Map {
         //感覺map還有很多要寫，只是我對遊戲不熟所以目前想不到
     private:
         Location map_loc;  //add new constructor to initialize map_loc (?
-        bool bomb, box, wall, item[12]; //constructor initialize
-        bool* character_inside;  //constructor initialize
+        Bomb bomb;
+        bool wall, contain_bomb, contain_item[12];
+        Item* item[12]; //constructor initialize //use pointer to enable polymorphism
+        bool* character_inside;  //constructor initialize : new [4]
 };
 
 #endif

@@ -5,7 +5,8 @@
 #include <SDL_ttf.h>
 #include "texture.h"
 #include "Item.h"
-#include "Map.h"
+#include "Location.h"
+#include "Bomb.h"
 
 enum Direction{ UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 
