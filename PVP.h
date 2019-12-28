@@ -7,7 +7,9 @@
 #include <SDL_ttf.h>
 #include "button.h"
 #include "texture.h"
-#include "Map.h"
+#include "Player.h"
+#include "Bomb.h"
+#include "Item.h"
 
 void PVP();
 void PVP1();

@@ -650,10 +650,6 @@ SDL2/begin_code.h
 SDL2/close_code.h
 -
 
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.cpp
-Bomb.h
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
-
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
 SDL.h
 -
@@ -663,12 +659,6 @@ SDL_ttf.h
 -
 Map.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
-Location.h
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.h
-
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.cpp
-Item.h
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.h
 
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.h
 SDL.h
@@ -677,16 +667,6 @@ SDL_image.h
 -
 SDL_ttf.h
 -
-Map.h
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
-Location.h
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.h
-Bomb.h
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
-
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.h
-
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.cpp
 Map.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
 
@@ -699,18 +679,12 @@ SDL_image.h
 -
 SDL_ttf.h
 -
-Player.h
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.h
-Bomb.h
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
-Item.h
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.h
-Location.h
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.h
 
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/PVE.cpp
 PVE.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/PVE.h
+Player.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.h
 
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/PVE.h
 iostream
@@ -747,8 +721,8 @@ button.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/button.h
 texture.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/texture.h
-Map.h
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
+Player.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.h
 
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.cpp
 Player.h
@@ -763,14 +737,12 @@ SDL_ttf.h
 -
 texture.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/texture.h
+Item.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.h
 Map.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
 Bomb.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
-Item.h
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.h
-Location.h
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.h
 
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/button.h
 iostream

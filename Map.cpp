@@ -10,5 +10,8 @@ extern int* character_picture;
 extern const int Total_item;
 Map** map = NULL;
 
-
+Location::Location(){
+    x = 0;
+    y = 0;
+}
 Map::Map(){}

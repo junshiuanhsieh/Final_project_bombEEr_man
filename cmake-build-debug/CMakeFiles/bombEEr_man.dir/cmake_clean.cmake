@@ -1,7 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/bombEEr_man.dir/Bomb.cpp.o"
   "CMakeFiles/bombEEr_man.dir/Item.cpp.o"
-  "CMakeFiles/bombEEr_man.dir/Location.cpp.o"
   "CMakeFiles/bombEEr_man.dir/Map.cpp.o"
   "CMakeFiles/bombEEr_man.dir/PVE.cpp.o"
   "CMakeFiles/bombEEr_man.dir/PVP.cpp.o"

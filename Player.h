@@ -4,10 +4,9 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include "texture.h"
+#include "Item.h"
 #include "Map.h"
 #include "Bomb.h"
-#include "Item.h"
-#include "Location.h"
 
 enum Direction{ UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 
@@ -16,11 +15,11 @@ class Player {
         Player();
         Player(int num);
         bool dead();
-        //void placebomb(int x, int y, Bomb &);
+        void placebomb(int x, int y, Bomb &);
         void move(Direction, int s);
         void determine_loc();
-//        void get_item(Item &);
-//        void useitem(Item &);
+        void get_item(Item &);
+        void useitem(Item &);
         void player_render();
         bool alive;
         int item_owned[12];

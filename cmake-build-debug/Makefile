@@ -177,33 +177,6 @@ Item.cpp.s:
 	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Item.cpp.s
 .PHONY : Item.cpp.s
 
-Location.o: Location.cpp.o
-
-.PHONY : Location.o
-
-# target to build an object file
-Location.cpp.o:
-	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Location.cpp.o
-.PHONY : Location.cpp.o
-
-Location.i: Location.cpp.i
-
-.PHONY : Location.i
-
-# target to preprocess a source file
-Location.cpp.i:
-	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Location.cpp.i
-.PHONY : Location.cpp.i
-
-Location.s: Location.cpp.s
-
-.PHONY : Location.s
-
-# target to generate assembly for a file
-Location.cpp.s:
-	$(MAKE) -f CMakeFiles/bombEEr_man.dir/build.make CMakeFiles/bombEEr_man.dir/Location.cpp.s
-.PHONY : Location.cpp.s
-
 Map.o: Map.cpp.o
 
 .PHONY : Map.o
@@ -408,9 +381,6 @@ help:
 	@echo "... Item.o"
 	@echo "... Item.i"
 	@echo "... Item.s"
-	@echo "... Location.o"
-	@echo "... Location.i"
-	@echo "... Location.s"
 	@echo "... Map.o"
 	@echo "... Map.i"
 	@echo "... Map.s"

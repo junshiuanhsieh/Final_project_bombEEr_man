@@ -5,11 +5,12 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-#include "Player.h"
-#include "Bomb.h"
-#include "Item.h"
-#include "Location.h"
 
+class Location {
+public:
+    int x, y;
+    Location();
+};
 class Map {
     friend class Player;
     friend class Bomb;

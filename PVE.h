@@ -9,6 +9,9 @@
 #include "button.h"
 #include "texture.h"
 #include "Map.h"
+#include "Player.h"
+#include "Bomb.h"
+#include "Item.h"
 
 void PVE();
 void PVE1();

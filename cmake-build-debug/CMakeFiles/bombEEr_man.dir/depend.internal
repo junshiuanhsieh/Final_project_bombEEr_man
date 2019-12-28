@@ -52,11 +52,7 @@ CMakeFiles/bombEEr_man.dir/Bomb.cpp.o
  /Library/Frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.cpp
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
- /Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.h
- /Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
- /Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.h
- /Users/shiuanhsieh/CLionProjects/bombEEr_man/texture.h
 CMakeFiles/bombEEr_man.dir/Item.cpp.o
  /Library/Frameworks/SDL2.framework/Headers/SDL.h
  /Library/Frameworks/SDL2.framework/Headers/SDL_assert.h
@@ -106,16 +102,9 @@ CMakeFiles/bombEEr_man.dir/Item.cpp.o
  /Library/Frameworks/SDL2.framework/Headers/close_code.h
  /Library/Frameworks/SDL2_image.framework/Headers/SDL_image.h
  /Library/Frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h
- /Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.cpp
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.h
- /Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
- /Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.h
- /Users/shiuanhsieh/CLionProjects/bombEEr_man/texture.h
-CMakeFiles/bombEEr_man.dir/Location.cpp.o
- /Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.cpp
- /Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.h
 CMakeFiles/bombEEr_man.dir/Map.cpp.o
  /Library/Frameworks/SDL2.framework/Headers/SDL.h
  /Library/Frameworks/SDL2.framework/Headers/SDL_assert.h
@@ -165,13 +154,8 @@ CMakeFiles/bombEEr_man.dir/Map.cpp.o
  /Library/Frameworks/SDL2.framework/Headers/close_code.h
  /Library/Frameworks/SDL2_image.framework/Headers/SDL_image.h
  /Library/Frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h
- /Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
- /Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.h
- /Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.cpp
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
- /Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.h
- /Users/shiuanhsieh/CLionProjects/bombEEr_man/texture.h
 CMakeFiles/bombEEr_man.dir/PVE.cpp.o
  /Library/Frameworks/SDL2.framework/Headers/SDL.h
  /Library/Frameworks/SDL2.framework/Headers/SDL_assert.h
@@ -223,7 +207,6 @@ CMakeFiles/bombEEr_man.dir/PVE.cpp.o
  /Library/Frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.h
- /Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/PVE.cpp
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/PVE.h
@@ -281,7 +264,6 @@ CMakeFiles/bombEEr_man.dir/PVP.cpp.o
  /Library/Frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.h
- /Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/PVP.cpp
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/PVP.h
@@ -339,7 +321,6 @@ CMakeFiles/bombEEr_man.dir/Player.cpp.o
  /Library/Frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.h
- /Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.cpp
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.h
@@ -447,7 +428,6 @@ CMakeFiles/bombEEr_man.dir/main.cpp.o
  /Library/Frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.h
- /Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/PVE.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/PVP.h

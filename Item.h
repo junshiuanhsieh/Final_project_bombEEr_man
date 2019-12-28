@@ -5,8 +5,7 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include "Map.h"
-#include "Location.h"
-#include "Bomb.h"
+
 
 class Item {
     friend class Player;

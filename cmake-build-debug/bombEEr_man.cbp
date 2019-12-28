@@ -100,12 +100,6 @@
 		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.h">
 			<Option target="bombEEr_man"/>
 		</Unit>
-		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.cpp">
-			<Option target="bombEEr_man"/>
-		</Unit>
-		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/Location.h">
-			<Option target="bombEEr_man"/>
-		</Unit>
 		<Unit filename="/Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.cpp">
 			<Option target="bombEEr_man"/>
 		</Unit>

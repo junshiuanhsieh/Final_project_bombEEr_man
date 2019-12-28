@@ -27,9 +27,9 @@ bool Player::dead(){
     alive = false;
     for(int i = 0; i<Total_item; i++) item_owned[i] = 0;
 }
-//void Player::placebomb(int x, int y, Bomb & newbomb){
-//    newbomb.bomb_loc = player_loc;
-//}
+void Player::placebomb(int x, int y, Bomb & newbomb){
+    newbomb.bomb_loc = player_loc;
+}
 void Player::move(Direction dir, int s){
     if(dir == UP) {
         if(player_point.y > 0) {player_point.y -= s;}
@@ -50,13 +50,13 @@ void Player::determine_loc(){
     player_loc.x = (player_point.x-10) / 60;
     player_loc.y = (player_point.y-60) / 60;
 }
-//void Player::get_item(Item &item){
-//    item_owned[item.item_num]++;
-//    item.taken_by_player(player_num);
-//}
-//void Player::useitem(Item &item){
-//    item_owned[item.item_num]--;
-//}
+void Player::get_item(Item &item){
+    item_owned[item.item_num]++;
+    item.taken_by_player(player_num);
+}
+void Player::useitem(Item &item){
+    item_owned[item.item_num]--;
+}
 void Player::player_render(){
 
 }
