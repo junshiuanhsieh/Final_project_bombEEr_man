@@ -15,6 +15,7 @@ class Bomb {
         Location bomb_left();
         Location bomb_up();
         Location bomb_down();
+        void bomb_explode();  //player放置bomb後經過一段時間後爆炸
         void changemap(Location);
 
     private:

@@ -17,10 +17,10 @@ class Map {
     friend class Item;
     public:
         Map();
-        void collapse();
-        void met_character(int player);
-        void item_taken(int player);
-
+        void collapse(); //bomb爆炸時呼叫
+        void met_character(int player); //player呼叫
+        void item_taken(int player); //player呼叫
+        //感覺map還有很多要寫，只是我對遊戲不熟所以目前想不到
     private:
         Location map_loc;
         bool bomb, box, wall, item[12];

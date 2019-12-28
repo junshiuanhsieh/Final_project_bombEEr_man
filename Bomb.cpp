@@ -23,6 +23,9 @@ Location Bomb::bomb_up(){
 Location Bomb::bomb_down(){
 
 }
+void Bomb::bomb_explode(){
+
+}
 void Bomb::changemap(Location){
 
 }
