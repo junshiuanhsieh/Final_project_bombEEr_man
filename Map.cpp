@@ -12,7 +12,14 @@ Map** map = NULL;
 
 Map::Map(){
     character_inside = new bool[Player_number];
-    for(int i = 0; i<Player_number; i++) character_inside[i] = 0;
+    contain_bomb = 0;
+    wall = 0;
+    for(int i = 0; i<Player_number; i++) {
+        character_inside[i] = 0;
+        contain_item[i] = 0;
+        item[i] = NULL;
+    }
+
     //more
 }
 void Map::collapse(){

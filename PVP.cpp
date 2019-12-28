@@ -18,7 +18,6 @@ void PVP(){
     for(int i = 0; i<16; i++) map[i] = new Map [11];
 
 
-
     if(Player_number == 1) PVP1();
     else if(Player_number == 2) PVP2();
     else if(Player_number == 3) PVP3();

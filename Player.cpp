@@ -12,13 +12,20 @@ extern Player* player = NULL;
 
 Player::Player(){
     alive = true;
-    for(int i = 0; i<Total_item; i++) item_owned[i] = 0;
+    for(int i = 0; i<Total_item; i++) {
+        item[i] = 0;
+        item_owned[i] = NULL;
+    }
     score = 0;
     bomb_distance = 1;
+
 }
 Player::Player(int num) : player_num(num){
     alive = true;
-    for(int i = 0; i<Total_item; i++) item_owned[i] = 0;
+    for(int i = 0; i<Total_item; i++) {
+        item[i] = 0;
+        item_owned[i] = NULL;
+    }
     score = 0;
     form = character_picture[num];
     bomb_distance = 1;
@@ -32,7 +39,6 @@ bool Player::dead(){
     alive = false;
     for(int i = 0; i<Total_item; i++) item_owned[i] = 0;
 }
-
 void Player::move(Direction dir, int s){
     if(dir == UP) {
         if(player_point.y > 0) {player_point.y -= s;}
@@ -52,17 +58,23 @@ void Player::determine_loc(){
     player_loc.x = (player_point.x-10) / 60;
     player_loc.y = (player_point.y-60) / 60;
 }
-void Player::get_item(Item &item){
-    item_owned[item.item_num]++;
-    item.taken_by_player(player_num);
+void Player::get_item(Item * item){
+    item_owned[item->item_num]++;
+    item->taken_by_player(player_num);
 }
-void Player::useitem(Item &item){
-    item_owned[item.item_num]--;
+void Player::useitem(Item * item){
+    item_owned[item->item_num]--;
+    item->used();
+}
+void Player::putbomb(Bomb & newbomb){
+    newbomb = Bomb(player_loc, bomb_distance);
 }
 void Player::player_render(){
     SDL_Rect player_dest = {};
     picture.render(&player_dest);
 }
+
+
 //bool Player::operator! (){
 //    return alive;
 //}

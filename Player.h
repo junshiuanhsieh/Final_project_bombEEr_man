@@ -17,11 +17,13 @@ class Player {
         bool dead();                             //call by class Bomb
         void move(Direction, int s);
         void determine_loc();                    //use player_point to determine player_loc
-        void get_item(Item &);
-        void useitem(Item &);
+        void get_item(Item *);
+        void useitem(Item *);                    //use pointer to enable polymorphism
+        void putbomb(Bomb &);
         void player_render();
         bool alive;
-        int item_owned[12];
+        Item * item_owned[12];
+        bool item[12];
         int score;
         Location player_loc;
     private:
