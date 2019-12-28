@@ -6,7 +6,6 @@
 #include "texture.h"
 #include "Item.h"
 #include "Map.h"
-#include "Bomb.h"
 
 enum Direction{ UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 
@@ -15,7 +14,7 @@ class Player {
         Player();
         Player(int num);
         bool dead();
-        void placebomb(int x, int y, Bomb &);
+        //void placebomb(int x, int y);
         void move(Direction, int s);
         void determine_loc();
         void get_item(Item &);

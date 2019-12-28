@@ -6,12 +6,13 @@
 #include <SDL_ttf.h>
 #include "Map.h"
 #include "Item.h"
-
+#include "Player.h"
 
 class Bomb {
     friend class Player;
     public:
         Bomb();
+        Bomb(Location, int distance);
         Location bomb_right();  //determine which map (in which box/player is located) will be bombed
         Location bomb_left();
         Location bomb_up();

@@ -1,3 +1,4 @@
+#include <lber.h>
 #include "Bomb.h"
 
 extern const int SCREEN_WIDTH;
@@ -9,6 +10,9 @@ extern const int Total_item;
 extern Map** map;
 
 Bomb::Bomb(){
+
+}
+Bomb::Bomb(Location loc, int distance) : bomb_loc(loc), bomb_distance(distance){
 
 }
 Location Bomb::bomb_right(){

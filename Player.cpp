@@ -29,10 +29,9 @@ bool Player::dead(){
     alive = false;
     for(int i = 0; i<Total_item; i++) item_owned[i] = 0;
 }
-void Player::placebomb(int x, int y, Bomb & newbomb){
-    newbomb.bomb_loc = player_loc;
-    newbomb.bomb_distance = bomb_distance;
-}
+//void Player::placebomb(int x, int y){
+//
+//}
 void Player::move(Direction dir, int s){
     if(dir == UP) {
         if(player_point.y > 0) {player_point.y -= s;}
