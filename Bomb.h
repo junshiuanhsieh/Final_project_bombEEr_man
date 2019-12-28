@@ -11,15 +11,15 @@ class Bomb {
     friend class Player;
     public:
         Bomb();
-        SDL_Point bomb_right();
-        SDL_Point bomb_left();
-        SDL_Point bomb_up();
-        SDL_Point bomb_down();
-        void changemap(SDL_Point);
+        Location bomb_right();
+        Location bomb_left();
+        Location bomb_up();
+        Location bomb_down();
+        void changemap(Location);
 
     private:
-        Location bomb_loc;
-        int bomb_distance;
+        Location bomb_loc;  //player來設定
+        int bomb_distance;  //由player放下bomb時設定
 
 };
 

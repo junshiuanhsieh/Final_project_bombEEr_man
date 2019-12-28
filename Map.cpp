@@ -14,4 +14,17 @@ Location::Location(){
     x = 0;
     y = 0;
 }
-Map::Map(){}
+
+Map::Map(){
+
+}
+void Map::collapse(){
+
+}
+void Map::met_character(int player){
+
+}
+void Map::item_taken(int player){
+
+}
+

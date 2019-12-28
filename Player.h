@@ -26,7 +26,7 @@ class Player {
         int score;
         Location player_loc;
     private:
-        int player_num, form;
+        int player_num, form, bomb_distance;
         Texture picture;
         SDL_Point player_point;
 };

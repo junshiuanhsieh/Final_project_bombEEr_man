@@ -17,7 +17,7 @@ class Item {
         Item(Location, int num);
         void show();
         virtual void used();
-        void taken_by_player(int player_num);
+        void taken_by_player(int player_num);  //player get_item(Item &item) 時呼叫
 };
 
 class item0 : public Item {

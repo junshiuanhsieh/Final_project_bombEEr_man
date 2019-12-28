@@ -11,12 +11,14 @@ Player::Player(){
     alive = true;
     for(int i = 0; i<Total_item; i++) item_owned[i] = 0;
     score = 0;
+    bomb_distance = 1;
 }
 Player::Player(int num) : player_num(num){
     alive = true;
     for(int i = 0; i<Total_item; i++) item_owned[i] = 0;
     score = 0;
     form = character_picture[num];
+    bomb_distance = 1;
     if(form==0) picture.loadFromFile("../character_image/character0.png");
     if(form==1) picture.loadFromFile("../character_image/character1.png");
     if(form==2) picture.loadFromFile("../character_image/character2.png");
@@ -29,6 +31,7 @@ bool Player::dead(){
 }
 void Player::placebomb(int x, int y, Bomb & newbomb){
     newbomb.bomb_loc = player_loc;
+    newbomb.bomb_distance = bomb_distance;
 }
 void Player::move(Direction dir, int s){
     if(dir == UP) {
