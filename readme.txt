@@ -8,6 +8,7 @@ Global Variable:
   bool quit;
   int Player_number, Mode;
   int* character_picture;
+  const int Total_item;
 
 Class:
   Rectbutton

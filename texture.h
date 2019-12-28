@@ -1,8 +1,10 @@
+#ifndef BOMBEER_MAN_TEXTURE_H
+#define BOMBEER_MAN_TEXTURE_H
+
 #include <iostream>
 #include <SDL.h>
 #include <SDL_image.h>
-#ifndef BOMBEER_MAN_TEXTURE_H
-#define BOMBEER_MAN_TEXTURE_H
+
 using namespace std;
 
 class Texture{

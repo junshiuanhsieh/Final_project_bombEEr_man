@@ -1,9 +1,12 @@
+#ifndef BOMBEER_MAN_MAP_H
+#define BOMBEER_MAN_MAP_H
+
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-//#include "Player.h"
-//#include "Bomb.h"
-//#include "Item.h"
+#include "Player.h"
+#include "Bomb.h"
+#include "Item.h"
 
 class Map {
     friend class Character;
@@ -19,8 +22,8 @@ class Map {
         SDL_Point map_loc;
         bool bomb, box, wall;
         int item[12];
-        bool *character_inside;
+        bool* character_inside;
 };
 
-
+#endif
 

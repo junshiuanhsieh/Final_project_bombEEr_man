@@ -1,3 +1,6 @@
+#ifndef BOMBEER_MAN_PVE_H
+#define BOMBEER_MAN_PVE_H
+
 #include <iostream>
 #include <string>
 #include <SDL.h>
@@ -9,3 +12,6 @@ void PVE();
 void PVE1();
 void PVE2();
 void PVE3();
+void Show_data();
+
+#endif

@@ -16,6 +16,7 @@ SDL_Renderer* gRenderer = NULL;
 bool quit;
 int Player_number = 0, Mode = 0;
 int* character_picture = NULL;
+const int Total_item = 12;
 
 void init();
 void close();
@@ -260,11 +261,9 @@ void Scrolling(){
         SDL_RenderPresent( gRenderer );
         SDL_Delay(10);
         i += 5;
-        //cout << i << endl;
     }
 
     while(!next && !quit){
-        //cout << "hello" << endl;
         int big_next = 1, big_back = 1;
         while (SDL_PollEvent(&scrollingevent) != 0) {
             if (scrollingevent.type == SDL_QUIT) {quit = true; return;}

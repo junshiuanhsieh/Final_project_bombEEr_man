@@ -1,3 +1,6 @@
+#ifndef BOMBEER_MAN_BOMB_H
+#define BOMBEER_MAN_BOMB_H
+
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
@@ -17,4 +20,4 @@ class Bomb {
 
 };
 
-
+#endif
