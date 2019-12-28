@@ -13,10 +13,9 @@ class Player {
     public:
         Player();
         Player(int num);
-        bool dead();
-        //void placebomb(int x, int y);
+        bool dead();                             //call by class Bomb
         void move(Direction, int s);
-        void determine_loc();
+        void determine_loc();                    //use player_point to determine player_loc
         void get_item(Item &);
         void useitem(Item &);
         void player_render();

@@ -651,6 +651,8 @@ SDL2/close_code.h
 -
 
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.cpp
+lber.h
+-
 Bomb.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
 
@@ -665,6 +667,8 @@ Map.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
 Item.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.h
+Player.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.h
 
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.cpp
 Item.h
@@ -763,8 +767,6 @@ Item.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.h
 Map.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
-Bomb.h
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
 
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/button.h
 iostream

@@ -6,6 +6,7 @@ extern SDL_Renderer* gRenderer;
 extern int* character_picture;
 extern const int Total_item = 12;
 extern Map** map;
+extern Player* player = NULL;
 
 Player::Player(){
     alive = true;
@@ -29,9 +30,7 @@ bool Player::dead(){
     alive = false;
     for(int i = 0; i<Total_item; i++) item_owned[i] = 0;
 }
-//void Player::placebomb(int x, int y){
-//
-//}
+
 void Player::move(Direction dir, int s){
     if(dir == UP) {
         if(player_point.y > 0) {player_point.y -= s;}
@@ -46,7 +45,6 @@ void Player::move(Direction dir, int s){
         if(player_point.x < 900) {player_point.x += s;}
     }
     determine_loc();
-
 }
 void Player::determine_loc(){
     player_loc.x = (player_point.x-10) / 60;
@@ -60,7 +58,8 @@ void Player::useitem(Item &item){
     item_owned[item.item_num]--;
 }
 void Player::player_render(){
-
+    SDL_Rect player_dest = {};
+    picture.render(&player_dest);
 }
 //bool Player::operator! (){
 //    return alive;

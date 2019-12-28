@@ -54,6 +54,8 @@ CMakeFiles/bombEEr_man.dir/Bomb.cpp.o
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
+ /Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.h
+ /Users/shiuanhsieh/CLionProjects/bombEEr_man/texture.h
 CMakeFiles/bombEEr_man.dir/Item.cpp.o
  /Library/Frameworks/SDL2.framework/Headers/SDL.h
  /Library/Frameworks/SDL2.framework/Headers/SDL_assert.h
@@ -320,7 +322,6 @@ CMakeFiles/bombEEr_man.dir/Player.cpp.o
  /Library/Frameworks/SDL2.framework/Headers/close_code.h
  /Library/Frameworks/SDL2_image.framework/Headers/SDL_image.h
  /Library/Frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h
- /Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
  /Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.cpp
