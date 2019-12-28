@@ -17,7 +17,8 @@ class Map {
     private:
         Map();
         SDL_Point map_loc;
-        bool bomb, box, wall, item[12];
+        bool bomb, box, wall;
+        int item[12];
         bool *character_inside;
 };
 

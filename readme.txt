@@ -16,9 +16,14 @@ Class:
   Map
   Character
   Bomb
+  Item
+  Item_n
 
 cpp file:
   texture.cpp
   button.cpp
   PVE.cpp
   PVP.cpp
+  Map.cpp
+  Bomb.cpp
+  Item.cpp
