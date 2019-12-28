@@ -51,6 +51,7 @@ CMakeFiles/bombEEr_man.dir/Bomb.cpp.o: /Library/Frameworks/SDL2_image.framework/
 CMakeFiles/bombEEr_man.dir/Bomb.cpp.o: /Library/Frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h
 CMakeFiles/bombEEr_man.dir/Bomb.cpp.o: ../Bomb.cpp
 CMakeFiles/bombEEr_man.dir/Bomb.cpp.o: ../Bomb.h
+CMakeFiles/bombEEr_man.dir/Bomb.cpp.o: ../Item.h
 CMakeFiles/bombEEr_man.dir/Bomb.cpp.o: ../Map.h
 
 CMakeFiles/bombEEr_man.dir/Item.cpp.o: /Library/Frameworks/SDL2.framework/Headers/SDL.h

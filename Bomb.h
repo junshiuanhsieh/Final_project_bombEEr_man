@@ -5,13 +5,14 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include "Map.h"
+#include "Item.h"
 
 
 class Bomb {
     friend class Player;
     public:
         Bomb();
-        Location bomb_right();
+        Location bomb_right();  //determine which map (in which box/player is located) will be bombed
         Location bomb_left();
         Location bomb_up();
         Location bomb_down();
@@ -20,7 +21,7 @@ class Bomb {
 
     private:
         Location bomb_loc;  //player來設定
-        int bomb_distance;  //由player放下bomb時設定
+        int bomb_distance;  //由player放下bomb時設定, 爆炸能炸到的距離 原本是十字 (＝1)
 
 };
 

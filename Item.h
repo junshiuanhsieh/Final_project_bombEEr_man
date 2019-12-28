@@ -10,12 +10,12 @@
 class Item {
     friend class Player;
     protected:
-        int owner, item_num;
-        Location item_loc;
-        bool revealed, taken;
+        int owner, item_num;  //owner由player呼叫  item_num由constructor初始
+        Location item_loc;  //由constructor初始
+        bool revealed, taken; //revealed由bomb呼叫，taken由player呼叫
     public:
-        Item(Location, int num);
-        void show();
+        Item(Location, int num);  //constructor
+        void show();  //由bool revealed, taken判斷要不要render
         virtual void used();
         void taken_by_player(int player_num);  //player get_item(Item &item) 時呼叫
 };

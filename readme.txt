@@ -7,7 +7,7 @@ circular including is not allowed!!!
   PVP.h     include  =>  Map.h  Player.h  Item.h  Bomb.h
   Map.h     include
   Player.h  include  =>  Map.h  Item.h  Bomb.h
-  Bomb.h    include  =>  Map.h
+  Bomb.h    include  =>  Map.h  Item.h
   Item.h    include  =>  Map.h
 
 

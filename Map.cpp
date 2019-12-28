@@ -16,7 +16,9 @@ Location::Location(){
 }
 
 Map::Map(){
-
+    character_inside = new bool[Player_number];
+    for(int i = 0; i<Player_number; i++) character_inside[i] = 0;
+    //more
 }
 void Map::collapse(){
 

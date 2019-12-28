@@ -663,6 +663,8 @@ SDL_ttf.h
 -
 Map.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
+Item.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.h
 
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Item.cpp
 Item.h
