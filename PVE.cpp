@@ -27,11 +27,43 @@ void PVE(){
     map_random = rand()%3;
     PVE_map_initialize(map_random);
 
-    SDL_Event test;
+    SDL_Event PVE_event;
+    int rate = 5;
     while(!quit) {
-        while (SDL_PollEvent(&test) != 0) {
-            if (test.type == SDL_QUIT) quit = true;
+        while (SDL_PollEvent(&PVE_event) != 0) {
+            if (PVE_event.type == SDL_QUIT) {quit = true; return;}
+            else if(PVE_event.type == SDL_KEYDOWN){
+                if (PVE_event.key.keysym.sym==SDLK_RIGHT) player[0].move(RIGHT, rate);
+                else if (PVE_event.key.keysym.sym==SDLK_LEFT) player[0].move(LEFT, rate);
+                else if (PVE_event.key.keysym.sym==SDLK_UP) player[0].move(UP, rate);
+                else if (PVE_event.key.keysym.sym==SDLK_DOWN) player[0].move(DOWN, rate);
+                else player[0].finish_moving();
+
+                if(Player_number == 2){
+                    if (PVE_event.key.keysym.sym==SDLK_d) player[1].move(RIGHT, rate);
+                    else if (PVE_event.key.keysym.sym==SDLK_a) player[1].move(LEFT, rate);
+                    else if (PVE_event.key.keysym.sym==SDLK_w) player[1].move(UP, rate);
+                    else if (PVE_event.key.keysym.sym==SDLK_s) player[1].move(DOWN, rate);
+                    else player[1].finish_moving();
+
+                    if(Player_number==3){
+                        if (PVE_event.key.keysym.sym==SDLK_l) player[2].move(RIGHT, rate);
+                        else if (PVE_event.key.keysym.sym==SDLK_j) player[2].move(LEFT, rate);
+                        else if (PVE_event.key.keysym.sym==SDLK_i) player[2].move(UP, rate);
+                        else if (PVE_event.key.keysym.sym==SDLK_k) player[2].move(DOWN, rate);
+                        else player[2].finish_moving();
+                    }
+                }
+            }
+            else if(PVE_event.type == SDL_KEYUP){
+                for(int i = 0; i<Player_number; i++){
+                    player[i].finish_moving();
+                }
+            }
         }
+
+
+
     }
 }
 
