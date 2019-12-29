@@ -26,9 +26,10 @@ Map::Map(){
     for(int i = 0; i<Player_number; i++) character_inside[i] = 0;
     contain_item = 0;
     which_item = -1;
-    wall = contain_bomb =  contain_box = 0;
+    wall = contain_bomb =  contain_emptybox = 0;
     item = NULL;
     bomb = NULL;
+    box = NULL;
 }
 
 Map::Map(Location Location_for_init) : map_loc(Location_for_init){
@@ -36,24 +37,45 @@ Map::Map(Location Location_for_init) : map_loc(Location_for_init){
     for(int i = 0; i<Player_number; i++) character_inside[i] = 0;
     contain_item = 0;
     which_item = -1;
-    wall = contain_bomb = contain_box = 0;
+    wall = contain_bomb = contain_emptybox = 0;
     item = NULL;
     bomb = NULL;
+    box = NULL;
 }
 
 //這個其實我不太懂，是box跟障礙物被炸到collapse的意思嗎，還是box會顯現出來。
 void Map::collapse(){
-    if(contain_box == 1 ) contain_box = 0;
+    if(contain_emptybox == 1 ) contain_emptybox = 0;
     //不知道被炸到之後不用render是不是我要寫
 }
 
 bool Map::met_character(int player){
-    if(contain_bomb == 1 || contain_box == 1) return 0;
+    if(contain_bomb == 1 || contain_emptybox == 1) return 0;
     else return 1;
 }
 
 int Map::item_taken(int player){
     contain_item = 0;
     return which_item;
+}
+void Map::render_map(){
+    if(contain_emptybox && box!=NULL && box->destroyed==0){
+        Texture emptybox;
+        emptybox.loadFromFile("../item_image/empty_box.png");
+        SDL_Rect map_rect = {20+60*map_loc.x, 75+60*map_loc.y, 60, 60};
+        emptybox.render(&map_rect);
+    }
+    else if(contain_item && item!=NULL && item->destroyed==0){
+        Texture item_box;
+        item_box.loadFromFile("../item_image/box.png");
+        SDL_Rect map_rect = {20+60*map_loc.x, 75+60*map_loc.y, 60, 60};;
+        item_box.render(&map_rect);
+    }
+    else if(contain_bomb){
+        Texture bomb;
+        bomb.loadFromFile("../item_image/bomb.png");
+        SDL_Rect bomb_rect = {};
+        bomb.render(&bomb_rect);
+    }
 }
 

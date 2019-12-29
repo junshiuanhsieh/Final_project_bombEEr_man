@@ -55,8 +55,8 @@ void Player::move(Direction dir, int s){
     determine_loc();
 }
 void Player::determine_loc(){
-    player_loc.x = (player_point.x-10) / 60;
-    player_loc.y = (player_point.y-60) / 60;
+    player_loc.x = (player_point.x-20) / 60;
+    player_loc.y = (player_point.y-75) / 60;
 }
 void Player::get_item(Item * item){
     item_owned[item->item_num]++;
@@ -70,7 +70,7 @@ void Player::putbomb(Bomb & newbomb){
     newbomb = Bomb(player_loc, bomb_distance);
 }
 void Player::player_render(){
-    SDL_Rect player_dest = {};
+    SDL_Rect player_dest = {20+60*player_loc.x, 75+60*player_loc.y, 60, 60};
     picture.render(&player_dest);
 }
 

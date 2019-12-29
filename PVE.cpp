@@ -1,4 +1,6 @@
 #include "PVE.h"
+#include <cstdlib>
+#include <ctime>
 
 extern const int SCREEN_WIDTH;
 extern const int SCREEN_HEIGHT;
@@ -20,12 +22,31 @@ void PVE(){
             map[i][j] = Map(temp_loc);
         }
     }
-
+    int map_random;
+    srand(time(0));
+    map_random = rand()%3;
+    PVE_map_initialize(map_random);
+    
 }
 
 void PVE_Show_data(){
     for(int i = 0; i<Player_number; i++){
 
+    }
+}
+
+void PVE_map_initialize(int random_num){
+    if(random_num==0){
+        map[5][5].wall = 1;
+        map[3][10].wall = 1;
+    }
+    else if(random_num==1){
+        map[1][2].wall = 1;
+        map[13][5].wall = 1;
+    }
+    else if(random_num==2){
+        map[8][2].wall = 1;
+        map[15][7].wall = 1;
     }
 }
 

@@ -5,15 +5,25 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include "Location.h"
-
-class Item {
+class empty_box{
+    friend class Player;
+    friend class Map;
+    friend class Bomb;
+    protected:
+        Location box_loc;  //由constructor初始
+    public:
+        empty_box();
+        empty_box(Location);  //constructor
+        bool destroyed;
+        void box_destroyed();
+};
+class Item : public empty_box{
     friend class Player;
     friend class Map;
     friend class Bomb;
     protected:
         int owner, item_num;  //owner由player呼叫  item_num由constructor初始
-        Location item_loc;  //由constructor初始
-        bool revealed, taken; //revealed由bomb呼叫，taken由player呼叫
+        bool taken; //revealed由bomb呼叫，taken由player呼叫
     public:
         Item(Location, int num);  //constructor
         void show();  //由bool revealed, taken判斷要不要render

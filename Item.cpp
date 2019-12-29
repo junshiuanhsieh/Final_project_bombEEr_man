@@ -13,13 +13,21 @@ extern int* character_picture;
 extern const int Total_item;
 extern Map** map;
 
-Item::Item(Location loc, int num) : item_loc(loc), item_num(num){
-    revealed = 0;
+empty_box::empty_box(){destroyed = 0;}
+empty_box::empty_box(Location loc) : box_loc(loc){
+    destroyed = 0;
+}
+void empty_box::box_destroyed(){
+    map[box_loc.x][box_loc.y].collapse();
+}
+Item::Item(Location loc, int num) : item_num(num){
+    box_loc = loc;
+    destroyed = 0;
     taken = 0;
     owner = -1;
 }
 void Item::show(){
-    if(!revealed){}
+    if(!destroyed){}
     else{
         if(!taken){}
     }
@@ -30,5 +38,5 @@ void Item::used(){
 void Item::taken_by_player(int player_num){
     owner = player_num;
     taken = true;
-    map[item_loc.x][item_loc.y].which_item = -1;
+    map[box_loc.x][box_loc.y].which_item = -1;
 }
