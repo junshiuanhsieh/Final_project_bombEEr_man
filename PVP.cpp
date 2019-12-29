@@ -98,11 +98,6 @@ void PVP(){
             else player[2].finish_moving();
         }
 
-
-
-
-        //cout << "Player[0].loc = " << player[0].player_loc.x << "  " << player[0].player_loc.y << endl;
-
         Texture PVP_background0;
         PVP_background0.loadFromFile("../PVP_image/background0.png");
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
