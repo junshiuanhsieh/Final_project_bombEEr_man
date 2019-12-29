@@ -15,9 +15,7 @@
 #include "Location.h"
 
 void PVE();
-void PVE1();
-void PVE2();
-void PVE3();
+
 void PVE_Show_data();
 
 #endif

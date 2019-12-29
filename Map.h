@@ -22,7 +22,7 @@ class Map {
         //感覺map還有很多要寫，只是我對遊戲不熟所以目前想不到
     private:
         Location map_loc;  //add new constructor to initialize map_loc (?
-        Bomb bomb;
+        Bomb* bomb;
         bool wall, contain_bomb, contain_box, contain_item;
         int which_item;
         Item* item; //constructor initialize //use pointer to enable polymorphism

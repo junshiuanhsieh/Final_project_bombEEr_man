@@ -5,6 +5,7 @@ class Location {
 public:
     int x, y;
     Location();
+    Location(int, int);
 };
 
 

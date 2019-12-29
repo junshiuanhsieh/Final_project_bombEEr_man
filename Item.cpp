@@ -30,5 +30,5 @@ void Item::used(){
 void Item::taken_by_player(int player_num){
     owner = player_num;
     taken = true;
-    map[item_loc.x][item_loc.y].item[item_num] = 0;
+    map[item_loc.x][item_loc.y].which_item = -1;
 }

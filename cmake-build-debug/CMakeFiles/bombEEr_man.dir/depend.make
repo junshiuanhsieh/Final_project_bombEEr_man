@@ -169,6 +169,8 @@ CMakeFiles/bombEEr_man.dir/Map.cpp.o: ../Item.h
 CMakeFiles/bombEEr_man.dir/Map.cpp.o: ../Location.h
 CMakeFiles/bombEEr_man.dir/Map.cpp.o: ../Map.cpp
 CMakeFiles/bombEEr_man.dir/Map.cpp.o: ../Map.h
+CMakeFiles/bombEEr_man.dir/Map.cpp.o: ../Player.h
+CMakeFiles/bombEEr_man.dir/Map.cpp.o: ../texture.h
 
 CMakeFiles/bombEEr_man.dir/PVE.cpp.o: /Library/Frameworks/SDL2.framework/Headers/SDL.h
 CMakeFiles/bombEEr_man.dir/PVE.cpp.o: /Library/Frameworks/SDL2.framework/Headers/SDL_assert.h

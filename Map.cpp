@@ -28,6 +28,7 @@ Map::Map(){
     which_item = -1;
     wall = contain_bomb =  contain_box = 0;
     item = NULL;
+    bomb = NULL;
 }
 
 Map::Map(Location Location_for_init) : map_loc(Location_for_init){
@@ -37,6 +38,7 @@ Map::Map(Location Location_for_init) : map_loc(Location_for_init){
     which_item = -1;
     wall = contain_bomb = contain_box = 0;
     item = NULL;
+    bomb = NULL;
 }
 
 //這個其實我不太懂，是box跟障礙物被炸到collapse的意思嗎，還是box會顯現出來。
