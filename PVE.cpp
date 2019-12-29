@@ -28,42 +28,81 @@ void PVE(){
     PVE_map_initialize(map_random);
 
     SDL_Event PVE_event;
-    int rate = 5;
+    player[0].player_loc.x = 0;
+    player[0].player_loc.y = 0;
+    player[0].player_point.x = 50;
+    player[0].player_point.y = 105;
+    int rate = 8;
+    bool keypress[12];
+    for(int i = 0; i<12; i++) keypress[i] = 0;
     while(!quit) {
         while (SDL_PollEvent(&PVE_event) != 0) {
             if (PVE_event.type == SDL_QUIT) {quit = true; return;}
-            else if(PVE_event.type == SDL_KEYDOWN){
-                if (PVE_event.key.keysym.sym==SDLK_RIGHT) player[0].move(RIGHT, rate);
-                else if (PVE_event.key.keysym.sym==SDLK_LEFT) player[0].move(LEFT, rate);
-                else if (PVE_event.key.keysym.sym==SDLK_UP) player[0].move(UP, rate);
-                else if (PVE_event.key.keysym.sym==SDLK_DOWN) player[0].move(DOWN, rate);
-                else player[0].finish_moving();
+            if (PVE_event.type == SDL_KEYDOWN && PVE_event.key.repeat==0) {
+                switch( PVE_event.key.keysym.sym ){
+                    case SDLK_UP: keypress[Key_Up] = 1; break;
+                    case SDLK_DOWN: keypress[Key_Down] = 1; break;
+                    case SDLK_LEFT: keypress[Key_Left] = 1; break;
+                    case SDLK_RIGHT: keypress[Key_Right] = 1; break;
 
-                if(Player_number == 2){
-                    if (PVE_event.key.keysym.sym==SDLK_d) player[1].move(RIGHT, rate);
-                    else if (PVE_event.key.keysym.sym==SDLK_a) player[1].move(LEFT, rate);
-                    else if (PVE_event.key.keysym.sym==SDLK_w) player[1].move(UP, rate);
-                    else if (PVE_event.key.keysym.sym==SDLK_s) player[1].move(DOWN, rate);
-                    else player[1].finish_moving();
+                    case SDLK_w: keypress[Key_w] = 1; break;
+                    case SDLK_s: keypress[Key_s] = 1; break;
+                    case SDLK_a: keypress[Key_a] = 1; break;
+                    case SDLK_d: keypress[Key_d] = 1; break;
 
-                    if(Player_number==3){
-                        if (PVE_event.key.keysym.sym==SDLK_l) player[2].move(RIGHT, rate);
-                        else if (PVE_event.key.keysym.sym==SDLK_j) player[2].move(LEFT, rate);
-                        else if (PVE_event.key.keysym.sym==SDLK_i) player[2].move(UP, rate);
-                        else if (PVE_event.key.keysym.sym==SDLK_k) player[2].move(DOWN, rate);
-                        else player[2].finish_moving();
-                    }
+                    case SDLK_i: keypress[Key_i] = 1; break;
+                    case SDLK_k: keypress[Key_k] = 1; break;
+                    case SDLK_j: keypress[Key_j] = 1; break;
+                    case SDLK_l: keypress[Key_l] = 1; break;
                 }
             }
-            else if(PVE_event.type == SDL_KEYUP){
-                for(int i = 0; i<Player_number; i++){
-                    player[i].finish_moving();
+            else if (PVE_event.type == SDL_KEYUP && PVE_event.key.repeat==0) {
+                switch( PVE_event.key.keysym.sym ){
+                    case SDLK_UP: keypress[Key_Up] = 0; break;
+                    case SDLK_DOWN: keypress[Key_Down] = 0; break;
+                    case SDLK_LEFT: keypress[Key_Left] = 0; break;
+                    case SDLK_RIGHT: keypress[Key_Right] = 0; break;
+
+                    case SDLK_w: keypress[Key_w] = 0; break;
+                    case SDLK_s: keypress[Key_s] = 0; break;
+                    case SDLK_a: keypress[Key_a] = 0; break;
+                    case SDLK_d: keypress[Key_d] = 0; break;
+
+                    case SDLK_i: keypress[Key_i] = 0; break;
+                    case SDLK_k: keypress[Key_k] = 0; break;
+                    case SDLK_j: keypress[Key_j] = 0; break;
+                    case SDLK_l: keypress[Key_l] = 0; break;
                 }
             }
         }
 
+        if (keypress[Key_Up]) player[0].move(UP, rate);
+        else if (keypress[Key_Down]) player[0].move(DOWN, rate);
+        else if (keypress[Key_Left]) player[0].move(LEFT, rate);
+        else if (keypress[Key_Right]) player[0].move(RIGHT, rate);
+        else player[0].finish_moving();
 
+        if (keypress[Key_w]) player[1].move(UP, rate);
+        else if (keypress[Key_s]) player[1].move(DOWN, rate);
+        else if (keypress[Key_a]) player[1].move(LEFT, rate);
+        else if (keypress[Key_d]) player[1].move(RIGHT, rate);
+        else player[1].finish_moving();
 
+        if(Player_number==3){
+            if (keypress[Key_i]) player[2].move(UP, rate);
+            else if (keypress[Key_k]) player[2].move(DOWN, rate);
+            else if (keypress[Key_j]) player[2].move(LEFT, rate);
+            else if (keypress[Key_l]) player[2].move(RIGHT, rate);
+            else player[2].finish_moving();
+        }
+
+        Texture PVP_background0;
+        PVP_background0.loadFromFile("../PVP_image/background0.png");
+        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+        SDL_RenderClear(gRenderer);
+        PVP_background0.render(NULL);
+        player[0].player_render();
+        SDL_RenderPresent( gRenderer );
     }
 }
 

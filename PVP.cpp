@@ -105,7 +105,6 @@ void PVP(){
         PVP_background0.render(NULL);
         player[0].player_render();
         SDL_RenderPresent( gRenderer );
-
     }
 }
 
