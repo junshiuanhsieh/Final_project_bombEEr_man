@@ -131,7 +131,11 @@ void Player::putbomb(Bomb & newbomb){
 }
 void Player::player_render(){
     SDL_Rect player_dest = {player_point.x-30, player_point.y-30, 60, 60};
-    picture.loadFromFile("../character_image/character4.png");
+    if(character_picture[player_num]==0) picture.loadFromFile("../character_image/character0.png");
+    if(character_picture[player_num]==1) picture.loadFromFile("../character_image/character1.png");
+    if(character_picture[player_num]==2) picture.loadFromFile("../character_image/character2.png");
+    if(character_picture[player_num]==3) picture.loadFromFile("../character_image/character3.png");
+    if(character_picture[player_num]==4) picture.loadFromFile("../character_image/character4.png");
     picture.render(&player_dest);
 }
 

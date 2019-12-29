@@ -32,6 +32,18 @@ void PVE(){
     player[0].player_loc.y = 0;
     player[0].player_point.x = 50;
     player[0].player_point.y = 105;
+    if(Player_number>1){
+        player[1].player_loc.x = 15;
+        player[1].player_loc.y = 10;
+        player[1].player_point.x = 920;
+        player[1].player_point.y = 675;
+        if(Player_number == 3){
+            player[2].player_loc.x = 0;
+            player[2].player_loc.y = 10;
+            player[2].player_point.x = 50;
+            player[2].player_point.y = 675;
+        }
+    }
     int rate = 8;
     bool keypress[12];
     for(int i = 0; i<12; i++) keypress[i] = 0;
@@ -82,18 +94,20 @@ void PVE(){
         else if (keypress[Key_Right]) player[0].move(RIGHT, rate);
         else player[0].finish_moving();
 
-        if (keypress[Key_w]) player[1].move(UP, rate);
-        else if (keypress[Key_s]) player[1].move(DOWN, rate);
-        else if (keypress[Key_a]) player[1].move(LEFT, rate);
-        else if (keypress[Key_d]) player[1].move(RIGHT, rate);
-        else player[1].finish_moving();
+        if(Player_number > 1){
+            if (keypress[Key_w]) player[1].move(UP, rate);
+            else if (keypress[Key_s]) player[1].move(DOWN, rate);
+            else if (keypress[Key_a]) player[1].move(LEFT, rate);
+            else if (keypress[Key_d]) player[1].move(RIGHT, rate);
+            else player[1].finish_moving();
 
-        if(Player_number==3){
-            if (keypress[Key_i]) player[2].move(UP, rate);
-            else if (keypress[Key_k]) player[2].move(DOWN, rate);
-            else if (keypress[Key_j]) player[2].move(LEFT, rate);
-            else if (keypress[Key_l]) player[2].move(RIGHT, rate);
-            else player[2].finish_moving();
+            if(Player_number == 3){
+                if (keypress[Key_i]) player[2].move(UP, rate);
+                else if (keypress[Key_k]) player[2].move(DOWN, rate);
+                else if (keypress[Key_j]) player[2].move(LEFT, rate);
+                else if (keypress[Key_l]) player[2].move(RIGHT, rate);
+                else player[2].finish_moving();
+            }
         }
 
         Texture PVP_background0;
@@ -101,7 +115,7 @@ void PVE(){
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         PVP_background0.render(NULL);
-        player[0].player_render();
+        for(int i = 0; i<Player_number; i++) player[i].player_render();
         SDL_RenderPresent( gRenderer );
     }
 }

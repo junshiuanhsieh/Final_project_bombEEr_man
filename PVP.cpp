@@ -34,6 +34,16 @@ void PVP(){
     player[0].player_loc.y = 0;
     player[0].player_point.x = 50;
     player[0].player_point.y = 105;
+    player[1].player_loc.x = 15;
+    player[1].player_loc.y = 10;
+    player[1].player_point.x = 920;
+    player[1].player_point.y = 675;
+    if(Player_number == 3){
+        player[2].player_loc.x = 0;
+        player[2].player_loc.y = 10;
+        player[2].player_point.x = 50;
+        player[2].player_point.y = 675;
+    }
     int rate = 8;
     bool keypress[12];
     for(int i = 0; i<12; i++) keypress[i] = 0;
@@ -103,7 +113,7 @@ void PVP(){
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         PVP_background0.render(NULL);
-        player[0].player_render();
+        for(int i = 0; i<Player_number; i++) player[i].player_render();
         SDL_RenderPresent( gRenderer );
     }
 }
