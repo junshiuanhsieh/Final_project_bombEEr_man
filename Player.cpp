@@ -49,6 +49,7 @@ void Player::move(Direction dir, int s){
                     player_point.y -= s;
                     map[player_loc.x][player_loc.y-1].character_inside[player_num] = 1;
                     map[player_loc.x][player_loc.y].character_inside[player_num] = 0;
+                    player_loc.y--;
                 }
             }
             else player_point.y -= s;
@@ -63,6 +64,7 @@ void Player::move(Direction dir, int s){
                     player_point.y += s;
                     map[player_loc.x][player_loc.y+1].character_inside[player_num] = 1;
                     map[player_loc.x][player_loc.y].character_inside[player_num] = 0;
+                    player_loc.y++;
                 }
             }
             else player_point.y += s;
@@ -77,6 +79,7 @@ void Player::move(Direction dir, int s){
                     player_point.x -= s;
                     map[player_loc.x-1][player_loc.y].character_inside[player_num] = 1;
                     map[player_loc.x][player_loc.y].character_inside[player_num] = 0;
+                    player_loc.x--;
                 }
             }
             else player_point.x -= s;
@@ -91,6 +94,7 @@ void Player::move(Direction dir, int s){
                     player_point.x += s;
                     map[player_loc.x+1][player_loc.y].character_inside[player_num] = 1;
                     map[player_loc.x][player_loc.y].character_inside[player_num] = 0;
+                    player_loc.x++;
                 }
             }
             else player_point.x += s;
