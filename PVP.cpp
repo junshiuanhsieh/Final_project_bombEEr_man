@@ -34,7 +34,7 @@ void PVP(){
     player[0].player_loc.y = 0;
     player[0].player_point.x = 50;
     player[0].player_point.y = 105;
-    int rate = 5;
+    int rate = 8;
     bool keypress[12];
     for(int i = 0; i<12; i++) keypress[i] = 0;
     while(!quit) {
@@ -123,7 +123,7 @@ void PVP_map_initialize(int random_num){
         map[1][4].wall = map[4][4].wall = map[5][4].wall = map[6][4].wall = map[9][4].wall = map[10][4].wall = map[11][4].wall = 1;
         map[1][5].wall = map[4][5].wall = map[5][5].wall = map[6][5].wall = map[9][5].wall = map[10][5].wall = map[11][5].wall = 1;
         map[0][6].wall = map[9][6].wall = map[11][6].wall = 1;
-        map[0][8].wall = 1;
+        map[0][8].wall = map[1][8].wall = 1;
         map[0][9].wall = map[1][9].wall = map[4][9].wall = map[7][9].wall = map[8][9].wall = map[12][9].wall = 1;
         map[4][10].wall = map[7][10].wall = map[8][10].wall = map[12][10].wall = 1;
 
