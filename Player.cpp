@@ -42,9 +42,10 @@ bool Player::dead(){
 void Player::move(Direction dir, int s){
     if(dir == UP) {
         if(player_point.y >= 105+s) {
-            bool change_loc = 0;
+            bool change_loc = 0, soon_change_loc = 0;
             if((player_point.y-s-75) / 60 != player_loc.y && player_loc.y>0) change_loc = 1;
-            if(change_loc){
+            if((player_point.y-30-75) / 60 != player_loc.y && player_loc.y>0) soon_change_loc = 1;
+            if(change_loc || soon_change_loc){
                 if(map[player_loc.x][player_loc.y-1].met_character(player_num)){
                     player_point.y -= s;
                     map[player_loc.x][player_loc.y-1].character_inside[player_num] = 1;
@@ -58,9 +59,10 @@ void Player::move(Direction dir, int s){
     }
     else if(dir == DOWN){
         if(player_point.y <= 705-s) {
-            bool change_loc = 0;
+            bool change_loc = 0, soon_change_loc = 0;
             if((player_point.y+s-75) / 60 != player_loc.y && player_loc.y<11) change_loc = 1;
-            if(change_loc){
+            if((player_point.y+30-75) / 60 != player_loc.y && player_loc.y<11) soon_change_loc = 1;
+            if(change_loc || soon_change_loc){
                 if(map[player_loc.x][player_loc.y+1].met_character(player_num)){
                     player_point.y += s;
                     map[player_loc.x][player_loc.y+1].character_inside[player_num] = 1;
@@ -74,9 +76,10 @@ void Player::move(Direction dir, int s){
     }
     else if(dir == LEFT){
         if(player_point.x >= 50+s) {
-            bool change_loc = 0;
+            bool change_loc = 0, soon_change_loc = 0;
             if((player_point.x-s-20) / 60 != player_loc.x && player_loc.x>0) change_loc = 1;
-            if(change_loc){
+            if((player_point.x-30-20) / 60 != player_loc.x && player_loc.x>0) soon_change_loc = 1;
+            if(change_loc || soon_change_loc){
                 if(map[player_loc.x-1][player_loc.y].met_character(player_num)){
                     player_point.x -= s;
                     map[player_loc.x-1][player_loc.y].character_inside[player_num] = 1;
@@ -90,9 +93,10 @@ void Player::move(Direction dir, int s){
     }
     else if(dir == RIGHT){
         if(player_point.x <= 950-s) {
-            bool change_loc = 0;
+            bool change_loc = 0, soon_change_loc = 0;
             if((player_point.x+s-20) / 60 != player_loc.x && player_loc.x<16) change_loc = 1;
-            if(change_loc){
+            if((player_point.x+30-20) / 60 != player_loc.x && player_loc.x<16) soon_change_loc = 1;
+            if(change_loc || soon_change_loc){
                 if(map[player_loc.x+1][player_loc.y].met_character(player_num)){
                     player_point.x += s;
                     map[player_loc.x+1][player_loc.y].character_inside[player_num] = 1;
