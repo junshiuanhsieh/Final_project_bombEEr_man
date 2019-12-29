@@ -76,5 +76,3 @@ void PVE_map_initialize(int random_num){
         SDL_RenderPresent( gRenderer );
     }
 }
-
-
