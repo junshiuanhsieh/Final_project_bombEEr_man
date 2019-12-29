@@ -41,22 +41,26 @@ bool Player::dead(){
 }
 void Player::move(Direction dir, int s){
     if(dir == UP) {
-        if(player_point.y > 0) {player_point.y -= s;}
+        if(player_point.y > 105) {player_point.y -= s;}
     }
     else if(dir == DOWN){
-        if(player_point.y < 600) {player_point.y += s;}
+        if(player_point.y < 630) {player_point.y += s;}
     }
     else if(dir == LEFT){
-        if(player_point.x > 0) {player_point.x -= s;}
+        if(player_point.x > 50) {player_point.x -= s;}
     }
     else if(dir == RIGHT){
-        if(player_point.x < 900) {player_point.x += s;}
+        if(player_point.x < 930) {player_point.x += s;}
     }
     determine_loc();
 }
 void Player::determine_loc(){
     player_loc.x = (player_point.x-20) / 60;
     player_loc.y = (player_point.y-75) / 60;
+}
+void Player::finish_moving(){
+    player_point.x = 50 + player_loc.x*60;
+    player_point.y = 105 + player_loc.y*60;
 }
 void Player::get_item(Item * item){
     item_owned[item->item_num]++;

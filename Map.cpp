@@ -50,7 +50,7 @@ void Map::collapse(){
 }
 
 bool Map::met_character(int player){
-    if(contain_bomb == 1 || contain_emptybox == 1) return 0;
+    if(contain_bomb == 1 || contain_emptybox == 1 || wall) return 0;
     else return 1;
 }
 

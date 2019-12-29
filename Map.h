@@ -30,7 +30,7 @@ class Map {
         int which_item;
         empty_box* box;
         Item* item;                        //constructor initialize //use pointer to enable polymorphism
-        bool* character_inside;               //constructor initialize : new [4]
+        bool* character_inside;               //constructor initialize : new
 };
 
 #endif

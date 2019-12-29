@@ -11,12 +11,15 @@
 enum Direction{ UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 
 class Player {
+    friend void PVE();
+    friend void PVP();
     public:
         Player();
         Player(int num);
         bool dead();                             //call by class Bomb
         void move(Direction, int s);
         void determine_loc();                    //use player_point to determine player_loc
+        void finish_moving();
         void get_item(Item *);
         void useitem(Item *);                    //use pointer to enable polymorphism
         void putbomb(Bomb &);
@@ -26,6 +29,7 @@ class Player {
         bool item[12];
         int score;
         Location player_loc;
+
     private:
         int player_num, form, bomb_distance;
         Texture picture;

@@ -43,8 +43,15 @@ void PVE_Show_data(){
 
 void PVE_map_initialize(int random_num){
     if(random_num==0){
-        map[5][5].wall = 1;
-        map[3][10].wall = 1;
+        map[3][0].wall = map[6][0].wall = map[7][0].wall = map[8][0].wall = 1;
+        map[2][1].wall = map[3][1].wall = map[3][1].wall = map[6][1].wall = map[7][1].wall = map[8][1].wall = map[10][1].wall = map[11][1].wall = map[12][1].wall = 1;
+        map[1][4].wall = map[4][4].wall = map[5][4].wall = map[6][4].wall = map[9][4].wall = map[10][4].wall = map[11][4].wall = 1;
+        map[1][5].wall = map[4][5].wall = map[5][5].wall = map[6][5].wall = map[9][5].wall = map[10][5].wall = map[11][5].wall = 1;
+        map[0][6].wall = map[9][6].wall = map[11][6].wall = 1;
+        map[0][8].wall = 1;
+        map[0][9].wall = map[1][9].wall = map[4][9].wall = map[7][9].wall = map[8][9].wall = map[12][9].wall = 1;
+        map[4][10].wall = map[7][10].wall = map[8][10].wall = map[12][10].wall = 1;
+
 
         Texture PVE_background0;
         PVE_background0.loadFromFile("../PVP_image/background0.png");
@@ -54,8 +61,15 @@ void PVE_map_initialize(int random_num){
         SDL_RenderPresent( gRenderer );
     }
     else if(random_num==1){
-        map[1][2].wall = 1;
-        map[13][5].wall = 1;
+        map[3][0].wall = map[6][0].wall = map[7][0].wall = map[8][0].wall = 1;
+        map[2][1].wall = map[3][1].wall = map[3][1].wall = map[6][1].wall = map[7][1].wall = map[8][1].wall = map[10][1].wall = map[11][1].wall = map[12][1].wall = 1;
+        map[1][4].wall = map[4][4].wall = map[5][4].wall = map[6][4].wall = map[9][4].wall = map[10][4].wall = map[11][4].wall = 1;
+        map[1][5].wall = map[4][5].wall = map[5][5].wall = map[6][5].wall = map[9][5].wall = map[10][5].wall = map[11][5].wall = 1;
+        map[0][6].wall = map[9][6].wall = map[11][6].wall = 1;
+        map[0][8].wall = 1;
+        map[0][9].wall = map[1][9].wall = map[4][9].wall = map[7][9].wall = map[8][9].wall = map[12][9].wall = 1;
+        map[4][10].wall = map[7][10].wall = map[8][10].wall = map[12][10].wall = 1;
+
 
         Texture PVE_background1;
         PVE_background1.loadFromFile("../PVP_image/background0.png");
@@ -65,8 +79,15 @@ void PVE_map_initialize(int random_num){
         SDL_RenderPresent( gRenderer );
     }
     else if(random_num==2){
-        map[8][2].wall = 1;
-        map[15][7].wall = 1;
+        map[3][0].wall = map[6][0].wall = map[7][0].wall = map[8][0].wall = 1;
+        map[2][1].wall = map[3][1].wall = map[3][1].wall = map[6][1].wall = map[7][1].wall = map[8][1].wall = map[10][1].wall = map[11][1].wall = map[12][1].wall = 1;
+        map[1][4].wall = map[4][4].wall = map[5][4].wall = map[6][4].wall = map[9][4].wall = map[10][4].wall = map[11][4].wall = 1;
+        map[1][5].wall = map[4][5].wall = map[5][5].wall = map[6][5].wall = map[9][5].wall = map[10][5].wall = map[11][5].wall = 1;
+        map[0][6].wall = map[9][6].wall = map[11][6].wall = 1;
+        map[0][8].wall = 1;
+        map[0][9].wall = map[1][9].wall = map[4][9].wall = map[7][9].wall = map[8][9].wall = map[12][9].wall = 1;
+        map[4][10].wall = map[7][10].wall = map[8][10].wall = map[12][10].wall = 1;
+
 
         Texture PVE_background2;
         PVE_background2.loadFromFile("../PVP_image/background0.png");
