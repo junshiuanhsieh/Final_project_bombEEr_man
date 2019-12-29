@@ -74,7 +74,7 @@ void Map::render_map(){
     else if(contain_bomb){
         Texture bomb;
         bomb.loadFromFile("../item_image/bomb.png");
-        SDL_Rect bomb_rect = {};
+        SDL_Rect bomb_rect = {30+60*map_loc.x, 75+60*map_loc.y, 50, 50};
         bomb.render(&bomb_rect);
     }
 }

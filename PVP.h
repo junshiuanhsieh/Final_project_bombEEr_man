@@ -15,9 +15,7 @@
 #include "Location.h"
 
 void PVP();
-void PVP1();
-void PVP2();
-void PVP3();
 void PVP_Show_data();
+void PVP_map_initialize(int random_num);
 
 #endif

@@ -15,7 +15,6 @@
 #include "Location.h"
 
 void PVE();
-
 void PVE_Show_data();
 void PVE_map_initialize(int random_num);
 
