@@ -33,7 +33,6 @@ void PVE(){
             if (test.type == SDL_QUIT) quit = true;
         }
     }
-
 }
 
 void PVE_Show_data(){

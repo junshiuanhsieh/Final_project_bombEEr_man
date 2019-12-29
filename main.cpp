@@ -39,7 +39,6 @@ int main( int argc, char* args[] ){
     close();
     return 0;
 }
-
 void init() {
     SDL_Init(SDL_INIT_VIDEO);
     TTF_Init();
@@ -132,25 +131,43 @@ void Choosemode(){
     }
 }
 void Choosenumber(){
-    int TOTAL_NUMBERBUTTON = 3;
+    int TOTAL_NUMBERBUTTON;
+    if(Mode==1) TOTAL_NUMBERBUTTON = 3;
+    else if(Mode==2) TOTAL_NUMBERBUTTON = 2;
     const int BUTTON_NUMBER_WIDTH = 200;
     const int BUTTON_NUMBER_HEIGHT = 100;
     Texture choosenumber;
     RectButton numberbuttons[TOTAL_NUMBERBUTTON], backto_choosemode;
-    SDL_Rect numberbutton_dest[TOTAL_NUMBERBUTTON], backbuttondest={100, 600, 200, 100};
+    SDL_Rect PVE_numberbutton_dest[TOTAL_NUMBERBUTTON], backbuttondest={100, 600, 200, 100};
+    SDL_Rect PVP_numberbutton_dest[TOTAL_NUMBERBUTTON];
     for(int i = 0; i<TOTAL_NUMBERBUTTON; i++){
-        numberbutton_dest[i].x = 300*i+200;
-        numberbutton_dest[i].y = 450;
-        numberbutton_dest[i].w = BUTTON_NUMBER_WIDTH;
-        numberbutton_dest[i].h = BUTTON_NUMBER_HEIGHT;
-        numberbuttons[i] = RectButton(numberbutton_dest[i]);
+        if(TOTAL_NUMBERBUTTON==3){
+            PVE_numberbutton_dest[i].x = 300*i+200;
+            PVE_numberbutton_dest[i].y = 450;
+            PVE_numberbutton_dest[i].w = BUTTON_NUMBER_WIDTH;
+            PVE_numberbutton_dest[i].h = BUTTON_NUMBER_HEIGHT;
+            numberbuttons[i] = RectButton(PVE_numberbutton_dest[i]);
+        }
+        else if(TOTAL_NUMBERBUTTON==2){
+            PVP_numberbutton_dest[i].x = 400*i+300;
+            PVP_numberbutton_dest[i].y = 450;
+            PVP_numberbutton_dest[i].w = BUTTON_NUMBER_WIDTH;
+            PVP_numberbutton_dest[i].h = BUTTON_NUMBER_HEIGHT;
+            numberbuttons[i] = RectButton(PVP_numberbutton_dest[i]);
+        }
     }
     backto_choosemode = RectButton(backbuttondest);
     choosenumber.loadFromFile("../start_image/choosenumber_background.png");
     backto_choosemode.buttontexture.loadFromFile("../start_image/back.png");
-    numberbuttons[0].buttontexture.loadFromFile("../start_image/choosenumber_button1.png");
-    numberbuttons[1].buttontexture.loadFromFile("../start_image/choosenumber_button2.png");
-    numberbuttons[2].buttontexture.loadFromFile("../start_image/choosenumber_button3.png");
+    if(Mode==1){
+        numberbuttons[0].buttontexture.loadFromFile("../start_image/choosenumber_button1.png");
+        numberbuttons[1].buttontexture.loadFromFile("../start_image/choosenumber_button2.png");
+        numberbuttons[2].buttontexture.loadFromFile("../start_image/choosenumber_button3.png");
+    }
+    else if(Mode==2){
+        numberbuttons[0].buttontexture.loadFromFile("../start_image/choosenumber_button2.png");
+        numberbuttons[1].buttontexture.loadFromFile("../start_image/choosenumber_button3.png");
+    }
 
     SDL_Event numberevent;
     while(!quit) {
@@ -168,7 +185,8 @@ void Choosenumber(){
             if(numberbuttons[i].CurrentSprite==BUTTON_SPRITE_MOUSE_OUT) big = 0;
             numberbuttons[i].rectrender(big);
             if(numberbuttons[i].CurrentSprite==BUTTON_SPRITE_MOUSE_UP) {
-                Player_number = i+1;
+                if(Mode==1) Player_number = i+1;
+                else if(Mode==2) Player_number = i+2;
                 cout << "Total player = " << Player_number << endl;
                 Scrolling();
                 return;
@@ -249,13 +267,12 @@ void Scrolling(){
         }
         if(next_button.CurrentSprite == BUTTON_SPRITE_MOUSE_UP){
             next = 1;
-            Choosecharacter();
             TTF_CloseFont(font);
-            TTF_Quit();
             for(int j = 0; j<4; j++){
                 SDL_DestroyTexture(pTextTexture[j]);
                 SDL_FreeSurface(pTextSurface[j]);
             }
+            Choosecharacter();
             return;
         }
         SDL_RenderPresent( gRenderer );
@@ -288,13 +305,12 @@ void Scrolling(){
         }
         if(next_button.CurrentSprite == BUTTON_SPRITE_MOUSE_UP){
             next = 1;
-            Choosecharacter();
             TTF_CloseFont(font);
-            //TTF_Quit();
             for(int j = 0; j<4; j++){
                 SDL_DestroyTexture(pTextTexture[j]);
                 SDL_FreeSurface(pTextSurface[j]);
             }
+            Choosecharacter();
             return;
         }
         SDL_RenderPresent( gRenderer );
