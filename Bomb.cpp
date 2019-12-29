@@ -9,6 +9,7 @@ extern int Player_number, Mode;
 extern int* character_picture;
 extern const int Total_item;
 extern Map** map;
+extern Player* player;
 
 Bomb::Bomb(){
 
