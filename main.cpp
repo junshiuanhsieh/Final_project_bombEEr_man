@@ -365,11 +365,7 @@ void Choosecharacter(){
             while (SDL_PollEvent(&chooseevent) != 0) {
                 backto_scrolling.handleEvent(&chooseevent);
                 if (chooseevent.type == SDL_QUIT) {quit = true; return;}
-                else if(chooseevent.type == SDL_KEYDOWN) {
-                    while(chooseevent.type != SDL_KEYUP) {
-                        SDL_PollEvent(&chooseevent);
-                        if (chooseevent.type == SDL_QUIT) {quit=true; return;}
-                    }
+                else if(chooseevent.type == SDL_KEYDOWN && chooseevent.key.repeat == 0) {
                     if (chooseevent.key.keysym.sym==SDLK_RIGHT || chooseevent.key.keysym.sym==SDLK_d || chooseevent.key.keysym.sym==SDLK_l) {
                         if (tempchoose < end_choose) {
                             tempchoose++;

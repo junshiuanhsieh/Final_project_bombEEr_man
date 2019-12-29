@@ -47,6 +47,8 @@ void Player::move(Direction dir, int s){
             if(change_loc){
                 if(map[player_loc.x][player_loc.y-1].met_character(player_num)){
                     player_point.y -= s;
+                    map[player_loc.x][player_loc.y-1].character_inside[player_num] = 1;
+                    map[player_loc.x][player_loc.y].character_inside[player_num] = 0;
                 }
             }
             else player_point.y -= s;
@@ -59,9 +61,11 @@ void Player::move(Direction dir, int s){
             if(change_loc){
                 if(map[player_loc.x][player_loc.y+1].met_character(player_num)){
                     player_point.x += s;
+                    map[player_loc.x][player_loc.y+1].character_inside[player_num] = 1;
+                    map[player_loc.x][player_loc.y].character_inside[player_num] = 0;
                 }
             }
-            else player_point.x += s;
+            else player_point.y += s;
         }
     }
     else if(dir == LEFT){
@@ -71,6 +75,8 @@ void Player::move(Direction dir, int s){
             if(change_loc){
                 if(map[player_loc.x-1][player_loc.y].met_character(player_num)){
                     player_point.x -= s;
+                    map[player_loc.x-1][player_loc.y].character_inside[player_num] = 1;
+                    map[player_loc.x][player_loc.y].character_inside[player_num] = 0;
                 }
             }
             else player_point.x -= s;
@@ -83,6 +89,8 @@ void Player::move(Direction dir, int s){
             if(change_loc){
                 if(map[player_loc.x+1][player_loc.y].met_character(player_num)){
                     player_point.x += s;
+                    map[player_loc.x+1][player_loc.y].character_inside[player_num] = 1;
+                    map[player_loc.x][player_loc.y].character_inside[player_num] = 0;
                 }
             }
             else player_point.x += s;
@@ -110,7 +118,8 @@ void Player::putbomb(Bomb & newbomb){
     newbomb = Bomb(player_loc, bomb_distance);
 }
 void Player::player_render(){
-    SDL_Rect player_dest = {20+60*player_loc.x, 75+60*player_loc.y, 60, 60};
+    SDL_Rect player_dest = {player_point.x-30, player_point.y-30, 60, 60};
+    picture.loadFromFile("../character_image/character4.png");
     picture.render(&player_dest);
 }
 

@@ -13,6 +13,12 @@ enum ButtonSprite{
     BUTTON_SPRITE_MOUSE_UP = 3,
 };
 
+enum keyboard{
+    Key_Up = 0, Key_Down = 1, Key_Left = 2, Key_Right = 3,
+    Key_w = 4, Key_s = 5, Key_a = 6, Key_d = 7,
+    Key_i = 8, Key_k = 9, Key_j = 10, Key_l = 11,
+};
+
 class RectButton{
     public:
         RectButton();
