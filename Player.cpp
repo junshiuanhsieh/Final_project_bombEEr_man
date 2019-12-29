@@ -60,7 +60,7 @@ void Player::move(Direction dir, int s){
             if((player_point.x+5-75) / 60 != player_loc.x && player_loc.x<11) change_loc = 1;
             if(change_loc){
                 if(map[player_loc.x][player_loc.y+1].met_character(player_num)){
-                    player_point.x += s;
+                    player_point.y += s;
                     map[player_loc.x][player_loc.y+1].character_inside[player_num] = 1;
                     map[player_loc.x][player_loc.y].character_inside[player_num] = 0;
                 }
