@@ -30,32 +30,30 @@ void PVP(){
     PVP_map_initialize(map_random);
 
     SDL_Event PVP_event;
+    int rate = 5;
     while(!quit) {
         while (SDL_PollEvent(&PVP_event) != 0) {
             if (PVP_event.type == SDL_QUIT) {quit = true; return;}
             else if(PVP_event.type == SDL_KEYDOWN){
-                if (PVP_event.key.keysym.sym==SDLK_RIGHT) {
-                    bool move = 1, changeloc = 0;
-                    if((player[0].player_point.x+5-20) / 60 != player[0].player_loc.x) changeloc = 1;
-                        if(map[player[0].player_loc.x+1][player[0].player_loc.y].met_character(0)){
-                            player[0].player_loc.x += 5;
-                        }
+                if (PVP_event.key.keysym.sym==SDLK_RIGHT) player[0].move(RIGHT, rate);
+                else if (PVP_event.key.keysym.sym==SDLK_LEFT) player[0].move(LEFT, rate);
+                else if (PVP_event.key.keysym.sym==SDLK_UP) player[0].move(UP, rate);
+                else if (PVP_event.key.keysym.sym==SDLK_DOWN) player[0].move(DOWN, rate);
+                else player[0].finish_moving();
+
+                if (PVP_event.key.keysym.sym==SDLK_d) player[1].move(RIGHT, rate);
+                else if (PVP_event.key.keysym.sym==SDLK_a) player[1].move(LEFT, rate);
+                else if (PVP_event.key.keysym.sym==SDLK_w) player[1].move(UP, rate);
+                else if (PVP_event.key.keysym.sym==SDLK_s) player[1].move(DOWN, rate);
+                else player[1].finish_moving();
+
+                if(Player_number==3){
+                    if (PVP_event.key.keysym.sym==SDLK_l) player[2].move(RIGHT, rate);
+                    else if (PVP_event.key.keysym.sym==SDLK_j) player[2].move(LEFT, rate);
+                    else if (PVP_event.key.keysym.sym==SDLK_i) player[2].move(UP, rate);
+                    else if (PVP_event.key.keysym.sym==SDLK_k) player[2].move(DOWN, rate);
+                    else player[2].finish_moving();
                 }
-                if (PVP_event.key.keysym.sym!=SDLK_RIGHT) {
-                    player[0].finish_moving();
-                }
-                else if (PVP_event.key.keysym.sym==SDLK_LEFT) {
-
-                }
-                else if (PVP_event.key.keysym.sym==SDLK_UP) {
-
-                }
-                else if (PVP_event.key.keysym.sym==SDLK_DOWN) {
-
-                }
-
-
-
 
             }
             else if(PVP_event.type == SDL_KEYUP){
