@@ -54,11 +54,12 @@ void Player::move(Direction dir, int s){
             }
             else player_point.y -= s;
         }
+        //cout << player_loc.x << " "  << player_loc.y << endl;
     }
     else if(dir == DOWN){
         if(player_point.y <= 705-s) {
             bool change_loc = 0;
-            if((player_point.y+s-75) / 60 != player_loc.x && player_loc.x<11) change_loc = 1;
+            if((player_point.y+s-75) / 60 != player_loc.y && player_loc.y<11) change_loc = 1;
             if(change_loc){
                 if(map[player_loc.x][player_loc.y+1].met_character(player_num)){
                     player_point.y += s;
@@ -69,6 +70,7 @@ void Player::move(Direction dir, int s){
             }
             else player_point.y += s;
         }
+        //cout << player_loc.x << " "  << player_loc.y << endl;
     }
     else if(dir == LEFT){
         if(player_point.x >= 50+s) {
@@ -84,6 +86,7 @@ void Player::move(Direction dir, int s){
             }
             else player_point.x -= s;
         }
+        //cout << player_loc.x << " "  << player_loc.y << endl;
     }
     else if(dir == RIGHT){
         if(player_point.x <= 950-s) {
@@ -99,6 +102,7 @@ void Player::move(Direction dir, int s){
             }
             else player_point.x += s;
         }
+        //cout << player_loc.x << " "  << player_loc.y << endl;
     }
     determine_loc();
 }
