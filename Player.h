@@ -29,7 +29,7 @@ class Player {
         bool alive;
         Item * item_owned[12];
         bool item[12];
-        int score, bomb_distance, bomb_number;
+        int score, bomb_distance, bomb_available, bomb_left;
         Location player_loc;
 
     private:

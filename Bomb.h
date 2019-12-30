@@ -11,7 +11,7 @@ class Bomb {
     friend class Player;
     public:
         Bomb();
-        Bomb(Location, int distance);
+        Bomb(Location, int distance, int player_num);
         Bomb(const Bomb &copy);        //copy constructor
         Bomb operator=(const Bomb &);
         Location bomb_right();  //determine which map (in which box/player is located) will be bombed
@@ -23,7 +23,7 @@ class Bomb {
         clock_t clk;
     private:
         Location bomb_loc;  //player來設定
-        int bomb_distance;  //由player放下bomb時設定, 爆炸能炸到的距離 原本是十字 (＝1)
+        int bomb_distance, owner;  //由player放下bomb時設定, 爆炸能炸到的距離 原本是十字 (＝1)
 
 };
 

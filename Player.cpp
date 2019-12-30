@@ -19,7 +19,8 @@ Player::Player(){
     }
     score = 0;
     bomb_distance = 1;
-    bomb_number = 1;
+    bomb_available = 1;
+    bomb_left = 1;
 }
 Player::Player(int num) : player_num(num){
     alive = true;
@@ -30,14 +31,10 @@ Player::Player(int num) : player_num(num){
     score = 0;
     form = character_picture[num];
     bomb_distance = 1;
-    bomb_number = 1;
+    bomb_available = 1;
+    bomb_left = 1;
 
-//    if(form==0) {
-//        cout << "load0" << endl;
-//        picture.loadFromFile("../character_image/character0.png");
-//        if(picture.mTexture == NULL) cout << "fail" << endl;
-//        cout << "check" << endl;
-//    }
+//    if(form==0) picture.loadFromFile("../character_image/character0.png");}
 //    else if(form==1) picture.loadFromFile("../character_image/character1.png");
 //    else if(form==2) picture.loadFromFile("../character_image/character2.png");
 //    else if(form==3) picture.loadFromFile("../character_image/character3.png");
@@ -63,7 +60,6 @@ void Player::move(Direction dir, int s){
             }
             else player_point.y -= s;
         }
-        //cout << player_loc.x << " "  << player_loc.y << endl;
     }
     else if(dir == DOWN){
         if(player_point.y <= 705-s) {
@@ -80,7 +76,6 @@ void Player::move(Direction dir, int s){
             }
             else player_point.y += s;
         }
-        //cout << player_loc.x << " "  << player_loc.y << endl;
     }
     else if(dir == LEFT){
         if(player_point.x >= 50+s) {
@@ -97,7 +92,6 @@ void Player::move(Direction dir, int s){
             }
             else player_point.x -= s;
         }
-        //cout << player_loc.x << " "  << player_loc.y << endl;
     }
     else if(dir == RIGHT){
         if(player_point.x <= 950-s) {
@@ -114,7 +108,6 @@ void Player::move(Direction dir, int s){
             }
             else player_point.x += s;
         }
-        //cout << player_loc.x << " "  << player_loc.y << endl;
     }
     determine_loc();
 }
@@ -133,8 +126,7 @@ Bomb* Player::putbomb(Bomb * bomb){
     Bomb* temptempbomb;
     temptempbomb = bomb;
     for(int i = 0; i<bomb_num-1; i++) temp_bomb[i] = Bomb(bomb[i]);
-    Bomb newbomb(player_loc,bomb_distance);
-
+    Bomb newbomb(player_loc,bomb_distance, player_num);
     temp_bomb[bomb_num-1] = Bomb(newbomb);
     bomb = temp_bomb;
     temp_bomb = temptempbomb;
@@ -155,10 +147,3 @@ void Player::player_render(){
     SDL_Rect player_dest = {player_point.x-30, player_point.y-30, 60, 60};
     picture.render(&player_dest);
 }
-
-
-//bool Player::operator! (){
-//    return alive;
-//}
-//Player Player::operator+(int addscore){score += addscore;}
-//Player Player::operator-(int minusscore){score -= minusscore;}

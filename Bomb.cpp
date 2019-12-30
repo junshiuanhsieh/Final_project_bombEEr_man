@@ -15,15 +15,17 @@ extern int bomb_num;
 Bomb::Bomb() : clk(clock()){
     bomb_distance = 1;
 }
-Bomb::Bomb(Location loc, int distance) : bomb_loc(loc), bomb_distance(distance), clk(clock()){}
+Bomb::Bomb(Location loc, int distance, int player_num) : bomb_loc(loc), bomb_distance(distance), clk(clock()), owner(player_num){}
 Bomb::Bomb(const Bomb &copy): clk(copy.clk){
     bomb_loc = copy.bomb_loc;
     bomb_distance = copy.bomb_distance;
+    owner = copy.owner;
 }
 Bomb Bomb::operator=(const Bomb & copy){
     clk = copy.clk;
     bomb_loc = copy.bomb_loc;
     bomb_distance = copy.bomb_distance;
+    owner = copy.owner;
 }
 Location Bomb::bomb_right(){
     Location bombRight;
@@ -61,6 +63,7 @@ Bomb* Bomb::bomb_explode(int num, Bomb * bomb){
     temp_bomb = temptempbomb;
     map[bomb_loc.x][bomb_loc.y].contain_bomb = 0;
     map[bomb_loc.x][bomb_loc.y].bomb = NULL;
+    player[owner].bomb_left++;
     delete [] temp_bomb;
     return bomb;
 }
