@@ -133,9 +133,6 @@ void Player::useitem(Item * item){
     item_owned[item->item_num]--;
     item->used();
 }
-void Player::putbomb(Bomb & newbomb){
-    newbomb = Bomb(player_loc, bomb_distance);
-}
 void Player::player_render(){
     SDL_Rect player_dest = {player_point.x-30, player_point.y-30, 60, 60};
     picture.render(&player_dest);

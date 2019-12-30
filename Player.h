@@ -13,6 +13,8 @@ enum Direction{ UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 class Player {
     friend void PVE();
     friend void PVP();
+    friend void PVE_initialize();
+    friend void PVP_initialize();
     public:
         Player();
         Player(int num);
@@ -22,7 +24,6 @@ class Player {
         void finish_moving();
         void get_item(Item *);
         void useitem(Item *);                    //use pointer to enable polymorphism
-        void putbomb(Bomb &);
         void player_render();
         bool alive;
         Item * item_owned[12];

@@ -26,45 +26,18 @@ void PVP(){
             map[i][j] = Map(temp_loc);
         }
     }
-    int rate = 8;
-    bool keypress[12];
-    Bomb * bomb = NULL;
-
-    bomb_texture.loadFromFile("../item_image/bomb.png");
-    itembox_texture.loadFromFile("../item_image/box.png");
-    emptybox_texture.loadFromFile("../item_image/empty_box.png");
-    //item_texture.loadFromFile
 
     int map_random;
     srand(time(0));
     map_random = rand()%3;
     PVP_map_initialize(map_random);
+    PVP_initialize();
 
-    for(int i = 0; i<Player_number; i++){
-        if(character_picture[i]==0) player[i].picture.loadFromFile("../character_image/character0.png");
-        else if(character_picture[i]==1) player[i].picture.loadFromFile("../character_image/character1.png");
-        else if(character_picture[i]==2) player[i].picture.loadFromFile("../character_image/character2.png");
-        else if(character_picture[i]==3) player[i].picture.loadFromFile("../character_image/character3.png");
-        else if(character_picture[i]==4) player[i].picture.loadFromFile("../character_image/character4.png");
-    }
-    player[0].player_loc.x = 15;
-    player[0].player_loc.y = 10;
-    player[0].player_point.x = 920;
-    player[0].player_point.y = 675;
-
-    player[1].player_loc.x = 0;
-    player[1].player_loc.y = 0;
-    player[1].player_point.x = 50;
-    player[1].player_point.y = 105;
-
-    if(Player_number == 3){
-        player[2].player_loc.x = 15;
-        player[2].player_loc.y = 0;
-        player[2].player_point.x = 920;
-        player[2].player_point.y = 105;
-    }
-
+    int rate = 8;
+    bool keypress[12];
+    Bomb * bomb = NULL;
     SDL_Event PVP_event;
+
     for(int i = 0; i<12; i++) keypress[i] = 0;
     while(!quit) {
         while (SDL_PollEvent(&PVP_event) != 0) {
@@ -154,9 +127,34 @@ void PVP(){
     }
 }
 
-void PVP_Show_data(){
-    for(int i = 0; i<Player_number; i++){
+void PVP_initialize(){
+    bomb_texture.loadFromFile("../item_image/bomb.png");
+    itembox_texture.loadFromFile("../item_image/box.png");
+    emptybox_texture.loadFromFile("../item_image/empty_box.png");
+    //item_texture.loadFromFile
 
+    for(int i = 0; i<Player_number; i++){
+        if(character_picture[i]==0) player[i].picture.loadFromFile("../character_image/character0.png");
+        else if(character_picture[i]==1) player[i].picture.loadFromFile("../character_image/character1.png");
+        else if(character_picture[i]==2) player[i].picture.loadFromFile("../character_image/character2.png");
+        else if(character_picture[i]==3) player[i].picture.loadFromFile("../character_image/character3.png");
+        else if(character_picture[i]==4) player[i].picture.loadFromFile("../character_image/character4.png");
+    }
+    player[0].player_loc.x = 15;
+    player[0].player_loc.y = 10;
+    player[0].player_point.x = 920;
+    player[0].player_point.y = 675;
+
+    player[1].player_loc.x = 0;
+    player[1].player_loc.y = 0;
+    player[1].player_point.x = 50;
+    player[1].player_point.y = 105;
+
+    if(Player_number == 3){
+        player[2].player_loc.x = 15;
+        player[2].player_loc.y = 0;
+        player[2].player_point.x = 920;
+        player[2].player_point.y = 105;
     }
 }
 
@@ -229,4 +227,10 @@ Bomb* PVP_new_bomb(int player_num, Bomb* bomb){
     map[player[player_num].player_loc.x][player[player_num].player_loc.y].bomb = & bomb[bomb_num-1];
     delete [] temp_bomb;
     return bomb;
+}
+
+void PVP_Show_data(){
+    for(int i = 0; i<Player_number; i++){
+
+    }
 }

@@ -26,45 +26,18 @@ void PVE(){
         }
     }
 
-    int rate = 10;
-    bool keypress[12];
-    Bomb * bomb = NULL;
-
-    bomb_texture.loadFromFile("../item_image/bomb.png");
-    itembox_texture.loadFromFile("../item_image/box.png");
-    emptybox_texture.loadFromFile("../item_image/empty_box.png");
-    //item_texture.loadFromFile
-
     int map_random;
     srand(time(0));
     map_random = rand()%3;
     PVE_map_initialize(map_random);
 
-    for(int i = 0; i<Player_number; i++){
-        if(character_picture[i]==0) player[i].picture.loadFromFile("../character_image/character0.png");
-        else if(character_picture[i]==1) player[i].picture.loadFromFile("../character_image/character1.png");
-        else if(character_picture[i]==2) player[i].picture.loadFromFile("../character_image/character2.png");
-        else if(character_picture[i]==3) player[i].picture.loadFromFile("../character_image/character3.png");
-        else if(character_picture[i]==4) player[i].picture.loadFromFile("../character_image/character4.png");
-    }
-    player[0].player_loc.x = 15;
-    player[0].player_loc.y = 10;
-    player[0].player_point.x = 920;
-    player[0].player_point.y = 675;
-    if(Player_number>1){
-        player[1].player_loc.x = 0;
-        player[1].player_loc.y = 0;
-        player[1].player_point.x = 50;
-        player[1].player_point.y = 105;
-        if(Player_number == 3){
-            player[2].player_loc.x = 15;
-            player[2].player_loc.y = 0;
-            player[2].player_point.x = 920;
-            player[2].player_point.y = 105;
-        }
-    }
+    PVE_initialize();
 
+    int rate = 10;
+    bool keypress[12];
+    Bomb * bomb = NULL;
     SDL_Event PVE_event;
+
     for(int i = 0; i<12; i++) keypress[i] = 0;
     while(!quit) {
         while (SDL_PollEvent(&PVE_event) != 0) {
@@ -152,21 +125,42 @@ void PVE(){
                 map[i][j].render_map();
             }
         }
-        for(int i = 0; i<Player_number; i++) player[i].player_render();
+        for(int i = 0; i<Player_number; i++) if(player[i].alive) player[i].player_render();
         SDL_RenderPresent(gRenderer);
     }
 }
 
-void PVE_Show_data(){
+void PVE_initialize(){
+    bomb_texture.loadFromFile("../item_image/bomb.png");
+    itembox_texture.loadFromFile("../item_image/box.png");
+    emptybox_texture.loadFromFile("../item_image/empty_box.png");
+    //item_texture.loadFromFile
+
     for(int i = 0; i<Player_number; i++){
-
+        if(character_picture[i]==0) player[i].picture.loadFromFile("../character_image/character0.png");
+        else if(character_picture[i]==1) player[i].picture.loadFromFile("../character_image/character1.png");
+        else if(character_picture[i]==2) player[i].picture.loadFromFile("../character_image/character2.png");
+        else if(character_picture[i]==3) player[i].picture.loadFromFile("../character_image/character3.png");
+        else if(character_picture[i]==4) player[i].picture.loadFromFile("../character_image/character4.png");
     }
+    player[0].player_loc.x = 15;
+    player[0].player_loc.y = 10;
+    player[0].player_point.x = 920;
+    player[0].player_point.y = 675;
+    if(Player_number>1){
+        player[1].player_loc.x = 0;
+        player[1].player_loc.y = 0;
+        player[1].player_point.x = 50;
+        player[1].player_point.y = 105;
+        if(Player_number == 3){
+            player[2].player_loc.x = 15;
+            player[2].player_loc.y = 0;
+            player[2].player_point.x = 920;
+            player[2].player_point.y = 105;
+        }
+    }
+
 }
-
-void PVE_load_media(){
-
-}
-
 void PVE_map_initialize(int random_num){
     cout << "random = " << random_num << endl;
     if(random_num==0){
@@ -218,7 +212,6 @@ void PVE_map_initialize(int random_num){
         SDL_RenderPresent(gRenderer);
     }
 }
-
 Bomb* PVE_new_bomb(int player_num, Bomb* bomb){
     static int bomb_num = 0;
     bomb_num++;
@@ -236,4 +229,9 @@ Bomb* PVE_new_bomb(int player_num, Bomb* bomb){
     map[player[player_num].player_loc.x][player[player_num].player_loc.y].bomb = & bomb[bomb_num-1];
     delete [] temp_bomb;
     return bomb;
+}
+void PVE_Show_data(){
+    for(int i = 0; i<Player_number; i++){
+
+    }
 }
