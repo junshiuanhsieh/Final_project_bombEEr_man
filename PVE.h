@@ -18,6 +18,5 @@ void PVE();
 void PVE_Show_data();
 void PVE_initialize();
 void PVE_map_initialize(int random_num);
-Bomb* PVE_new_bomb(int player_num, Bomb*);
 
 #endif

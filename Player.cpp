@@ -8,6 +8,7 @@ extern SDL_Renderer* gRenderer;
 extern int* character_picture;
 extern const int Total_item = 12;
 extern Map** map;
+extern int bomb_num;
 Player* player = NULL;
 
 Player::Player(){
@@ -124,6 +125,23 @@ void Player::determine_loc(){
 void Player::finish_moving(){
     player_point.x = 50 + player_loc.x*60;
     player_point.y = 105 + player_loc.y*60;
+}
+Bomb* Player::putbomb(Bomb * bomb){
+    bomb_num++;
+    Bomb* temp_bomb;
+    temp_bomb= new Bomb [bomb_num];
+    Bomb* temptempbomb;
+    temptempbomb = bomb;
+    for(int i = 0; i<bomb_num-1; i++) temp_bomb[i] = bomb[i];
+    Bomb newbomb(player_loc, bomb_distance);
+
+    temp_bomb[bomb_num-1] = Bomb(newbomb);
+    bomb = temp_bomb;
+    temp_bomb = temptempbomb;
+    map[player_loc.x][player_loc.y].contain_bomb = 1;
+    map[player_loc.x][player_loc.y].bomb = & bomb[bomb_num-1];
+    delete [] temp_bomb;
+    return bomb;
 }
 void Player::get_item(Item * item){
     item_owned[item->item_num]++;

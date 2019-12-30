@@ -24,6 +24,7 @@ class Player {
         void finish_moving();
         void get_item(Item *);
         void useitem(Item *);                    //use pointer to enable polymorphism
+        Bomb* putbomb(Bomb *);
         void player_render();
         bool alive;
         Item * item_owned[12];

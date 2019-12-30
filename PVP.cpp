@@ -13,7 +13,9 @@ extern const int Total_item;
 extern Player* player;
 extern Map** map;
 extern Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture;
+extern int bomb_num;
 Texture PVP_background;
+
 
 void PVP(){
     player = new Player[Player_number];
@@ -34,6 +36,7 @@ void PVP(){
     PVP_initialize();
 
     int rate = 8;
+    bomb_num = 0;
     bool keypress[12];
     Bomb * bomb = NULL;
     SDL_Event PVP_event;
@@ -50,7 +53,7 @@ void PVP(){
                     case SDLK_RIGHT: keypress[Key_Right] = 1; break;
                     case SDLK_RETURN:
                         if(map[player[0].player_loc.x][player[0].player_loc.y].contain_bomb==0)
-                            bomb = PVP_new_bomb(0, bomb);
+                            bomb = player[0].putbomb(bomb);
                         break;
 
                     case SDLK_w: keypress[Key_w] = 1; break;
@@ -59,7 +62,7 @@ void PVP(){
                     case SDLK_d: keypress[Key_d] = 1; break;
                     case SDLK_TAB:
                         if(map[player[1].player_loc.x][player[1].player_loc.y].contain_bomb==0)
-                            bomb = PVP_new_bomb(1, bomb);
+                            bomb = player[1].putbomb(bomb);
                         break;
 
                     case SDLK_i: keypress[Key_i] = 1; break;
@@ -69,7 +72,7 @@ void PVP(){
                     case SDLK_SPACE:
                         if(Player_number == 3){
                             if(map[player[2].player_loc.x][player[2].player_loc.y].contain_bomb==0)
-                                bomb = PVP_new_bomb(2, bomb);
+                                bomb = player[2].putbomb(bomb);
                             break;
                         }
                 }
@@ -208,25 +211,6 @@ void PVP_map_initialize(int random_num){
         PVP_background.render(NULL);
         SDL_RenderPresent( gRenderer );
     }
-}
-
-Bomb* PVP_new_bomb(int player_num, Bomb* bomb){
-    static int bomb_num = 0;
-    bomb_num++;
-    Bomb* temp_bomb;
-    temp_bomb= new Bomb [bomb_num];
-    Bomb* temptempbomb;
-    temptempbomb = bomb;
-    for(int i = 0; i<bomb_num-1; i++) temp_bomb[i] = bomb[i];
-    Bomb newbomb(player[player_num].player_loc, player[player_num].bomb_distance);
-
-    temp_bomb[bomb_num-1] = Bomb(newbomb);
-    bomb = temp_bomb;
-    temp_bomb = temptempbomb;
-    map[player[player_num].player_loc.x][player[player_num].player_loc.y].contain_bomb = 1;
-    map[player[player_num].player_loc.x][player[player_num].player_loc.y].bomb = & bomb[bomb_num-1];
-    delete [] temp_bomb;
-    return bomb;
 }
 
 void PVP_Show_data(){

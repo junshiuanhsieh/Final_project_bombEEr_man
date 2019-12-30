@@ -18,6 +18,5 @@ void PVP();
 void PVP_Show_data();
 void PVP_initialize();
 void PVP_map_initialize(int random_num);
-Bomb* PVP_new_bomb(int player_num, Bomb*);
 
 #endif

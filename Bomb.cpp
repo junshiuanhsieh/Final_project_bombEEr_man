@@ -13,9 +13,10 @@ extern Player* player;
 
 Bomb::Bomb(){
     bomb_distance = 1;
+    clk = clock();
 }
 Bomb::Bomb(Location loc, int distance) : bomb_loc(loc), bomb_distance(distance){
-
+    clk = clock();
 }
 Bomb::Bomb(Bomb &copy){
     bomb_loc = copy.bomb_loc;
