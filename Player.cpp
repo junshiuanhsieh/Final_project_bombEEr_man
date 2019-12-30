@@ -8,7 +8,7 @@ extern SDL_Renderer* gRenderer;
 extern int* character_picture;
 extern const int Total_item = 12;
 extern Map** map;
-extern Player* player = NULL;
+Player* player = NULL;
 
 Player::Player(){
     alive = true;
@@ -30,11 +30,17 @@ Player::Player(int num) : player_num(num){
     form = character_picture[num];
     bomb_distance = 1;
     bomb_number = 1;
-    if(form==0) picture.loadFromFile("../character_image/character0.png");
-    if(form==1) picture.loadFromFile("../character_image/character1.png");
-    if(form==2) picture.loadFromFile("../character_image/character2.png");
-    if(form==3) picture.loadFromFile("../character_image/character3.png");
-    if(form==4) picture.loadFromFile("../character_image/character4.png");
+
+//    if(form==0) {
+//        cout << "load0" << endl;
+//        picture.loadFromFile("../character_image/character0.png");
+//        if(picture.mTexture == NULL) cout << "fail" << endl;
+//        cout << "check" << endl;
+//    }
+//    else if(form==1) picture.loadFromFile("../character_image/character1.png");
+//    else if(form==2) picture.loadFromFile("../character_image/character2.png");
+//    else if(form==3) picture.loadFromFile("../character_image/character3.png");
+//    else if(form==4) picture.loadFromFile("../character_image/character4.png");
 }
 bool Player::dead(){
     alive = false;
@@ -132,11 +138,6 @@ void Player::putbomb(Bomb & newbomb){
 }
 void Player::player_render(){
     SDL_Rect player_dest = {player_point.x-30, player_point.y-30, 60, 60};
-    if(character_picture[player_num]==0) picture.loadFromFile("../character_image/character0.png");
-    if(character_picture[player_num]==1) picture.loadFromFile("../character_image/character1.png");
-    if(character_picture[player_num]==2) picture.loadFromFile("../character_image/character2.png");
-    if(character_picture[player_num]==3) picture.loadFromFile("../character_image/character3.png");
-    if(character_picture[player_num]==4) picture.loadFromFile("../character_image/character4.png");
     picture.render(&player_dest);
 }
 

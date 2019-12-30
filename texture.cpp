@@ -22,6 +22,7 @@ void Texture::loadFromFile( std::string path ){
     mHeight = loadedSurface->h;
     SDL_FreeSurface(loadedSurface);
     mTexture = newTexture;
+    //if(mTexture == NULL) cout << "fail to load" << endl;
 }
 
 #if defined(_SDL_TTF_H) || defined(SDL_TTF_H)

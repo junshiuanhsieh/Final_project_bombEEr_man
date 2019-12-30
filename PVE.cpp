@@ -6,10 +6,13 @@ extern const int SCREEN_WIDTH;
 extern const int SCREEN_HEIGHT;
 extern SDL_Renderer* gRenderer;
 extern bool quit;
-extern int Player_number;
+extern int Player_number, Mode;
 extern const int Total_item;
+extern int* character_picture;
 extern Player* player;
 extern Map** map;
+extern Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture;
+Texture PVE_background;
 
 void PVE(){
     player = new Player[Player_number];
@@ -22,11 +25,28 @@ void PVE(){
             map[i][j] = Map(temp_loc);
         }
     }
+
+    int rate = 10;
+    bool keypress[12];
+    Bomb * bomb = NULL;
+
+    bomb_texture.loadFromFile("../item_image/bomb.png");
+    itembox_texture.loadFromFile("../item_image/box.png");
+    emptybox_texture.loadFromFile("../item_image/empty_box.png");
+    //item_texture.loadFromFile
+
     int map_random;
     srand(time(0));
     map_random = rand()%3;
     PVE_map_initialize(map_random);
-    SDL_Event PVE_event;
+
+    for(int i = 0; i<Player_number; i++){
+        if(character_picture[i]==0) player[i].picture.loadFromFile("../character_image/character0.png");
+        else if(character_picture[i]==1) player[i].picture.loadFromFile("../character_image/character1.png");
+        else if(character_picture[i]==2) player[i].picture.loadFromFile("../character_image/character2.png");
+        else if(character_picture[i]==3) player[i].picture.loadFromFile("../character_image/character3.png");
+        else if(character_picture[i]==4) player[i].picture.loadFromFile("../character_image/character4.png");
+    }
     player[0].player_loc.x = 15;
     player[0].player_loc.y = 10;
     player[0].player_point.x = 920;
@@ -43,9 +63,8 @@ void PVE(){
             player[2].player_point.y = 105;
         }
     }
-    int rate = 10;
-    bool keypress[12];
-    Bomb * bomb = NULL;
+
+    SDL_Event PVE_event;
     for(int i = 0; i<12; i++) keypress[i] = 0;
     while(!quit) {
         while (SDL_PollEvent(&PVE_event) != 0) {
@@ -56,19 +75,32 @@ void PVE(){
                     case SDLK_DOWN: keypress[Key_Down] = 1; break;
                     case SDLK_LEFT: keypress[Key_Left] = 1; break;
                     case SDLK_RIGHT: keypress[Key_Right] = 1; break;
-                    case SDLK_RETURN: bomb = PVE_new_bomb(0, bomb); break;
+                    case SDLK_RETURN:
+                        if(map[player[0].player_loc.x][player[0].player_loc.y].contain_bomb==0)
+                            bomb = PVE_new_bomb(0, bomb);
+                        break;
 
                     case SDLK_w: keypress[Key_w] = 1; break;
                     case SDLK_s: keypress[Key_s] = 1; break;
                     case SDLK_a: keypress[Key_a] = 1; break;
                     case SDLK_d: keypress[Key_d] = 1; break;
-                    case SDLK_TAB: bomb = PVE_new_bomb(1, bomb); break;
+                    case SDLK_TAB:
+                        if(Player_number > 1) {
+                            if (map[player[1].player_loc.x][player[1].player_loc.y].contain_bomb == 0)
+                                bomb = PVE_new_bomb(1, bomb);
+                        }
+                        break;
 
                     case SDLK_i: keypress[Key_i] = 1; break;
                     case SDLK_k: keypress[Key_k] = 1; break;
                     case SDLK_j: keypress[Key_j] = 1; break;
                     case SDLK_l: keypress[Key_l] = 1; break;
-                    case SDLK_SPACE: bomb = PVE_new_bomb(2, bomb); break;
+                    case SDLK_SPACE:
+                        if(Player_number == 3) {
+                            if (map[player[2].player_loc.x][player[2].player_loc.y].contain_bomb == 0)
+                                bomb = PVE_new_bomb(2, bomb);
+                        }
+                        break;
                 }
             }
             else if (PVE_event.type == SDL_KEYUP && PVE_event.key.repeat==0) {
@@ -112,11 +144,9 @@ void PVE(){
                 else player[2].finish_moving();
             }
         }
-        Texture PVP_background0;
-        PVP_background0.loadFromFile("../PVP_image/background0.png");
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
-        PVP_background0.render(NULL);
+        PVE_background.render(NULL);
         for(int i = 0; i<16; i++){
             for(int j = 0; j<11; j++){
                 map[i][j].render_map();
@@ -133,6 +163,10 @@ void PVE_Show_data(){
     }
 }
 
+void PVE_load_media(){
+
+}
+
 void PVE_map_initialize(int random_num){
     cout << "random = " << random_num << endl;
     if(random_num==0){
@@ -145,13 +179,10 @@ void PVE_map_initialize(int random_num){
         map[0][9].wall = map[1][9].wall = map[4][9].wall = map[7][9].wall = map[8][9].wall = map[12][9].wall = 1;
         map[4][10].wall = map[7][10].wall = map[8][10].wall = map[12][10].wall = 1;
 
-
-
-        Texture PVE_background0;
-        PVE_background0.loadFromFile("../PVP_image/background0.png");
+        PVE_background.loadFromFile("../PVP_image/background0.png");
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
-        PVE_background0.render(NULL);
+        PVE_background.render(NULL);
         SDL_RenderPresent( gRenderer );
     }
     else if(random_num==1){
@@ -164,12 +195,10 @@ void PVE_map_initialize(int random_num){
         map[0][9].wall = map[1][9].wall = map[4][9].wall = map[7][9].wall = map[8][9].wall = map[12][9].wall = 1;
         map[4][10].wall = map[7][10].wall = map[8][10].wall = map[12][10].wall = 1;
 
-
-        Texture PVE_background1;
-        PVE_background1.loadFromFile("../PVP_image/background0.png");
+        PVE_background.loadFromFile("../PVP_image/background0.png");
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
-        PVE_background1.render(NULL);
+        PVE_background.render(NULL);
         SDL_RenderPresent( gRenderer );
     }
     else if(random_num==2){
@@ -182,13 +211,11 @@ void PVE_map_initialize(int random_num){
         map[0][9].wall = map[1][9].wall = map[4][9].wall = map[7][9].wall = map[8][9].wall = map[12][9].wall = 1;
         map[4][10].wall = map[7][10].wall = map[8][10].wall = map[12][10].wall = 1;
 
-
-        Texture PVE_background2;
-        PVE_background2.loadFromFile("../PVP_image/background0.png");
+        PVE_background.loadFromFile("../PVP_image/background0.png");
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
-        PVE_background2.render(NULL);
-        SDL_RenderPresent( gRenderer );
+        PVE_background.render(NULL);
+        SDL_RenderPresent(gRenderer);
     }
 }
 

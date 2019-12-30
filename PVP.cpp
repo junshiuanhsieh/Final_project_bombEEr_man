@@ -12,6 +12,8 @@ extern int* character_picture;
 extern const int Total_item;
 extern Player* player;
 extern Map** map;
+extern Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture;
+Texture PVP_background;
 
 void PVP(){
     player = new Player[Player_number];
@@ -24,12 +26,27 @@ void PVP(){
             map[i][j] = Map(temp_loc);
         }
     }
+    int rate = 8;
+    bool keypress[12];
+    Bomb * bomb = NULL;
+
+    bomb_texture.loadFromFile("../item_image/bomb.png");
+    itembox_texture.loadFromFile("../item_image/box.png");
+    emptybox_texture.loadFromFile("../item_image/empty_box.png");
+    //item_texture.loadFromFile
+
     int map_random;
     srand(time(0));
     map_random = rand()%3;
     PVP_map_initialize(map_random);
 
-    SDL_Event PVP_event;
+    for(int i = 0; i<Player_number; i++){
+        if(character_picture[i]==0) player[i].picture.loadFromFile("../character_image/character0.png");
+        else if(character_picture[i]==1) player[i].picture.loadFromFile("../character_image/character1.png");
+        else if(character_picture[i]==2) player[i].picture.loadFromFile("../character_image/character2.png");
+        else if(character_picture[i]==3) player[i].picture.loadFromFile("../character_image/character3.png");
+        else if(character_picture[i]==4) player[i].picture.loadFromFile("../character_image/character4.png");
+    }
     player[0].player_loc.x = 15;
     player[0].player_loc.y = 10;
     player[0].player_point.x = 920;
@@ -46,9 +63,8 @@ void PVP(){
         player[2].player_point.x = 920;
         player[2].player_point.y = 105;
     }
-    int rate = 8;
-    bool keypress[12];
-    Bomb * bomb = NULL;
+
+    SDL_Event PVP_event;
     for(int i = 0; i<12; i++) keypress[i] = 0;
     while(!quit) {
         while (SDL_PollEvent(&PVP_event) != 0) {
@@ -59,19 +75,30 @@ void PVP(){
                     case SDLK_DOWN: keypress[Key_Down] = 1; break;
                     case SDLK_LEFT: keypress[Key_Left] = 1; break;
                     case SDLK_RIGHT: keypress[Key_Right] = 1; break;
-                    case SDLK_RETURN: bomb = PVP_new_bomb(0, bomb); break;
+                    case SDLK_RETURN:
+                        if(map[player[0].player_loc.x][player[0].player_loc.y].contain_bomb==0)
+                            bomb = PVP_new_bomb(0, bomb);
+                        break;
 
                     case SDLK_w: keypress[Key_w] = 1; break;
                     case SDLK_s: keypress[Key_s] = 1; break;
                     case SDLK_a: keypress[Key_a] = 1; break;
                     case SDLK_d: keypress[Key_d] = 1; break;
-                    case SDLK_TAB: bomb = PVP_new_bomb(1, bomb); break;
+                    case SDLK_TAB:
+                        if(map[player[1].player_loc.x][player[1].player_loc.y].contain_bomb==0)
+                            bomb = PVP_new_bomb(1, bomb);
+                        break;
 
                     case SDLK_i: keypress[Key_i] = 1; break;
                     case SDLK_k: keypress[Key_k] = 1; break;
                     case SDLK_j: keypress[Key_j] = 1; break;
                     case SDLK_l: keypress[Key_l] = 1; break;
-                    case SDLK_SPACE: bomb = PVP_new_bomb(2, bomb); break;
+                    case SDLK_SPACE:
+                        if(Player_number == 3){
+                            if(map[player[2].player_loc.x][player[2].player_loc.y].contain_bomb==0)
+                                bomb = PVP_new_bomb(2, bomb);
+                            break;
+                        }
                 }
             }
             else if (PVP_event.type == SDL_KEYUP && PVP_event.key.repeat==0) {
@@ -114,11 +141,9 @@ void PVP(){
             else player[2].finish_moving();
         }
 
-        Texture PVP_background0;
-        PVP_background0.loadFromFile("../PVP_image/background0.png");
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
-        PVP_background0.render(NULL);
+        PVP_background.render(NULL);
         for(int i = 0; i<16; i++){
             for(int j = 0; j<11; j++){
                 map[i][j].render_map();
@@ -147,11 +172,10 @@ void PVP_map_initialize(int random_num){
         map[0][9].wall = 1; map[1][9].wall = 1; map[4][9].wall = 1; map[7][9].wall = 1; map[8][9].wall = 1; map[12][9].wall = 1;
         map[4][10].wall = 1; map[7][10].wall = 1; map[8][10].wall = 1; map[12][10].wall = 1;
 
-        Texture PVP_background0;
-        PVP_background0.loadFromFile("../PVP_image/background0.png");
+        PVP_background.loadFromFile("../PVP_image/background0.png");
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
-        PVP_background0.render(NULL);
+        PVP_background.render(NULL);
         SDL_RenderPresent( gRenderer );
     }
     else if(random_num==1){
@@ -164,11 +188,10 @@ void PVP_map_initialize(int random_num){
         map[0][9].wall = 1; map[1][9].wall = 1; map[4][9].wall = 1; map[7][9].wall = 1; map[8][9].wall = 1; map[12][9].wall = 1;
         map[4][10].wall = 1; map[7][10].wall = 1; map[8][10].wall = 1; map[12][10].wall = 1;
 
-        Texture PVP_background1;
-        PVP_background1.loadFromFile("../PVP_image/background0.png");
+        PVP_background.loadFromFile("../PVP_image/background0.png");
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
-        PVP_background1.render(NULL);
+        PVP_background.render(NULL);
         SDL_RenderPresent( gRenderer );
     }
     else if(random_num==2){
@@ -181,14 +204,12 @@ void PVP_map_initialize(int random_num){
         map[0][9].wall = 1; map[1][9].wall = 1; map[4][9].wall = 1; map[7][9].wall = 1; map[8][9].wall = 1; map[12][9].wall = 1;
         map[4][10].wall = 1; map[7][10].wall = 1; map[8][10].wall = 1; map[12][10].wall = 1;
 
-        Texture PVP_background2;
-        PVP_background2.loadFromFile("../PVP_image/background0.png");
+        PVP_background.loadFromFile("../PVP_image/background0.png");
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
-        PVP_background2.render(NULL);
+        PVP_background.render(NULL);
         SDL_RenderPresent( gRenderer );
     }
-
 }
 
 Bomb* PVP_new_bomb(int player_num, Bomb* bomb){

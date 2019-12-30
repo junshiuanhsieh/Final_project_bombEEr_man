@@ -9,6 +9,7 @@
 using namespace std;
 
 class Texture{
+    friend class Player;
     public:
         Texture();
         ~Texture();

@@ -10,8 +10,9 @@ extern bool quit;
 extern int Player_number, Mode;
 extern int* character_picture;
 extern const int Total_item;
-Map** map = NULL;
 extern Player* player;
+Map** map = NULL;
+Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture;
 
 //render圖像那些是main去判斷對不對，我應該只要做回傳變數給main，告訴他情況就好?
 //map 裡面實際要放甚麼(人，箱子，以及箱子中的禮物就等PVE和PVP去設定);
@@ -60,22 +61,16 @@ int Map::item_taken(int player){
 }
 void Map::render_map(){
     if(contain_emptybox && box!=NULL && box->destroyed==0){
-        Texture emptybox;
-        emptybox.loadFromFile("../item_image/empty_box.png");
         SDL_Rect map_rect = {20+60*map_loc.x, 75+60*map_loc.y, 60, 60};
-        emptybox.render(&map_rect);
+        emptybox_texture.render(&map_rect);
     }
     else if(contain_item && item!=NULL && item->destroyed==0){
-        Texture item_box;
-        item_box.loadFromFile("../item_image/box.png");
         SDL_Rect map_rect = {20+60*map_loc.x, 75+60*map_loc.y, 60, 60};;
-        item_box.render(&map_rect);
+        itembox_texture.render(&map_rect);
     }
     else if(contain_bomb){
-        Texture bomb;
-        bomb.loadFromFile("../item_image/bomb.png");
         SDL_Rect bomb_rect = {30+60*map_loc.x, 75+60*map_loc.y, 50, 50};
-        bomb.render(&bomb_rect);
+        bomb_texture.render(&bomb_rect);
     }
 }
 
