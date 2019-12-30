@@ -132,8 +132,8 @@ Bomb* Player::putbomb(Bomb * bomb){
     temp_bomb= new Bomb [bomb_num];
     Bomb* temptempbomb;
     temptempbomb = bomb;
-    for(int i = 0; i<bomb_num-1; i++) temp_bomb[i] = bomb[i];
-    Bomb newbomb(player_loc, bomb_distance);
+    for(int i = 0; i<bomb_num-1; i++) temp_bomb[i] = Bomb(bomb[i]);
+    Bomb newbomb(player_loc,bomb_distance);
 
     temp_bomb[bomb_num-1] = Bomb(newbomb);
     bomb = temp_bomb;

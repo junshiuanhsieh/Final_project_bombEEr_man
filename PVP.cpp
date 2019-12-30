@@ -117,6 +117,12 @@ void PVP(){
             else player[2].finish_moving();
         }
 
+        for(int i = 0; i<bomb_num; i++){
+            if(clock() - bomb[i].clk > 100000){
+                bomb = bomb[i].bomb_explode(i, bomb);
+                i--;
+            }
+        }
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         PVP_background.render(NULL);

@@ -15,6 +15,7 @@ extern Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture
 Texture PVE_background;
 int bomb_num = 0;
 
+
 void PVE(){
     player = new Player[Player_number];
     for(int i = 0; i<Player_number; i++) player[i] = Player(i);
@@ -119,13 +120,12 @@ void PVE(){
                 else player[2].finish_moving();
             }
         }
-
         for(int i = 0; i<bomb_num; i++){
-            clock_t t;
+            if(clock() - bomb[i].clk > 100000){
+                bomb = bomb[i].bomb_explode(i, bomb);
+                i--;
+            }
         }
-
-
-
 
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);

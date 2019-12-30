@@ -205,51 +205,54 @@ void Choosenumber(){
 }
 void Scrolling(){
     Texture scrolling, TextTexture;
-    scrolling.loadFromFile("../start_image/scrolling_background.png");
+    scrolling.loadFromFile("../start_image/scrolling_PVE_background.png");
     SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF);
     SDL_RenderClear(gRenderer);
     scrolling.render(NULL);
+    TextTexture.loadFromFile("../start_image/scrolling_PVE.png");
     SDL_RenderPresent( gRenderer );
 
-    SDL_Surface * pTextSurface[4] = {NULL};
-    SDL_Texture* pTextTexture[4] = {NULL};
     SDL_Rect rcText[4], back_dest = {100, 600, 200, 100}, next_dest = {900, 600, 200, 100};
     RectButton backto_number(back_dest), next_button(next_dest);
     backto_number.buttontexture.loadFromFile("../start_image/back.png");
     next_button.buttontexture.loadFromFile("../start_image/next.png");
-    //TTF_Init();
-    TTF_Font *font;
-    font = TTF_OpenFont("../fonts/GenJyuuGothic-P-Heavy.ttf", 200);
-    Uint16 text[][4] = {{0x65e9,0x5b89,0x0021,0x0000}, {0x65e9,0x5b89,0x0021,0x0000}, {0x65e9,0x5b89,0x0021,0x0000}, {0x65e9,0x5b89,0x0021,0x0000}};
-    SDL_Color color = {0,0,0};
-    for(int j = 0; j<4; j++){
-        rcText[j].x = 100;
-        rcText[j].w = 200;
-        rcText[j].h = 100;
-    }
+    SDL_Rect text_dest,text_clip;
+    double temp_y = 600;
 
     SDL_Event scrollingevent;
+    text_dest.x = 0;
+    text_dest.w = 1200;
 
-    int i = 0;
+    text_clip.x = 0;
+    text_clip.y = 0;
+    text_clip.w = 1200;
+
+//    int i = 0;
     bool next = 0;
-    while(i<500 && !quit && !next){
+
+    while(temp_y>=0){
+
+        text_clip .h = 750 - temp_y;
+        text_dest .h = 750 - temp_y;
+        text_dest .y = temp_y;
+
+        temp_y -= 3;
+        scrolling.render(NULL);
+        TextTexture.render(&text_dest,&text_clip,0);
+        SDL_RenderPresent( gRenderer );
+    }
+
+    while(!quit && !next){
+
         while (SDL_PollEvent(&scrollingevent) != 0) {
             if (scrollingevent.type == SDL_QUIT) {quit = true; return;}
             backto_number.handleEvent(&scrollingevent);
             next_button.handleEvent(&scrollingevent);
         }
-        rcText[0].y = 100 - i;
-        rcText[1].y = 200 - i;
-        rcText[2].y = 300 - i;
-        rcText[3].y = 400 - i;
 
         SDL_RenderClear(gRenderer);
-        scrolling.render(NULL);
-        for(int j = 0; j<4; j++) {
-            pTextSurface[j] = TTF_RenderUNICODE_Solid(font, text[j], color);
-            pTextTexture[j] = SDL_CreateTextureFromSurface(gRenderer, pTextSurface[j]);
-            SDL_RenderCopy(gRenderer, pTextTexture[j], NULL, &rcText[j]);
-        }
+        //scrolling.render(NULL);
+        TextTexture.render(&text_dest,&text_clip,0);
         int big_back = 1, big_next = 1;
         if(backto_number.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) big_back = 0;
         backto_number.rectrender(big_back);
@@ -257,27 +260,17 @@ void Scrolling(){
         next_button.rectrender(big_next);
         if(backto_number.CurrentSprite == BUTTON_SPRITE_MOUSE_UP){
             Choosenumber();
-            TTF_CloseFont(font);
-            TTF_Quit();
-            for(int j = 0; j<4; j++){
-                SDL_DestroyTexture(pTextTexture[j]);
-                SDL_FreeSurface(pTextSurface[j]);
-            }
             return;
         }
         if(next_button.CurrentSprite == BUTTON_SPRITE_MOUSE_UP){
             next = 1;
-            TTF_CloseFont(font);
-            for(int j = 0; j<4; j++){
-                SDL_DestroyTexture(pTextTexture[j]);
-                SDL_FreeSurface(pTextSurface[j]);
-            }
             Choosecharacter();
             return;
         }
+
         SDL_RenderPresent( gRenderer );
         SDL_Delay(10);
-        i += 5;
+
     }
 
     while(!next && !quit){
@@ -295,24 +288,14 @@ void Scrolling(){
         next_button.rectrender(big_next);
         if(backto_number.CurrentSprite == BUTTON_SPRITE_MOUSE_UP){
             Choosenumber();
-            TTF_CloseFont(font);
-            TTF_Quit();
-            for(int j = 0; j<4; j++){
-                SDL_DestroyTexture(pTextTexture[j]);
-                SDL_FreeSurface(pTextSurface[j]);
-            }
             return;
         }
         if(next_button.CurrentSprite == BUTTON_SPRITE_MOUSE_UP){
             next = 1;
-            TTF_CloseFont(font);
-            for(int j = 0; j<4; j++){
-                SDL_DestroyTexture(pTextTexture[j]);
-                SDL_FreeSurface(pTextSurface[j]);
-            }
             Choosecharacter();
             return;
         }
+
         SDL_RenderPresent( gRenderer );
     }
 }

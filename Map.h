@@ -15,8 +15,6 @@ class Map {
     friend class Item;
     friend void PVE();
     friend void PVP();
-    friend Bomb* PVE_new_bomb(int player_num, Bomb* bomb);
-    friend Bomb* PVP_new_bomb(int player_num, Bomb* bomb);
     public:
         Map();
         Map(Location);
