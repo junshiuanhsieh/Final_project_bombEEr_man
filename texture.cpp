@@ -24,6 +24,13 @@ void Texture::loadFromFile( std::string path ){
     mTexture = newTexture;
     //if(mTexture == NULL) cout << "fail to load" << endl;
 }
+void Texture::setBlendMode( SDL_BlendMode blending ){
+    SDL_SetTextureBlendMode( mTexture, blending );
+}
+
+void Texture::setAlpha( Uint8 alpha ){
+    SDL_SetTextureAlphaMod( mTexture, alpha );
+}
 
 #if defined(_SDL_TTF_H) || defined(SDL_TTF_H)
 bool Texture::loadFromRenderedText(string textureText, SDL_Color textColor){

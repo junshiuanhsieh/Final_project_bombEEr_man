@@ -13,6 +13,8 @@ class Texture{
         Texture();
         ~Texture();
         void loadFromFile(string path);
+        void setBlendMode(SDL_BlendMode blending);
+        void setAlpha(Uint8 alpha);
 
         #if defined(_SDL_TTF_H) || defined(SDL_TTF_H)
             bool loadFromRenderedText(string textureText, SDL_Color textColor );

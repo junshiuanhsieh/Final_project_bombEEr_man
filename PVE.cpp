@@ -11,7 +11,7 @@ extern const int Total_item;
 extern int* character_picture;
 extern Player* player;
 extern Map** map;
-extern Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture;
+extern Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture, explode_texture;
 Texture PVE_background;
 int bomb_num = 0;
 
@@ -140,7 +140,7 @@ void PVE(){
                 map[i][j].render_map();
             }
         }
-        for(int i = 0; i<Player_number; i++) if(player[i].alive) player[i].player_render();
+        for(int i = 0; i<Player_number; i++) if(player[i].alive==1) player[i].player_render();
         SDL_RenderPresent(gRenderer);
     }
 }
@@ -149,6 +149,7 @@ void PVE_initialize(){
     bomb_texture.loadFromFile("../item_image/bomb.png");
     itembox_texture.loadFromFile("../item_image/box.png");
     emptybox_texture.loadFromFile("../item_image/empty_box.png");
+    explode_texture.loadFromFile("../item_image/explode.png");
     //item_texture.loadFromFile
 
     for(int i = 0; i<Player_number; i++){

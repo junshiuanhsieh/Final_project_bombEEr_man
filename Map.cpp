@@ -12,7 +12,7 @@ extern int* character_picture;
 extern const int Total_item;
 extern Player* player;
 Map** map = NULL;
-Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture;
+Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture, explode_texture;
 
 //render圖像那些是main去判斷對不對，我應該只要做回傳變數給main，告訴他情況就好?
 //map 裡面實際要放甚麼(人，箱子，以及箱子中的禮物就等PVE和PVP去設定);
@@ -22,6 +22,7 @@ Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture;
 //然後item要設定一個 = 的operator ，不然我不能初始化
 //然後如果box沒有要class(現在)，我會有一個contain_box 的 bool，但我覺得還是要有class box，或是他可以是一個item陣列，
 //然後目前我把map那格上面有障礙物的情況也先放在contain box 裡面，contain_box跟contain_item不會同時為一
+
 Map::Map(){
     character_inside = new bool[Player_number];
     for(int i = 0; i<Player_number; i++) character_inside[i] = 0;
@@ -30,7 +31,8 @@ Map::Map(){
     wall = contain_bomb =  contain_emptybox = 0;
     item = NULL;
     bomb = NULL;
-    box = NULL;
+    emptybox = NULL;
+    explode_blending = 0;
 }
 
 Map::Map(Location Location_for_init) : map_loc(Location_for_init){
@@ -41,12 +43,19 @@ Map::Map(Location Location_for_init) : map_loc(Location_for_init){
     wall = contain_bomb = contain_emptybox = 0;
     item = NULL;
     bomb = NULL;
-    box = NULL;
+    emptybox = NULL;
+    explode_blending = 0;
 }
 
-//這個其實我不太懂，是box跟障礙物被炸到collapse的意思嗎，還是box會顯現出來。
 void Map::collapse(){
-    if(contain_emptybox == 1 ) contain_emptybox = 0;
+    if(contain_emptybox == 1) {
+        contain_emptybox = 0;
+        emptybox->destroyed = 1;
+        emptybox = NULL;
+    }
+    if(contain_item == 1 && item->destroyed == 0){
+        item->destroyed = 1;
+    }
     //不知道被炸到之後不用render是不是我要寫
 }
 
@@ -59,18 +68,24 @@ int Map::item_taken(int player){
     contain_item = 0;
     return which_item;
 }
+
 void Map::render_map(){
-    if(contain_emptybox && box!=NULL && box->destroyed==0){
-        SDL_Rect map_rect = {20+60*map_loc.x, 75+60*map_loc.y, 60, 60};
+    SDL_Rect map_rect = {20+60*map_loc.x, 75+60*map_loc.y, 60, 60};
+    if(contain_emptybox && emptybox!=NULL && emptybox->destroyed==0){
         emptybox_texture.render(&map_rect);
     }
     else if(contain_item && item!=NULL && item->destroyed==0){
-        SDL_Rect map_rect = {20+60*map_loc.x, 75+60*map_loc.y, 60, 60};;
         itembox_texture.render(&map_rect);
     }
     else if(contain_bomb){
         SDL_Rect bomb_rect = {30+60*map_loc.x, 75+60*map_loc.y, 50, 50};
         bomb_texture.render(&bomb_rect);
     }
+    else if(explode_blending != 0){
+        explode_texture.setAlpha(explode_blending);
+        explode_texture.render(&map_rect);
+        explode_blending -= 15;
+    }
+    //contain_item && item->destroyed == 1
 }
 

@@ -19,7 +19,7 @@ class Map {
         Map();
         Map(Location);
         void collapse();                          //bomb爆炸時呼叫
-        bool met_character(int player);             //player呼叫
+        bool met_character(int player);             //player呼叫 判斷是否能走過去
         int item_taken(int player);              //player呼叫
         bool wall, contain_bomb, contain_emptybox, contain_item;
         void render_map();
@@ -27,10 +27,11 @@ class Map {
     private:
         Location map_loc;                          //add new constructor to initialize map_loc (?
         Bomb* bomb;
-        int which_item;
-        empty_box* box;
+        empty_box* emptybox;
         Item* item;                        //constructor initialize //use pointer to enable polymorphism
+        int which_item;
         bool* character_inside;               //constructor initialize : new
+        Uint8 explode_blending;
 };
 
 #endif

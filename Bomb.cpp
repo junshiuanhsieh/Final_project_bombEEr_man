@@ -27,31 +27,110 @@ Bomb Bomb::operator=(const Bomb & copy){
     bomb_distance = copy.bomb_distance;
     owner = copy.owner;
 }
-Location Bomb::bomb_right(){
-    Location bombRight;
-    if (bomb_loc.x!=15) bombRight.x=bomb_loc.x+bomb_distance;
-    bombRight.y=bomb_loc.y;
-    return bombRight;
+
+int Bomb::bomb_up(){
+    Location bombUp = bomb_loc;
+    for(int i = 0; i<=bomb_distance; i++){
+        if(bomb_loc.y-i < 0) return i-1;
+        bombUp.y = bomb_loc.y - i;
+        for(int j = 0; j<Player_number; j++){
+            if (map[bombUp.x][bombUp.y].character_inside[j] && player[j].alive==1){
+                player[j].alive = 0;
+                cout << "player" << j << " died ! " << endl;
+                return i;
+            }
+        }
+        if(map[bombUp.x][bombUp.y].wall) return i-1;
+            //contain_bomb
+        else if(map[bombUp.x][bombUp.y].contain_emptybox){
+            map[bombUp.x][bombUp.y].collapse();
+            return i;
+        }
+        else if(map[bombUp.x][bombUp.y].contain_item && map[bombUp.x][bombUp.y].item->destroyed==0){
+            map[bombUp.x][bombUp.y].collapse();
+            return i;
+        }
+    }
+    return bomb_distance;
 }
-Location Bomb::bomb_left(){
-    Location bombLeft;
-    if (bomb_loc.x!=0) bombLeft.x=bomb_loc.x-bomb_distance;
-    bombLeft.y=bomb_loc.y;
-    return bombLeft;
+int Bomb::bomb_down(){
+    Location bombDown = bomb_loc;
+    for(int i = 0; i<=bomb_distance; i++){
+        if(bomb_loc.y+i > 10) return i-1;
+        bombDown.y = bomb_loc.y + i;
+        for(int j = 0; j<Player_number; j++){
+            if (map[bombDown.x][bombDown.y].character_inside[j] && player[j].alive==1){
+                player[j].alive = 0;
+                cout << "player" << j << " died ! " << endl;
+                return i;
+            }
+        }
+        if(map[bombDown.x][bombDown.y].wall) return i-1;
+            //contain_bomb
+        else if(map[bombDown.x][bombDown.y].contain_emptybox){
+            map[bombDown.x][bombDown.y].collapse();
+            return i;
+        }
+        else if(map[bombDown.x][bombDown.y].contain_item && map[bombDown.x][bombDown.y].item->destroyed==0){
+            map[bombDown.x][bombDown.y].collapse();
+            return i;
+        }
+    }
+    return bomb_distance;
 }
-Location Bomb::bomb_up(){
-    Location bombUp;
-    if (bomb_loc.x!=0) bombUp.y=bomb_loc.y-bomb_distance;
-    bombUp.x=bomb_loc.x;
-    return bombUp;
+int Bomb::bomb_left(){
+    Location bombLeft = bomb_loc;
+    for(int i = 0; i<=bomb_distance; i++){
+        if(bomb_loc.x-i < 0) return i-1;
+        bombLeft.x = bomb_loc.x - i;
+        for(int j = 0; j<Player_number; j++){
+            if (map[bombLeft.x][bombLeft.y].character_inside[j] && player[j].alive==1){
+                player[j].alive = 0;
+                cout << "player" << j << " died ! " << endl;
+                return i;
+            }
+        }
+        if(map[bombLeft.x][bombLeft.y].wall) return i-1;
+            //contain_bomb
+        else if(map[bombLeft.x][bombLeft.y].contain_emptybox){
+            map[bombLeft.x][bombLeft.y].collapse();
+            return i;
+        }
+        else if(map[bombLeft.x][bombLeft.y].contain_item && map[bombLeft.x][bombLeft.y].item->destroyed==0){
+            map[bombLeft.x][bombLeft.y].collapse();
+            return i;
+        }
+    }
+    return bomb_distance;
 }
-Location Bomb::bomb_down(){
-    Location bombDown;
-    if (bomb_loc.x!=10) bombDown.y=bomb_loc.y+bomb_distance;
-    bombDown.x=bomb_loc.x;
-    return bombDown;
+int Bomb::bomb_right(){
+    Location bombRight = bomb_loc;
+    for(int i = 0; i<=bomb_distance; i++){
+        if(bomb_loc.x+i > 15) return i-1;
+        bombRight.x = bomb_loc.x + i;
+        for(int j = 0; j<Player_number; j++){
+            if (map[bombRight.x][bombRight.y].character_inside[j] && player[j].alive==1){
+                player[j].alive = 0;
+                cout << "player" << j << " died ! " << endl;
+                return i;
+            }
+        }
+        if(map[bombRight.x][bombRight.y].wall) return i-1;
+        //contain_bomb
+        else if(map[bombRight.x][bombRight.y].contain_emptybox){
+            map[bombRight.x][bombRight.y].collapse();
+            return i;
+        }
+        else if(map[bombRight.x][bombRight.y].contain_item && map[bombRight.x][bombRight.y].item->destroyed==0){
+            map[bombRight.x][bombRight.y].collapse();
+            return i;
+        }
+    }
+    return bomb_distance;
 }
+
 Bomb* Bomb::bomb_explode(int num, Bomb * bomb){
+    changemap();
     bomb_num--;
     Bomb* temp_bomb;
     temp_bomb= new Bomb [bomb_num];
@@ -67,129 +146,25 @@ Bomb* Bomb::bomb_explode(int num, Bomb * bomb){
     delete [] temp_bomb;
     return bomb;
 }
-void Bomb::changemap(Location bombLoc){
-    for ( int k=0 ; k <Player_number ; ++k){
-        if (map[map[bombLoc.x][bombLoc.y].character_inside[k]]){
-            bool bombRight = false;
-            bool bombLeft = false;
-            bool bombUp = false;
-            bool bombDown = false;
-            for ( int i=bombLoc.x+1 ; i< bomb_right().x ; ++i ){
-                for ( int j=0 ; j<Player_number ; ++j ){
-                    if ( map[i][bomb_right().y].character_inside[j] ) {
-                        bombRight=true;
-                        map[i][bomb_right().y].collapse();
-                        player[j].dead();
-                        player[k].score+=10000;
-                        break;
-                    }
-                }
-                if ( bombRight ) break;
 
-                if ( map[i][bomb_right().y].contain_item ) {
-                    bombRight=true;
-                    map[i][bomb_right().y].box->box_destroyed();
-                    map[i][bomb_right().y].item->show();
-                    SDL_Delay(1000);
-                    map[i][bomb_right().y].item->taken=true;
-                    player[k].get_item(map[i][bomb_right().y].item);
-                }
-                if ( bombRight ) break;
+void Bomb::changemap(){
+    int bomb_farest[4];
+    bomb_farest[UP] = bomb_up();
+    bomb_farest[DOWN] = bomb_down();
+    bomb_farest[LEFT] = bomb_left();
+    bomb_farest[RIGHT] = bomb_right();
+    map[bomb_loc.x][bomb_loc.y].explode_blending = 255;
 
-                if (map[i][bomb_right().y].contain_emptybox){
-                    bombRight=true;
-                    map[i][bomb_right().y].box->box_destroyed();
-                }
-                if ( bombRight ) break;
-            }
-            for ( int i=bombLoc.x-1 ; i> bomb_left().x ; --i ){
-                for ( int j=0 ; j<Player_number ; ++j ){
-                    if ( map[i][bomb_left().y].character_inside[j] ) {
-                        bombLeft=true;
-                        map[i][bomb_left().y].collapse();
-                        player[j].dead();
-                        player[k].score+=10000;
-                        break;
-                    }
-                }
-                if ( bombLeft ) break;
-
-                if ( map[i][bomb_left().y].contain_item ) {
-                    bombLeft=true;
-                    map[i][bomb_left().y].box->box_destroyed();
-                    map[i][bomb_left().y].item->show();
-                    SDL_Delay(1000);
-                    map[i][bomb_left().y].item->taken=true;
-                    player[k].get_item(map[i][bomb_left().y].item);
-                }
-                if ( bombLeft ) break;
-
-                if (map[i][bomb_left().y].contain_emptybox){
-                    bombLeft=true;
-                    map[i][bomb_left().y].box->box_destroyed();
-                }
-
-                if ( bombLeft ) break;
-            }
-            for ( int i=bombLoc.y-1 ; i> bomb_up().y ; --i ){
-                for ( int j=0 ; j<Player_number ; ++j ){
-                    if ( map[bomb_up().x][i].character_inside[j] ) {
-                        bombUp=true;
-                        map[bomb_up().x][i].collapse();
-                        player[j].dead();
-                        player[k].score+=10000;
-                        break;
-                    }
-                }
-                if ( bombUp ) break;
-
-                if ( map[bomb_up().x][i].contain_item ) {
-                    bombUp=true;
-                    map[bomb_up().x][i].box->box_destroyed();
-                    map[bomb_up().x][i].item->show();
-                    SDL_Delay(1000);
-                    map[bomb_up().x][i].item->taken=true;
-                    player[k].get_item(map[bomb_up().x][i].item);
-                }
-                if ( bombUp ) break;
-
-                if (map[bomb_up().x][i].contain_emptybox){
-                    bombUp=true;
-                    map[bomb_up().x][i].box->box_destroyed();
-                }
-
-                if ( bombUp ) break;
-            }
-            for ( int i=bombLoc.y+1 ; i< bomb_down().y ; ++i ){
-                for ( int j=0 ; j<Player_number ; ++j ){
-                    if ( map[bomb_down().x][i].character_inside[j] ) {
-                        bombDown=true;
-                        map[bomb_down().x][i].collapse();
-                        player[j].dead();
-                        player[k].score+=10000;
-                        break;
-                    }
-                }
-                if ( bombDown ) break;
-
-                if ( map[bomb_down().x][i].contain_item ) {
-                    bombDown=true;
-                    map[bomb_down().x][i].box->box_destroyed();
-                    map[bomb_down().x][i].item->show();
-                    SDL_Delay(1000);
-                    map[i][bomb_right().y].item->taken=true;
-                    player[k].get_item(map[bomb_down().x][i].item);
-                }
-                if ( bombDown ) break;
-
-                if (map[bomb_down().x][i].contain_item){
-                    bombDown=true;
-                    map[bomb_down().x][i].box->box_destroyed();
-                }
-
-                if ( bombDown ) break;
-            }
-        }
+    for(int i = 1; i<=bomb_farest[UP]; i++){
+        map[bomb_loc.x][bomb_loc.y-i].explode_blending = 255;
     }
-
+    for(int i = 1; i<=bomb_farest[DOWN]; i++){
+        map[bomb_loc.x][bomb_loc.y+i].explode_blending = 255;
+    }
+    for(int i = 1; i<=bomb_farest[LEFT]; i++){
+        map[bomb_loc.x-i][bomb_loc.y].explode_blending = 255;
+    }
+    for(int i = 1; i<=bomb_farest[RIGHT]; i++){
+        map[bomb_loc.x+i][bomb_loc.y].explode_blending = 255;
+    }
 }
