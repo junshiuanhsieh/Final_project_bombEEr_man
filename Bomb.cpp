@@ -12,10 +12,14 @@ extern Map** map;
 extern Player* player;
 
 Bomb::Bomb(){
-
+    bomb_distance = 1;
 }
 Bomb::Bomb(Location loc, int distance) : bomb_loc(loc), bomb_distance(distance){
 
+}
+Bomb::Bomb(Bomb &copy){
+    bomb_loc = copy.bomb_loc;
+    bomb_distance = copy.bomb_distance;
 }
 Location Bomb::bomb_right(){
 

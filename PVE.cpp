@@ -45,6 +45,7 @@ void PVE(){
     }
     int rate = 10;
     bool keypress[12];
+    Bomb * bomb = NULL;
     for(int i = 0; i<12; i++) keypress[i] = 0;
     while(!quit) {
         while (SDL_PollEvent(&PVE_event) != 0) {
@@ -55,16 +56,19 @@ void PVE(){
                     case SDLK_DOWN: keypress[Key_Down] = 1; break;
                     case SDLK_LEFT: keypress[Key_Left] = 1; break;
                     case SDLK_RIGHT: keypress[Key_Right] = 1; break;
+                    case SDLK_RETURN: bomb = PVE_new_bomb(0, bomb); break;
 
                     case SDLK_w: keypress[Key_w] = 1; break;
                     case SDLK_s: keypress[Key_s] = 1; break;
                     case SDLK_a: keypress[Key_a] = 1; break;
                     case SDLK_d: keypress[Key_d] = 1; break;
+                    case SDLK_TAB: bomb = PVE_new_bomb(1, bomb); break;
 
                     case SDLK_i: keypress[Key_i] = 1; break;
                     case SDLK_k: keypress[Key_k] = 1; break;
                     case SDLK_j: keypress[Key_j] = 1; break;
                     case SDLK_l: keypress[Key_l] = 1; break;
+                    case SDLK_SPACE: bomb = PVE_new_bomb(2, bomb); break;
                 }
             }
             else if (PVE_event.type == SDL_KEYUP && PVE_event.key.repeat==0) {
@@ -113,6 +117,11 @@ void PVE(){
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         PVP_background0.render(NULL);
+        for(int i = 0; i<16; i++){
+            for(int j = 0; j<11; j++){
+                map[i][j].render_map();
+            }
+        }
         for(int i = 0; i<Player_number; i++) player[i].player_render();
         SDL_RenderPresent(gRenderer);
     }
@@ -183,3 +192,21 @@ void PVE_map_initialize(int random_num){
     }
 }
 
+Bomb* PVE_new_bomb(int player_num, Bomb* bomb){
+    static int bomb_num = 0;
+    bomb_num++;
+    Bomb* temp_bomb;
+    temp_bomb= new Bomb [bomb_num];
+    Bomb* temptempbomb;
+    temptempbomb = bomb;
+    for(int i = 0; i<bomb_num-1; i++) temp_bomb[i] = bomb[i];
+    Bomb newbomb(player[player_num].player_loc, player[player_num].bomb_distance);
+
+    temp_bomb[bomb_num-1] = Bomb(newbomb);
+    bomb = temp_bomb;
+    temp_bomb = temptempbomb;
+    map[player[player_num].player_loc.x][player[player_num].player_loc.y].contain_bomb = 1;
+    map[player[player_num].player_loc.x][player[player_num].player_loc.y].bomb = & bomb[bomb_num-1];
+    delete [] temp_bomb;
+    return bomb;
+}

@@ -27,11 +27,11 @@ class Player {
         bool alive;
         Item * item_owned[12];
         bool item[12];
-        int score;
+        int score, bomb_distance, bomb_number;
         Location player_loc;
 
     private:
-        int player_num, form, bomb_distance, bomb_number;
+        int player_num, form;
         Texture picture;
         SDL_Point player_point;
 };
