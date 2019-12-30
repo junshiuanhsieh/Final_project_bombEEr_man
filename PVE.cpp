@@ -26,25 +26,24 @@ void PVE(){
     srand(time(0));
     map_random = rand()%3;
     PVE_map_initialize(map_random);
-
     SDL_Event PVE_event;
-    player[0].player_loc.x = 0;
-    player[0].player_loc.y = 0;
-    player[0].player_point.x = 50;
-    player[0].player_point.y = 105;
+    player[0].player_loc.x = 15;
+    player[0].player_loc.y = 10;
+    player[0].player_point.x = 920;
+    player[0].player_point.y = 675;
     if(Player_number>1){
-        player[1].player_loc.x = 15;
-        player[1].player_loc.y = 10;
-        player[1].player_point.x = 920;
-        player[1].player_point.y = 675;
+        player[1].player_loc.x = 0;
+        player[1].player_loc.y = 0;
+        player[1].player_point.x = 50;
+        player[1].player_point.y = 105;
         if(Player_number == 3){
-            player[2].player_loc.x = 0;
-            player[2].player_loc.y = 10;
-            player[2].player_point.x = 50;
-            player[2].player_point.y = 675;
+            player[2].player_loc.x = 15;
+            player[2].player_loc.y = 0;
+            player[2].player_point.x = 920;
+            player[2].player_point.y = 105;
         }
     }
-    int rate = 8;
+    int rate = 10;
     bool keypress[12];
     for(int i = 0; i<12; i++) keypress[i] = 0;
     while(!quit) {
@@ -109,14 +108,13 @@ void PVE(){
                 else player[2].finish_moving();
             }
         }
-
         Texture PVP_background0;
         PVP_background0.loadFromFile("../PVP_image/background0.png");
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         PVP_background0.render(NULL);
         for(int i = 0; i<Player_number; i++) player[i].player_render();
-        SDL_RenderPresent( gRenderer );
+        SDL_RenderPresent(gRenderer);
     }
 }
 
@@ -127,15 +125,17 @@ void PVE_Show_data(){
 }
 
 void PVE_map_initialize(int random_num){
+    cout << "random = " << random_num << endl;
     if(random_num==0){
         map[3][0].wall = map[6][0].wall = map[7][0].wall = map[8][0].wall = 1;
         map[2][1].wall = map[3][1].wall = map[3][1].wall = map[6][1].wall = map[7][1].wall = map[8][1].wall = map[10][1].wall = map[11][1].wall = map[12][1].wall = 1;
         map[1][4].wall = map[4][4].wall = map[5][4].wall = map[6][4].wall = map[9][4].wall = map[10][4].wall = map[11][4].wall = 1;
         map[1][5].wall = map[4][5].wall = map[5][5].wall = map[6][5].wall = map[9][5].wall = map[10][5].wall = map[11][5].wall = 1;
         map[0][6].wall = map[9][6].wall = map[11][6].wall = 1;
-        map[0][8].wall = 1;
+        map[0][8].wall = map[1][8].wall = 1;
         map[0][9].wall = map[1][9].wall = map[4][9].wall = map[7][9].wall = map[8][9].wall = map[12][9].wall = 1;
         map[4][10].wall = map[7][10].wall = map[8][10].wall = map[12][10].wall = 1;
+
 
 
         Texture PVE_background0;
@@ -151,7 +151,7 @@ void PVE_map_initialize(int random_num){
         map[1][4].wall = map[4][4].wall = map[5][4].wall = map[6][4].wall = map[9][4].wall = map[10][4].wall = map[11][4].wall = 1;
         map[1][5].wall = map[4][5].wall = map[5][5].wall = map[6][5].wall = map[9][5].wall = map[10][5].wall = map[11][5].wall = 1;
         map[0][6].wall = map[9][6].wall = map[11][6].wall = 1;
-        map[0][8].wall = 1;
+        map[0][8].wall = map[1][8].wall = 1;
         map[0][9].wall = map[1][9].wall = map[4][9].wall = map[7][9].wall = map[8][9].wall = map[12][9].wall = 1;
         map[4][10].wall = map[7][10].wall = map[8][10].wall = map[12][10].wall = 1;
 
@@ -169,7 +169,7 @@ void PVE_map_initialize(int random_num){
         map[1][4].wall = map[4][4].wall = map[5][4].wall = map[6][4].wall = map[9][4].wall = map[10][4].wall = map[11][4].wall = 1;
         map[1][5].wall = map[4][5].wall = map[5][5].wall = map[6][5].wall = map[9][5].wall = map[10][5].wall = map[11][5].wall = 1;
         map[0][6].wall = map[9][6].wall = map[11][6].wall = 1;
-        map[0][8].wall = 1;
+        map[0][8].wall = map[1][8].wall = 1;
         map[0][9].wall = map[1][9].wall = map[4][9].wall = map[7][9].wall = map[8][9].wall = map[12][9].wall = 1;
         map[4][10].wall = map[7][10].wall = map[8][10].wall = map[12][10].wall = 1;
 

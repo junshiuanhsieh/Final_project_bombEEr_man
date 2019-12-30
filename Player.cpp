@@ -18,7 +18,7 @@ Player::Player(){
     }
     score = 0;
     bomb_distance = 1;
-
+    bomb_number = 1;
 }
 Player::Player(int num) : player_num(num){
     alive = true;
@@ -29,6 +29,7 @@ Player::Player(int num) : player_num(num){
     score = 0;
     form = character_picture[num];
     bomb_distance = 1;
+    bomb_number = 1;
     if(form==0) picture.loadFromFile("../character_image/character0.png");
     if(form==1) picture.loadFromFile("../character_image/character1.png");
     if(form==2) picture.loadFromFile("../character_image/character2.png");

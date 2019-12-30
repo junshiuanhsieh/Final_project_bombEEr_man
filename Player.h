@@ -31,7 +31,7 @@ class Player {
         Location player_loc;
 
     private:
-        int player_num, form, bomb_distance;
+        int player_num, form, bomb_distance, bomb_number;
         Texture picture;
         SDL_Point player_point;
 };
