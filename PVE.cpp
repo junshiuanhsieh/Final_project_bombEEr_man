@@ -140,9 +140,35 @@ void PVE(){
                 map[i][j].render_map();
             }
         }
-        for(int i = 0; i<Player_number; i++) if(player[i].alive==1) player[i].player_render();
+        bool game_continue = 0;
+        for(int i = 0; i<Player_number; i++) {
+            if(player[i].alive==1) {
+                player[i].player_render();
+                game_continue = 1;
+            }
+        }
         PVE_Show_data();
+        SDL_RenderPresent(gRenderer);
+        if(!game_continue) break;
+    }
+    SDL_Delay(1000);
+    Texture game_over, win_lose;
+    game_over.loadFromFile("../PVE_image/game_over.png");
+    win_lose.loadFromFile("../PVE_image/win_lose");
 
+    bool win = 0;
+    SDL_Rect win_clip = {0, 0, 900, 200}, lose_clip = {0, 200, 900, 200}, win_lose_dest = {300, 500, 600, 135};
+    SDL_Event endgame;
+
+    while(!quit){
+        while(SDL_PollEvent(&endgame) != 0) {
+            if (endgame.type == SDL_QUIT) quit = true;
+        }
+        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+        SDL_RenderClear(gRenderer);
+        game_over.render(NULL);
+        if(win) win_lose.render(&win_lose_dest, &win_clip);
+        else win_lose.render(&win_lose_dest, &lose_clip);
         SDL_RenderPresent(gRenderer);
     }
 }

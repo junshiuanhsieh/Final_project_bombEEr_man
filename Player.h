@@ -33,9 +33,10 @@ class Player {
         bool item[12];
         int score, bomb_distance, bomb_available, bomb_left;
         Location player_loc;
-
+        static int count_rank;
     private:
-        int player_num, form;
+        int player_num;
+        int rank;
         Texture picture;
         SDL_Point player_point;
 };

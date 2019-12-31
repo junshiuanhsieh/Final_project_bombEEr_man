@@ -228,7 +228,6 @@ void Scrolling(){
     text_clip.y = 0;
     text_clip.w = 1200;
 
-//    int i = 0;
     bool next = 0;
 
     if(Mode==1){
