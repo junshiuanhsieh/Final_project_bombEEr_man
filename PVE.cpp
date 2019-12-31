@@ -11,7 +11,7 @@ extern const int Total_item;
 extern int* character_picture;
 extern Player* player;
 extern Map** map;
-extern Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture, explode_texture;
+extern Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture, explode_texture, cross_texture;
 Texture PVE_background;
 int bomb_num = 0;
 
@@ -152,6 +152,8 @@ void PVE_initialize(){
     itembox_texture.loadFromFile("../item_image/box.png");
     emptybox_texture.loadFromFile("../item_image/empty_box.png");
     explode_texture.loadFromFile("../item_image/explode.png");
+    cross_texture.loadFromFile("../item_image/cross.png");
+    explode_texture.setBlendMode( SDL_BLENDMODE_BLEND );
     //item_texture.loadFromFile
 
     for(int i = 0; i<Player_number; i++){
@@ -235,7 +237,21 @@ void PVE_map_initialize(int random_num){
     }
 }
 void PVE_Show_data(){
+    static SDL_Rect photo_sticker[3] = {{1000,0,100,100}, {1000,250,100,100}, {1000,500,100,100}};
+    static SDL_Rect score[3] = {{1100,0,100,100}, {1100,250,100,100}, {1100,500,100,100}};
+    SDL_Rect player_item[Player_number][12];
     for(int i = 0; i<Player_number; i++){
-
+        for(int j = 0; j<3; j++){
+            for(int k = 0; k<4; k++){
+                player_item[i][k+4*j].x = 1000 + 50*k;
+                player_item[i][k+4*j].y = 250*i + 100 + 50*j;
+                player_item[i][k+4*j].w = player_item[i][k+4*j].h = 50;
+            }
+        }
+        player[i].picture.render(&photo_sticker[i]);
+//        for(int j = 0; j<12; j++){
+//            if(player[i].item[j])
+//        }
+        if(player[i].alive == 0) cross_texture.render(&photo_sticker[i]);
     }
 }

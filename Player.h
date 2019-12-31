@@ -15,6 +15,8 @@ class Player {
     friend void PVP();
     friend void PVE_initialize();
     friend void PVP_initialize();
+    friend void PVE_Show_data();
+    friend void PVP_Show_data();
     public:
         Player();
         Player(int num);

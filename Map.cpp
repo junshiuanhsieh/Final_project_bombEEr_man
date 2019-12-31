@@ -12,7 +12,7 @@ extern int* character_picture;
 extern const int Total_item;
 extern Player* player;
 Map** map = NULL;
-Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture, explode_texture;
+Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture, explode_texture, cross_texture;
 
 //render圖像那些是main去判斷對不對，我應該只要做回傳變數給main，告訴他情況就好?
 //map 裡面實際要放甚麼(人，箱子，以及箱子中的禮物就等PVE和PVP去設定);

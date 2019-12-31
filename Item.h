@@ -5,6 +5,7 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include "Location.h"
+#include "texture.h"
 class empty_box{
     friend class Player;
     friend class Map;
