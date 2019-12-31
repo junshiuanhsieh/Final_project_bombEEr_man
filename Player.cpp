@@ -18,9 +18,9 @@ Player::Player(){
         item_owned[i] = NULL;
     }
     score = 0;
-    bomb_distance = 1;
-    bomb_available = 1;
-    bomb_left = 1;
+    bomb_distance = 16;
+    bomb_available = 3;
+    bomb_left = 3;
 }
 Player::Player(int num) : player_num(num){
     alive = true;
@@ -30,15 +30,9 @@ Player::Player(int num) : player_num(num){
     }
     score = 0;
     form = character_picture[num];
-    bomb_distance = 1;
-    bomb_available = 1;
-    bomb_left = 1;
-
-//    if(form==0) picture.loadFromFile("../character_image/character0.png");}
-//    else if(form==1) picture.loadFromFile("../character_image/character1.png");
-//    else if(form==2) picture.loadFromFile("../character_image/character2.png");
-//    else if(form==3) picture.loadFromFile("../character_image/character3.png");
-//    else if(form==4) picture.loadFromFile("../character_image/character4.png");
+    bomb_distance = 16;
+    bomb_available = 3;
+    bomb_left = 3;
 }
 bool Player::dead(){
     alive = false;

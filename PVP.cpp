@@ -230,6 +230,7 @@ void PVP_map_initialize(int random_num){
 }
 
 void PVP_Show_data(){
+    
     for(int i = 0; i<Player_number; i++){
 
     }

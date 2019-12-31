@@ -204,12 +204,13 @@ void Choosenumber(){
     }
 }
 void Scrolling(){
-    Texture scrolling, TextTexture;
-    scrolling.loadFromFile("../start_image/scrolling_PVE_background.png");
+    Texture scrolling, TextTexture,TextTexture2;
+    scrolling.loadFromFile("../start_image/scrolling_background.png");
     SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF);
     SDL_RenderClear(gRenderer);
     scrolling.render(NULL);
     TextTexture.loadFromFile("../start_image/scrolling_PVE.png");
+    TextTexture2.loadFromFile("../start_image/scrolling_PVP.png");
     SDL_RenderPresent( gRenderer );
 
     SDL_Rect rcText[4], back_dest = {100, 600, 200, 100}, next_dest = {900, 600, 200, 100};
@@ -230,17 +231,33 @@ void Scrolling(){
 //    int i = 0;
     bool next = 0;
 
-    while(temp_y>=0){
+    if(Mode==1){
+        while(temp_y>=0){
 
-        text_clip .h = 750 - temp_y;
-        text_dest .h = 750 - temp_y;
-        text_dest .y = temp_y;
+            text_clip .h = 750 - temp_y;
+            text_dest .h = 750 - temp_y;
+            text_dest .y = temp_y;
 
-        temp_y -= 3;
-        scrolling.render(NULL);
-        TextTexture.render(&text_dest,&text_clip,0);
-        SDL_RenderPresent( gRenderer );
+            temp_y -= 3;
+            scrolling.render(NULL);
+            TextTexture.render(&text_dest,&text_clip,0);
+            SDL_RenderPresent( gRenderer );
+        }
     }
+    else{
+        while(temp_y>=0){
+
+            text_clip .h = 750 - temp_y;
+            text_dest .h = 750 - temp_y;
+            text_dest .y = temp_y;
+
+            temp_y -= 3;
+            scrolling.render(NULL);
+            TextTexture2.render(&text_dest,&text_clip,0);
+            SDL_RenderPresent( gRenderer );
+        }
+    }
+
 
     while(!quit && !next){
 
@@ -252,7 +269,10 @@ void Scrolling(){
 
         SDL_RenderClear(gRenderer);
         //scrolling.render(NULL);
-        TextTexture.render(&text_dest,&text_clip,0);
+        if(Mode==1)  TextTexture.render(&text_dest,&text_clip,0);
+        else TextTexture2.render(&text_dest,&text_clip,0);
+
+
         int big_back = 1, big_next = 1;
         if(backto_number.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) big_back = 0;
         backto_number.rectrender(big_back);

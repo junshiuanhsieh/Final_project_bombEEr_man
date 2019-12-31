@@ -141,6 +141,8 @@ void PVE(){
             }
         }
         for(int i = 0; i<Player_number; i++) if(player[i].alive==1) player[i].player_render();
+        PVE_Show_data();
+
         SDL_RenderPresent(gRenderer);
     }
 }
