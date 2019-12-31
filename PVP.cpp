@@ -124,7 +124,7 @@ void PVP(){
 
         for(int i = 0; i<bomb_num; i++){
             if(clock() - bomb[i].clk > 100000){
-                bomb = bomb[i].bomb_explode(i, bomb);
+                bomb = bomb[i].bomb_explode(i);
                 i--;
             }
         }

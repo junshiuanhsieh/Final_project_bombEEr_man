@@ -11,6 +11,7 @@ extern const int Total_item;
 extern Map** map;
 extern Player* player;
 extern int bomb_num;
+Bomb * bomb = NULL;
 
 Bomb::Bomb() : clk(clock()){
     bomb_distance = 1;
@@ -19,12 +20,14 @@ Bomb::Bomb(Location loc, int distance, int player_num, int _number) : bomb_loc(l
     clk = clock();
     owner = player_num;
     number = _number;
+    map[bomb_loc.x][bomb_loc.y].bomb = this;
 }
 Bomb::Bomb(const Bomb &copy): clk(copy.clk){
     bomb_loc = copy.bomb_loc;
     bomb_distance = copy.bomb_distance;
     owner = copy.owner;
     number = copy.number;
+    map[bomb_loc.x][bomb_loc.y].bomb = this;
 }
 Bomb Bomb::operator=(const Bomb & copy){
     clk = copy.clk;
@@ -32,9 +35,10 @@ Bomb Bomb::operator=(const Bomb & copy){
     bomb_distance = copy.bomb_distance;
     owner = copy.owner;
     number = copy.number;
+    map[bomb_loc.x][bomb_loc.y].bomb = this;
 }
 
-int Bomb::bomb_up(Bomb* bomb){
+int Bomb::bomb_up(){
     Location bombUp = bomb_loc;
     for(int i = 1; i<=bomb_distance; i++){
         if(bomb_loc.y-i < 0) {
@@ -52,7 +56,7 @@ int Bomb::bomb_up(Bomb* bomb){
             return i-1;
         }
         else if(map[bombUp.x][bombUp.y].contain_bomb){
-            //map[bombUp.x][bombUp.y].bomb->bomb_explode(map[bombUp.x][bombUp.y].bomb->number, bomb);
+            //bomb = map[bombUp.x][bombUp.y].bomb->bomb_explode(map[bombUp.x][bombUp.y].bomb->number);
             return i;
         }
         else if(map[bombUp.x][bombUp.y].contain_emptybox){
@@ -66,7 +70,7 @@ int Bomb::bomb_up(Bomb* bomb){
     }
     return bomb_distance;
 }
-int Bomb::bomb_down(Bomb* bomb){
+int Bomb::bomb_down(){
     Location bombDown = bomb_loc;
     for(int i = 1; i<=bomb_distance; i++){
         if(bomb_loc.y+i > 10) {
@@ -84,7 +88,7 @@ int Bomb::bomb_down(Bomb* bomb){
             return i-1;
         }
         else if(map[bombDown.x][bombDown.y].contain_bomb){
-            //map[bombDown.x][bombDown.y].bomb->bomb_explode(map[bombDown.x][bombDown.y].bomb->number, bomb);
+            //bomb = map[bombDown.x][bombDown.y].bomb->bomb_explode(map[bombDown.x][bombDown.y].bomb->number);
             return i;
         }
         else if(map[bombDown.x][bombDown.y].contain_emptybox){
@@ -98,7 +102,7 @@ int Bomb::bomb_down(Bomb* bomb){
     }
     return bomb_distance;
 }
-int Bomb::bomb_left(Bomb* bomb){
+int Bomb::bomb_left(){
     Location bombLeft = bomb_loc;
     for(int i = 1; i<=bomb_distance; i++){
         if(bomb_loc.x-i < 0) {
@@ -116,7 +120,7 @@ int Bomb::bomb_left(Bomb* bomb){
             return i-1;
         }
         else if(map[bombLeft.x][bombLeft.y].contain_bomb){
-            //map[bombLeft.x][bombLeft.y].bomb->bomb_explode(map[bombLeft.x][bombLeft.y].bomb->number, bomb);
+            //bomb = map[bombLeft.x][bombLeft.y].bomb->bomb_explode(map[bombLeft.x][bombLeft.y].bomb->number);
             return i;
         }
         else if(map[bombLeft.x][bombLeft.y].contain_emptybox){
@@ -130,7 +134,7 @@ int Bomb::bomb_left(Bomb* bomb){
     }
     return bomb_distance;
 }
-int Bomb::bomb_right(Bomb* bomb){
+int Bomb::bomb_right(){
     Location bombRight = bomb_loc;
     for(int i = 1; i<=bomb_distance; i++){
         if(bomb_loc.x+i > 15) {
@@ -148,7 +152,7 @@ int Bomb::bomb_right(Bomb* bomb){
             return i-1;
         }
         else if(map[bombRight.x][bombRight.y].contain_bomb){
-           // map[bombRight.x][bombRight.y].bomb->bomb_explode(map[bombRight.x][bombRight.y].bomb->number, bomb);
+            //bomb = map[bombRight.x][bombRight.y].bomb->bomb_explode(map[bombRight.x][bombRight.y].bomb->number);
             return i;
         }
         else if(map[bombRight.x][bombRight.y].contain_emptybox){
@@ -163,17 +167,17 @@ int Bomb::bomb_right(Bomb* bomb){
     return bomb_distance;
 }
 
-Bomb* Bomb::bomb_explode(int num, Bomb * bomb){
+Bomb* Bomb::bomb_explode(int num){
     clk = 0;
-    changemap(bomb);
+    changemap();
     bomb_num--;
     Bomb* temp_bomb;
     temp_bomb= new Bomb [bomb_num];
     Bomb* temptempbomb;
     temptempbomb = bomb;
-    for(int i = 0; i<num; i++) temp_bomb[i] = Bomb(bomb[i]);
+    for(int i = 0; i<num; i++) temp_bomb[i] = bomb[i];
     for(int i = num; i<bomb_num; i++) {
-        temp_bomb[i] = Bomb(bomb[i+1]);
+        temp_bomb[i] = bomb[i+1];
         temp_bomb[i].number--;
     }
     bomb = temp_bomb;
@@ -185,7 +189,7 @@ Bomb* Bomb::bomb_explode(int num, Bomb * bomb){
     return bomb;
 }
 
-void Bomb::changemap(Bomb* bomb){
+void Bomb::changemap(){
     int bomb_farest[4];
     bool bomb_on_character = 0;
     for(int i = 0; i<Player_number; i++){
@@ -197,10 +201,10 @@ void Bomb::changemap(Bomb* bomb){
         bomb_farest[UP] = bomb_farest[DOWN] = bomb_farest[LEFT] = bomb_farest[RIGHT] = 0;
     }
     if(!bomb_on_character){
-        bomb_farest[UP] = bomb_up(bomb);
-        bomb_farest[DOWN] = bomb_down(bomb);
-        bomb_farest[LEFT] = bomb_left(bomb);
-        bomb_farest[RIGHT] = bomb_right(bomb);
+        bomb_farest[UP] = bomb_up();
+        bomb_farest[DOWN] = bomb_down();
+        bomb_farest[LEFT] = bomb_left();
+        bomb_farest[RIGHT] = bomb_right();
     }
 
     map[bomb_loc.x][bomb_loc.y].explode_blending = 255;

@@ -18,7 +18,7 @@ Player::Player(){
         item_owned[i] = NULL;
     }
     score = 0;
-    bomb_distance = 1;
+    bomb_distance = 2;
     bomb_available = 3;
     bomb_left = 3;
 }
@@ -30,7 +30,7 @@ Player::Player(int num) : player_num(num){
     }
     score = 0;
     form = character_picture[num];
-    bomb_distance = 1;
+    bomb_distance = 2;
     bomb_available = 3;
     bomb_left = 3;
 }
@@ -139,10 +139,11 @@ Bomb* Player::putbomb(Bomb * bomb){
     temp_bomb= new Bomb [bomb_num];
     Bomb* temptempbomb;
     temptempbomb = bomb;
-    for(int i = 0; i<bomb_num-1; i++) temp_bomb[i] = Bomb(bomb[i]);
+    for(int i = 0; i<bomb_num-1; i++) temp_bomb[i] = bomb[i];
     Bomb newbomb(player_loc,bomb_distance, player_num, bomb_num-1);
-    temp_bomb[bomb_num-1] = Bomb(newbomb);
+    temp_bomb[bomb_num-1] = newbomb;
     bomb = temp_bomb;
+    map[player_loc.x][player_loc.y].bomb = &bomb[bomb_num-1];
     temp_bomb = temptempbomb;
     map[player_loc.x][player_loc.y].contain_bomb = 1;
     map[player_loc.x][player_loc.y].bomb = & bomb[bomb_num-1];

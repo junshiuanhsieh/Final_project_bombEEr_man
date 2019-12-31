@@ -11,6 +11,7 @@ extern const int Total_item;
 extern int* character_picture;
 extern Player* player;
 extern Map** map;
+extern Bomb* bomb;
 extern Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture, explode_texture, cross_texture;
 Texture PVE_background;
 int bomb_num = 0;
@@ -37,7 +38,6 @@ void PVE(){
     int rate = 10;
     bomb_num = 0;
     bool keypress[12];
-    Bomb * bomb = NULL;
     SDL_Event PVE_event;
 
     for(int i = 0; i<12; i++) keypress[i] = 0;
@@ -127,7 +127,7 @@ void PVE(){
         }
         for(int i = 0; i<bomb_num; i++){
             if(clock() - bomb[i].clk > 100000){
-                bomb = bomb[i].bomb_explode(i, bomb);
+                bomb = bomb[i].bomb_explode(i);
                 i--;
             }
         }
