@@ -160,17 +160,20 @@ void PVP_initialize(){
     player[0].player_loc.y = 10;
     player[0].player_point.x = 920;
     player[0].player_point.y = 675;
+    map[15][10].character_inside[0] = 1;
 
     player[1].player_loc.x = 0;
     player[1].player_loc.y = 0;
     player[1].player_point.x = 50;
     player[1].player_point.y = 105;
+    map[0][0].character_inside[1] = 1;
 
     if(Player_number == 3){
         player[2].player_loc.x = 15;
         player[2].player_loc.y = 0;
         player[2].player_point.x = 920;
         player[2].player_point.y = 105;
+        map[15][0].character_inside[2] = 1;
     }
 }
 

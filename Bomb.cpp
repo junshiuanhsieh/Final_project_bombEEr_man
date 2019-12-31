@@ -30,102 +30,142 @@ Bomb Bomb::operator=(const Bomb & copy){
 
 int Bomb::bomb_up(){
     Location bombUp = bomb_loc;
-    for(int i = 0; i<=bomb_distance; i++){
-        if(bomb_loc.y-i < 0) return i-1;
+    for(int i = 1; i<=bomb_distance; i++){
+        if(bomb_loc.y-i < 0) {
+            cout << "up = " << i-1 << endl;
+            return i-1;
+        }
         bombUp.y = bomb_loc.y - i;
         for(int j = 0; j<Player_number; j++){
             if (map[bombUp.x][bombUp.y].character_inside[j] && player[j].alive==1){
-                player[j].alive = 0;
+                player[j].dead();
                 cout << "player" << j << " died ! " << endl;
+                cout << "up = " << i << endl;
                 return i;
             }
         }
-        if(map[bombUp.x][bombUp.y].wall) return i-1;
+        if(map[bombUp.x][bombUp.y].wall) {
+            cout << "up = " << i-1 << endl;
+            return i-1;
+        }
             //contain_bomb
         else if(map[bombUp.x][bombUp.y].contain_emptybox){
             map[bombUp.x][bombUp.y].collapse();
+            cout << "up = " << i << endl;
             return i;
         }
         else if(map[bombUp.x][bombUp.y].contain_item && map[bombUp.x][bombUp.y].item->destroyed==0){
             map[bombUp.x][bombUp.y].collapse();
+            cout << "up = " << i << endl;
             return i;
         }
     }
+    cout << "up = " << bomb_distance << endl;
     return bomb_distance;
 }
 int Bomb::bomb_down(){
     Location bombDown = bomb_loc;
-    for(int i = 0; i<=bomb_distance; i++){
-        if(bomb_loc.y+i > 10) return i-1;
+    for(int i = 1; i<=bomb_distance; i++){
+        if(bomb_loc.y+i > 10) {
+            cout << "down = " << i-1 << endl;
+            return i-1;
+        }
         bombDown.y = bomb_loc.y + i;
         for(int j = 0; j<Player_number; j++){
             if (map[bombDown.x][bombDown.y].character_inside[j] && player[j].alive==1){
-                player[j].alive = 0;
+                player[j].dead();
                 cout << "player" << j << " died ! " << endl;
+                cout << "down = " << i << endl;
                 return i;
             }
         }
-        if(map[bombDown.x][bombDown.y].wall) return i-1;
+        if(map[bombDown.x][bombDown.y].wall) {
+            cout << "down = " << i-1 << endl;
+            return i-1;
+        }
             //contain_bomb
         else if(map[bombDown.x][bombDown.y].contain_emptybox){
             map[bombDown.x][bombDown.y].collapse();
+            cout << "down = " << i << endl;
             return i;
         }
         else if(map[bombDown.x][bombDown.y].contain_item && map[bombDown.x][bombDown.y].item->destroyed==0){
             map[bombDown.x][bombDown.y].collapse();
+            cout << "down = " << i << endl;
             return i;
         }
     }
+    cout << "down = " << bomb_distance << endl;
     return bomb_distance;
 }
 int Bomb::bomb_left(){
     Location bombLeft = bomb_loc;
-    for(int i = 0; i<=bomb_distance; i++){
-        if(bomb_loc.x-i < 0) return i-1;
+    for(int i = 1; i<=bomb_distance; i++){
+        if(bomb_loc.x-i < 0) {
+            cout << "left = " << i-1 << endl;
+            return i-1;
+        }
         bombLeft.x = bomb_loc.x - i;
         for(int j = 0; j<Player_number; j++){
             if (map[bombLeft.x][bombLeft.y].character_inside[j] && player[j].alive==1){
-                player[j].alive = 0;
+                player[j].dead();
                 cout << "player" << j << " died ! " << endl;
+                cout << "left = " << i << endl;
                 return i;
             }
         }
-        if(map[bombLeft.x][bombLeft.y].wall) return i-1;
+        if(map[bombLeft.x][bombLeft.y].wall) {
+            cout << "left = " << i-1 << endl;
+            return i-1;
+        }
             //contain_bomb
         else if(map[bombLeft.x][bombLeft.y].contain_emptybox){
             map[bombLeft.x][bombLeft.y].collapse();
+            cout << "left = " << i << endl;
             return i;
         }
         else if(map[bombLeft.x][bombLeft.y].contain_item && map[bombLeft.x][bombLeft.y].item->destroyed==0){
             map[bombLeft.x][bombLeft.y].collapse();
+            cout << "left = " << i << endl;
             return i;
         }
     }
+    cout << "left = " << bomb_distance << endl;
     return bomb_distance;
 }
 int Bomb::bomb_right(){
     Location bombRight = bomb_loc;
-    for(int i = 0; i<=bomb_distance; i++){
-        if(bomb_loc.x+i > 15) return i-1;
+    for(int i = 1; i<=bomb_distance; i++){
+        if(bomb_loc.x+i > 15) {
+            cout << "right = " << i-1 << endl;
+            return i-1;
+        }
         bombRight.x = bomb_loc.x + i;
         for(int j = 0; j<Player_number; j++){
             if (map[bombRight.x][bombRight.y].character_inside[j] && player[j].alive==1){
-                player[j].alive = 0;
+                player[j].dead();
                 cout << "player" << j << " died ! " << endl;
+                cout << "right = " << i << endl;
                 return i;
             }
         }
-        if(map[bombRight.x][bombRight.y].wall) return i-1;
+        if(map[bombRight.x][bombRight.y].wall) {
+            cout << "right = " << i-1 << endl;
+            return i-1;
+        }
         //contain_bomb
         else if(map[bombRight.x][bombRight.y].contain_emptybox){
             map[bombRight.x][bombRight.y].collapse();
+            cout << "right = " << i << endl;
             return i;
         }
         else if(map[bombRight.x][bombRight.y].contain_item && map[bombRight.x][bombRight.y].item->destroyed==0){
             map[bombRight.x][bombRight.y].collapse();
+            cout << "right = " << i << endl;
             return i;
         }
     }
+    cout << "right = " << bomb_distance << endl;
     return bomb_distance;
 }
 
@@ -149,10 +189,22 @@ Bomb* Bomb::bomb_explode(int num, Bomb * bomb){
 
 void Bomb::changemap(){
     int bomb_farest[4];
-    bomb_farest[UP] = bomb_up();
-    bomb_farest[DOWN] = bomb_down();
-    bomb_farest[LEFT] = bomb_left();
-    bomb_farest[RIGHT] = bomb_right();
+    bool bomb_on_character = 0;
+    for(int i = 0; i<Player_number; i++){
+        if(map[bomb_loc.x][bomb_loc.y].character_inside[i] && player[i].alive) {
+            bomb_on_character = 1;
+            player[i].dead();
+            cout << "player" << i << " died!" << endl;
+        }
+        bomb_farest[UP] = bomb_farest[DOWN] = bomb_farest[LEFT] = bomb_farest[RIGHT] = 0;
+    }
+    if(!bomb_on_character){
+        bomb_farest[UP] = bomb_up();
+        bomb_farest[DOWN] = bomb_down();
+        bomb_farest[LEFT] = bomb_left();
+        bomb_farest[RIGHT] = bomb_right();
+    }
+
     map[bomb_loc.x][bomb_loc.y].explode_blending = 255;
 
     for(int i = 1; i<=bomb_farest[UP]; i++){

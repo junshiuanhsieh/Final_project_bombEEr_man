@@ -50,12 +50,17 @@ void Player::move(Direction dir, int s){
             bool change_loc = 0, soon_change_loc = 0;
             if((player_point.y-s-75) / 60 != player_loc.y && player_loc.y>0) change_loc = 1;
             if((player_point.y-30-75) / 60 != player_loc.y && player_loc.y>0) soon_change_loc = 1;
-            if(change_loc || soon_change_loc){
+            if(change_loc){
                 if(map[player_loc.x][player_loc.y-1].met_character(player_num)){
                     player_point.y -= s;
                     map[player_loc.x][player_loc.y-1].character_inside[player_num] = 1;
                     map[player_loc.x][player_loc.y].character_inside[player_num] = 0;
                     player_loc.y--;
+                }
+            }
+            else if(soon_change_loc){
+                if(map[player_loc.x][player_loc.y-1].met_character(player_num)){
+                    player_point.y -= s;
                 }
             }
             else player_point.y -= s;
@@ -66,12 +71,17 @@ void Player::move(Direction dir, int s){
             bool change_loc = 0, soon_change_loc = 0;
             if((player_point.y+s-75) / 60 != player_loc.y && player_loc.y<11) change_loc = 1;
             if((player_point.y+30-75) / 60 != player_loc.y && player_loc.y<11) soon_change_loc = 1;
-            if(change_loc || soon_change_loc){
+            if(change_loc){
                 if(map[player_loc.x][player_loc.y+1].met_character(player_num)){
                     player_point.y += s;
                     map[player_loc.x][player_loc.y+1].character_inside[player_num] = 1;
                     map[player_loc.x][player_loc.y].character_inside[player_num] = 0;
                     player_loc.y++;
+                }
+            }
+            else if(soon_change_loc){
+                if(map[player_loc.x][player_loc.y+1].met_character(player_num)){
+                    player_point.y += s;
                 }
             }
             else player_point.y += s;
@@ -82,12 +92,17 @@ void Player::move(Direction dir, int s){
             bool change_loc = 0, soon_change_loc = 0;
             if((player_point.x-s-20) / 60 != player_loc.x && player_loc.x>0) change_loc = 1;
             if((player_point.x-30-20) / 60 != player_loc.x && player_loc.x>0) soon_change_loc = 1;
-            if(change_loc || soon_change_loc){
+            if(change_loc){
                 if(map[player_loc.x-1][player_loc.y].met_character(player_num)){
                     player_point.x -= s;
                     map[player_loc.x-1][player_loc.y].character_inside[player_num] = 1;
                     map[player_loc.x][player_loc.y].character_inside[player_num] = 0;
                     player_loc.x--;
+                }
+            }
+            else if(soon_change_loc){
+                if(map[player_loc.x-1][player_loc.y].met_character(player_num)){
+                    player_point.x -= s;
                 }
             }
             else player_point.x -= s;
@@ -98,12 +113,17 @@ void Player::move(Direction dir, int s){
             bool change_loc = 0, soon_change_loc = 0;
             if((player_point.x+s-20) / 60 != player_loc.x && player_loc.x<16) change_loc = 1;
             if((player_point.x+30-20) / 60 != player_loc.x && player_loc.x<16) soon_change_loc = 1;
-            if(change_loc || soon_change_loc){
+            if(change_loc){
                 if(map[player_loc.x+1][player_loc.y].met_character(player_num)){
                     player_point.x += s;
                     map[player_loc.x+1][player_loc.y].character_inside[player_num] = 1;
                     map[player_loc.x][player_loc.y].character_inside[player_num] = 0;
                     player_loc.x++;
+                }
+            }
+            else if(soon_change_loc){
+                if(map[player_loc.x+1][player_loc.y].met_character(player_num)){
+                    player_point.x += s;
                 }
             }
             else player_point.x += s;
