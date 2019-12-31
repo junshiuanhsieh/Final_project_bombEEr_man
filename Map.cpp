@@ -81,7 +81,7 @@ void Map::render_map(){
         SDL_Rect bomb_rect = {30+60*map_loc.x, 75+60*map_loc.y, 50, 50};
         bomb_texture.render(&bomb_rect);
     }
-    else if(explode_blending != 0){
+    if(explode_blending != 0){
         explode_texture.setAlpha(explode_blending);
         explode_texture.render(&map_rect);
         explode_blending -= 15;
