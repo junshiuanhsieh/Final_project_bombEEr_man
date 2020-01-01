@@ -132,16 +132,16 @@ void PVP(){
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         PVP_background.render(NULL);
-        for(int i = 0; i<16; i++){
-            for(int j = 0; j<11; j++){
-                map[i][j].render_map();
-            }
-        }
         int player_left = 0;
         for(int i = 0; i<Player_number; i++) {
             if(player[i].alive==1) {
                 player[i].player_render();
                 player_left++;
+            }
+        }
+        for(int i = 0; i<16; i++){
+            for(int j = 0; j<11; j++){
+                map[i][j].render_map();
             }
         }
         player[0].count_rank = player_left;

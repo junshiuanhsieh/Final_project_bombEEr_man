@@ -86,6 +86,7 @@ void Map::render_map(){
         explode_texture.render(&map_rect);
         explode_blending -= 15;
     }
+
     //contain_item && item->destroyed == 1
 }
 

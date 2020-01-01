@@ -136,16 +136,16 @@ void PVE(){
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         PVE_background.render(NULL);
-        for(int i = 0; i<16; i++){
-            for(int j = 0; j<11; j++){
-                map[i][j].render_map();
-            }
-        }
         bool game_continue = 0;
         for(int i = 0; i<Player_number; i++) {
             if(player[i].alive==1) {
                 player[i].player_render();
                 game_continue = 1;
+            }
+        }
+        for(int i = 0; i<16; i++){
+            for(int j = 0; j<11; j++){
+                map[i][j].render_map();
             }
         }
         PVE_Show_data();

@@ -28,7 +28,7 @@ void Scrolling();
 void Choosecharacter();
 void Tutorial_start();
 void Tutorial();
-void game_end(); 
+void game_end();
 
 int main(int argc, char* args[]){
     init();
