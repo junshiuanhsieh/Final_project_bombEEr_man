@@ -28,8 +28,9 @@ void Scrolling();
 void Choosecharacter();
 void Tutorial_start();
 void Tutorial();
+void game_end();
 
-int main( int argc, char* args[] ){
+int main(int argc, char* args[]){
     init();
     quit = false;
     Start();
@@ -38,6 +39,9 @@ int main( int argc, char* args[] ){
     if(quit) return 0;
     if(Mode == 1) PVE();
     else if(Mode == 2) PVP();
+
+    for(int i = 0; i<Player_number; i++) cout << "player " << i << " rank " << player[i].rank << " " << endl;
+    game_end();
     close();
     return 0;
 }
@@ -501,6 +505,54 @@ void Tutorial(){
             Tutorial_start();
             break;
         }
+    }
+}
+void game_end(){
+    Texture game_over, win_lose, cup, gameend_backgroung;
+    game_over.loadFromFile("../PVE_image/game_over.png");
+    win_lose.loadFromFile("../PVE_image/win_lose.png");
+    cup.loadFromFile("../PVP_image/cup.png");
+    gameend_backgroung.loadFromFile("../PVP_image/gameend_background.png");
+
+    bool win = 0;
+    SDL_Rect win_clip = {0, 0, 900, 200}, lose_clip = {0, 200, 900, 200}, win_lose_dest = {300, 500, 600, 135};
+
+    SDL_Rect showrank[Player_number], cupdest[Player_number];
+    if(Player_number==2){
+        showrank[0].x = 300; showrank[0].y = 200; showrank[0].w = 200; showrank[0].h = 200;
+        showrank[1].x = 700; showrank[1].y = 200; showrank[1].w = 200; showrank[1].h = 200;
+        cupdest[0].x = 400; cupdest[0].y = 300; cupdest[0].w = 100; cupdest[0].h = 100;
+        cupdest[1].x = 800; cupdest[1].y = 300; cupdest[1].w = 100; cupdest[1].h = 100;
+    }
+    else if(Player_number==3){
+        showrank[0].x = 200; showrank[0].y = 200; showrank[0].w = 200; showrank[0].h = 200;
+        showrank[1].x = 500; showrank[1].y = 200; showrank[1].w = 200; showrank[1].h = 200;
+        showrank[2].x = 800; showrank[2].y = 200; showrank[2].w = 200; showrank[2].h = 200;
+        cupdest[0].x = 300; cupdest[0].y = 300; cupdest[0].w = 100; cupdest[0].h = 100;
+        cupdest[1].x = 600; cupdest[1].y = 300; cupdest[1].w = 100; cupdest[1].h = 100;
+        cupdest[2].x = 700; cupdest[2].y = 300; cupdest[2].w = 100; cupdest[2].h = 100;
+    }
+    int no1;
+    for(int i = 0; i<Player_number; i++) if(player[i].rank == 1) no1 = i;
+    SDL_Event endgame;
+
+    while(!quit){
+        while(SDL_PollEvent(&endgame) != 0) {
+            if (endgame.type == SDL_QUIT) quit = true;
+        }
+        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+        SDL_RenderClear(gRenderer);
+        if(Mode==1){
+            game_over.render(NULL);
+            if(win) win_lose.render(&win_lose_dest, &win_clip);
+            else win_lose.render(&win_lose_dest, &lose_clip);
+        }
+        else if(Mode==2){
+            gameend_backgroung.render(NULL);
+            for(int i = 0; i<Player_number; i++) player[i].picture.render(&showrank[i]);
+            cup.render(&cupdest[no1]);
+        }
+        SDL_RenderPresent(gRenderer);
     }
 }
 

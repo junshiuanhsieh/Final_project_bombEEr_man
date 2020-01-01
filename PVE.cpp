@@ -19,6 +19,7 @@ int bomb_num = 0;
 void PVE(){
     player = new Player[Player_number];
     for(int i = 0; i<Player_number; i++) player[i] = Player(i);
+    player[0].count_rank = Player_number;
     map = new Map*[16];
     for(int i = 0; i<16; i++) {
         map[i] = new Map [11];
@@ -140,10 +141,19 @@ void PVE(){
                 map[i][j].render_map();
             }
         }
-        for(int i = 0; i<Player_number; i++) if(player[i].alive==1) player[i].player_render();
+        bool game_continue = 0;
+        for(int i = 0; i<Player_number; i++) {
+            if(player[i].alive==1) {
+                player[i].player_render();
+                game_continue = 1;
+            }
+        }
         PVE_Show_data();
-
         SDL_RenderPresent(gRenderer);
+        if(!game_continue) {
+            SDL_Delay(1000);
+            break;
+        }
     }
 }
 

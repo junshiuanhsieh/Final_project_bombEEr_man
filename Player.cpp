@@ -9,6 +9,7 @@ extern int* character_picture;
 extern const int Total_item = 12;
 extern Map** map;
 extern int bomb_num;
+extern int Player_number;
 extern Bomb * bomb;
 
 Player::Player(){
@@ -18,6 +19,7 @@ Player::Player(){
         item_owned[i] = NULL;
     }
     score = 0;
+    rank = 1;
     bomb_distance = 2;
     bomb_available = 3;
     bomb_left = 3;
@@ -29,14 +31,17 @@ Player::Player(int num) : player_num(num){
         item_owned[i] = NULL;
     }
     score = 0;
-    form = character_picture[num];
+    rank = 1;
     bomb_distance = 2;
     bomb_available = 3;
     bomb_left = 3;
 }
+int Player::count_rank = Player_number;
 bool Player::dead(){
     alive = false;
     for(int i = 0; i<Total_item; i++) item_owned[i] = 0;
+    rank = count_rank;
+    count_rank--;
 }
 void Player::move(Direction dir, int s){
     if(dir == UP) {

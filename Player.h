@@ -11,6 +11,8 @@
 enum Direction{ UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 
 class Player {
+    friend int main(int, char*args[]);
+    friend void game_end();
     friend void PVE();
     friend void PVP();
     friend void PVE_initialize();
@@ -33,9 +35,9 @@ public:
     bool item[12];
     int score, bomb_distance, bomb_available, bomb_left;
     Location player_loc;
-
+    static int count_rank;
 private:
-    int player_num, form;
+    int player_num, rank;
     Texture picture;
     SDL_Point player_point;
 };

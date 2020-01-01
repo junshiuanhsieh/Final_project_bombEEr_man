@@ -11,7 +11,7 @@ extern const int Total_item;
 extern Map** map;
 extern Player* player;
 extern int bomb_num;
-extern Bomb * bomb;  //一開始會是NULL，小心使用，有時間的話用用看singleton
+extern Bomb * bomb;  //一開始不知道為什麼會是NULL，沒有跟其他cpp檔連結，小心使用，有時間的話網路上說用用看singleton
 
 Bomb::Bomb() : clk(clock()){
     bomb_distance = 1;
@@ -209,6 +209,8 @@ void Bomb::changemap(){
     for(int i = 1; i<=bomb_farest[RIGHT]; i++){
         map[bomb_loc.x+i][bomb_loc.y].explode_blending = 255;
     }
+
+    //呼叫其他bomb.explode的時候this->bomb_loc會被改掉，不知道為什麼，所以先用其他變數存著
     bool bombup=0, bombdown=0, bombleft=0, bombright=0;
     Location locup(bomb_loc.x, bomb_loc.y-bomb_farest[UP]),
             locdown(bomb_loc.x, bomb_loc.y+bomb_farest[DOWN]),
@@ -242,4 +244,5 @@ void Bomb::changemap(){
 //    if(map[bomb_loc.x+bomb_farest[RIGHT]][bomb_loc.y].contain_bomb)
 //        bomb = map[bomb_loc.x+bomb_farest[RIGHT]][bomb_loc.y].bomb->bomb_explode(map[bomb_loc.x+bomb_farest[RIGHT]][bomb_loc.y].bomb->number, bomb);
 //    cout << "test finish " << bomb_loc.x << " " << bomb_loc.y << endl;
+
 }
