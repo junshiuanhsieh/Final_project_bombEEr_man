@@ -38,6 +38,7 @@ void PVE(){
     int rate = 10;
     bomb_num = 0;
     bool keypress[12];
+    Bomb * bomb = NULL;
     SDL_Event PVE_event;
 
     for(int i = 0; i<12; i++) keypress[i] = 0;
@@ -127,11 +128,13 @@ void PVE(){
         }
         for(int i = 0; i<bomb_num; i++){
             if(clock() - bomb[i].clk > 100000){
-                bomb = bomb[i].bomb_explode(i);
+                for(int i = 0; i<bomb_num; i++){
+                    cout << bomb[i].bomb_loc.x << " " << bomb[i].bomb_loc.y << endl;
+                }
+                bomb = bomb[i].bomb_explode(i, bomb);
                 i--;
             }
         }
-
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         PVE_background.render(NULL);
@@ -140,35 +143,9 @@ void PVE(){
                 map[i][j].render_map();
             }
         }
-        bool game_continue = 0;
-        for(int i = 0; i<Player_number; i++) {
-            if(player[i].alive==1) {
-                player[i].player_render();
-                game_continue = 1;
-            }
-        }
+        for(int i = 0; i<Player_number; i++) if(player[i].alive==1) player[i].player_render();
         PVE_Show_data();
-        SDL_RenderPresent(gRenderer);
-        if(!game_continue) break;
-    }
-    SDL_Delay(1000);
-    Texture game_over, win_lose;
-    game_over.loadFromFile("../PVE_image/game_over.png");
-    win_lose.loadFromFile("../PVE_image/win_lose");
 
-    bool win = 0;
-    SDL_Rect win_clip = {0, 0, 900, 200}, lose_clip = {0, 200, 900, 200}, win_lose_dest = {300, 500, 600, 135};
-    SDL_Event endgame;
-
-    while(!quit){
-        while(SDL_PollEvent(&endgame) != 0) {
-            if (endgame.type == SDL_QUIT) quit = true;
-        }
-        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-        SDL_RenderClear(gRenderer);
-        game_over.render(NULL);
-        if(win) win_lose.render(&win_lose_dest, &win_clip);
-        else win_lose.render(&win_lose_dest, &lose_clip);
         SDL_RenderPresent(gRenderer);
     }
 }

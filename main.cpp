@@ -16,6 +16,7 @@ SDL_Renderer* gRenderer = NULL;
 bool quit;
 int Player_number = 0, Mode = 0;
 int* character_picture = NULL;
+Bomb * bomb;
 
 void init();
 void close();

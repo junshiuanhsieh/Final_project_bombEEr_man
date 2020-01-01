@@ -124,7 +124,7 @@ void PVP(){
 
         for(int i = 0; i<bomb_num; i++){
             if(clock() - bomb[i].clk > 100000){
-                bomb = bomb[i].bomb_explode(i);
+                bomb = bomb[i].bomb_explode(i, bomb);
                 i--;
             }
         }
@@ -136,57 +136,9 @@ void PVP(){
                 map[i][j].render_map();
             }
         }
-        bool game_continue = 0;
-        for(int i = 0; i<Player_number; i++) {
-            if(player[i].alive==1) {
-                player[i].player_render();
-                game_continue = 1;
-            }
-        }
+        for(int i = 0; i<Player_number; i++) if(player[i].alive==1) player[i].player_render();
         PVP_Show_data();
-        SDL_RenderPresent(gRenderer);
-        if(!game_continue) {
-            cout << "game end" << endl;
-            break;
-        }
-
-    }
-    SDL_Delay(1000);
-    cout << "game end" << endl;
-    Texture cup, gameend_backgroung;
-    cup.loadFromFile("../PVP_image/cup.png");
-    gameend_backgroung.loadFromFile("../PVP_image/gameend_background.png");
-    SDL_Rect showrank[Player_number], cupdest[Player_number];
-    if(Player_number==2){
-        showrank[0].x = 300; showrank[0].y = 200; showrank[0].w = 200; showrank[0].h = 200;
-        showrank[1].x = 700; showrank[1].y = 200; showrank[1].w = 200; showrank[1].h = 200;
-        cupdest[0].x = 400; cupdest[0].y = 300; cupdest[0].w = 100; cupdest[0].h = 100;
-        cupdest[1].x = 800; cupdest[1].y = 300; cupdest[1].w = 100; cupdest[1].h = 100;
-    }
-    else if(Player_number==3){
-        showrank[0].x = 200; showrank[0].y = 200; showrank[0].w = 200; showrank[0].h = 200;
-        showrank[1].x = 500; showrank[1].y = 200; showrank[1].w = 200; showrank[1].h = 200;
-        showrank[2].x = 800; showrank[2].y = 200; showrank[2].w = 200; showrank[2].h = 200;
-        cupdest[0].x = 300; cupdest[0].y = 300; cupdest[0].w = 100; cupdest[0].h = 100;
-        cupdest[1].x = 600; cupdest[1].y = 300; cupdest[1].w = 100; cupdest[1].h = 100;
-        cupdest[2].x = 700; cupdest[2].y = 300; cupdest[2].w = 100; cupdest[2].h = 100;
-    }
-
-    int no1;
-    for(int i = 0; i<Player_number; i++) if(player[i].rank == 1) no1 = i;
-
-    SDL_Event endgame;
-
-    while(!quit){
-        while(SDL_PollEvent(&endgame) != 0) {
-            if (endgame.type == SDL_QUIT) quit = true;
-        }
-        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-        SDL_RenderClear(gRenderer);
-        gameend_backgroung.render(NULL);
-        for(int i = 0; i<Player_number; i++) player[i].picture.render(&showrank[i]);
-        cup.render(&cupdest[no1]);
-        SDL_RenderPresent(gRenderer);
+        SDL_RenderPresent( gRenderer );
     }
 }
 

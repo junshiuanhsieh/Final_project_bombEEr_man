@@ -17,30 +17,28 @@ class Player {
     friend void PVP_initialize();
     friend void PVE_Show_data();
     friend void PVP_Show_data();
-    public:
-        Player();
-        Player(int num);
-        bool dead();                             //call by class Bomb
-        void move(Direction, int s);
-        void determine_loc();                    //use player_point to determine player_loc
-        void finish_moving();
-        void get_item(Item *);
-        void useitem(Item *);                    //use pointer to enable polymorphism
-        Bomb* putbomb(Bomb *);
-        void player_render();
-        bool alive;
-        Item * item_owned[12];
-        bool item[12];
-        int score, bomb_distance, bomb_available, bomb_left;
-        Location player_loc;
-        static int count_rank;
-    private:
-        int player_num;
-        int rank;
-        Texture picture;
-        SDL_Point player_point;
+public:
+    Player();
+    Player(int num);
+    bool dead();                             //call by class Bomb
+    void move(Direction, int s);
+    void determine_loc();                    //use player_point to determine player_loc
+    void finish_moving();
+    void get_item(Item *);
+    void useitem(Item *);                    //use pointer to enable polymorphism
+    Bomb* putbomb(Bomb *);
+    void player_render();
+    bool alive;
+    Item * item_owned[12];
+    bool item[12];
+    int score, bomb_distance, bomb_available, bomb_left;
+    Location player_loc;
+
+private:
+    int player_num, form;
+    Texture picture;
+    SDL_Point player_point;
 };
 
 
 #endif
-

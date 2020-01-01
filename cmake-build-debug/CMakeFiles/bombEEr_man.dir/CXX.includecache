@@ -700,6 +700,14 @@ Item.h
 Bomb.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
 
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.cpp
+Player.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.h
+Bomb.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
+Map.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/Map.h
+
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Player.h
 SDL.h
 -

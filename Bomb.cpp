@@ -11,7 +11,7 @@ extern const int Total_item;
 extern Map** map;
 extern Player* player;
 extern int bomb_num;
-Bomb * bomb = NULL;
+extern Bomb * bomb;
 
 Bomb::Bomb() : clk(clock()){
     bomb_distance = 1;
@@ -51,8 +51,7 @@ int Bomb::bomb_up(){
             }
         }
         if(map[bombUp.x][bombUp.y].contain_bomb){
-            cout << map[bombUp.x][bombUp.y].bomb->number << endl;
-            bomb = map[bombUp.x][bombUp.y].bomb->bomb_explode(map[bombUp.x][bombUp.y].bomb->number);
+            bomb = map[bombUp.x][bombUp.y].bomb->bomb_explode(map[bombUp.x][bombUp.y].bomb->number, bomb);
             return i;
         }
         else if(map[bombUp.x][bombUp.y].wall) return i-1;
@@ -80,8 +79,7 @@ int Bomb::bomb_down(){
             }
         }
         if(map[bombDown.x][bombDown.y].contain_bomb){
-            cout << map[bombDown.x][bombDown.y].bomb->number << endl;
-            bomb = map[bombDown.x][bombDown.y].bomb->bomb_explode(map[bombDown.x][bombDown.y].bomb->number);
+            bomb = map[bombDown.x][bombDown.y].bomb->bomb_explode(map[bombDown.x][bombDown.y].bomb->number, bomb);
             return i;
         }
         else if(map[bombDown.x][bombDown.y].wall) return i-1;
@@ -109,8 +107,7 @@ int Bomb::bomb_left(){
             }
         }
         if(map[bombLeft.x][bombLeft.y].contain_bomb){
-            cout << map[bombLeft.x][bombLeft.y].bomb->number << endl;
-            bomb = map[bombLeft.x][bombLeft.y].bomb->bomb_explode(map[bombLeft.x][bombLeft.y].bomb->number);
+            bomb = map[bombLeft.x][bombLeft.y].bomb->bomb_explode(map[bombLeft.x][bombLeft.y].bomb->number, bomb);
             return i;
         }
         else if(map[bombLeft.x][bombLeft.y].wall) return i-1;
@@ -138,8 +135,7 @@ int Bomb::bomb_right(){
             }
         }
         if(map[bombRight.x][bombRight.y].contain_bomb){
-            cout << map[bombRight.x][bombRight.y].bomb->number << endl;
-            bomb = map[bombRight.x][bombRight.y].bomb->bomb_explode(map[bombRight.x][bombRight.y].bomb->number);
+            bomb = map[bombRight.x][bombRight.y].bomb->bomb_explode(map[bombRight.x][bombRight.y].bomb->number, bomb);
             return i;
         }
         else if(map[bombRight.x][bombRight.y].wall) return i-1;
@@ -154,16 +150,15 @@ int Bomb::bomb_right(){
     }
     return bomb_distance;
 }
-
-Bomb* Bomb::bomb_explode(int num){
-    cout << "bomb " << num << " explode" << endl;
+Bomb* Bomb::bomb_explode(int num, Bomb* _bomb){
+    bomb = _bomb;
     clk = 0;
     bomb_num--;
     Bomb* temp_bomb;
     temp_bomb= new Bomb [bomb_num];
     Bomb* temptempbomb;
     temptempbomb = bomb;
-    for(int i = 0; i<num; i++) temp_bomb[i] = bomb[i];
+    for(int i = 0; i<num; i++) temp_bomb[i] = (bomb)[i];
     for(int i = num; i<bomb_num; i++) {
         temp_bomb[i] = bomb[i+1];
         temp_bomb[i].number--;
@@ -177,6 +172,37 @@ Bomb* Bomb::bomb_explode(int num){
     changemap();
     return bomb;
 }
+//Bomb** Bomb::bomb_explode(int num, Bomb** _bomb){
+//    cout << "bomb " << num << " explode" << endl;
+//    for(int i = 0; i<bomb_num; i++){
+//        cout << (*_bomb)[i].bomb_loc.x << " " << (*_bomb)[i].bomb_loc.y << endl;
+//    }
+//    clk = 0;
+//    cout << "bomb_num = " << bomb_num << " --> ";
+//    bomb_num--;
+//    cout << bomb_num << endl;
+//    Bomb* temp_bomb;
+//    temp_bomb= new Bomb [bomb_num];
+//    Bomb* temptempbomb;
+//    temptempbomb = *_bomb;
+//    for(int i = 0; i<num; i++) temp_bomb[i] = (*_bomb)[i];
+//    for(int i = num; i<bomb_num; i++) {
+//        temp_bomb[i] = (*_bomb)[i+1];
+//        temp_bomb[i].number--;
+//    }
+//    *_bomb = temp_bomb;
+//    temp_bomb = temptempbomb;
+//    map[bomb_loc.x][bomb_loc.y].contain_bomb = 0;
+//    map[bomb_loc.x][bomb_loc.y].bomb = NULL;
+//    player[owner].bomb_left++;
+//    delete [] temp_bomb;
+//    bomb = *_bomb;
+//    for(int i = 0; i<bomb_num; i++){
+//        cout << bomb[i].bomb_loc.x << " " << bomb[i].bomb_loc.y << endl;
+//    }
+//    changemap();
+//    return _bomb;
+//}
 
 void Bomb::changemap(){
     int bomb_farest[4];
