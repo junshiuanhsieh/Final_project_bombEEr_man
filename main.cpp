@@ -534,11 +534,17 @@ void game_end(){
     }
     int no1 = -1;
     int twowinner[2] = {-1, -1};
+    bool noonewins = 0;
     for(int i = 0; i<Player_number; i++) if(player[i].rank == 1) no1 = i;
     if(no1 == -1){
-        if(player[0].rank == player[1].rank) { twowinner[0] = 0; twowinner[1] = 1;}
-        else if(player[2].rank == player[1].rank) { twowinner[0] = 1; twowinner[1] = 2;}
-        else if(player[0].rank == player[2].rank) { twowinner[0] = 0; twowinner[1] = 2;}
+        if(Player_number==2) noonewins = 1;
+        else if(Player_number==3){
+            if(player[0].rank == player[1].rank && player[2].rank == player[1].rank && player[0].rank == player[2].rank)
+                noonewins = 1;
+            else if(player[0].rank == player[1].rank) { twowinner[0] = 0; twowinner[1] = 1;}
+            else if(player[2].rank == player[1].rank) { twowinner[0] = 1; twowinner[1] = 2;}
+            else if(player[0].rank == player[2].rank) { twowinner[0] = 0; twowinner[1] = 2;}
+        }
     }
     SDL_Event endgame;
 
@@ -557,7 +563,7 @@ void game_end(){
             gameend_backgroung.render(NULL);
             for(int i = 0; i<Player_number; i++) player[i].picture.render(&showrank[i]);
             if(no1 != -1) cup.render(&cupdest[no1]);
-            else{
+            else if (!noonewins){
                 cup.render(&cupdest[twowinner[0]]);
                 cup.render(&cupdest[twowinner[1]]);
             }

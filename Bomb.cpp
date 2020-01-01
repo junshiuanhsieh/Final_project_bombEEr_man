@@ -154,8 +154,8 @@ int Bomb::bomb_right(){
     return bomb_distance;
 }
 Bomb* Bomb::bomb_explode(int num, Bomb* _bomb){
-    cout << "bomb " << num << " exploded" << endl;
-    for(int i = 0; i<bomb_num; i++) cout << _bomb[i].bomb_loc.x << " " << _bomb[i].bomb_loc.y << endl;
+    //cout << "bomb " << num << " exploded" << endl;
+    //for(int i = 0; i<bomb_num; i++) cout << _bomb[i].bomb_loc.x << " " << _bomb[i].bomb_loc.y << endl;
     bomb = _bomb;
     clk = 0;
     bomb_num--;
@@ -194,7 +194,7 @@ void Bomb::changemap(){
         bomb_farest[LEFT] = bomb_left();
         bomb_farest[RIGHT] = bomb_right();
     }
-    cout << bomb_farest[UP] << " " << bomb_farest[DOWN] << " " << bomb_farest[LEFT] << " " << bomb_farest[RIGHT] << endl;
+    //cout << bomb_farest[UP] << " " << bomb_farest[DOWN] << " " << bomb_farest[LEFT] << " " << bomb_farest[RIGHT] << endl;
     map[bomb_loc.x][bomb_loc.y].explode_blending = 255;
 
     for(int i = 1; i<=bomb_farest[UP]; i++){
