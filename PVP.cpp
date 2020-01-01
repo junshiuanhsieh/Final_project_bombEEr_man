@@ -51,7 +51,7 @@ void PVP(){
                     case SDLK_LEFT: keypress[Key_Left] = 1; break;
                     case SDLK_RIGHT: keypress[Key_Right] = 1; break;
                     case SDLK_RETURN:
-                        if(map[player[0].player_loc.x][player[0].player_loc.y].contain_bomb==0 && player[0].bomb_left>0){
+                        if(map[player[0].player_loc.x][player[0].player_loc.y].contain_bomb==0 && player[0].bomb_left>0 && player[0].alive){
                             bomb = player[0].putbomb(bomb);
                             player[0].bomb_left--;
                         }
@@ -62,7 +62,7 @@ void PVP(){
                     case SDLK_a: keypress[Key_a] = 1; break;
                     case SDLK_d: keypress[Key_d] = 1; break;
                     case SDLK_TAB:
-                        if(map[player[1].player_loc.x][player[1].player_loc.y].contain_bomb==0 && player[1].bomb_left>0){
+                        if(map[player[1].player_loc.x][player[1].player_loc.y].contain_bomb==0 && player[1].bomb_left>0 && player[1].alive){
                             bomb = player[1].putbomb(bomb);
                             player[1].bomb_left--;
                         }
@@ -74,7 +74,7 @@ void PVP(){
                     case SDLK_l: keypress[Key_l] = 1; break;
                     case SDLK_SPACE:
                         if(Player_number == 3){
-                            if(map[player[2].player_loc.x][player[2].player_loc.y].contain_bomb==0 && player[2].bomb_left>0){
+                            if(map[player[2].player_loc.x][player[2].player_loc.y].contain_bomb==0 && player[2].bomb_left>0 && player[2].alive){
                                 bomb = player[2].putbomb(bomb);
                                 player[2].bomb_left--;
                             }

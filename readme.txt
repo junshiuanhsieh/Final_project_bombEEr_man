@@ -20,8 +20,12 @@ Global Variable:
   bool quit;
   int Player_number, Mode;
   int* character_picture;
+  Bomb* bomb;
+  int bomb_num;
+  Player * player
   const int Total_item;
   Map** map;
+  Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture, explode_texture, cross_texture;
 
 Class:
   Rectbutton

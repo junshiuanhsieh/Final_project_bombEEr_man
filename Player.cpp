@@ -10,7 +10,6 @@ extern const int Total_item = 12;
 extern Map** map;
 extern int bomb_num;
 extern Bomb * bomb;
-Player* player = NULL;
 
 Player::Player(){
     alive = true;

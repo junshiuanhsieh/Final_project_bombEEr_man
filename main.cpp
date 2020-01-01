@@ -17,6 +17,7 @@ bool quit;
 int Player_number = 0, Mode = 0;
 int* character_picture = NULL;
 Bomb * bomb;
+Player* player = NULL;
 
 void init();
 void close();

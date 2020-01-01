@@ -10,7 +10,6 @@
 
 class Bomb {
     friend class Player;
-    friend void PVE();
     public:
         Bomb();
         Bomb(Location, int distance, int player_num, int _number);
@@ -22,7 +21,7 @@ class Bomb {
         int bomb_down();
         Bomb* bomb_explode(int, Bomb*);  //player放置bomb後經過一段時間後爆炸
         void changemap();
-        clock_t clk, explode_clk;
+        clock_t clk;
         int number;
     private:
         Location bomb_loc;  //player來設定
