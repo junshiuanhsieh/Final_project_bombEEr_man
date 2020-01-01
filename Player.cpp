@@ -41,7 +41,6 @@ bool Player::dead(){
     alive = false;
     for(int i = 0; i<Total_item; i++) item_owned[i] = 0;
     rank = count_rank;
-    count_rank--;
 }
 void Player::move(Direction dir, int s){
     if(dir == UP) {

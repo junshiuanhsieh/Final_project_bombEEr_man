@@ -42,5 +42,4 @@ private:
     SDL_Point player_point;
 };
 
-
 #endif

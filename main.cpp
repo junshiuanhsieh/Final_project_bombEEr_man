@@ -28,7 +28,7 @@ void Scrolling();
 void Choosecharacter();
 void Tutorial_start();
 void Tutorial();
-void game_end();
+void game_end(); 
 
 int main(int argc, char* args[]){
     init();
@@ -219,7 +219,7 @@ void Scrolling(){
     TextTexture2.loadFromFile("../start_image/scrolling_PVP.png");
     SDL_RenderPresent( gRenderer );
 
-    SDL_Rect rcText[4], back_dest = {100, 600, 200, 100}, next_dest = {900, 600, 200, 100};
+    SDL_Rect rcText[4], back_dest = {100, 640, 200, 100}, next_dest = {900, 640, 200, 100};
     RectButton backto_number(back_dest), next_button(next_dest);
     backto_number.buttontexture.loadFromFile("../start_image/back.png");
     next_button.buttontexture.loadFromFile("../start_image/next.png");
@@ -530,10 +530,16 @@ void game_end(){
         showrank[2].x = 800; showrank[2].y = 200; showrank[2].w = 200; showrank[2].h = 200;
         cupdest[0].x = 300; cupdest[0].y = 300; cupdest[0].w = 100; cupdest[0].h = 100;
         cupdest[1].x = 600; cupdest[1].y = 300; cupdest[1].w = 100; cupdest[1].h = 100;
-        cupdest[2].x = 700; cupdest[2].y = 300; cupdest[2].w = 100; cupdest[2].h = 100;
+        cupdest[2].x = 900; cupdest[2].y = 300; cupdest[2].w = 100; cupdest[2].h = 100;
     }
-    int no1;
+    int no1 = -1;
+    int twowinner[2] = {-1, -1};
     for(int i = 0; i<Player_number; i++) if(player[i].rank == 1) no1 = i;
+    if(no1 == -1){
+        if(player[0].rank == player[1].rank) { twowinner[0] = 0; twowinner[1] = 1;}
+        else if(player[2].rank == player[1].rank) { twowinner[0] = 1; twowinner[1] = 2;}
+        else if(player[0].rank == player[2].rank) { twowinner[0] = 0; twowinner[1] = 2;}
+    }
     SDL_Event endgame;
 
     while(!quit){
@@ -550,7 +556,11 @@ void game_end(){
         else if(Mode==2){
             gameend_backgroung.render(NULL);
             for(int i = 0; i<Player_number; i++) player[i].picture.render(&showrank[i]);
-            cup.render(&cupdest[no1]);
+            if(no1 != -1) cup.render(&cupdest[no1]);
+            else{
+                cup.render(&cupdest[twowinner[0]]);
+                cup.render(&cupdest[twowinner[1]]);
+            }
         }
         SDL_RenderPresent(gRenderer);
     }

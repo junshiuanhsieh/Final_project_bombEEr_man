@@ -144,9 +144,10 @@ void PVP(){
                 player_left++;
             }
         }
+        player[0].count_rank = player_left;
         PVP_Show_data();
         SDL_RenderPresent(gRenderer);
-        if(player_left==1) {
+        if(player_left<=1) {
             SDL_Delay(1000);
             break;
         }

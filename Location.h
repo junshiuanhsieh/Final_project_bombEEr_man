@@ -7,6 +7,4 @@ public:
     Location();
     Location(int, int);
 };
-
-
 #endif //BOMBEER_MAN_LOCATION_H
