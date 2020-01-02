@@ -16,7 +16,7 @@ SDL_Renderer* gRenderer = NULL;
 bool quit;
 int Player_number = 0, Mode = 0;
 int* character_picture = NULL;
-Bomb ** bomb;
+Bomb * bomb;
 Player* player = NULL;
 
 void init();
@@ -525,8 +525,8 @@ int quit_restart_home(){
 
     bool win = 0;
     SDL_Rect win_clip = {0, 0, 900, 200}, lose_clip = {0, 200, 900, 200}, win_lose_dest = {300, 500, 600, 135};
-    SDL_Rect home_dest = {250, 500, 100, 100}, restart_dest = {550, 500, 100, 100}, quit_dest = {850, 500, 100, 100};
-    SDL_Point home_cen = {300, 550}, restart_cen = {600, 550}, quit_cen = {900, 550};
+    SDL_Rect home_dest = {250, 550, 100, 100}, restart_dest = {550, 550, 100, 100}, quit_dest = {850, 550, 100, 100};
+    SDL_Point home_cen = {300, 600}, restart_cen = {600, 600}, quit_cen = {900, 600};
     SDL_Rect showrank[Player_number], cupdest[Player_number];
     if(Player_number==2){
         showrank[0].x = 300; showrank[0].y = 200; showrank[0].w = 200; showrank[0].h = 200;
@@ -587,7 +587,9 @@ int quit_restart_home(){
         }
         else if(Mode==2){
             gameend_backgroung.render(NULL);
-            for(int i = 0; i<Player_number; i++) player[i].picture.render(&showrank[i]);
+            for(int i = 0; i<Player_number; i++) {
+                player[i].picture.render(&showrank[i]);
+            }
             if(no1 != -1) cup.render(&cupdest[no1]);
             else if (!noonewins){
                 cup.render(&cupdest[twowinner[0]]);
@@ -610,6 +612,7 @@ int quit_restart_home(){
         if(quit_button.CurrentSprite==BUTTON_SPRITE_MOUSE_UP) return 3;
 
     }
+    delete [] player;
     return 0;
 }
 

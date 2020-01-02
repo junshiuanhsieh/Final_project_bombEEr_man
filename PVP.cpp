@@ -12,7 +12,7 @@ extern int* character_picture;
 extern const int Total_item;
 extern Player* player;
 extern Map** map;
-extern Bomb ** bomb;
+extern Bomb * bomb;
 extern Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture, explode_texture, cross_texture;
 extern int bomb_num;
 Texture PVP_background;
@@ -56,7 +56,8 @@ void PVP(){
                     case SDLK_RIGHT: keypress[Key_Right] = 1; break;
                     case SDLK_RETURN:
                         if(map[player[0].player_loc.x][player[0].player_loc.y].contain_bomb==0 && player[0].bomb_left>0 && player[0].alive){
-                            bomb = player[0].putbomb(bomb);
+                            //Bomb** _bomb;
+                            bomb = *player[0].putbomb(&bomb);
                             player[0].bomb_left--;
                         }
                         break;
@@ -67,7 +68,7 @@ void PVP(){
                     case SDLK_d: keypress[Key_d] = 1; break;
                     case SDLK_TAB:
                         if(map[player[1].player_loc.x][player[1].player_loc.y].contain_bomb==0 && player[1].bomb_left>0 && player[1].alive){
-                            bomb = player[1].putbomb(bomb);
+                            bomb = *player[1].putbomb(&bomb);
                             player[1].bomb_left--;
                         }
                         break;
@@ -79,7 +80,7 @@ void PVP(){
                     case SDLK_SPACE:
                         if(Player_number == 3){
                             if(map[player[2].player_loc.x][player[2].player_loc.y].contain_bomb==0 && player[2].bomb_left>0 && player[2].alive){
-                                bomb = player[2].putbomb(bomb);
+                                bomb = *player[2].putbomb(&bomb);
                                 player[2].bomb_left--;
                             }
                             break;
@@ -127,8 +128,9 @@ void PVP(){
         }
 
         for(int i = 0; i<bomb_num; i++){
-            if(clock() - bomb[i]->clk > 100000){
-                bomb = bomb[i]->bomb_explode(i, bomb);
+            if(clock() - bomb[i].clk > 100000){
+                //for(int i = 0; i<bomb_num; i++) cout << "before bomb " << bomb[i].bomb_loc.x << " " << bomb[i].bomb_loc.y << "  owner= " << bomb[i].owner << endl;
+                bomb = *bomb[i].bomb_explode(i, &bomb);
                 i--;
             }
         }
@@ -155,7 +157,6 @@ void PVP(){
             break;
         }
     }
-    delete [] player;
     delete [] bomb;
     for(int i = 0; i<16; i++) delete [] map[i];
     delete [] map;

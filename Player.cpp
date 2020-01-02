@@ -10,7 +10,7 @@ extern const int Total_item = 12;
 extern Map** map;
 extern int bomb_num;
 extern int Player_number;
-extern Bomb ** bomb;
+extern Bomb * bomb;
 
 Player::Player(){
     alive = true;
@@ -168,28 +168,29 @@ void Player::finish_moving(){
     player_point.x = 50 + player_loc.x*60;
     player_point.y = 105 + player_loc.y*60;
 }
-Bomb** Player::putbomb(Bomb ** bomb){
+Bomb** Player::putbomb(Bomb ** _bomb){
+    cout << "player " << player_num << " put bomb " << bomb_num << endl;
     bomb_num++;
     Bomb newbomb(player_loc,bomb_distance, player_num, bomb_num-1);
-    if(bomb == NULL){
-        //cout << "first bomb" << endl;
-        bomb = new Bomb* ();
-        bomb[0] = &newbomb;
-        cout << "first bomb" << bomb[0]->number << endl;
+    if(*_bomb == NULL){
+        *_bomb = new Bomb ();
+        (*_bomb)[0] = newbomb;
+        //cout << "first bomb" << (*_bomb)[0].number << endl;
     }
     else {
-        Bomb** temp_bomb = NULL;
-        temp_bomb= new Bomb* [bomb_num];
-        Bomb** temptempbomb;
-        temptempbomb = bomb;
-        for(int i = 0; i<bomb_num-1; i++) temp_bomb[i] = bomb[i];
-        temp_bomb[bomb_num-1] = &newbomb;
-        bomb = temp_bomb;
-        map[player_loc.x][player_loc.y].contain_bomb = 1;
-        map[player_loc.x][player_loc.y].bomb = bomb[bomb_num-1];
-        delete [] temptempbomb;
+        Bomb * newbombpointer = NULL,  * temppointer = NULL;
+        temppointer = *_bomb;
+        newbombpointer = new Bomb [bomb_num];
+        for(int i = 0; i<bomb_num-1; i++) newbombpointer[i] = (*_bomb)[i];
+        newbombpointer[bomb_num-1] = newbomb;
+        *_bomb = newbombpointer;
+        delete [] temppointer;
     }
-    return bomb;
+    map[player_loc.x][player_loc.y].contain_bomb = 1;
+    map[player_loc.x][player_loc.y].bomb = _bomb[bomb_num-1];
+    //for(int i = 0; i<bomb_num; i++) cout << "put bomb " << (*_bomb)[i].bomb_loc.x << " " << (*_bomb)[i].bomb_loc.y << "  owner= " << (*_bomb)[i].owner << endl;
+    bomb = *_bomb;
+    return _bomb;
 }
 void Player::get_item(Item * item_get){
     item[item_get->item_num] = 1 ;

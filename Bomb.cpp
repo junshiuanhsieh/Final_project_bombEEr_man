@@ -11,7 +11,7 @@ extern const int Total_item;
 extern Map** map;
 extern Player* player;
 extern int bomb_num;
-extern Bomb ** bomb;  //一開始不知道為什麼會是NULL，沒有跟其他cpp檔連結，小心使用，有時間的話網路上說用用看singleton
+extern Bomb * bomb;  //一開始不知道為什麼會是NULL，沒有跟其他cpp檔連結，小心使用，有時間的話網路上說用用看singleton
 
 Bomb::Bomb() : clk(clock()){
     bomb_distance = 1;
@@ -165,24 +165,35 @@ int Bomb::bomb_right(){
     return bomb_distance;
 }
 Bomb** Bomb::bomb_explode(int num, Bomb** _bomb){
-    //cout << "bomb " << num << " exploded" << endl;
-    //for(int i = 0; i<bomb_num; i++) cout << _bomb[i].bomb_loc.x << " " << _bomb[i].bomb_loc.y << endl;
-    bomb_num--;
-    if(bomb_num != 0){
-        clk = 0;
-        Bomb* temptempbomb;
-        temptempbomb = bomb[num];
-        _bomb[num] = _bomb[bomb_num];
-        _bomb[bomb_num] = temptempbomb;
-    }
+    player[owner].bomb_left++;
+    clk = 0;
+    cout << "bomb " << num << " exploded" << endl;
+    for(int i = 0; i<bomb_num; i++) cout << "before  " << (*_bomb)[i].bomb_loc.x << " " << (*_bomb)[i].bomb_loc.y << "  owner= " << (*_bomb)[i].owner << "  number= " << (*_bomb)[i].number << endl;
     map[bomb_loc.x][bomb_loc.y].contain_bomb = 0;
     map[bomb_loc.x][bomb_loc.y].bomb = NULL;
-    cout << this->owner << endl;
-    player[this->owner].bomb_left++;
-    changemap();
+    bomb_num--;
+    Bomb * newpointerbomb = NULL;
+    newpointerbomb = new Bomb [bomb_num];
+    for(int i = 0; i<num; i++) newpointerbomb[i] = (*_bomb)[i];
+    for(int i = num; i<bomb_num; i++) {
+        newpointerbomb[i] = (*_bomb)[i+1];
+        newpointerbomb[i].number--;
+    }
+    for(int i = 0; i<bomb_num; i++) cout << "after  " << newpointerbomb[i].bomb_loc.x << " " << newpointerbomb[i].bomb_loc.y << "  owner= " << newpointerbomb[i].owner << "  number= " << newpointerbomb[i].number << endl;
+
+    newpointerbomb = *changemap(&newpointerbomb);
+    for(int i = 0; i<bomb_num; i++) cout << "after change " << newpointerbomb[i].bomb_loc.x << " " << newpointerbomb[i].bomb_loc.y << "  owner= " << newpointerbomb[i].owner << "  number= " << newpointerbomb[i].number << endl;
+
+    cout << "bomb_num" << bomb_num << endl;
+    if(bomb_num==0) newpointerbomb = NULL;
+    Bomb * temppointer;
+    temppointer = *_bomb;
+    *_bomb = newpointerbomb;
+    bomb = *_bomb;
+    //delete [] temppointer;   //不知道為什麼不能用
     return _bomb;
 }
-void Bomb::changemap(){
+Bomb** Bomb::changemap(Bomb** newpointerbomb){
     int bomb_farest[4];
     bool bomb_on_character = 0;
     for(int i = 0; i<Player_number; i++){
@@ -203,7 +214,7 @@ void Bomb::changemap(){
         bomb_farest[LEFT] = bomb_left();
         bomb_farest[RIGHT] = bomb_right();
     }
-    //cout << bomb_farest[UP] << " " << bomb_farest[DOWN] << " " << bomb_farest[LEFT] << " " << bomb_farest[RIGHT] << endl;
+    cout << bomb_farest[UP] << " " << bomb_farest[DOWN] << " " << bomb_farest[LEFT] << " " << bomb_farest[RIGHT] << endl;
     map[bomb_loc.x][bomb_loc.y].explode_blending = 255;
 
     for(int i = 1; i<=bomb_farest[UP]; i++){
@@ -219,39 +230,30 @@ void Bomb::changemap(){
         map[bomb_loc.x+i][bomb_loc.y].explode_blending = 255;
     }
 
-    //呼叫其他bomb.explode的時候this->bomb_loc會被改掉，不知道為什麼，所以先用其他變數存著
     bool bombup=0, bombdown=0, bombleft=0, bombright=0;
     Location locup(bomb_loc.x, bomb_loc.y-bomb_farest[UP]),
             locdown(bomb_loc.x, bomb_loc.y+bomb_farest[DOWN]),
             locleft(bomb_loc.x-bomb_farest[LEFT], bomb_loc.y),
             locright(bomb_loc.x+bomb_farest[RIGHT], bomb_loc.y);
 
-    if(map[bomb_loc.x][bomb_loc.y-bomb_farest[UP]].contain_bomb) bombup = 1;
-    if(map[bomb_loc.x][bomb_loc.y+bomb_farest[DOWN]].contain_bomb) bombdown = 1;
-    if(map[bomb_loc.x-bomb_farest[LEFT]][bomb_loc.y].contain_bomb) bombleft = 1;
-    if(map[bomb_loc.x+bomb_farest[RIGHT]][bomb_loc.y].contain_bomb) bombright = 1;
+    if(map[bomb_loc.x][bomb_loc.y-bomb_farest[UP]].contain_bomb) {bombup = 1; cout << "up" << endl;}
+    if(map[bomb_loc.x][bomb_loc.y+bomb_farest[DOWN]].contain_bomb) {bombdown = 1; cout << "down" << endl;}
+    if(map[bomb_loc.x-bomb_farest[LEFT]][bomb_loc.y].contain_bomb) {bombleft = 1; cout << "left" << endl;}
+    if(map[bomb_loc.x+bomb_farest[RIGHT]][bomb_loc.y].contain_bomb) {bombright = 1; cout << "right" << endl;}
 
-    if(bombup)
-        bomb = map[locup.x][locup.y].bomb->bomb_explode(map[locup.x][locup.y].bomb->number, bomb);
-    if(bombdown)
-        bomb = map[locdown.x][locdown.y].bomb->bomb_explode(map[locdown.x][locdown.y].bomb->number, bomb);
-    if(bombleft)
-        bomb = map[locleft.x][locleft.y].bomb->bomb_explode(map[locleft.x][locleft.y].bomb->number, bomb);
-    if(bombright)
-        bomb = map[locright.x][locright.y].bomb->bomb_explode(map[locright.x][locright.y].bomb->number, bomb);
 
-//    cout << "test up " << bomb_farest[UP] << " " << bomb_loc.x << " " << bomb_loc.y << endl;
-//    if(map[bomb_loc.x][bomb_loc.y-bomb_farest[UP]].contain_bomb)
-//        bomb = map[bomb_loc.x][bomb_loc.y-bomb_farest[UP]].bomb->bomb_explode(map[bomb_loc.x][bomb_loc.y-bomb_farest[UP]].bomb->number, bomb);
-//    cout << "test down " << bomb_farest[DOWN] << " " << bomb_loc.x << " " << bomb_loc.y << endl;
-//    if(map[bomb_loc.x][bomb_loc.y+bomb_farest[DOWN]].contain_bomb)
-//        bomb = map[bomb_loc.x][bomb_loc.y+bomb_farest[DOWN]].bomb->bomb_explode(map[bomb_loc.x][bomb_loc.y+bomb_farest[DOWN]].bomb->number, bomb);
-//    cout << "test left " << bomb_farest[LEFT] << " " << bomb_loc.x << " " << bomb_loc.y << endl;
-//    if(map[bomb_loc.x-bomb_farest[LEFT]][bomb_loc.y].contain_bomb)
-//        bomb = map[bomb_loc.x-bomb_farest[LEFT]][bomb_loc.y].bomb->bomb_explode(map[bomb_loc.x-bomb_farest[LEFT]][bomb_loc.y].bomb->number, bomb);
-//    cout << "test right " << bomb_farest[RIGHT] << " " << bomb_loc.x << " " << bomb_loc.y << endl;
-//    if(map[bomb_loc.x+bomb_farest[RIGHT]][bomb_loc.y].contain_bomb)
-//        bomb = map[bomb_loc.x+bomb_farest[RIGHT]][bomb_loc.y].bomb->bomb_explode(map[bomb_loc.x+bomb_farest[RIGHT]][bomb_loc.y].bomb->number, bomb);
-//    cout << "test finish " << bomb_loc.x << " " << bomb_loc.y << endl;
+    if(bombup && map[locup.x][locup.y].contain_bomb)
+        *newpointerbomb = *map[locup.x][locup.y].bomb->bomb_explode(map[locup.x][locup.y].bomb->number, newpointerbomb);
+    if(bombdown && map[locdown.x][locdown.y].contain_bomb)
+        *newpointerbomb = *map[locdown.x][locdown.y].bomb->bomb_explode(map[locdown.x][locdown.y].bomb->number, newpointerbomb);
+    if(bombleft && map[locleft.x][locleft.y].contain_bomb)
+        *newpointerbomb = *map[locleft.x][locleft.y].bomb->bomb_explode(map[locleft.x][locleft.y].bomb->number, newpointerbomb);
+    if(bombright && map[locright.x][locright.y].contain_bomb)
+        *newpointerbomb = *map[locright.x][locright.y].bomb->bomb_explode(map[locright.x][locright.y].bomb->number, newpointerbomb);
 
+    for(int i = 0; i<bomb_num; i++) cout << (*newpointerbomb)[i].bomb_loc.x << " " << (*newpointerbomb)[i].bomb_loc.y << "  owner= " << (*newpointerbomb)[i].owner << "  number= " << (*newpointerbomb)[i].number << endl;
+
+    bomb = *newpointerbomb;
+
+    return newpointerbomb;
 }
