@@ -19,7 +19,7 @@ class Bomb {
         int bomb_left();
         int bomb_up();
         int bomb_down();
-        Bomb* bomb_explode(int, Bomb*);  //player放置bomb後經過一段時間後爆炸
+        Bomb** bomb_explode(int, Bomb**);  //player放置bomb後經過一段時間後爆炸
         void changemap();
         clock_t clk;
         int number;

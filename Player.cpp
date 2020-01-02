@@ -10,7 +10,7 @@ extern const int Total_item = 12;
 extern Map** map;
 extern int bomb_num;
 extern int Player_number;
-extern Bomb * bomb;
+extern Bomb ** bomb;
 
 Player::Player(){
     alive = true;
@@ -168,21 +168,27 @@ void Player::finish_moving(){
     player_point.x = 50 + player_loc.x*60;
     player_point.y = 105 + player_loc.y*60;
 }
-Bomb* Player::putbomb(Bomb * bomb){
+Bomb** Player::putbomb(Bomb ** bomb){
     bomb_num++;
-    Bomb* temp_bomb;
-    temp_bomb= new Bomb [bomb_num];
-    Bomb* temptempbomb;
-    temptempbomb = bomb;
-    for(int i = 0; i<bomb_num-1; i++) temp_bomb[i] = bomb[i];
     Bomb newbomb(player_loc,bomb_distance, player_num, bomb_num-1);
-    temp_bomb[bomb_num-1] = newbomb;
-    bomb = temp_bomb;
-    map[player_loc.x][player_loc.y].bomb = &bomb[bomb_num-1];
-    temp_bomb = temptempbomb;
-    map[player_loc.x][player_loc.y].contain_bomb = 1;
-    map[player_loc.x][player_loc.y].bomb = & bomb[bomb_num-1];
-    delete [] temp_bomb;
+    if(bomb == NULL){
+        //cout << "first bomb" << endl;
+        bomb = new Bomb* ();
+        bomb[0] = &newbomb;
+        cout << "first bomb" << bomb[0]->number << endl;
+    }
+    else {
+        Bomb** temp_bomb = NULL;
+        temp_bomb= new Bomb* [bomb_num];
+        Bomb** temptempbomb;
+        temptempbomb = bomb;
+        for(int i = 0; i<bomb_num-1; i++) temp_bomb[i] = bomb[i];
+        temp_bomb[bomb_num-1] = &newbomb;
+        bomb = temp_bomb;
+        map[player_loc.x][player_loc.y].contain_bomb = 1;
+        map[player_loc.x][player_loc.y].bomb = bomb[bomb_num-1];
+        delete [] temptempbomb;
+    }
     return bomb;
 }
 void Player::get_item(Item * item_get){

@@ -12,12 +12,15 @@ extern int* character_picture;
 extern const int Total_item;
 extern Player* player;
 extern Map** map;
+extern Bomb ** bomb;
 extern Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture, explode_texture, cross_texture;
 extern int bomb_num;
 Texture PVP_background;
 
 
 void PVP(){
+    player = NULL;
+    map = NULL;
     player = new Player[Player_number];
     for(int i = 0; i<Player_number; i++) player[i] = Player(i);
     player[0].count_rank = Player_number;
@@ -38,7 +41,7 @@ void PVP(){
     //int rate = 8;
     bomb_num = 0;
     bool keypress[12];
-    Bomb * bomb = NULL;
+    bomb = NULL;
     SDL_Event PVP_event;
 
     for(int i = 0; i<12; i++) keypress[i] = 0;
@@ -124,8 +127,8 @@ void PVP(){
         }
 
         for(int i = 0; i<bomb_num; i++){
-            if(clock() - bomb[i].clk > 100000){
-                bomb = bomb[i].bomb_explode(i, bomb);
+            if(clock() - bomb[i]->clk > 100000){
+                bomb = bomb[i]->bomb_explode(i, bomb);
                 i--;
             }
         }
@@ -152,6 +155,10 @@ void PVP(){
             break;
         }
     }
+    delete [] player;
+    delete [] bomb;
+    for(int i = 0; i<16; i++) delete [] map[i];
+    delete [] map;
 }
 
 void PVP_initialize(){

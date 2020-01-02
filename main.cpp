@@ -16,7 +16,7 @@ SDL_Renderer* gRenderer = NULL;
 bool quit;
 int Player_number = 0, Mode = 0;
 int* character_picture = NULL;
-Bomb * bomb;
+Bomb ** bomb;
 Player* player = NULL;
 
 void init();
@@ -33,16 +33,27 @@ int quit_restart_home();
 int main(int argc, char* args[]){
     init();
     quit = false;
-    Start();
-    if(quit) return 0;
-    Choosemode();
-    if(quit) return 0;
-    if(Mode == 1) PVE();
-    else if(Mode == 2) PVP();
+    int endmode = 1;
+    while(endmode==1){
+        Start();
+        if(quit) return 0;
 
-    for(int i = 0; i<Player_number; i++) cout << "player " << i << " rank " << player[i].rank << " " << endl;
-    int endmode;
-    endmode = quit_restart_home();
+        Choosemode();
+        if(quit) return 0;
+
+        endmode = 2;
+        while(endmode==2){
+            if(Mode == 1) PVE();
+            else if(Mode == 2) PVP();
+
+            for(int i = 0; i<Player_number; i++) cout << "player " << i << " rank " << player[i].rank << " " << endl;
+
+            endmode = quit_restart_home();
+
+            if(endmode == 3) break;
+        }
+        if(endmode == 3) break;
+    }
     close();
     return 0;
 }
@@ -514,7 +525,8 @@ int quit_restart_home(){
 
     bool win = 0;
     SDL_Rect win_clip = {0, 0, 900, 200}, lose_clip = {0, 200, 900, 200}, win_lose_dest = {300, 500, 600, 135};
-
+    SDL_Rect home_dest = {250, 500, 100, 100}, restart_dest = {550, 500, 100, 100}, quit_dest = {850, 500, 100, 100};
+    SDL_Point home_cen = {300, 550}, restart_cen = {600, 550}, quit_cen = {900, 550};
     SDL_Rect showrank[Player_number], cupdest[Player_number];
     if(Player_number==2){
         showrank[0].x = 300; showrank[0].y = 200; showrank[0].w = 200; showrank[0].h = 200;
@@ -530,16 +542,22 @@ int quit_restart_home(){
         cupdest[1].x = 600; cupdest[1].y = 300; cupdest[1].w = 100; cupdest[1].h = 100;
         cupdest[2].x = 900; cupdest[2].y = 300; cupdest[2].w = 100; cupdest[2].h = 100;
     }
+    home_button = CircleButton(home_dest, home_cen, 50);
+    restart_button = CircleButton(restart_dest, restart_cen, 50);
+    quit_button = CircleButton(quit_dest, quit_cen, 50);
 
     game_over.loadFromFile("../PVE_image/game_over.png");
     win_lose.loadFromFile("../PVE_image/win_lose.png");
     cup.loadFromFile("../PVP_image/cup.png");
     gameend_backgroung.loadFromFile("../PVP_image/gameend_background.png");
-
+    home_button.buttontexture.loadFromFile("../button_image/home.png");
+    restart_button.buttontexture.loadFromFile("../button_image/restart.png");
+    quit_button.buttontexture.loadFromFile("../button_image/quit.png");
 
     int no1 = -1;
     int twowinner[2] = {-1, -1};
     bool noonewins = 0;
+
     for(int i = 0; i<Player_number; i++) if(player[i].rank == 1) no1 = i;
     if(no1 == -1){
         if(Player_number==2) noonewins = 1;
@@ -556,6 +574,9 @@ int quit_restart_home(){
     while(!quit){
         while(SDL_PollEvent(&endgame) != 0) {
             if (endgame.type == SDL_QUIT) quit = true;
+            home_button.handleEvent(&endgame);
+            restart_button.handleEvent(&endgame);
+            quit_button.handleEvent(&endgame);
         }
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
@@ -573,7 +594,21 @@ int quit_restart_home(){
                 cup.render(&cupdest[twowinner[1]]);
             }
         }
+
+        bool home_big = 1, restart_big = 1, quit_big = 1;
+        if(home_button.CurrentSprite==BUTTON_SPRITE_MOUSE_OUT) home_big = 0;
+        if(restart_button.CurrentSprite==BUTTON_SPRITE_MOUSE_OUT) restart_big = 0;
+        if(quit_button.CurrentSprite==BUTTON_SPRITE_MOUSE_OUT) quit_big = 0;
+        home_button.circlerender(home_big);
+        restart_button.circlerender(restart_big);
+        quit_button.circlerender(quit_big);
+
         SDL_RenderPresent(gRenderer);
+
+        if(home_button.CurrentSprite==BUTTON_SPRITE_MOUSE_UP) return 1;
+        if(restart_button.CurrentSprite==BUTTON_SPRITE_MOUSE_UP) return 2;
+        if(quit_button.CurrentSprite==BUTTON_SPRITE_MOUSE_UP) return 3;
+
     }
     return 0;
 }

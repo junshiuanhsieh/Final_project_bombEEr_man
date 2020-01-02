@@ -11,7 +11,7 @@ extern const int Total_item;
 extern Map** map;
 extern Player* player;
 extern int bomb_num;
-extern Bomb * bomb;  //一開始不知道為什麼會是NULL，沒有跟其他cpp檔連結，小心使用，有時間的話網路上說用用看singleton
+extern Bomb ** bomb;  //一開始不知道為什麼會是NULL，沒有跟其他cpp檔連結，小心使用，有時間的話網路上說用用看singleton
 
 Bomb::Bomb() : clk(clock()){
     bomb_distance = 1;
@@ -36,7 +36,6 @@ Bomb Bomb::operator=(const Bomb & copy){
     number = copy.number;
     map[bomb_loc.x][bomb_loc.y].bomb = this;
 }
-
 int Bomb::bomb_up(){
     Location bombUp = bomb_loc;
     for(int i = 1; i<=bomb_distance; i++){
@@ -165,29 +164,23 @@ int Bomb::bomb_right(){
     }
     return bomb_distance;
 }
-Bomb* Bomb::bomb_explode(int num, Bomb* _bomb){
+Bomb** Bomb::bomb_explode(int num, Bomb** _bomb){
     //cout << "bomb " << num << " exploded" << endl;
     //for(int i = 0; i<bomb_num; i++) cout << _bomb[i].bomb_loc.x << " " << _bomb[i].bomb_loc.y << endl;
-    bomb = _bomb;
-    clk = 0;
     bomb_num--;
-    Bomb* temp_bomb;
-    temp_bomb= new Bomb [bomb_num];
-    Bomb* temptempbomb;
-    temptempbomb = bomb;
-    for(int i = 0; i<num; i++) temp_bomb[i] = (bomb)[i];
-    for(int i = num; i<bomb_num; i++) {
-        temp_bomb[i] = bomb[i+1];
-        temp_bomb[i].number--;
+    if(bomb_num != 0){
+        clk = 0;
+        Bomb* temptempbomb;
+        temptempbomb = bomb[num];
+        _bomb[num] = _bomb[bomb_num];
+        _bomb[bomb_num] = temptempbomb;
     }
-    bomb = temp_bomb;
-    temp_bomb = temptempbomb;
     map[bomb_loc.x][bomb_loc.y].contain_bomb = 0;
     map[bomb_loc.x][bomb_loc.y].bomb = NULL;
-    player[owner].bomb_left++;
-    delete [] temp_bomb;
+    cout << this->owner << endl;
+    player[this->owner].bomb_left++;
     changemap();
-    return bomb;
+    return _bomb;
 }
 void Bomb::changemap(){
     int bomb_farest[4];
