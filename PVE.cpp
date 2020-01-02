@@ -176,9 +176,9 @@ void PVE_initialize(){
     item_texture[1].loadFromFile("../item_image/item1.png");
     item_texture[2].loadFromFile("../item_image/item2.png");
     item_texture[3].loadFromFile("../item_image/item3.png");
-    item_texture[4].loadFromFile("../item_image/item4.png");
+    item_texture[4].loadFromFile("../item_image/item4_PVE.png");
     item_texture[5].loadFromFile("../item_image/item5.png");
-    item_texture[11].loadFromFile("../item_image/item11.png");
+    item_texture[11].loadFromFile("../item_image/item11_PVE.png");
 
 
     for(int i = 0; i<Player_number; i++){

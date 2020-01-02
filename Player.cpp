@@ -105,7 +105,6 @@ void Player::move(Direction dir){
     }
     else if(dir == LEFT){
         if(player_point.x >= 50+rate) {
-
             if(map[player_loc.x][player_loc.y].contain_item ==1 ){
                 get_item(map[player_loc.x][player_loc.y].item);
                 map[player_loc.x][player_loc.y].item_taken(this->player_num);
@@ -131,7 +130,6 @@ void Player::move(Direction dir){
     }
     else if(dir == RIGHT){
         if(player_point.x <= 950-rate) {
-
             if(map[player_loc.x][player_loc.y].contain_item ==1 ){
                 get_item(map[player_loc.x][player_loc.y].item);
                 map[player_loc.x][player_loc.y].item_taken(this->player_num);
@@ -205,7 +203,7 @@ void Player::get_item(Item * item_get){
     }
         //爆炸威力加到最大
     else if(item_get->item_num == 2){
-        this->bomb_distance = 9;
+        this->bomb_distance = 15;
     }
         //走路速度變快
     else if(item_get->item_num == 3){
