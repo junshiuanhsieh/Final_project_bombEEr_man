@@ -28,7 +28,7 @@ void Scrolling();
 void Choosecharacter();
 void Tutorial_start();
 void Tutorial();
-void game_end();
+int quit_restart_home();
 
 int main(int argc, char* args[]){
     init();
@@ -41,7 +41,8 @@ int main(int argc, char* args[]){
     else if(Mode == 2) PVP();
 
     for(int i = 0; i<Player_number; i++) cout << "player " << i << " rank " << player[i].rank << " " << endl;
-    game_end();
+    int endmode;
+    endmode = quit_restart_home();
     close();
     return 0;
 }
@@ -507,12 +508,9 @@ void Tutorial(){
         }
     }
 }
-void game_end(){
+int quit_restart_home(){
     Texture game_over, win_lose, cup, gameend_backgroung;
-    game_over.loadFromFile("../PVE_image/game_over.png");
-    win_lose.loadFromFile("../PVE_image/win_lose.png");
-    cup.loadFromFile("../PVP_image/cup.png");
-    gameend_backgroung.loadFromFile("../PVP_image/gameend_background.png");
+    CircleButton home_button, restart_button, quit_button;
 
     bool win = 0;
     SDL_Rect win_clip = {0, 0, 900, 200}, lose_clip = {0, 200, 900, 200}, win_lose_dest = {300, 500, 600, 135};
@@ -532,6 +530,13 @@ void game_end(){
         cupdest[1].x = 600; cupdest[1].y = 300; cupdest[1].w = 100; cupdest[1].h = 100;
         cupdest[2].x = 900; cupdest[2].y = 300; cupdest[2].w = 100; cupdest[2].h = 100;
     }
+
+    game_over.loadFromFile("../PVE_image/game_over.png");
+    win_lose.loadFromFile("../PVE_image/win_lose.png");
+    cup.loadFromFile("../PVP_image/cup.png");
+    gameend_backgroung.loadFromFile("../PVP_image/gameend_background.png");
+
+
     int no1 = -1;
     int twowinner[2] = {-1, -1};
     bool noonewins = 0;
@@ -570,6 +575,7 @@ void game_end(){
         }
         SDL_RenderPresent(gRenderer);
     }
+    return 0;
 }
 
 

@@ -47,3 +47,12 @@ cpp file:
   Bomb.cpp
   Item.cpp
   Player.cpp
+
+item function:
+  0增加炸彈數
+  1增加爆炸範圍(一倍)
+  2爆炸威力達到最大
+  3增加走路速度
+  4慢速惡魔
+  5逆向惡魔
+  11免死金牌一次
