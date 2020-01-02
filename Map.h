@@ -15,6 +15,8 @@ class Map {
     friend class Item;
     friend void PVE();
     friend void PVP();
+    friend void PVE_map_initialize(int random_num);
+    friend void PVP_map_initialize(int random_num);
     friend void PVE_initialize();
     friend void PVP_initialize();
     public:

@@ -12,7 +12,7 @@ enum Direction{ UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 
 class Player {
     friend int main(int, char*args[]);
-    friend void game_end();
+    friend int quit_restart_home();
     friend void PVE();
     friend void PVP();
     friend void PVE_initialize();
@@ -23,7 +23,7 @@ public:
     Player();
     Player(int num);
     bool dead();                             //call by class Bomb
-    void move(Direction, int s);
+    void move(Direction);
     void determine_loc();                    //use player_point to determine player_loc
     void finish_moving();
     void get_item(Item *);
@@ -37,7 +37,7 @@ public:
     Location player_loc;
     static int count_rank;
 private:
-    int player_num, rank;
+    int player_num, rank, rate;
     Texture picture;
     SDL_Point player_point;
 };

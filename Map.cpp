@@ -53,19 +53,20 @@ void Map::collapse(){
         emptybox->destroyed = 1;
         emptybox = NULL;
     }
-    if(contain_item == 1 && item->destroyed == 0){
-        item->destroyed = 1;
-    }
-    //不知道被炸到之後不用render是不是我要寫
+//    if(contain_item == 1 && item->destroyed == 0){
+//        item->destroyed = 1;
+//    }
+
 }
 
 bool Map::met_character(int player){
-    if(contain_bomb == 1 || contain_emptybox == 1 || wall ==1 || (contain_item&&item->destroyed==0)) return 0;
+    if(contain_bomb == 1 || contain_emptybox == 1 || wall ==1 ) return 0;
     else return 1;
 }
 
 int Map::item_taken(int player){
     contain_item = 0;
+    item->destroyed = 1 ;
     return which_item;
 }
 
@@ -75,7 +76,7 @@ void Map::render_map(){
         emptybox_texture.render(&map_rect);
     }
     else if(contain_item && item!=NULL && item->destroyed==0){
-        itembox_texture.render(&map_rect);
+        item_texture[which_item].render(&map_rect);
     }
     else if(contain_bomb){
         SDL_Rect bomb_rect = {30+60*map_loc.x, 75+60*map_loc.y, 50, 50};

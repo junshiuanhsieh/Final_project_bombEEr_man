@@ -23,6 +23,7 @@ Player::Player(){
     bomb_distance = 2;
     bomb_available = 3;
     bomb_left = 3;
+    rate = 8;
 }
 Player::Player(int num) : player_num(num){
     alive = true;
@@ -35,6 +36,7 @@ Player::Player(int num) : player_num(num){
     bomb_distance = 2;
     bomb_available = 3;
     bomb_left = 3;
+    rate = 8;
 }
 int Player::count_rank = Player_number;
 bool Player::dead(){
@@ -42,15 +44,26 @@ bool Player::dead(){
     for(int i = 0; i<Total_item; i++) item_owned[i] = 0;
     rank = count_rank;
 }
-void Player::move(Direction dir, int s){
+void Player::move(Direction dir){
+    if(this->item[5] == 1){
+        if(dir == UP) dir =DOWN;
+        else if(dir == DOWN) dir =UP;
+        else if(dir == LEFT) dir =RIGHT;
+        else dir = LEFT;
+    }
     if(dir == UP) {
-        if(player_point.y >= 105+s) {
+        if(player_point.y >= 105+rate) {
+            if(map[player_loc.x][player_loc.y].contain_item ==1 ){
+                get_item(map[player_loc.x][player_loc.y].item);
+                map[player_loc.x][player_loc.y].item_taken(this->player_num);
+            }
+
             bool change_loc = 0, soon_change_loc = 0;
-            if((player_point.y-s-75) / 60 != player_loc.y && player_loc.y>0) change_loc = 1;
+            if((player_point.y-rate-75) / 60 != player_loc.y && player_loc.y>0) change_loc = 1;
             if((player_point.y-30-75) / 60 != player_loc.y && player_loc.y>0) soon_change_loc = 1;
             if(change_loc){
                 if(map[player_loc.x][player_loc.y-1].met_character(player_num)){
-                    player_point.y -= s;
+                    player_point.y -= rate;
                     map[player_loc.x][player_loc.y-1].character_inside[player_num] = 1;
                     map[player_loc.x][player_loc.y].character_inside[player_num] = 0;
                     player_loc.y--;
@@ -58,20 +71,25 @@ void Player::move(Direction dir, int s){
             }
             else if(soon_change_loc){
                 if(map[player_loc.x][player_loc.y-1].met_character(player_num)){
-                    player_point.y -= s;
+                    player_point.y -= rate;
                 }
             }
-            else player_point.y -= s;
+            else player_point.y -= rate;
         }
     }
     else if(dir == DOWN){
-        if(player_point.y <= 705-s) {
+        if(player_point.y <= 705-rate) {
+            if(map[player_loc.x][player_loc.y].contain_item ==1 ){
+                get_item(map[player_loc.x][player_loc.y].item);
+                map[player_loc.x][player_loc.y].item_taken(this->player_num);
+            }
+
             bool change_loc = 0, soon_change_loc = 0;
-            if((player_point.y+s-75) / 60 != player_loc.y && player_loc.y<11) change_loc = 1;
+            if((player_point.y+rate-75) / 60 != player_loc.y && player_loc.y<11) change_loc = 1;
             if((player_point.y+30-75) / 60 != player_loc.y && player_loc.y<11) soon_change_loc = 1;
             if(change_loc){
                 if(map[player_loc.x][player_loc.y+1].met_character(player_num)){
-                    player_point.y += s;
+                    player_point.y += rate;
                     map[player_loc.x][player_loc.y+1].character_inside[player_num] = 1;
                     map[player_loc.x][player_loc.y].character_inside[player_num] = 0;
                     player_loc.y++;
@@ -79,20 +97,25 @@ void Player::move(Direction dir, int s){
             }
             else if(soon_change_loc){
                 if(map[player_loc.x][player_loc.y+1].met_character(player_num)){
-                    player_point.y += s;
+                    player_point.y += rate;
                 }
             }
-            else player_point.y += s;
+            else player_point.y += rate;
         }
     }
     else if(dir == LEFT){
-        if(player_point.x >= 50+s) {
+        if(player_point.x >= 50+rate) {
+
+            if(map[player_loc.x][player_loc.y].contain_item ==1 ){
+                get_item(map[player_loc.x][player_loc.y].item);
+                map[player_loc.x][player_loc.y].item_taken(this->player_num);
+            }
             bool change_loc = 0, soon_change_loc = 0;
-            if((player_point.x-s-20) / 60 != player_loc.x && player_loc.x>0) change_loc = 1;
+            if((player_point.x-rate-20) / 60 != player_loc.x && player_loc.x>0) change_loc = 1;
             if((player_point.x-30-20) / 60 != player_loc.x && player_loc.x>0) soon_change_loc = 1;
             if(change_loc){
                 if(map[player_loc.x-1][player_loc.y].met_character(player_num)){
-                    player_point.x -= s;
+                    player_point.x -= rate;
                     map[player_loc.x-1][player_loc.y].character_inside[player_num] = 1;
                     map[player_loc.x][player_loc.y].character_inside[player_num] = 0;
                     player_loc.x--;
@@ -100,20 +123,25 @@ void Player::move(Direction dir, int s){
             }
             else if(soon_change_loc){
                 if(map[player_loc.x-1][player_loc.y].met_character(player_num)){
-                    player_point.x -= s;
+                    player_point.x -= rate;
                 }
             }
-            else player_point.x -= s;
+            else player_point.x -= rate;
         }
     }
     else if(dir == RIGHT){
-        if(player_point.x <= 950-s) {
+        if(player_point.x <= 950-rate) {
+
+            if(map[player_loc.x][player_loc.y].contain_item ==1 ){
+                get_item(map[player_loc.x][player_loc.y].item);
+                map[player_loc.x][player_loc.y].item_taken(this->player_num);
+            }
             bool change_loc = 0, soon_change_loc = 0;
-            if((player_point.x+s-20) / 60 != player_loc.x && player_loc.x<16) change_loc = 1;
+            if((player_point.x+rate-20) / 60 != player_loc.x && player_loc.x<16) change_loc = 1;
             if((player_point.x+30-20) / 60 != player_loc.x && player_loc.x<16) soon_change_loc = 1;
             if(change_loc){
                 if(map[player_loc.x+1][player_loc.y].met_character(player_num)){
-                    player_point.x += s;
+                    player_point.x += rate;
                     map[player_loc.x+1][player_loc.y].character_inside[player_num] = 1;
                     map[player_loc.x][player_loc.y].character_inside[player_num] = 0;
                     player_loc.x++;
@@ -121,13 +149,16 @@ void Player::move(Direction dir, int s){
             }
             else if(soon_change_loc){
                 if(map[player_loc.x+1][player_loc.y].met_character(player_num)){
-                    player_point.x += s;
+                    player_point.x += rate;
                 }
             }
-            else player_point.x += s;
+            else player_point.x += rate;
         }
     }
     determine_loc();
+
+
+
 }
 void Player::determine_loc(){
     player_loc.x = (player_point.x-20) / 60;
@@ -154,9 +185,41 @@ Bomb* Player::putbomb(Bomb * bomb){
     delete [] temp_bomb;
     return bomb;
 }
-void Player::get_item(Item * item){
-    item_owned[item->item_num]++;
-    item->taken_by_player(player_num);
+void Player::get_item(Item * item_get){
+    item[item_get->item_num] = 1 ;
+
+    if(item_get->item_num == 0) {
+        this->bomb_available++;
+        this->bomb_left++;
+    }
+        //增加一格爆炸範圍
+    else if(item_get->item_num == 1){
+        this->bomb_distance ++;
+    }
+        //爆炸威力加到最大
+    else if(item_get->item_num == 2){
+        this->bomb_distance = 9;
+    }
+        //走路速度變快
+    else if(item_get->item_num == 3){
+        this->rate += 3;
+    }
+        //走路速度變慢
+    else if(item_get->item_num == 4){
+        this->rate -= 3;
+    }
+        //逆向寫在move裡面
+    else if(item_get->item_num == 5){
+
+    }
+        //盾牌直接寫在bomb裡面
+    else if(item_get->item_num == 11){
+
+    }
+
+    item_get->taken_by_player(player_num);
+
+
 }
 void Player::useitem(Item * item){
     item_owned[item->item_num]--;
