@@ -264,7 +264,7 @@ int PVE(){
 
         //每秒不知道多少
         int time = (clock()- start_time)/70000;
-        cout << time << endl;
+        //cout << time << endl;
         SDL_RenderPresent(gRenderer);
         if(!game_continue) {
             SDL_Delay(1000);

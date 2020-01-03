@@ -360,21 +360,21 @@ void Choosecharacter(){
     SDL_Rect characteroption_dest[TOTAL_CHARACTER_OPTION], frame[TOTAL_CHARACTER_OPTION], backbuttondest={100, 600, 200, 100};
     for (int i = 0; i < TOTAL_CHARACTER_OPTION; i++) {
         characteroption_dest[i].x = 125 + i * 200;
-        characteroption_dest[i].y = 300;
+        characteroption_dest[i].y = 175;
         characteroption_dest[i].w = 150;
-        characteroption_dest[i].h = 150;
+        characteroption_dest[i].h = 375;
         frame[i].x = characteroption_dest[i].x - 10;
-        frame[i].y = 290;
+        frame[i].y = 165;
         frame[i].w = 170;
-        frame[i].h = 170;
+        frame[i].h = 395;
         characteroption[i] = RectButton(characteroption_dest[i]);
     }
     backto_scrolling = RectButton(backbuttondest);
-    characteroption[0].buttontexture.loadFromFile("../character_image/character0.png");
-    characteroption[1].buttontexture.loadFromFile("../character_image/character1.png");
-    characteroption[2].buttontexture.loadFromFile("../character_image/character2.png");
-    characteroption[3].buttontexture.loadFromFile("../character_image/character3.png");
-    characteroption[4].buttontexture.loadFromFile("../character_image/character4.png");
+    characteroption[0].buttontexture.loadFromFile("../character_image/shiuan.png");
+    characteroption[1].buttontexture.loadFromFile("../character_image/elephy.png");
+    characteroption[2].buttontexture.loadFromFile("../character_image/may.png");
+    characteroption[3].buttontexture.loadFromFile("../character_image/yee.png");
+    characteroption[4].buttontexture.loadFromFile("../character_image/Allen_wu.png");
     choosecharacter.loadFromFile("../start_image/choosecharacter_background.png");
     backto_scrolling.buttontexture.loadFromFile("../start_image/back.png");
 
