@@ -374,7 +374,7 @@ void Choosecharacter(){
     characteroption[1].buttontexture.loadFromFile("../character_image/elephy.png");
     characteroption[2].buttontexture.loadFromFile("../character_image/may.png");
     characteroption[3].buttontexture.loadFromFile("../character_image/yee.png");
-    characteroption[4].buttontexture.loadFromFile("../character_image/Allen_wu.png");
+    characteroption[4].buttontexture.loadFromFile("../character_image/allenwu.png");
     choosecharacter.loadFromFile("../start_image/choosecharacter_background.png");
     backto_scrolling.buttontexture.loadFromFile("../start_image/back.png");
 
