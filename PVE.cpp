@@ -72,6 +72,8 @@ int PVE(){
     bomb_num = 0;
     bool keypress[12];
     bomb = NULL;
+
+    clock_t start_time = clock();
     SDL_Event PVE_event;
 
     for(int i = 0; i<12; i++) keypress[i] = 0;
@@ -259,6 +261,10 @@ int PVE(){
             }
         }
         PVE_Show_data();
+
+        //每秒不知道多少
+        int time = (clock()- start_time)/70000;
+        cout << time << endl;
         SDL_RenderPresent(gRenderer);
         if(!game_continue) {
             SDL_Delay(1000);
