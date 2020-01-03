@@ -13,8 +13,8 @@ enum Direction{ UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 class Player {
     friend int main(int, char*args[]);
     friend int quit_restart_home();
-    friend void PVE();
-    friend void PVP();
+    friend int PVE();
+    friend int PVP();
     friend void PVE_initialize();
     friend void PVP_initialize();
     friend void PVE_Show_data();

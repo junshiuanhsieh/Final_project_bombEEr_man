@@ -36,15 +36,20 @@ int main(int argc, char* args[]){
     int endmode = 1;
     while(endmode==1){
         Start();
-        if(quit) return 0;
+        if(quit) break;
 
         Choosemode();
-        if(quit) return 0;
+        if(quit) break;
 
         endmode = 2;
         while(endmode==2){
-            if(Mode == 1) PVE();
-            else if(Mode == 2) PVP();
+            //int gamemode = 0;
+            if(Mode == 1) endmode = PVE();
+            else if(Mode == 2) endmode = PVP();
+
+            if(endmode==1) break;
+            else if(endmode==2) continue;
+            else if(endmode==3) {quit = 1; break;}
 
             for(int i = 0; i<Player_number; i++) cout << "player " << i << " rank " << player[i].rank << " " << endl;
 
@@ -52,7 +57,7 @@ int main(int argc, char* args[]){
 
             if(endmode == 3) break;
         }
-        if(endmode == 3) break;
+        if(endmode == 3 || quit) break;
     }
     close();
     return 0;
@@ -235,8 +240,8 @@ void Scrolling(){
     RectButton backto_number(back_dest), next_button(next_dest);
     backto_number.buttontexture.loadFromFile("../start_image/back.png");
     next_button.buttontexture.loadFromFile("../start_image/next.png");
-    SDL_Rect text_dest,text_clip;
-    double temp_y = 600;
+    SDL_Rect text_dest,text_clip, background_dest;
+    double temp_y ;
 
     SDL_Event scrollingevent;
     text_dest.x = 0;
@@ -246,31 +251,41 @@ void Scrolling(){
     text_clip.y = 0;
     text_clip.w = 1200;
 
+    background_dest.x = 0;
+    background_dest.w = 1200;
+
+
     bool next = 0;
 
     if(Mode==1){
+        background_dest.y = temp_y = 675;
+        background_dest.h = 750-temp_y;
         while(temp_y>=0){
 
-            text_clip .h = 750 - temp_y;
-            text_dest .h = 750 - temp_y;
+            text_clip .h = 675 - temp_y;
+            text_dest .h = 675 - temp_y;
             text_dest .y = temp_y;
 
-            temp_y -= 3;
+            temp_y -= 10;
             scrolling.render(NULL);
             TextTexture.render(&text_dest,&text_clip,0);
+
             SDL_RenderPresent( gRenderer );
         }
     }
     else{
+        background_dest.y = temp_y = 650;
+        background_dest.h = 750 - temp_y;
         while(temp_y>=0){
 
-            text_clip .h = 750 - temp_y;
-            text_dest .h = 750 - temp_y;
+            text_clip .h = 675 - temp_y;
+            text_dest .h = 650 - temp_y;
             text_dest .y = temp_y;
 
-            temp_y -= 3;
+            temp_y -= 10;
             scrolling.render(NULL);
             TextTexture2.render(&text_dest,&text_clip,0);
+
             SDL_RenderPresent( gRenderer );
         }
     }

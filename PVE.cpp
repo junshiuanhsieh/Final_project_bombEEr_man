@@ -16,7 +16,7 @@ extern Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture
 Texture PVE_background;
 int bomb_num = 0;
 
-void PVE(){
+int PVE(){
     player = NULL;
     map = NULL;
     player = new Player[Player_number];
@@ -38,7 +38,37 @@ void PVE(){
 
     PVE_initialize();
 
-    //int rate = 10;
+    CircleButton pause, music_on, music_off;
+    SDL_Rect pause_dest = {720, 15, 50, 50}, music_dest = {780, 15, 50, 50};
+    SDL_Point pause_cen = {745, 40}, music_cen = {805, 40};
+    bool music = 1;
+    pause = CircleButton(pause_dest, pause_cen, 25);
+    music_on = CircleButton(music_dest, music_cen, 25);
+    music_off = CircleButton(music_dest, music_cen, 25);
+    pause.buttontexture.loadFromFile("../button_image/pause.png");
+    music_on.buttontexture.loadFromFile("../button_image/music_on.png");
+    music_off.buttontexture.loadFromFile("../button_image/music_off.png");
+
+    Texture pause_black, pause_window;
+    CircleButton pause_home, pause_restart, pause_quit;
+    RectButton resume_button;
+    SDL_Rect pausewindow_dest = {250, 140, 700, 470}, resume_dest = {380, 470, 440, 110},
+            pausehome_dest = {370, 315, 140, 140}, pauserestart_dest = {530, 315, 140, 140}, pausequit_dest = {690, 315, 140, 140};
+    SDL_Point pausehome_cen = {440, 385}, pauserestart_cen = {600, 385}, pausequit_cen = {760, 385};
+    pause_home = CircleButton(pausehome_dest, pausehome_cen, 70);
+    pause_restart = CircleButton(pauserestart_dest, pauserestart_cen, 70);
+    pause_quit = CircleButton(pausequit_dest, pausequit_cen, 70);
+    resume_button = RectButton(resume_dest);
+
+    pause_black.loadFromFile("../button_image/pause_black.png");
+    pause_black.setBlendMode(SDL_BLENDMODE_BLEND);
+    pause_window.loadFromFile("../button_image/pause_window.png");
+    pause_home.buttontexture.loadFromFile("../button_image/home.png");
+    pause_restart.buttontexture.loadFromFile("../button_image/restart.png");
+    pause_quit.buttontexture.loadFromFile("../button_image/quit.png");
+    resume_button.buttontexture.loadFromFile("../button_image/resume.png");
+
+
     bomb_num = 0;
     bool keypress[12];
     bomb = NULL;
@@ -47,7 +77,10 @@ void PVE(){
     for(int i = 0; i<12; i++) keypress[i] = 0;
     while(!quit) {
         while (SDL_PollEvent(&PVE_event) != 0) {
-            if (PVE_event.type == SDL_QUIT) {quit = true; return;}
+            pause.handleEvent(&PVE_event);
+            music_on.handleEvent(&PVE_event);
+            music_off.handleEvent(&PVE_event);
+            if (PVE_event.type == SDL_QUIT) {quit = true; return 3;}
             if (PVE_event.type == SDL_KEYDOWN && PVE_event.key.repeat==0) {
                 switch( PVE_event.key.keysym.sym ){
                     case SDLK_UP: keypress[Key_Up] = 1; break;
@@ -106,6 +139,71 @@ void PVE(){
                     case SDLK_l: keypress[Key_l] = 0; break;
                 }
             }
+            if(pause.CurrentSprite == BUTTON_SPRITE_MOUSE_DOWN) {
+                bool resume = 0;
+                cout << "pause " << endl;
+                while(!resume){
+                    SDL_Event pause_event;
+                    while(1) {
+                        while (SDL_PollEvent(&pause_event) != 0) {
+                            pause_home.handleEvent(&pause_event);
+                            pause_restart.handleEvent(&pause_event);
+                            pause_quit.handleEvent(&pause_event);
+                            resume_button.handleEvent(&pause_event);
+                            if (pause_event.type == SDL_QUIT) {
+                                quit = true;
+                                return 3;
+                            }
+                            if (pause_home.CurrentSprite == BUTTON_SPRITE_MOUSE_UP) return 1;
+                            if (pause_restart.CurrentSprite == BUTTON_SPRITE_MOUSE_UP) return 2;
+                            if (pause_quit.CurrentSprite == BUTTON_SPRITE_MOUSE_UP) return 3;
+                            if (resume_button.CurrentSprite == BUTTON_SPRITE_MOUSE_UP) {
+                                cout << "resume" << endl;
+                                resume = 1;
+                                break;
+                            }
+                        }
+                        if(resume) break;
+                        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+                        SDL_RenderClear(gRenderer);
+                        PVE_background.render(NULL);
+
+                        for (int i = 0; i < Player_number; i++) {
+                            if (player[i].alive == 1) player[i].player_render();
+                        }
+                        for (int i = 0; i < 16; i++) {
+                            for (int j = 0; j < 11; j++) map[i][j].render_map();
+                        }
+                        PVE_Show_data();
+
+                        pause_black.setAlpha(150);
+                        pause_black.render(NULL);
+
+                        pause_window.render(&pausewindow_dest);
+
+                        bool pausehome_big = 1, pauserestart_big = 1, pausequit_big = 1, pauseresume_big = 1;
+                        if (pause_home.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) pausehome_big = 0;
+                        pause_home.circlerender(pausehome_big);
+                        if (pause_restart.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) pauserestart_big = 0;
+                        pause_restart.circlerender(pauserestart_big);
+                        if (pause_quit.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) pausequit_big = 0;
+                        pause_quit.circlerender(pausequit_big);
+                        if (resume_button.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) pauseresume_big = 0;
+                        resume_button.rectrender(pauseresume_big);
+
+                        SDL_RenderPresent(gRenderer);
+                    }
+                }
+            }
+            if(music_on.CurrentSprite == BUTTON_SPRITE_MOUSE_DOWN ) {
+                while(music_on.CurrentSprite != BUTTON_SPRITE_MOUSE_UP) {
+                    SDL_PollEvent(&PVE_event);
+                    if (PVE_event.type == SDL_QUIT) {quit=true; break;}
+                    music_on.handleEvent(&PVE_event);
+                }
+                if(music) music = 0;
+                else music = 1;
+            }
         }
 
         if (keypress[Key_Up]) player[0].move(UP);
@@ -135,9 +233,19 @@ void PVE(){
                 i--;
             }
         }
+
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         PVE_background.render(NULL);
+
+        bool bigpause=1, bigmusic=1, bighome=1, bigrestart=1, bigquit=1;
+        if(pause.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) bigpause = 0;
+        pause.circlerender(bigpause);
+        if(music_on.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT ) bigmusic = 0;
+        if(music) music_on.circlerender(bigmusic);
+        else music_off.circlerender(bigmusic);
+
+
         bool game_continue = 0;
         for(int i = 0; i<Player_number; i++) {
             if(player[i].alive==1) {

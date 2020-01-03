@@ -10,8 +10,8 @@
 
 class Bomb {
     friend class Player;
-    friend void PVE();
-    friend void PVP();
+    friend int PVE();
+    friend int PVP();
     public:
         Bomb();
         Bomb(Location, int distance, int player_num, int _number);
