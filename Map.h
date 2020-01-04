@@ -13,6 +13,7 @@ class Map {
     friend class Player;
     friend class Bomb;
     friend class Item;
+    friend class Boss;
     friend int PVE();
     friend int PVP();
     friend void PVE_map_initialize(int random_num);

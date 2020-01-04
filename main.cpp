@@ -244,7 +244,7 @@ void Scrolling(){
     TextTexture2.setAlpha(180);
     SDL_RenderPresent( gRenderer );
 
-    SDL_Rect rcText[4], back_dest = {100, 640, 200, 100}, next_dest = {900, 640, 200, 100};
+    SDL_Rect rcText[4], back_dest = {100, 650, 200, 100}, next_dest = {900, 650, 200, 100};
     RectButton backto_number(back_dest), next_button(next_dest);
     backto_number.buttontexture.loadFromFile("../start_image/back.png");
     next_button.buttontexture.loadFromFile("../start_image/next.png");

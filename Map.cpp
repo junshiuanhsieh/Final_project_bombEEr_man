@@ -72,12 +72,12 @@ int Map::item_taken(int player){
 
 void Map::render_map(){
     SDL_Rect map_rect = {20+60*map_loc.x, 75+60*map_loc.y, 60, 60};
-    if(contain_emptybox && contain_item && emptybox->destroyed==0){
-        itembox_texture.render(&map_rect);
-    }
-    else if(contain_emptybox && !contain_item && emptybox->destroyed==0){
+    if(contain_emptybox && emptybox->destroyed==0){
         emptybox_texture.render(&map_rect);
     }
+//    else if(contain_emptybox && !contain_item && emptybox->destroyed==0){
+//        emptybox_texture.render(&map_rect);
+//    }
     else if(contain_item && item!=NULL && item->destroyed==0){
         item_texture[which_item].render(&map_rect);
     }

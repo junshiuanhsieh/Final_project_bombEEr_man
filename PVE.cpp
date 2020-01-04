@@ -15,6 +15,7 @@ extern Bomb* bomb;
 extern Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture, explode_texture, cross_texture;
 Texture PVE_background;
 int bomb_num = 0;
+Boss boss;
 
 int PVE(){
     player = NULL;
@@ -32,8 +33,10 @@ int PVE(){
     }
 
     int map_random;
+    //set map random = 0
     srand(time(0));
     map_random = rand()%3;
+    map_random = 0;
     PVE_map_initialize(map_random);
 
     PVE_initialize();
@@ -141,6 +144,61 @@ int PVE(){
                     case SDLK_l: keypress[Key_l] = 0; break;
                 }
             }
+
+            static int time = 1;
+            int boss_rage = 0;
+            //boss set bomb
+
+            if(time % (150-boss_rage) ==0) {
+
+                int boss_bombx[6] = {10,11,12,13,14,15};
+                int boss_bomby[6] = {2,2,2,2,2,2};
+
+                for(int i=0;i<6;i++){
+                    boss.player_loc.x = boss_bombx[i];
+                    boss.player_loc.y = boss_bomby[i];
+                    bomb = *boss.putbomb(&bomb);
+                    boss.bomb_left --;
+                }
+
+                    }
+            if(time % (70-boss_rage) ==0) {
+
+                    boss.player_loc.x = 3;
+                    boss.player_loc.y = 0;
+                *boss.putbomb(&bomb);
+                    boss.bomb_left --;
+
+                }
+            if(time % (500-boss_rage) ==0) {
+
+                int boss_bombx[6] = {0,1,2,3,4,5};
+                int boss_bomby[6] = {7,7,7,7,7,7};
+
+                for(int i=0;i<6;i++){
+                    boss.player_loc.x = boss_bombx[i];
+                    boss.player_loc.y = boss_bomby[i];
+                    *boss.putbomb(&bomb);
+                    boss.bomb_left --;
+                }
+
+
+            }
+            if(time%(700-boss_rage)==0){
+
+                int boss_bombx[4] = {10,10,5,5};
+                int boss_bomby[4] = {2,7,8,1};
+
+                for(int i=0;i<4;i++){
+                    boss.player_loc.x = boss_bombx[i];
+                    boss.player_loc.y = boss_bomby[i];
+                    *boss.putbomb(&bomb);
+                    boss.bomb_left --;
+                }
+
+            }
+            time ++;
+
             if(pause.CurrentSprite == BUTTON_SPRITE_MOUSE_DOWN) {
                 bool resume = 0;
                 cout << "pause " << endl;
@@ -255,6 +313,8 @@ int PVE(){
                 game_continue = 1;
             }
         }
+
+        boss.player_render();
         for(int i = 0; i<16; i++){
             for(int j = 0; j<11; j++){
                 map[i][j].render_map();
@@ -294,6 +354,11 @@ void PVE_initialize(){
     item_texture[5].loadFromFile("../item_image/item5.png");
     item_texture[11].loadFromFile("../item_image/item11_PVE.png");
 
+    boss.picture.loadFromFile("../character_image/boss.png");
+    boss.bomb_distance = 16;
+    boss.bomb_available = 100;
+    boss.bomb_left =  100;
+    boss.boss_life = 50;
 
     for(int i = 0; i<Player_number; i++){
         if(character_picture[i]==0) player[i].picture.loadFromFile("../character_image/character0.png");
@@ -327,28 +392,37 @@ void PVE_initialize(){
 void PVE_map_initialize(int random_num){
     cout << "random = " << random_num << endl;
     if(random_num==0){
-        map[3][0].wall = map[6][0].wall = map[7][0].wall = map[8][0].wall = 1;
-        map[2][1].wall = map[3][1].wall = map[3][1].wall = map[6][1].wall = map[7][1].wall = map[8][1].wall = map[10][1].wall = map[11][1].wall = map[12][1].wall = 1;
-        map[1][4].wall = map[4][4].wall = map[5][4].wall = map[6][4].wall = map[9][4].wall = map[10][4].wall = map[11][4].wall = 1;
-        map[1][5].wall = map[4][5].wall = map[5][5].wall = map[6][5].wall = map[9][5].wall = map[10][5].wall = map[11][5].wall = 1;
-        map[0][6].wall = map[9][6].wall = map[11][6].wall = 1;
-        map[0][8].wall = map[1][8].wall = 1;
-        map[0][9].wall = map[1][9].wall = map[4][9].wall = map[7][9].wall = map[8][9].wall = map[12][9].wall = 1;
-        map[4][10].wall = map[7][10].wall = map[8][10].wall = map[12][10].wall = 1;
+        map[1][0].wall = map[2][0].wall = map[11][0].wall = map[12][0].wall = map[13][0].wall = 1;
+        map[12][1].wall = 1;
+        map[4][2].wall = map[5][2].wall = 1;
+        map[6][3].wall = map[7][3].wall = map[8][3].wall = map[9][3].wall = map[14][3].wall = map[15][3].wall = 1;
+        map[2][4].wall = map[3][4].wall = map[6][4].wall = map[7][4].wall = map[8][4].wall = map[9][4].wall = map[13][4].wall = map[14][4].wall = 1;
+        map[3][5].wall = map[6][5].wall = map[7][5].wall = map[8][5].wall = map[9][5].wall = 1;
+        map[3][6].wall = map[6][6].wall = map[7][6].wall = map[8][6].wall = map[9][6].wall = 1;
+        map[15][7].wall = 1;
+        map[0][8].wall = map[15][8].wall = 1;
+        map[0][9].wall = map[1][9].wall = map[0][9].wall = map[7][9].wall = map[14][9].wall = map[15][9].wall = 1;
+        map[0][10].wall = map[7][10].wall = map[9][10].wall = map[10][10].wall = map[11][10].wall = 1;
+//
+//        map[1][2].contain_item = map[2][5].contain_item = map[5][7].contain_item = map[7][2].contain_item = 1;
+//        map[14][3].contain_item =map[14][5].contain_item =map[14][8].contain_item =  map[3][4].contain_item =1;
+//        map[10][3].contain_item = map[2][9].contain_item = 1;
 
-        map[1][2].contain_item = map[2][5].contain_item = map[5][7].contain_item = map[7][2].contain_item = 1;
-        map[14][3].contain_item =map[14][5].contain_item =map[14][8].contain_item =  map[3][4].contain_item =1;
-        map[10][3].contain_item = map[2][9].contain_item = 1;
+//        map[1][2].which_item = map[2][5].which_item = map[2][9].which_item = 0;
+//        map[5][7].which_item = map[7][2].which_item = 1;
+//        map[14][3].which_item = 2;
+//        map[14][5].which_item = 3;
+//        map[14][8].which_item = 4;
+//        map[3][4].which_item =  5;
+//        map[10][3].which_item = 11;
 
-        map[1][2].which_item = map[2][5].which_item = map[2][9].which_item = 0;
-        map[5][7].which_item = map[7][2].which_item = 1;
-        map[14][3].which_item = 2;
-        map[14][5].which_item = 3;
-        map[14][8].which_item = 4;
-        map[3][4].which_item =  5;
-        map[10][3].which_item = 11;
+        for(int i = 6; i < 10; i++) {
+            for (int j = 3; j < 7; j++) {
+                map[i][j].wall = 1;
+            }
+        }
 
-        map[5][3].contain_emptybox = map[10][8].contain_emptybox =map[7][4].contain_emptybox = map[2][9].contain_emptybox =  1;
+        //map[5][3].contain_emptybox = map[10][8].contain_emptybox =map[7][4].contain_emptybox = map[2][9].contain_emptybox =  1;
 
         for(int i = 0; i<16; i++) {
             for (int j = 0; j < 11; j++) {
@@ -361,21 +435,24 @@ void PVE_map_initialize(int random_num){
         }
 
 
-        PVE_background.loadFromFile("../PVP_image/background0.png");
+        PVE_background.loadFromFile("../PVE_image/background0.png");
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         PVE_background.render(NULL);
         SDL_RenderPresent( gRenderer );
     }
     else if(random_num==1){
-        map[3][0].wall = map[6][0].wall = map[7][0].wall = map[8][0].wall = 1;
-        map[2][1].wall = map[3][1].wall = map[3][1].wall = map[6][1].wall = map[7][1].wall = map[8][1].wall = map[10][1].wall = map[11][1].wall = map[12][1].wall = 1;
-        map[1][4].wall = map[4][4].wall = map[5][4].wall = map[6][4].wall = map[9][4].wall = map[10][4].wall = map[11][4].wall = 1;
-        map[1][5].wall = map[4][5].wall = map[5][5].wall = map[6][5].wall = map[9][5].wall = map[10][5].wall = map[11][5].wall = 1;
-        map[0][6].wall = map[9][6].wall = map[11][6].wall = 1;
-        map[0][8].wall = map[1][8].wall = 1;
-        map[0][9].wall = map[1][9].wall = map[4][9].wall = map[7][9].wall = map[8][9].wall = map[12][9].wall = 1;
-        map[4][10].wall = map[7][10].wall = map[8][10].wall = map[12][10].wall = 1;
+        map[1][0].wall = map[2][0].wall = map[11][0].wall = map[12][0].wall = map[13][0].wall = 1;
+        map[12][1].wall = 1;
+        map[4][2].wall = map[5][2].wall = 1;
+        map[6][3].wall = map[7][3].wall = map[8][3].wall = map[9][3].wall = map[14][3].wall = map[15][3].wall = 1;
+        map[2][4].wall = map[3][4].wall = map[6][4].wall = map[7][4].wall = map[8][4].wall = map[9][4].wall = map[13][4].wall = map[14][4].wall = 1;
+        map[3][5].wall = map[6][5].wall = map[7][5].wall = map[8][5].wall = map[9][5].wall = 1;
+        map[3][6].wall = map[6][6].wall = map[7][6].wall = map[8][6].wall = map[9][6].wall = 1;
+        map[15][7].wall = 1;
+        map[15][8].wall = 1;
+        map[0][9].wall = map[1][9].wall = map[0][9].wall = map[7][9].wall = map[14][9].wall = map[15][9].wall = 1;
+        map[0][10].wall = map[7][10].wall = map[9][10].wall = map[10][10].wall = map[11][10].wall = 1;
 
         map[1][2].contain_item = map[2][5].contain_item = map[5][7].contain_item = map[7][2].contain_item = 1;
         map[14][3].contain_item =map[14][5].contain_item =map[14][8].contain_item =  map[3][4].contain_item =1;
@@ -402,21 +479,24 @@ void PVE_map_initialize(int random_num){
         }
 
 
-        PVE_background.loadFromFile("../PVP_image/background0.png");
+        PVE_background.loadFromFile("../PVE_image/background0.png");
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         PVE_background.render(NULL);
         SDL_RenderPresent( gRenderer );
     }
     else if(random_num==2){
-        map[3][0].wall = map[6][0].wall = map[7][0].wall = map[8][0].wall = 1;
-        map[2][1].wall = map[3][1].wall = map[3][1].wall = map[6][1].wall = map[7][1].wall = map[8][1].wall = map[10][1].wall = map[11][1].wall = map[12][1].wall = 1;
-        map[1][4].wall = map[4][4].wall = map[5][4].wall = map[6][4].wall = map[9][4].wall = map[10][4].wall = map[11][4].wall = 1;
-        map[1][5].wall = map[4][5].wall = map[5][5].wall = map[6][5].wall = map[9][5].wall = map[10][5].wall = map[11][5].wall = 1;
-        map[0][6].wall = map[9][6].wall = map[11][6].wall = 1;
-        map[0][8].wall = map[1][8].wall = 1;
-        map[0][9].wall = map[1][9].wall = map[4][9].wall = map[7][9].wall = map[8][9].wall = map[12][9].wall = 1;
-        map[4][10].wall = map[7][10].wall = map[8][10].wall = map[12][10].wall = 1;
+        map[1][0].wall = map[2][0].wall = map[11][0].wall = map[12][0].wall = map[13][0].wall = 1;
+        map[12][1].wall = 1;
+        map[4][2].wall = map[5][2].wall = 1;
+        map[6][3].wall = map[7][3].wall = map[8][3].wall = map[9][3].wall = map[14][3].wall = map[15][3].wall = 1;
+        map[2][4].wall = map[3][4].wall = map[6][4].wall = map[7][4].wall = map[8][4].wall = map[9][4].wall = map[13][4].wall = map[14][4].wall = 1;
+        map[3][5].wall = map[6][5].wall = map[7][5].wall = map[8][5].wall = map[9][5].wall = 1;
+        map[3][6].wall = map[6][6].wall = map[7][6].wall = map[8][6].wall = map[9][6].wall = 1;
+        map[15][7].wall = 1;
+        map[15][8].wall = 1;
+        map[0][9].wall = map[1][9].wall = map[0][9].wall = map[7][9].wall = map[14][9].wall = map[15][9].wall = 1;
+        map[0][10].wall = map[7][10].wall = map[9][10].wall = map[10][10].wall = map[11][10].wall = 1;
 
         map[1][2].contain_item = map[2][5].contain_item = map[5][7].contain_item = map[7][2].contain_item = 1;
         map[14][3].contain_item =map[14][5].contain_item =map[14][8].contain_item =  map[3][4].contain_item =1;
@@ -443,7 +523,7 @@ void PVE_map_initialize(int random_num){
         }
 
 
-        PVE_background.loadFromFile("../PVP_image/background0.png");
+        PVE_background.loadFromFile("../PVE_image/background0.png");
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         PVE_background.render(NULL);

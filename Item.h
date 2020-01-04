@@ -10,6 +10,7 @@ class empty_box{
     friend class Player;
     friend class Map;
     friend class Bomb;
+    friend class Boss;
     protected:
         Location box_loc;  //由constructor初始
     public:
@@ -22,6 +23,7 @@ class Item : public empty_box{
     friend class Player;
     friend class Map;
     friend class Bomb;
+    friend class Boss;
     protected:
         int owner, item_num;  //owner由player呼叫  item_num由constructor初始
         bool taken; //revealed由bomb呼叫，taken由player呼叫

@@ -13,6 +13,7 @@ enum Direction{ UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 class Player {
     friend int main(int, char*args[]);
     friend int quit_restart_home();
+    friend class Boss;
     friend int PVE();
     friend int PVP();
     friend void PVE_initialize();
@@ -42,4 +43,19 @@ private:
     SDL_Point player_point;
 };
 
+class Boss : public Player {
+
+    friend int main(int, char*args[]);
+    friend int quit_restart_home();
+    friend class Boss;
+    friend int PVE();
+    friend void PVE_initialize();
+    friend void PVE_Show_data();
+    friend class Bomb;
+public:
+    void player_render();
+
+private:
+    int boss_life;
+};
 #endif
