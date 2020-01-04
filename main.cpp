@@ -516,10 +516,11 @@ void Tutorial_start(){
 }
 void Tutorial(){
     cout << "tutorial" << endl;
-    SDL_Rect back_dest = {100, 600, 200, 100};
+    SDL_Rect back_dest = {950, 650, 200, 100};
     Texture tutorial;
     RectButton back(back_dest);
-    tutorial.loadFromFile("../start_image/tutorial_background.png");
+    if(Mode==1) tutorial.loadFromFile("../start_image/tutorial_background_PVE.png");
+    else if(Mode==2) tutorial.loadFromFile("../start_image/tutorial_background_PVP.png");
     back.buttontexture.loadFromFile("../start_image/back.png");
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
