@@ -12,7 +12,7 @@ extern int* character_picture;
 extern const int Total_item;
 extern Player* player;
 extern Map** map;
-extern Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture, explode_texture, cross_texture;
+extern Texture bomb_texture, emptybox_texture, item_texture[12], itembox_texture, explode_texture, cross_texture, wall_texture;
 extern int bomb_num;
 Texture PVP_background;
 
@@ -32,6 +32,7 @@ void PVP(){
     int map_random;
     srand(time(0));
     map_random = rand()%3;
+    map_random = 0;
     PVP_map_initialize(map_random);
     PVP_initialize();
 
@@ -124,7 +125,7 @@ void PVP(){
         }
 
         for(int i = 0; i<bomb_num; i++){
-            if(clock() - bomb[i].clk > 100000){
+            if((clock() - bomb[i].clk)/CLOCKS_PER_SEC > 1.6){
                 bomb = bomb[i].bomb_explode(i, bomb);
                 i--;
             }
@@ -155,29 +156,30 @@ void PVP(){
 }
 
 void PVP_initialize(){
-    bomb_texture.loadFromFile("../item_image/bomb.png");
-    itembox_texture.loadFromFile("../item_image/box.png");
-    emptybox_texture.loadFromFile("../item_image/empty_box.png");
-    explode_texture.loadFromFile("../item_image/explode.png");
-    cross_texture.loadFromFile("../item_image/cross.png");
+    bomb_texture.loadFromFile("item_image/bomb.png");
+    itembox_texture.loadFromFile("item_image/box.png");
+    emptybox_texture.loadFromFile("item_image/empty_box.png");
+    explode_texture.loadFromFile("item_image/explode.png");
+    wall_texture.loadFromFile("item_image/wall.png");
+    cross_texture.loadFromFile("item_image/cross.png");
     explode_texture.setBlendMode( SDL_BLENDMODE_BLEND );
 
     //item_texture.loadFromFile
 
-    item_texture[0].loadFromFile("../item_image/item0.png");
-    item_texture[1].loadFromFile("../item_image/item1.png");
-    item_texture[2].loadFromFile("../item_image/item2.png");
-    item_texture[3].loadFromFile("../item_image/item3.png");
-    item_texture[4].loadFromFile("../item_image/item4.png");
-    item_texture[5].loadFromFile("../item_image/item5.png");
-    item_texture[11].loadFromFile("../item_image/item11.png");
+    item_texture[0].loadFromFile("item_image/item0.png");
+    item_texture[1].loadFromFile("item_image/item1.png");
+    item_texture[2].loadFromFile("item_image/item2.png");
+    item_texture[3].loadFromFile("item_image/item3.png");
+    item_texture[4].loadFromFile("item_image/item4.png");
+    item_texture[5].loadFromFile("item_image/item5.png");
+    item_texture[11].loadFromFile("item_image/item11.png");
 
     for(int i = 0; i<Player_number; i++){
-        if(character_picture[i]==0) player[i].picture.loadFromFile("../character_image/character0.png");
-        else if(character_picture[i]==1) player[i].picture.loadFromFile("../character_image/character1.png");
-        else if(character_picture[i]==2) player[i].picture.loadFromFile("../character_image/character2.png");
-        else if(character_picture[i]==3) player[i].picture.loadFromFile("../character_image/character3.png");
-        else if(character_picture[i]==4) player[i].picture.loadFromFile("../character_image/character4.png");
+        if(character_picture[i]==0) player[i].picture.loadFromFile("character_image/character0.png");
+        else if(character_picture[i]==1) player[i].picture.loadFromFile("character_image/character1.png");
+        else if(character_picture[i]==2) player[i].picture.loadFromFile("character_image/character2.png");
+        else if(character_picture[i]==3) player[i].picture.loadFromFile("character_image/character3.png");
+        else if(character_picture[i]==4) player[i].picture.loadFromFile("character_image/character4.png");
     }
     player[0].player_loc.x = 15;
     player[0].player_loc.y = 10;
@@ -203,28 +205,98 @@ void PVP_initialize(){
 void PVP_map_initialize(int random_num){
     cout << "random = " << random_num << endl;
     if(random_num==0){
+
+        //here set wall
         map[3][0].wall = map[6][0].wall = map[7][0].wall = map[8][0].wall = 1;
-        map[2][1].wall = map[3][1].wall = map[3][1].wall = map[6][1].wall = map[7][1].wall = map[8][1].wall = map[10][1].wall = map[11][1].wall = map[12][1].wall = 1;
-        map[1][4].wall = map[4][4].wall = map[5][4].wall = map[6][4].wall = map[9][4].wall = map[10][4].wall = map[11][4].wall = 1;
+        map[2][1].wall = map[3][1].wall = map[6][1].wall = map[7][1].wall = map[8][1].wall = map[10][1].wall = map[11][1].wall = map[12][1].wall = 1;
+        map[14][2].wall = 1;
+        map[14][3].wall = 1;
+        map[1][4].wall = map[4][4].wall = map[5][4].wall = map[6][4].wall = map[9][4].wall = map[10][4].wall = map[11][4].wall = map[14][4].wall =1;
         map[1][5].wall = map[4][5].wall = map[5][5].wall = map[6][5].wall = map[9][5].wall = map[10][5].wall = map[11][5].wall = 1;
-        map[0][6].wall = map[9][6].wall = map[11][6].wall = 1;
-        map[0][8].wall = map[1][8].wall = 1;
+        map[0][6].wall = map[3][6].wall = map[9][6].wall = map[11][6].wall = 1;
+        map[5][7].wall = map[14][7].wall = 1;
+        map[0][8].wall = map[1][8].wall = map[9][8].wall = 1;
         map[0][9].wall = map[1][9].wall = map[4][9].wall = map[7][9].wall = map[8][9].wall = map[12][9].wall = 1;
         map[4][10].wall = map[7][10].wall = map[8][10].wall = map[12][10].wall = 1;
 
-        map[1][2].contain_item = map[2][5].contain_item = map[5][7].contain_item = map[7][2].contain_item = 1;
-        map[14][3].contain_item =map[14][5].contain_item =map[14][8].contain_item =  map[3][4].contain_item =1;
-        map[10][3].contain_item = map[2][9].contain_item = 1;
+        //here's the locations of items
+        map[10][0].contain_item = map[13][0].contain_item = 1;
+        map[14][1].contain_item = 1;
+        map[1][2].contain_item = map[4][2].contain_item = map[6][2].contain_item = map[9][2].contain_item = map[11][2].contain_item = 1;
+        map[2][3].contain_item = map[3][3].contain_item = map[6][3].contain_item = map[10][3].contain_item = map[13][3].contain_item = 1;
+        map[0][4].contain_item = map[2][4].contain_item = map[7][4].contain_item = map[8][4].contain_item = 1;
+        map[7][5].contain_item = map[8][5].contain_item = map[13][5].contain_item = map[15][5].contain_item = 1;
+        map[10][6].contain_item = 1;
+        map[1][7].contain_item = map[2][7].contain_item = map[4][7].contain_item = map[6][7].contain_item = 1;
+        map[7][7].contain_item = map[12][7].contain_item = map[13][7].contain_item = map[15][7].contain_item = 1;
+        map[3][8].contain_item = map[6][8].contain_item = map[11][8].contain_item = map[14][8].contain_item = 1;
+        map[2][9].contain_item = map[9][9].contain_item = map[10][9].contain_item = map[13][9].contain_item = 1;
+        map[6][10].contain_item = 1;
 
-        map[1][2].which_item = map[2][5].which_item = map[2][9].which_item = 0;
-        map[5][7].which_item = map[7][2].which_item = 1;
-        map[14][3].which_item = 2;
-        map[14][5].which_item = 3;
-        map[14][8].which_item = 4;
-        map[3][4].which_item =  5;
-        map[10][3].which_item = 11;
+        //here's the locations of boxes that contain items
+        map[10][0].contain_emptybox = map[13][0].contain_emptybox = 1;
+        map[14][1].contain_emptybox = 1;
+        map[1][2].contain_emptybox = map[4][2].contain_emptybox = map[6][2].contain_emptybox = map[9][2].contain_emptybox = map[11][2].contain_emptybox = 1;
+        map[2][3].contain_emptybox = map[3][3].contain_emptybox = map[6][3].contain_emptybox = map[10][3].contain_emptybox = map[13][3].contain_emptybox = 1;
+        map[0][4].contain_emptybox = map[2][4].contain_emptybox = map[7][4].contain_emptybox = map[8][4].contain_emptybox = 1;
+        map[7][5].contain_emptybox = map[8][5].contain_emptybox = map[13][5].contain_emptybox = map[15][5].contain_emptybox = 1;
+        map[10][6].contain_emptybox = 1;
+        map[1][7].contain_emptybox = map[2][7].contain_emptybox = map[4][7].contain_emptybox = map[6][7].contain_emptybox = 1;
+        map[7][7].contain_emptybox = map[12][7].contain_emptybox = map[13][7].contain_emptybox = map[15][7].contain_emptybox = 1;
+        map[3][8].contain_emptybox = map[6][8].contain_emptybox = map[11][8].contain_emptybox = map[14][8].contain_emptybox = 1;
+        map[2][9].contain_emptybox = map[9][9].contain_emptybox = map[10][9].contain_emptybox = map[13][9].contain_emptybox = 1;
+        map[6][10].contain_emptybox = 1;
 
-        map[5][3].contain_emptybox = map[10][8].contain_emptybox =map[7][4].contain_emptybox = map[2][9].contain_emptybox =  1;
+        //here's the locations of real empty boxes
+        int emptyboxes_x[36] ={2, 1, 5, 9, 13, 0, 2, 3, 8, 13,15, 0, 1, 7, 15, 13, 12, 14, 2, 4, 8, 14, 9, 11, 2, 4, 7, 10, 12, 13, 15, 3, 6, 14,  3, 13};
+        int emptyboxes_y[36] ={0, 1, 1, 1, 1,  2, 2, 2, 2, 2,  2, 3, 3, 3, 3,   4,  5,  5, 6, 6, 6,  6, 7,  7, 8, 8, 8,  8,  8,  8,  8, 9, 9,  9, 10, 10};
+        for(int i = 0; i < 36 ;i++){
+            map[emptyboxes_x[i]][emptyboxes_y[i]].contain_emptybox = 1;
+        }
+
+        int item0x[9] = {1,4,10,0,7,6,13,3,13};
+        int item0y[9] = {2,2,3,4,4,7,7,8,9};
+        for(int i = 0; i<9; i++) {
+              map[item0x[i]][item0y[i]].which_item = 0;
+        }
+
+        int  item1x[7] = {2,5,13,2,12,6,14};
+        int  item1y[7] = {3,3,3,7,7,8,8};
+        for(int i = 0; i<7; i++) {
+              map[item1x[i]][item1y[i]].which_item = 1;
+        }
+
+        int  item2x[2] = {13,7};
+        int  item2y[2] = {1,5};
+        for(int i = 0; i<2; i++) {
+              map[item2x[i]][item2y[i]].which_item = 2;
+        }
+
+        int  item3x[6] = {6,2,13,1,15,10};
+        int  item3y[6] = {3,4,5 ,7, 7,9};
+        for(int i = 0; i<6; i++) {
+              map[item3x[i]][item3y[i]].which_item = 3;
+        }
+
+        int  item4x[5]= {10, 9, 3, 7, 11};
+        int  item4y[5]= { 0, 2, 3, 7, 8};
+        for(int i = 0; i<5; i++) {
+              map[item4x[i]][item4y[i]].which_item = 4;
+        }
+
+        int  item5x[8] = {6, 11, 8, 15, 10, 4, 9,  6};
+        int  item5y[8] = { 2, 2, 5,  5,  6, 7, 9, 10};
+        for(int i = 0; i<8; i++) {
+              map[item5x[i]][item5y[i]].which_item = 5;
+        }
+
+        int  item11x[3] = {14, 8, 2};
+        int  item11y[3] = { 1, 4, 9};
+        for(int i = 0; i<3; i++) {
+              map[item11x[i]][item11y[i]].which_item = 11;
+        }
+
+
 
         for(int i = 0; i<16; i++) {
             for (int j = 0; j < 11; j++) {
@@ -237,7 +309,7 @@ void PVP_map_initialize(int random_num){
         }
 
 
-        PVP_background.loadFromFile("../PVP_image/background0.png");
+        PVP_background.loadFromFile("PVP_image/background0.png");
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         PVP_background.render(NULL);
@@ -278,7 +350,7 @@ void PVP_map_initialize(int random_num){
         }
 
 
-        PVP_background.loadFromFile("../PVP_image/background0.png");
+        PVP_background.loadFromFile("PVP_image/background0.png");
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         PVP_background.render(NULL);
@@ -318,7 +390,7 @@ void PVP_map_initialize(int random_num){
             }
         }
 
-        PVP_background.loadFromFile("../PVP_image/background0.png");
+        PVP_background.loadFromFile("PVP_image/background0.png");
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         PVP_background.render(NULL);

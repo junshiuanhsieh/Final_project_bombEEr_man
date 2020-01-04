@@ -3,8 +3,8 @@
 
 #include <iostream>
 #include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
+#include "SDL_image.h"
+#include "SDL_ttf.h"
 #include "Location.h"
 #include "Item.h"
 #include "Bomb.h"
@@ -13,6 +13,7 @@ class Map {
     friend class Player;
     friend class Bomb;
     friend class Item;
+    friend class Boss;
     friend void PVE();
     friend void PVP();
     friend void PVE_map_initialize(int random_num);

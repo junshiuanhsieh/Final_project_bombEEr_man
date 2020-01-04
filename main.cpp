@@ -1,5 +1,5 @@
 #include <SDL.h>
-#include <SDL_image.h>
+#include "SDL_image.h"
 #include <iostream>
 #include <string>
 #include <cmath>
@@ -70,8 +70,8 @@ void Start(){
     SDL_Point startbuttoncenter = {600, 520};
     SDL_Rect startbuttondest={420,190 , 360, 512};
     startbomb = CircleButton(startbuttondest, startbuttoncenter, BUTTON_START_RADIUS);
-    startgame.loadFromFile("../start_image/startbackground.png");
-    startbomb.buttontexture.loadFromFile("../start_image/startbomb.png");
+    startgame.loadFromFile("start_image/startbackground.png");
+    startbomb.buttontexture.loadFromFile("start_image/startbomb.png");
 
     SDL_Event startevent;
     while(!quit){
@@ -97,16 +97,19 @@ void Choosemode(){
     const int BUTTON_MODE_HEIGHT = 150;
     SDL_Rect modebutton_dest[2];
     for(int i = 0; i<2; i++){
+
         modebutton_dest[i].x = 500*i+200;
         modebutton_dest[i].y = 500;
         modebutton_dest[i].w = BUTTON_MODE_WIDTH;
         modebutton_dest[i].h = BUTTON_MODE_HEIGHT;
+
     }
     for(int i = 0; i<2; i++) modebuttons[i] = RectButton(modebutton_dest[i]);
-    modebuttons[0].buttontexture.loadFromFile("../start_image/PVEbutton.png");
-    modebuttons[1].buttontexture.loadFromFile("../start_image/PVPbutton.png");
-    choosemode.loadFromFile("../start_image/modebackground.png");
+    modebuttons[0].buttontexture.loadFromFile("start_image/PVEbutton.png");
+    modebuttons[1].buttontexture.loadFromFile("start_image/PVPbutton.png");
+    choosemode.loadFromFile("start_image/modebackground.png");
     SDL_Event modeevent;
+
     while(!quit){
         while(SDL_PollEvent(&modeevent) != 0){
             if(modeevent.type == SDL_QUIT) quit = true;
@@ -138,6 +141,7 @@ void Choosemode(){
     }
 }
 void Choosenumber(){
+
     int TOTAL_NUMBERBUTTON;
     if(Mode==1) TOTAL_NUMBERBUTTON = 3;
     else if(Mode==2) TOTAL_NUMBERBUTTON = 2;
@@ -147,7 +151,9 @@ void Choosenumber(){
     RectButton numberbuttons[TOTAL_NUMBERBUTTON], backto_choosemode;
     SDL_Rect PVE_numberbutton_dest[TOTAL_NUMBERBUTTON], backbuttondest={100, 600, 200, 100};
     SDL_Rect PVP_numberbutton_dest[TOTAL_NUMBERBUTTON];
+
     for(int i = 0; i<TOTAL_NUMBERBUTTON; i++){
+
         if(TOTAL_NUMBERBUTTON==3){
             PVE_numberbutton_dest[i].x = 300*i+200;
             PVE_numberbutton_dest[i].y = 450;
@@ -155,6 +161,7 @@ void Choosenumber(){
             PVE_numberbutton_dest[i].h = BUTTON_NUMBER_HEIGHT;
             numberbuttons[i] = RectButton(PVE_numberbutton_dest[i]);
         }
+
         else if(TOTAL_NUMBERBUTTON==2){
             PVP_numberbutton_dest[i].x = 400*i+300;
             PVP_numberbutton_dest[i].y = 450;
@@ -163,17 +170,19 @@ void Choosenumber(){
             numberbuttons[i] = RectButton(PVP_numberbutton_dest[i]);
         }
     }
+
     backto_choosemode = RectButton(backbuttondest);
-    choosenumber.loadFromFile("../start_image/choosenumber_background.png");
-    backto_choosemode.buttontexture.loadFromFile("../start_image/back.png");
+    choosenumber.loadFromFile("start_image/choosenumber_background.png");
+    backto_choosemode.buttontexture.loadFromFile("start_image/back.png");
+
     if(Mode==1){
-        numberbuttons[0].buttontexture.loadFromFile("../start_image/choosenumber_button1.png");
-        numberbuttons[1].buttontexture.loadFromFile("../start_image/choosenumber_button2.png");
-        numberbuttons[2].buttontexture.loadFromFile("../start_image/choosenumber_button3.png");
+        numberbuttons[0].buttontexture.loadFromFile("start_image/choosenumber_button1.png");
+        numberbuttons[1].buttontexture.loadFromFile("start_image/choosenumber_button2.png");
+        numberbuttons[2].buttontexture.loadFromFile("start_image/choosenumber_button3.png");
     }
     else if(Mode==2){
-        numberbuttons[0].buttontexture.loadFromFile("../start_image/choosenumber_button2.png");
-        numberbuttons[1].buttontexture.loadFromFile("../start_image/choosenumber_button3.png");
+        numberbuttons[0].buttontexture.loadFromFile("start_image/choosenumber_button2.png");
+        numberbuttons[1].buttontexture.loadFromFile("start_image/choosenumber_button3.png");
     }
 
     SDL_Event numberevent;
@@ -212,20 +221,20 @@ void Choosenumber(){
 }
 void Scrolling(){
     Texture scrolling, TextTexture,TextTexture2;
-    scrolling.loadFromFile("../start_image/scrolling_background.png");
+    scrolling.loadFromFile("start_image/scrolling_background.png");
     SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF);
     SDL_RenderClear(gRenderer);
     scrolling.render(NULL);
-    TextTexture.loadFromFile("../start_image/scrolling_PVE.png");
-    TextTexture2.loadFromFile("../start_image/scrolling_PVP.png");
+    TextTexture.loadFromFile("start_image/scrolling_PVE.png");
+    TextTexture2.loadFromFile("start_image/scrolling_PVP.png");
     SDL_RenderPresent( gRenderer );
 
     SDL_Rect rcText[4], back_dest = {100, 640, 200, 100}, next_dest = {900, 640, 200, 100};
     RectButton backto_number(back_dest), next_button(next_dest);
-    backto_number.buttontexture.loadFromFile("../start_image/back.png");
-    next_button.buttontexture.loadFromFile("../start_image/next.png");
-    SDL_Rect text_dest,text_clip;
-    double temp_y = 600;
+    backto_number.buttontexture.loadFromFile("start_image/back.png");
+    next_button.buttontexture.loadFromFile("start_image/next.png");
+    SDL_Rect text_dest,text_clip, background_dest;
+    double temp_y ;
 
     SDL_Event scrollingevent;
     text_dest.x = 0;
@@ -235,31 +244,41 @@ void Scrolling(){
     text_clip.y = 0;
     text_clip.w = 1200;
 
+    background_dest.x = 0;
+    background_dest.w = 1200;
+
+
     bool next = 0;
 
     if(Mode==1){
+        background_dest.y = temp_y = 675;
+        background_dest.h = 750-temp_y;
         while(temp_y>=0){
 
-            text_clip .h = 750 - temp_y;
-            text_dest .h = 750 - temp_y;
+            text_clip .h = 675 - temp_y;
+            text_dest .h = 675 - temp_y;
             text_dest .y = temp_y;
 
-            temp_y -= 3;
+            temp_y -= 10;
             scrolling.render(NULL);
             TextTexture.render(&text_dest,&text_clip,0);
+
             SDL_RenderPresent( gRenderer );
         }
     }
     else{
+        background_dest.y = temp_y = 650;
+        background_dest.h = 750 - temp_y;
         while(temp_y>=0){
 
-            text_clip .h = 750 - temp_y;
-            text_dest .h = 750 - temp_y;
+            text_clip .h = 675 - temp_y;
+            text_dest .h = 650 - temp_y;
             text_dest .y = temp_y;
 
-            temp_y -= 3;
+            temp_y -= 10;
             scrolling.render(NULL);
             TextTexture2.render(&text_dest,&text_clip,0);
+
             SDL_RenderPresent( gRenderer );
         }
     }
@@ -325,6 +344,7 @@ void Scrolling(){
         SDL_RenderPresent( gRenderer );
     }
 }
+
 void Choosecharacter(){
     character_picture = new int[Player_number];
     for(int i = 0; i< Player_number; i++) character_picture[i] = -1;
@@ -344,13 +364,13 @@ void Choosecharacter(){
         characteroption[i] = RectButton(characteroption_dest[i]);
     }
     backto_scrolling = RectButton(backbuttondest);
-    characteroption[0].buttontexture.loadFromFile("../character_image/character0.png");
-    characteroption[1].buttontexture.loadFromFile("../character_image/character1.png");
-    characteroption[2].buttontexture.loadFromFile("../character_image/character2.png");
-    characteroption[3].buttontexture.loadFromFile("../character_image/character3.png");
-    characteroption[4].buttontexture.loadFromFile("../character_image/character4.png");
-    choosecharacter.loadFromFile("../start_image/choosecharacter_background.png");
-    backto_scrolling.buttontexture.loadFromFile("../start_image/back.png");
+    characteroption[0].buttontexture.loadFromFile("character_image/character0.png");
+    characteroption[1].buttontexture.loadFromFile("character_image/character1.png");
+    characteroption[2].buttontexture.loadFromFile("character_image/character2.png");
+    characteroption[3].buttontexture.loadFromFile("character_image/character3.png");
+    characteroption[4].buttontexture.loadFromFile("character_image/character4.png");
+    choosecharacter.loadFromFile("start_image/choosecharacter_background.png");
+    backto_scrolling.buttontexture.loadFromFile("start_image/back.png");
 
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
@@ -429,10 +449,10 @@ void Tutorial_start(){
     Texture tutorial_start;
     RectButton tutorial(tutorial_dest), backto_character(back_dest);
     CircleButton start_game(startgame_dest, startgame_center, 150);
-    tutorial_start.loadFromFile("../start_image/tutorial_start_background.png");
-    backto_character.buttontexture.loadFromFile("../start_image/back.png");
-    tutorial.buttontexture.loadFromFile("../start_image/tutorial.png");
-    start_game.buttontexture.loadFromFile(("../start_image/start_game.png"));
+    tutorial_start.loadFromFile("start_image/tutorial_start_background.png");
+    backto_character.buttontexture.loadFromFile("start_image/back.png");
+    tutorial.buttontexture.loadFromFile("start_image/tutorial.png");
+    start_game.buttontexture.loadFromFile(("start_image/start_game.png"));
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
     tutorial_start.render(NULL);
@@ -481,8 +501,8 @@ void Tutorial(){
     SDL_Rect back_dest = {100, 600, 200, 100};
     Texture tutorial;
     RectButton back(back_dest);
-    tutorial.loadFromFile("../start_image/tutorial_background.png");
-    back.buttontexture.loadFromFile("../start_image/back.png");
+    tutorial.loadFromFile("start_image/tutorial_background.png");
+    back.buttontexture.loadFromFile("start_image/back.png");
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
     tutorial.render(NULL);
@@ -531,10 +551,10 @@ int quit_restart_home(){
         cupdest[2].x = 900; cupdest[2].y = 300; cupdest[2].w = 100; cupdest[2].h = 100;
     }
 
-    game_over.loadFromFile("../PVE_image/game_over.png");
-    win_lose.loadFromFile("../PVE_image/win_lose.png");
-    cup.loadFromFile("../PVP_image/cup.png");
-    gameend_backgroung.loadFromFile("../PVP_image/gameend_background.png");
+    game_over.loadFromFile("PVE_image/game_over.png");
+    win_lose.loadFromFile("PVE_image/win_lose.png");
+    cup.loadFromFile("PVP_image/cup.png");
+    gameend_backgroung.loadFromFile("PVP_image/gameend_background.png");
 
 
     int no1 = -1;

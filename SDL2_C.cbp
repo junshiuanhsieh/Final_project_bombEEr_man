@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="SDL2_C" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Release">
+				<Option output="bin/Release/SDL2_C" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="SDL2-2.0.10/i686-w64-mingw32/include" />
+					<Add directory="SDL_bgi-2.3.0/src" />
+					<Add directory="SDL2_image-2.0.5/i686-w64-mingw32/include" />
+					<Add directory="SDL2_mixer-2.0.4/i686-w64-mingw32/include" />
+					<Add directory="SDL2_ttf-2.0.15/i686-w64-mingw32/include" />
+					<Add directory="SDL2-2.0.10/i686-w64-mingw32/include/SDL2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-lmingw32" />
+					<Add option="-L/mingw64/bin" />
+					<Add option="-lSDL_bgi" />
+					<Add option="-lSDL2_ttf" />
+					<Add option="-lSDL2_mixer" />
+					<Add option="-lSDL2_image" />
+					<Add option="-lSDL2main" />
+					<Add option="-lSDL2" />
+					<Add directory="SDL2-2.0.10/i686-w64-mingw32/lib" />
+					<Add directory="SDL_bgi-2.3.0/bin/CodeBlocks" />
+					<Add directory="SDL2_image-2.0.5/i686-w64-mingw32/lib" />
+					<Add directory="SDL2_mixer-2.0.4/i686-w64-mingw32/lib" />
+					<Add directory="SDL2_ttf-2.0.15/i686-w64-mingw32/lib" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="Bomb.cpp" />
+		<Unit filename="Bomb.h" />
+		<Unit filename="Item.cpp" />
+		<Unit filename="Item.h" />
+		<Unit filename="Location.cpp" />
+		<Unit filename="Location.h" />
+		<Unit filename="Map.cpp" />
+		<Unit filename="Map.h" />
+		<Unit filename="PVE.cpp" />
+		<Unit filename="PVE.h" />
+		<Unit filename="PVP.cpp" />
+		<Unit filename="PVP.h" />
+		<Unit filename="Player.cpp" />
+		<Unit filename="Player.h" />
+		<Unit filename="SDL_image.h" />
+		<Unit filename="SDL_ttf.h" />
+		<Unit filename="boss.cpp" />
+		<Unit filename="boss.h" />
+		<Unit filename="button.cpp" />
+		<Unit filename="button.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="texture.cpp" />
+		<Unit filename="texture.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,8 +1,8 @@
 #ifndef BOMBEER_MAN_PLAYER_H
 #define BOMBEER_MAN_PLAYER_H
 #include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
+#include "SDL_image.h"
+#include "SDL_ttf.h"
 #include "texture.h"
 #include "Item.h"
 #include "Location.h"
@@ -13,6 +13,7 @@ enum Direction{ UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 class Player {
     friend int main(int, char*args[]);
     friend int quit_restart_home();
+    friend class Boss;
     friend void PVE();
     friend void PVP();
     friend void PVE_initialize();
@@ -29,7 +30,7 @@ public:
     void get_item(Item *);
     void useitem(Item *);                    //use pointer to enable polymorphism
     Bomb* putbomb(Bomb *);
-    void player_render();
+    virtual void player_render();
     bool alive;
     Item * item_owned[12];
     bool item[12];
@@ -41,5 +42,24 @@ private:
     Texture picture;
     SDL_Point player_point;
 };
+
+
+class Boss : public Player {
+
+    friend int main(int, char*args[]);
+    friend int quit_restart_home();
+    friend class Boss;
+    friend void PVE();
+    friend void PVE_initialize();
+    friend void PVE_Show_data();
+    friend class Bomb;
+    public:
+        void player_render();
+
+    private:
+        int boss_life;
+};
+
+
 
 #endif

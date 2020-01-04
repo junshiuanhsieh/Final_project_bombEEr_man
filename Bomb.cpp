@@ -12,6 +12,7 @@ extern Map** map;
 extern Player* player;
 extern int bomb_num;
 extern Bomb * bomb;  //一開始不知道為什麼會是NULL，沒有跟其他cpp檔連結，小心使用，有時間的話網路上說用用看singleton
+extern Boss boss;
 
 Bomb::Bomb() : clk(clock()){
     bomb_distance = 1;
@@ -57,7 +58,10 @@ int Bomb::bomb_up(){
            // bomb = map[bombUp.x][bombUp.y].bomb->bomb_explode(map[bombUp.x][bombUp.y].bomb->number, bomb);
             return i;
         }
-        else if(map[bombUp.x][bombUp.y].wall) return i-1;
+        else if(map[bombUp.x][bombUp.y].wall) {
+            if(Mode == 1) boss.boss_life --;
+            return i-1;
+        }
         else if(map[bombUp.x][bombUp.y].contain_emptybox){
             map[bombUp.x][bombUp.y].collapse();
             return i;
@@ -89,7 +93,10 @@ int Bomb::bomb_down(){
             //bomb = map[bombDown.x][bombDown.y].bomb->bomb_explode(map[bombDown.x][bombDown.y].bomb->number, bomb);
             return i;
         }
-        else if(map[bombDown.x][bombDown.y].wall) return i-1;
+        else if(map[bombDown.x][bombDown.y].wall) {
+            if(Mode == 1) boss.boss_life --;
+            return i-1;
+        }
         else if(map[bombDown.x][bombDown.y].contain_emptybox){
             map[bombDown.x][bombDown.y].collapse();
             return i;
@@ -121,12 +128,15 @@ int Bomb::bomb_left(){
             //bomb = map[bombLeft.x][bombLeft.y].bomb->bomb_explode(map[bombLeft.x][bombLeft.y].bomb->number, bomb);
             return i;
         }
-        else if(map[bombLeft.x][bombLeft.y].wall) return i-1;
+        else if(map[bombLeft.x][bombLeft.y].wall) {
+            if(Mode == 1) boss.boss_life --;
+            return i-1;
+        }
         else if(map[bombLeft.x][bombLeft.y].contain_emptybox){
             map[bombLeft.x][bombLeft.y].collapse();
             return i;
         }
-//        else if(map[bombLeft.x][bombLeft.y].contain_item && map[bombLeft.x][bombLeft.y].item->destroyed==0){
+//        else if(map[bombLeft.x][bombLeft.y].contai/n_item && map[bombLeft.x][bombLeft.y].item->destroyed==0){
 //            map[bombLeft.x][bombLeft.y].collapse();
 //            return i;
 //        }
@@ -153,7 +163,10 @@ int Bomb::bomb_right(){
             //bomb = map[bombRight.x][bombRight.y].bomb->bomb_explode(map[bombRight.x][bombRight.y].bomb->number, bomb);
             return i;
         }
-        else if(map[bombRight.x][bombRight.y].wall) return i-1;
+        else if(map[bombRight.x][bombRight.y].wall) {
+                if(Mode == 1) boss.boss_life --;
+                return i-1;
+        }
         else if(map[bombRight.x][bombRight.y].contain_emptybox){
             map[bombRight.x][bombRight.y].collapse();
             return i;

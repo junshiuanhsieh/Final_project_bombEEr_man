@@ -20,10 +20,10 @@ Player::Player(){
     }
     score = 0;
     rank = 1;
-    bomb_distance = 2;
-    bomb_available = 3;
-    bomb_left = 3;
-    rate = 8;
+    bomb_distance = 1;
+    bomb_available = 1;
+    bomb_left = 1;
+    rate = 7;
 }
 Player::Player(int num) : player_num(num){
     alive = true;
@@ -33,10 +33,10 @@ Player::Player(int num) : player_num(num){
     }
     score = 0;
     rank = 1;
-    bomb_distance = 2;
-    bomb_available = 3;
-    bomb_left = 3;
-    rate = 8;
+    bomb_distance = 1;
+    bomb_available = 1;
+    bomb_left = 1;
+    rate = 7;
 }
 int Player::count_rank = Player_number;
 bool Player::dead(){
@@ -164,10 +164,12 @@ void Player::determine_loc(){
     player_loc.x = (player_point.x-20) / 60;
     player_loc.y = (player_point.y-75) / 60;
 }
+
 void Player::finish_moving(){
     player_point.x = 50 + player_loc.x*60;
     player_point.y = 105 + player_loc.y*60;
 }
+
 Bomb* Player::putbomb(Bomb * bomb){
     bomb_num++;
     Bomb* temp_bomb;
@@ -185,6 +187,7 @@ Bomb* Player::putbomb(Bomb * bomb){
     delete [] temp_bomb;
     return bomb;
 }
+
 void Player::get_item(Item * item_get){
     item[item_get->item_num] = 1 ;
 
@@ -202,11 +205,11 @@ void Player::get_item(Item * item_get){
     }
         //走路速度變快
     else if(item_get->item_num == 3){
-        this->rate += 3;
+        this->rate += 1;
     }
         //走路速度變慢
     else if(item_get->item_num == 4){
-        this->rate -= 3;
+        this->rate -= 2;
     }
         //逆向寫在move裡面
     else if(item_get->item_num == 5){
@@ -221,11 +224,25 @@ void Player::get_item(Item * item_get){
 
 
 }
+
 void Player::useitem(Item * item){
     item_owned[item->item_num]--;
     item->used();
 }
+
 void Player::player_render(){
     SDL_Rect player_dest = {player_point.x-30, player_point.y-30, 60, 60};
     picture.render(&player_dest);
 }
+
+void Boss::player_render(){
+
+    SDL_Rect boss_dest;
+
+    boss_dest.x = 20 + 60 * 6;
+    boss_dest.y = 75 + 60 * 3;
+    boss_dest.w = 240;
+    boss_dest.h = 240;
+    picture.render(&boss_dest);
+}
+
