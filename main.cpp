@@ -82,9 +82,9 @@ void close(){
 void Start(){
     CircleButton startbomb;
     Texture startgame;
-    const int BUTTON_START_RADIUS = 180;
-    SDL_Point startbuttoncenter = {600, 520};
-    SDL_Rect startbuttondest={420,190 , 360, 512};
+    const int BUTTON_START_RADIUS = 120;
+    SDL_Point startbuttoncenter = {1000, 621};
+    SDL_Rect startbuttondest={880,400 , 240, 341};
     startbomb = CircleButton(startbuttondest, startbuttoncenter, BUTTON_START_RADIUS);
     startgame.loadFromFile("../start_image/startbackground.png");
     startbomb.buttontexture.loadFromFile("../start_image/startbomb.png");
@@ -113,7 +113,7 @@ void Choosemode(){
     const int BUTTON_MODE_HEIGHT = 150;
     SDL_Rect modebutton_dest[2];
     for(int i = 0; i<2; i++){
-        modebutton_dest[i].x = 500*i+200;
+        modebutton_dest[i].x = 630*i+150;
         modebutton_dest[i].y = 500;
         modebutton_dest[i].w = BUTTON_MODE_WIDTH;
         modebutton_dest[i].h = BUTTON_MODE_HEIGHT;
@@ -159,7 +159,7 @@ void Choosenumber(){
     else if(Mode==2) TOTAL_NUMBERBUTTON = 2;
     const int BUTTON_NUMBER_WIDTH = 200;
     const int BUTTON_NUMBER_HEIGHT = 100;
-    Texture choosenumber;
+    Texture choosenumber_PVE, choosenumber_PVP;
     RectButton numberbuttons[TOTAL_NUMBERBUTTON], backto_choosemode;
     SDL_Rect PVE_numberbutton_dest[TOTAL_NUMBERBUTTON], backbuttondest={100, 600, 200, 100};
     SDL_Rect PVP_numberbutton_dest[TOTAL_NUMBERBUTTON];
@@ -180,7 +180,8 @@ void Choosenumber(){
         }
     }
     backto_choosemode = RectButton(backbuttondest);
-    choosenumber.loadFromFile("../start_image/choosenumber_background.png");
+    choosenumber_PVE.loadFromFile("../start_image/choosenumber_background_PVE.png");
+    choosenumber_PVP.loadFromFile("../start_image/choosenumber_background_PVP.png");
     backto_choosemode.buttontexture.loadFromFile("../start_image/back.png");
     if(Mode==1){
         numberbuttons[0].buttontexture.loadFromFile("../start_image/choosenumber_button1.png");
@@ -202,7 +203,8 @@ void Choosenumber(){
         if (numberevent.type == SDL_QUIT) return;
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
-        choosenumber.render(NULL);
+        if(Mode==1) choosenumber_PVE.render(NULL);
+        else if(Mode==2) choosenumber_PVP.render(NULL);
         for(int i = 0; i < TOTAL_NUMBERBUTTON; i++) {
             bool big = 1;
             if(numberbuttons[i].CurrentSprite==BUTTON_SPRITE_MOUSE_OUT) big = 0;
@@ -227,11 +229,13 @@ void Choosenumber(){
     }
 }
 void Scrolling(){
-    Texture scrolling, TextTexture,TextTexture2;
-    scrolling.loadFromFile("../start_image/scrolling_background.png");
+    Texture scrolling_PVE, scrolling_PVP, TextTexture,TextTexture2;
+    scrolling_PVE.loadFromFile("../start_image/scrollingbackground_PVE.png");
+    scrolling_PVP.loadFromFile("../start_image/scrollingbackground_PVP.png");
     SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF);
     SDL_RenderClear(gRenderer);
-    scrolling.render(NULL);
+    if(Mode==1) scrolling_PVE.render(NULL);
+    else if(Mode==2) scrolling_PVP.render(NULL);
     TextTexture.loadFromFile("../start_image/scrolling_PVE.png");
     TextTexture2.loadFromFile("../start_image/scrolling_PVP.png");
     SDL_RenderPresent( gRenderer );
@@ -267,7 +271,8 @@ void Scrolling(){
             text_dest .y = temp_y;
 
             temp_y -= 10;
-            scrolling.render(NULL);
+            if(Mode==1) scrolling_PVE.render(NULL);
+            else if(Mode==2) scrolling_PVP.render(NULL);
             TextTexture.render(&text_dest,&text_clip,0);
 
             SDL_RenderPresent( gRenderer );
@@ -283,7 +288,8 @@ void Scrolling(){
             text_dest .y = temp_y;
 
             temp_y -= 10;
-            scrolling.render(NULL);
+            if(Mode==1) scrolling_PVE.render(NULL);
+            else if(Mode==2) scrolling_PVP.render(NULL);
             TextTexture2.render(&text_dest,&text_clip,0);
 
             SDL_RenderPresent( gRenderer );
@@ -300,7 +306,8 @@ void Scrolling(){
         }
 
         SDL_RenderClear(gRenderer);
-        //scrolling.render(NULL);
+        if(Mode==1) scrolling_PVE.render(NULL);
+        else if(Mode==2) scrolling_PVP.render(NULL);
         if(Mode==1)  TextTexture.render(&text_dest,&text_clip,0);
         else TextTexture2.render(&text_dest,&text_clip,0);
 
@@ -333,7 +340,8 @@ void Scrolling(){
             backto_number.handleEvent(&scrollingevent);
         }
         SDL_RenderClear(gRenderer);
-        scrolling.render(NULL);
+        if(Mode==1) scrolling_PVE.render(NULL);
+        else if(Mode==2) scrolling_PVP.render(NULL);
         if(backto_number.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) big_back = 0;
         backto_number.rectrender(big_back);
         if(next_button.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) big_next = 0;
