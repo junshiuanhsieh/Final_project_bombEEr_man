@@ -238,6 +238,10 @@ void Scrolling(){
     else if(Mode==2) scrolling_PVP.render(NULL);
     TextTexture.loadFromFile("../start_image/scrolling_PVE.png");
     TextTexture2.loadFromFile("../start_image/scrolling_PVP.png");
+    TextTexture.setBlendMode(SDL_BLENDMODE_BLEND);
+    TextTexture2.setBlendMode(SDL_BLENDMODE_BLEND);
+    TextTexture.setAlpha(180);
+    TextTexture2.setAlpha(180);
     SDL_RenderPresent( gRenderer );
 
     SDL_Rect rcText[4], back_dest = {100, 640, 200, 100}, next_dest = {900, 640, 200, 100};
