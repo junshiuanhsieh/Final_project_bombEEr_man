@@ -363,7 +363,7 @@ void Scrolling(){
         SDL_RenderPresent( gRenderer );
     }
 }
-void Choosecharacter(){
+void Choosecharacter() {
     character_picture = new int[Player_number];
     for(int i = 0; i< Player_number; i++) character_picture[i] = -1;
     int TOTAL_CHARACTER_OPTION = 5;
@@ -560,7 +560,7 @@ int quit_restart_home(){
     bool win = 0;
     SDL_Rect win_clip = {0, 0, 900, 200}, lose_clip = {0, 200, 900, 200}, win_lose_dest = {300, 500, 600, 135};
     SDL_Rect home_dest = {350, 620, 100, 100}, restart_dest = {550, 620, 100, 100}, quit_dest = {750, 620, 100, 100};
-    SDL_Point home_cen = {400, 670}, restart_cen = {650, 670}, quit_cen = {800, 670};
+    SDL_Point home_cen = {400, 670}, restart_cen = {600, 670}, quit_cen = {800, 670};
     SDL_Rect showrank[Player_number], cupdest[Player_number];
     if(Player_number==2){
         showrank[0].x = 300; showrank[0].y = 100; showrank[0].w = 200; showrank[0].h = 500;

@@ -191,7 +191,8 @@ Bomb** Player::putbomb(Bomb ** _bomb){
     return _bomb;
 }
 void Player::get_item(Item * item_get){
-    item[item_get->item_num] = 1 ;
+    if(item_get->item_num == 5 && item[5] == 1) item[5] = 0;
+    else item[item_get->item_num] = 1 ;
 
     if(item_get->item_num == 0) {
         this->bomb_available++;

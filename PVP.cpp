@@ -41,8 +41,8 @@ int PVP(){
     PVP_initialize();
 
     CircleButton pause, music_on, music_off;
-    SDL_Rect pause_dest = {720, 15, 50, 50}, music_dest = {780, 15, 50, 50};
-    SDL_Point pause_cen = {745, 40}, music_cen = {805, 40};
+    SDL_Rect pause_dest = {870, 15, 50, 50}, music_dest = {930, 15, 50, 50};
+    SDL_Point pause_cen = {895, 40}, music_cen = {955, 40};
 
     bool music = 1;
     pause = CircleButton(pause_dest, pause_cen, 25);
@@ -276,6 +276,7 @@ int PVP(){
     delete [] bomb;
     for(int i = 0; i<16; i++) delete [] map[i];
     delete [] map;
+    return 0;
 }
 
 void PVP_initialize(){
