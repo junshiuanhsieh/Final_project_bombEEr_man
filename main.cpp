@@ -244,7 +244,7 @@ void Scrolling(){
     TextTexture2.setAlpha(180);
     SDL_RenderPresent( gRenderer );
 
-    SDL_Rect rcText[4], back_dest = {100, 650, 200, 100}, next_dest = {900, 650, 200, 100};
+    SDL_Rect rcText[4], back_dest = {100, 600, 200, 100}, next_dest = {900, 600, 200, 100};
     RectButton backto_number(back_dest), next_button(next_dest);
     backto_number.buttontexture.loadFromFile("../start_image/back.png");
     next_button.buttontexture.loadFromFile("../start_image/next.png");
@@ -266,12 +266,12 @@ void Scrolling(){
     bool next = 0;
 
     if(Mode==1){
-        background_dest.y = temp_y = 675;
+        background_dest.y = temp_y = 750;
         background_dest.h = 750-temp_y;
         while(temp_y>=0){
 
-            text_clip .h = 675 - temp_y;
-            text_dest .h = 675 - temp_y;
+            text_clip .h = 750 - temp_y;
+            text_dest .h = 750 - temp_y;
             text_dest .y = temp_y;
 
             temp_y -= 10;
@@ -283,12 +283,12 @@ void Scrolling(){
         }
     }
     else{
-        background_dest.y = temp_y = 650;
+        background_dest.y = temp_y = 750;
         background_dest.h = 750 - temp_y;
         while(temp_y>=0){
 
-            text_clip .h = 675 - temp_y;
-            text_dest .h = 650 - temp_y;
+            text_clip .h = 750 - temp_y;
+            text_dest .h = 750 - temp_y;
             text_dest .y = temp_y;
 
             temp_y -= 10;
@@ -474,11 +474,11 @@ void Choosecharacter(){
     Tutorial_start();
 }
 void Tutorial_start(){
-    SDL_Rect tutorial_dest = {900, 600, 200, 100}, startgame_dest = {450, 400, 300, 300}, back_dest = {100, 600, 200, 100};
-    SDL_Point startgame_center = {600, 550};
+    SDL_Rect tutorial_dest = {900, 600, 200, 100}, startgame_dest = {500, 530, 200, 200}, back_dest = {100, 600, 200, 100};
+    SDL_Point startgame_center = {600, 630};
     Texture tutorial_start;
     RectButton tutorial(tutorial_dest), backto_character(back_dest);
-    CircleButton start_game(startgame_dest, startgame_center, 150);
+    CircleButton start_game(startgame_dest, startgame_center, 100);
     tutorial_start.loadFromFile("../start_image/tutorial_start_background.png");
     backto_character.buttontexture.loadFromFile("../start_image/back.png");
     tutorial.buttontexture.loadFromFile("../start_image/tutorial.png");
@@ -560,39 +560,46 @@ void Tutorial(){
     }
 }
 int quit_restart_home(){
-    Texture game_over, win_lose, cup, gameend_backgroung;
+    Texture win_background, lose_background, cup, gameend_backgroung, characterpicture[5];
     CircleButton home_button, restart_button, quit_button;
 
     bool win = 0;
     SDL_Rect win_clip = {0, 0, 900, 200}, lose_clip = {0, 200, 900, 200}, win_lose_dest = {300, 500, 600, 135};
-    SDL_Rect home_dest = {250, 550, 100, 100}, restart_dest = {550, 550, 100, 100}, quit_dest = {850, 550, 100, 100};
-    SDL_Point home_cen = {300, 600}, restart_cen = {600, 600}, quit_cen = {900, 600};
+    SDL_Rect home_dest = {350, 620, 100, 100}, restart_dest = {550, 620, 100, 100}, quit_dest = {750, 620, 100, 100};
+    SDL_Point home_cen = {400, 670}, restart_cen = {650, 670}, quit_cen = {800, 670};
     SDL_Rect showrank[Player_number], cupdest[Player_number];
     if(Player_number==2){
-        showrank[0].x = 300; showrank[0].y = 200; showrank[0].w = 200; showrank[0].h = 200;
-        showrank[1].x = 700; showrank[1].y = 200; showrank[1].w = 200; showrank[1].h = 200;
+        showrank[0].x = 300; showrank[0].y = 100; showrank[0].w = 200; showrank[0].h = 500;
+        showrank[1].x = 700; showrank[1].y = 100; showrank[1].w = 200; showrank[1].h = 500;
         cupdest[0].x = 400; cupdest[0].y = 300; cupdest[0].w = 100; cupdest[0].h = 100;
         cupdest[1].x = 800; cupdest[1].y = 300; cupdest[1].w = 100; cupdest[1].h = 100;
     }
     else if(Player_number==3){
-        showrank[0].x = 200; showrank[0].y = 200; showrank[0].w = 200; showrank[0].h = 200;
-        showrank[1].x = 500; showrank[1].y = 200; showrank[1].w = 200; showrank[1].h = 200;
-        showrank[2].x = 800; showrank[2].y = 200; showrank[2].w = 200; showrank[2].h = 200;
-        cupdest[0].x = 300; cupdest[0].y = 300; cupdest[0].w = 100; cupdest[0].h = 100;
-        cupdest[1].x = 600; cupdest[1].y = 300; cupdest[1].w = 100; cupdest[1].h = 100;
-        cupdest[2].x = 900; cupdest[2].y = 300; cupdest[2].w = 100; cupdest[2].h = 100;
+        showrank[0].x = 200; showrank[0].y = 100; showrank[0].w = 200; showrank[0].h = 500;
+        showrank[1].x = 500; showrank[1].y = 100; showrank[1].w = 200; showrank[1].h = 500;
+        showrank[2].x = 800; showrank[2].y = 100; showrank[2].w = 200; showrank[2].h = 500;
+        cupdest[0].x = 300; cupdest[0].y = 250; cupdest[0].w = 100; cupdest[0].h = 114;
+        cupdest[1].x = 600; cupdest[1].y = 250; cupdest[1].w = 100; cupdest[1].h = 114;
+        cupdest[2].x = 900; cupdest[2].y = 250; cupdest[2].w = 100; cupdest[2].h = 114;
     }
     home_button = CircleButton(home_dest, home_cen, 50);
     restart_button = CircleButton(restart_dest, restart_cen, 50);
     quit_button = CircleButton(quit_dest, quit_cen, 50);
 
-    game_over.loadFromFile("../PVE_image/game_over.png");
-    win_lose.loadFromFile("../PVE_image/win_lose.png");
+    win_background.loadFromFile("../PVE_image/win_background.png");
+    lose_background.loadFromFile("../PVE_image/lose_background.png");
     cup.loadFromFile("../PVP_image/cup.png");
     gameend_backgroung.loadFromFile("../PVP_image/gameend_background.png");
+    gameend_backgroung.setBlendMode(SDL_BLENDMODE_BLEND);
+    gameend_backgroung.setAlpha(180);
     home_button.buttontexture.loadFromFile("../button_image/home.png");
     restart_button.buttontexture.loadFromFile("../button_image/restart.png");
     quit_button.buttontexture.loadFromFile("../button_image/quit.png");
+    characterpicture[0].loadFromFile("../character_image/shiuan.png");
+    characterpicture[1].loadFromFile("../character_image/elephy.png");
+    characterpicture[2].loadFromFile("../character_image/may.png");
+    characterpicture[3].loadFromFile("../character_image/yee.png");
+    characterpicture[4].loadFromFile("../character_image/allenwu.png");
 
     int no1 = -1;
     int twowinner[2] = {-1, -1};
@@ -621,14 +628,13 @@ int quit_restart_home(){
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         if(Mode==1){
-            game_over.render(NULL);
-            if(win) win_lose.render(&win_lose_dest, &win_clip);
-            else win_lose.render(&win_lose_dest, &lose_clip);
+            if(win) win_background.render(NULL);
+            else lose_background.render(NULL);
         }
         else if(Mode==2){
             gameend_backgroung.render(NULL);
             for(int i = 0; i<Player_number; i++) {
-                player[i].picture.render(&showrank[i]);
+                characterpicture[i].render(&showrank[i]);
             }
             if(no1 != -1) cup.render(&cupdest[no1]);
             else if (!noonewins){
