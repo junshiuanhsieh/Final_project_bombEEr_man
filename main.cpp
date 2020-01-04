@@ -367,7 +367,7 @@ void Choosecharacter(){
     character_picture = new int[Player_number];
     for(int i = 0; i< Player_number; i++) character_picture[i] = -1;
     int TOTAL_CHARACTER_OPTION = 5;
-    Texture choosecharacter;
+    Texture choosecharacter, spotlight_white, spotlight_gold;
     RectButton characteroption[TOTAL_CHARACTER_OPTION], backto_scrolling;
     SDL_Rect characteroption_dest[TOTAL_CHARACTER_OPTION], frame[TOTAL_CHARACTER_OPTION], backbuttondest={100, 600, 200, 100};
     for (int i = 0; i < TOTAL_CHARACTER_OPTION; i++) {
@@ -376,9 +376,9 @@ void Choosecharacter(){
         characteroption_dest[i].w = 150;
         characteroption_dest[i].h = 375;
         frame[i].x = characteroption_dest[i].x - 10;
-        frame[i].y = 165;
+        frame[i].y = 135;
         frame[i].w = 170;
-        frame[i].h = 395;
+        frame[i].h = 405;
         characteroption[i] = RectButton(characteroption_dest[i]);
     }
     backto_scrolling = RectButton(backbuttondest);
@@ -389,6 +389,8 @@ void Choosecharacter(){
     characteroption[4].buttontexture.loadFromFile("../character_image/allenwu.png");
     choosecharacter.loadFromFile("../start_image/choosecharacter_background.png");
     backto_scrolling.buttontexture.loadFromFile("../start_image/back.png");
+    spotlight_white.loadFromFile("../start_image/spotlight_white.png");
+    spotlight_gold.loadFromFile("../start_image/spotlight_gold.png");
 
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
@@ -444,15 +446,25 @@ void Choosecharacter(){
             big = 1;
             if(backto_scrolling.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) big = 0;
             backto_scrolling.rectrender(big);
-            SDL_SetRenderDrawColor(gRenderer, 0x00, 0xFF, 0x00, 0xFF);
-            if(character_picture[Player_number-1] == -1) SDL_RenderFillRect(gRenderer, &frame[tempchoose]);
+
+
+
+
+
             for (int j = 0; j<TOTAL_CHARACTER_OPTION; j++) {
-                if (choosen[j] == 1) {
-                    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
-                    SDL_RenderFillRect(gRenderer, &frame[j]);
-                }
                 characteroption[j].rectrender();
+                if (choosen[j] == 1) {
+                    //SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
+                    //SDL_RenderFillRect(gRenderer, &frame[j]);
+                    spotlight_gold.render(&frame[j]);
+                }
+
             }
+            //SDL_SetRenderDrawColor(gRenderer, 0x00, 0xFF, 0x00, 0xFF);
+            if(character_picture[Player_number-1] == -1) spotlight_white.render(&frame[tempchoose]);
+            //SDL_RenderFillRect(gRenderer, &frame[tempchoose]);
+
+
             SDL_RenderPresent(gRenderer);
             if(nextplayer) break;
         }
