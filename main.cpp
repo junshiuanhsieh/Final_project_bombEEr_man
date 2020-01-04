@@ -367,9 +367,9 @@ void Choosecharacter(){
     character_picture = new int[Player_number];
     for(int i = 0; i< Player_number; i++) character_picture[i] = -1;
     int TOTAL_CHARACTER_OPTION = 5;
-    Texture choosecharacter, spotlight_white, spotlight_gold;
+    Texture choosecharacter, spotlight_white, spotlight_gold, playertext[3];
     RectButton characteroption[TOTAL_CHARACTER_OPTION], backto_scrolling;
-    SDL_Rect characteroption_dest[TOTAL_CHARACTER_OPTION], frame[TOTAL_CHARACTER_OPTION], backbuttondest={100, 600, 200, 100};
+    SDL_Rect characteroption_dest[TOTAL_CHARACTER_OPTION], frame[TOTAL_CHARACTER_OPTION], backbuttondest={100, 600, 200, 100}, text_dest = {350, 50, 500, 100};
     for (int i = 0; i < TOTAL_CHARACTER_OPTION; i++) {
         characteroption_dest[i].x = 125 + i * 200;
         characteroption_dest[i].y = 175;
@@ -391,6 +391,9 @@ void Choosecharacter(){
     backto_scrolling.buttontexture.loadFromFile("../start_image/back.png");
     spotlight_white.loadFromFile("../start_image/spotlight_white.png");
     spotlight_gold.loadFromFile("../start_image/spotlight_gold.png");
+    playertext[0].loadFromFile("../start_image/player1.png");
+    playertext[1].loadFromFile("../start_image/player2.png");
+    playertext[2].loadFromFile("../start_image/player3.png");
 
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
@@ -447,24 +450,15 @@ void Choosecharacter(){
             if(backto_scrolling.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) big = 0;
             backto_scrolling.rectrender(big);
 
-
-
-
-
             for (int j = 0; j<TOTAL_CHARACTER_OPTION; j++) {
                 characteroption[j].rectrender();
                 if (choosen[j] == 1) {
-                    //SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
-                    //SDL_RenderFillRect(gRenderer, &frame[j]);
                     spotlight_gold.render(&frame[j]);
                 }
 
             }
-            //SDL_SetRenderDrawColor(gRenderer, 0x00, 0xFF, 0x00, 0xFF);
             if(character_picture[Player_number-1] == -1) spotlight_white.render(&frame[tempchoose]);
-            //SDL_RenderFillRect(gRenderer, &frame[tempchoose]);
-
-
+            playertext[i].render(&text_dest);
             SDL_RenderPresent(gRenderer);
             if(nextplayer) break;
         }
