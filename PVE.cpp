@@ -71,6 +71,7 @@ int PVE(){
     pause_quit.buttontexture.loadFromFile("../button_image/quit.png");
     resume_button.buttontexture.loadFromFile("../button_image/resume.png");
 
+    SDL_Rect blood_total = {390, 435, 220, 50}, blood_left = {400, 440, 200, 40};
 
     bomb_num = 0;
     bool keypress[12];
@@ -315,6 +316,22 @@ int PVE(){
         }
 
         boss.player_render();
+        SDL_SetRenderDrawColor(gRenderer, 0x00, 0xFF, 0xFF, 0xFF);
+        SDL_RenderFillRect(gRenderer, &blood_total);
+
+        if(Player_number==1){
+            blood_left.w = (boss.boss_life/50.0) * 200;
+        }
+        else if(Player_number==2){
+            blood_left.w = (boss.boss_life/70.0) * 200;
+        }
+        else if(Player_number==3){
+            blood_left.w = (boss.boss_life/90.0) * 200;
+        }
+
+        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
+        SDL_RenderFillRect(gRenderer, &blood_left);
+
         for(int i = 0; i<16; i++){
             for(int j = 0; j<11; j++){
                 map[i][j].render_map();
