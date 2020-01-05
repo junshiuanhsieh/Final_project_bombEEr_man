@@ -229,7 +229,7 @@ int PVP(){
         }
 
         for(int i = 0; i<bomb_num; i++){
-            if(clock() - bomb[i].clk > 100000){
+            if(double(clock() - bomb[i].clk)/CLOCKS_PER_SEC > 1.7){
                 //for(int i = 0; i<bomb_num; i++) cout << "before bomb " << bomb[i].bomb_loc.x << " " << bomb[i].bomb_loc.y << "  owner= " << bomb[i].owner << endl;
                 bomb = *bomb[i].bomb_explode(i, &bomb);
                 i--;

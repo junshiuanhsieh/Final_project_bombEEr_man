@@ -305,7 +305,7 @@ int PVE(){
             }
         }
         for(int i = 0; i<bomb_num; i++){
-            if(clock() - bomb[i].clk > 100000){
+            if(double(clock() - bomb[i].clk)/CLOCKS_PER_SEC > 2.7){
                 bomb = *bomb[i].bomb_explode(i, &bomb);
                 i--;
             }
