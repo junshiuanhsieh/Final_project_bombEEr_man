@@ -32,12 +32,10 @@ int PVE(){
         }
     }
 
-    int map_random;
-    //set map random = 0
-    srand(time(0));
-    map_random = rand()%3;
-    map_random = 0;
-    PVE_map_initialize(map_random);
+    //for the boss to set bomb
+    static int T = 10;
+
+    PVE_map_initialize(0);
 
     PVE_initialize();
 
@@ -146,59 +144,6 @@ int PVE(){
                 }
             }
 
-            static int time = 1;
-            int boss_rage = 0;
-            //boss set bomb
-
-            if(time % (150-boss_rage) ==0) {
-
-                int boss_bombx[6] = {10,11,12,13,14,15};
-                int boss_bomby[6] = {2,2,2,2,2,2};
-
-                for(int i=0;i<6;i++){
-                    boss.player_loc.x = boss_bombx[i];
-                    boss.player_loc.y = boss_bomby[i];
-                    bomb = *boss.putbomb(&bomb);
-                    boss.bomb_left --;
-                }
-
-                    }
-            if(time % (70-boss_rage) ==0) {
-
-                    boss.player_loc.x = 3;
-                    boss.player_loc.y = 0;
-                *boss.putbomb(&bomb);
-                    boss.bomb_left --;
-
-                }
-            if(time % (500-boss_rage) ==0) {
-
-                int boss_bombx[6] = {0,1,2,3,4,5};
-                int boss_bomby[6] = {7,7,7,7,7,7};
-
-                for(int i=0;i<6;i++){
-                    boss.player_loc.x = boss_bombx[i];
-                    boss.player_loc.y = boss_bomby[i];
-                    *boss.putbomb(&bomb);
-                    boss.bomb_left --;
-                }
-
-
-            }
-            if(time%(700-boss_rage)==0){
-
-                int boss_bombx[4] = {10,10,5,5};
-                int boss_bomby[4] = {2,7,8,1};
-
-                for(int i=0;i<4;i++){
-                    boss.player_loc.x = boss_bombx[i];
-                    boss.player_loc.y = boss_bomby[i];
-                    *boss.putbomb(&bomb);
-                    boss.bomb_left --;
-                }
-
-            }
-            time ++;
 
             if(pause.CurrentSprite == BUTTON_SPRITE_MOUSE_DOWN) {
                 bool resume = 0;
@@ -267,6 +212,77 @@ int PVE(){
             }
         }
 
+        //pattern 1
+        if(T % (300) ==0 &&  T % 900!=0) {
+            int boss_bombx[3] = {10,11,12};
+            int boss_bomby[3] = {2,  2, 2 };
+
+            for(int i=0;i<3;i++){
+                boss.player_loc.x = boss_bombx[i];
+                boss.player_loc.y = boss_bomby[i];
+                *boss.putbomb(&bomb);
+                boss.bomb_left --;
+            }
+        }
+        //pattern 2
+        if(T % (300) ==0 && T % 900!=0) {
+            int boss_bombx[3] = { 3, 4, 5};
+            int boss_bomby[3] = { 7, 7, 7};
+
+            for(int i=0;i<3;i++){
+                boss.player_loc.x = boss_bombx[i];
+                boss.player_loc.y = boss_bomby[i];
+                *boss.putbomb(&bomb);
+                boss.bomb_left --;
+            }
+        }
+        //pattern 3
+        if(T % (900) ==0) {
+            int boss_bombx[3] = { 1, 2, 3};
+            int boss_bomby[3] = { 2, 2, 2 };
+
+            for(int i=0;i<3;i++){
+                boss.player_loc.x = boss_bombx[i];
+                boss.player_loc.y = boss_bomby[i];
+                *boss.putbomb(&bomb);
+                boss.bomb_left --;
+            }
+        }
+        //pattern 4
+        if(T % (900) ==0) {
+            int boss_bombx[3] = { 14, 9, 4};
+            int boss_bomby[3] = { 7,  8, 10};
+
+            for(int i=0;i<3;i++){
+                boss.player_loc.x = boss_bombx[i];
+                boss.player_loc.y = boss_bomby[i];
+                *boss.putbomb(&bomb);
+                boss.bomb_left --;
+            }
+        }
+        if(boss.boss_life < 15 && T%1000 == 0){
+
+            boss.player_loc.x = 13;
+            boss.player_loc.y =  3;
+            *boss.putbomb(&bomb);
+            boss.bomb_left --;
+        }
+        if(boss.boss_life < 15 ){
+            if(T % 1200 == 0&& T % 600 != 0){
+                boss.player_loc.x = 7;
+                boss.player_loc.y =  1;
+                *boss.putbomb(&bomb);
+                boss.bomb_left --;
+            }
+            else if(T % 600 == 0){
+                boss.player_loc.x = 7;
+                boss.player_loc.y =  0;
+                *boss.putbomb(&bomb);
+                boss.bomb_left --;
+            }
+        }
+
+
         if (keypress[Key_Up]) player[0].move(UP);
         else if (keypress[Key_Down]) player[0].move(DOWN);
         else if (keypress[Key_Left]) player[0].move(LEFT);
@@ -299,7 +315,7 @@ int PVE(){
         SDL_RenderClear(gRenderer);
         PVE_background.render(NULL);
 
-        bool bigpause=1, bigmusic=1, bighome=1, bigrestart=1, bigquit=1;
+        bool bigpause=1, bigmusic=1;
         if(pause.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT) bigpause = 0;
         pause.circlerender(bigpause);
         if(music_on.CurrentSprite == BUTTON_SPRITE_MOUSE_OUT ) bigmusic = 0;
@@ -313,6 +329,11 @@ int PVE(){
                 player[i].player_render();
                 game_continue = 1;
             }
+        }
+        if(boss.boss_life <= 0){
+            game_continue = 0;
+            SDL_Delay(1000);
+            return 4;
         }
 
         boss.player_render();
@@ -337,11 +358,41 @@ int PVE(){
                 map[i][j].render_map();
             }
         }
+        static int flag[3] = {0};
+        if(boss.boss_life <=40){
+            if(flag[0]==0){
+                cout << "haha" << endl;
+                T=10;
+                flag[0] = 1;
+            }
+            T += 2;
+        }
+        else if(boss.boss_life <=30){
+            if(flag[1]==0){
+                T=10;
+                flag[1] = 1;
+            }
+            T += 5;
+        }
+        else if(boss.boss_life <=15){
+            if(flag[2]==0){
+                T=10;
+                flag[2] = 1;
+            }
+            T += 10;
+        }
+        else T++;
+
+        cout << "T is " << T << endl;
+        cout << "boss' left life is  " << boss.boss_life << endl;
+
+
         PVE_Show_data();
 
         //每秒不知道多少
-        int time = (clock()- start_time)/70000;
+        //int time = (clock()- start_time)/70000;
         //cout << time << endl;
+
         SDL_RenderPresent(gRenderer);
         if(!game_continue) {
             SDL_Delay(1000);
@@ -351,12 +402,12 @@ int PVE(){
     delete [] bomb;
     for(int i = 0; i<16; i++) delete [] map[i];
     delete [] map;
-    return 0;
+    if(boss.boss_life==0) return 4;
+    else return 0;
 }
 
 void PVE_initialize(){
     bomb_texture.loadFromFile("../item_image/bomb.png");
-    itembox_texture.loadFromFile("../item_image/box.png");
     emptybox_texture.loadFromFile("../item_image/empty_box.png");
     explode_texture.loadFromFile("../item_image/explode.png");
     cross_texture.loadFromFile("../item_image/cross.png");
@@ -376,7 +427,9 @@ void PVE_initialize(){
     boss.bomb_distance = 16;
     boss.bomb_available = 100;
     boss.bomb_left =  100;
-    boss.boss_life = 50;
+    if(Player_number==1) boss.boss_life = 50;
+    else if(Player_number==2) boss.boss_life = 70;
+    else if(Player_number==3) boss.boss_life = 90;
 
     for(int i = 0; i<Player_number; i++){
         if(character_picture[i]==0) player[i].picture.loadFromFile("../character_image/character0.png");
@@ -409,6 +462,7 @@ void PVE_initialize(){
 }
 void PVE_map_initialize(int random_num){
     cout << "random = " << random_num << endl;
+
     if(random_num==0){
         map[1][0].wall = map[2][0].wall = map[11][0].wall = map[12][0].wall = map[13][0].wall = 1;
         map[12][1].wall = 1;
@@ -422,17 +476,73 @@ void PVE_map_initialize(int random_num){
         map[0][9].wall = map[1][9].wall = map[0][9].wall = map[7][9].wall = map[14][9].wall = map[15][9].wall = 1;
         map[0][10].wall = map[7][10].wall = map[9][10].wall = map[10][10].wall = map[11][10].wall = 1;
 //
-//        map[1][2].contain_item = map[2][5].contain_item = map[5][7].contain_item = map[7][2].contain_item = 1;
-//        map[14][3].contain_item =map[14][5].contain_item =map[14][8].contain_item =  map[3][4].contain_item =1;
-//        map[10][3].contain_item = map[2][9].contain_item = 1;
+        //here's the locations of items
+        map[3][0].contain_item  =  map[6][0].contain_item  = 1;
+        map[1][1].contain_item =  map[5][1].contain_item = map[8][1].contain_item = map[13][1].contain_item =1;
+        map[7][2].contain_item  = map[14][2].contain_item = 1;
+        map[0][3].contain_item =  map[1][3].contain_item = map[12][3].contain_item =1;
+        //map[0][4].contain_item = map[2][4].contain_item = map[7][4].contain_item = map[8][4].contain_item = 1;
+        map[2][5].contain_item = map[10][5].contain_item = map[13][5].contain_item = map[15][5].contain_item = 1;
+        map[1][6].contain_item =  map[11][6].contain_item = map[13][6].contain_item = 1;
+        map[7][7].contain_item =map[10][7].contain_item =map[13][7].contain_item = 1;
+        map[2][8].contain_item = map[6][8].contain_item = 1;
+        map[3][9].contain_item = map[11][9].contain_item = map[13][9].contain_item = 1;
+        map[5][10].contain_item = 1;
 
-//        map[1][2].which_item = map[2][5].which_item = map[2][9].which_item = 0;
-//        map[5][7].which_item = map[7][2].which_item = 1;
-//        map[14][3].which_item = 2;
-//        map[14][5].which_item = 3;
-//        map[14][8].which_item = 4;
-//        map[3][4].which_item =  5;
-//        map[10][3].which_item = 11;
+        //here's the locations of box with items
+        map[3][0].contain_emptybox  =  map[6][0].contain_emptybox  = 1;
+        map[1][1].contain_emptybox =  map[5][1].contain_emptybox = map[8][1].contain_emptybox = map[13][1].contain_emptybox =1;
+        map[7][2].contain_emptybox = map[14][2].contain_emptybox = 1;
+        map[0][3].contain_emptybox =  map[1][3].contain_emptybox = map[12][3].contain_emptybox =1;
+        //map[0][4].contain_emptybox = map[2][4].contain_emptybox = map[7][4].contain_emptybox = map[8][4].contain_emptybox = 1;
+        map[2][5].contain_emptybox = map[10][5].contain_emptybox = map[13][5].contain_emptybox = map[15][5].contain_emptybox = 1;
+        map[1][6].contain_emptybox = map[11][6].contain_emptybox = map[13][6].contain_emptybox = 1;
+        map[7][7].contain_emptybox = map[10][7].contain_emptybox = map[13][7].contain_emptybox = 1;
+        map[2][8].contain_emptybox = map[6][8].contain_emptybox = 1;
+        map[3][9].contain_emptybox = map[11][9].contain_emptybox = map[13][9].contain_emptybox = 1;
+        map[5][10].contain_emptybox = 1;
+
+        int item0x[3] = { 0, 13, 2};
+        int item0y[3] = { 3,  7, 8};
+        for(int i = 0; i < 3; i++) {
+            map[item0x[i]][item0y[i]].which_item = 0;
+        }
+
+        int  item1x[4] = {13, 15,  1, 11};
+        int  item1y[4] = { 1,  5,  6,  6};
+        for(int i = 0; i<4; i++) {
+            map[item1x[i]][item1y[i]].which_item = 1;
+        }
+
+        int  item2x[2] = {5, 7};
+        int  item2y[2] = {1, 7};
+        for(int i = 0; i<2; i++) {
+            map[item2x[i]][item2y[i]].which_item = 2;
+        }
+
+        int  item3x[3] = {3, 3, 13};
+        int  item3y[3] = {0, 9,  9};
+        for(int i = 0; i<3; i++) {
+            map[item3x[i]][item3y[i]].which_item = 3;
+        }
+
+        int  item4x[3]= { 2, 10, 13};
+        int  item4y[3]= { 5, 5,   5};
+        for(int i = 0; i<3; i++) {
+            map[item4x[i]][item4y[i]].which_item = 4;
+        }
+
+        int  item5x[7] = { 6, 7, 1, 12, 13, 10,  5};
+        int  item5y[7] = { 0, 2, 3,  3,  6,  7, 10};
+        for(int i = 0; i < 7; i++) {
+            map[item5x[i]][item5y[i]].which_item = 5;
+        }
+
+        int  item11x[5] = { 1, 8, 14,  6, 11};
+        int  item11y[5] = { 1, 1,  2,  8,  9};
+        for(int i = 0; i<5; i++) {
+            map[item11x[i]][item11y[i]].which_item = 11;
+        }
 
         for(int i = 6; i < 10; i++) {
             for (int j = 3; j < 7; j++) {
@@ -459,94 +569,7 @@ void PVE_map_initialize(int random_num){
         PVE_background.render(NULL);
         SDL_RenderPresent( gRenderer );
     }
-    else if(random_num==1){
-        map[1][0].wall = map[2][0].wall = map[11][0].wall = map[12][0].wall = map[13][0].wall = 1;
-        map[12][1].wall = 1;
-        map[4][2].wall = map[5][2].wall = 1;
-        map[6][3].wall = map[7][3].wall = map[8][3].wall = map[9][3].wall = map[14][3].wall = map[15][3].wall = 1;
-        map[2][4].wall = map[3][4].wall = map[6][4].wall = map[7][4].wall = map[8][4].wall = map[9][4].wall = map[13][4].wall = map[14][4].wall = 1;
-        map[3][5].wall = map[6][5].wall = map[7][5].wall = map[8][5].wall = map[9][5].wall = 1;
-        map[3][6].wall = map[6][6].wall = map[7][6].wall = map[8][6].wall = map[9][6].wall = 1;
-        map[15][7].wall = 1;
-        map[15][8].wall = 1;
-        map[0][9].wall = map[1][9].wall = map[0][9].wall = map[7][9].wall = map[14][9].wall = map[15][9].wall = 1;
-        map[0][10].wall = map[7][10].wall = map[9][10].wall = map[10][10].wall = map[11][10].wall = 1;
 
-        map[1][2].contain_item = map[2][5].contain_item = map[5][7].contain_item = map[7][2].contain_item = 1;
-        map[14][3].contain_item =map[14][5].contain_item =map[14][8].contain_item =  map[3][4].contain_item =1;
-        map[10][3].contain_item = map[2][9].contain_item = 1;
-
-        map[1][2].which_item = map[2][5].which_item = map[2][9].which_item = 0;
-        map[5][7].which_item = map[7][2].which_item = 1;
-        map[14][3].which_item = 2;
-        map[14][5].which_item = 3;
-        map[14][8].which_item = 4;
-        map[3][4].which_item =  5;
-        map[10][3].which_item = 11;
-
-        map[5][3].contain_emptybox = map[10][8].contain_emptybox =map[7][4].contain_emptybox = map[2][9].contain_emptybox =  1;
-
-        for(int i = 0; i<16; i++) {
-            for (int j = 0; j < 11; j++) {
-                if (map[i][j].contain_emptybox == 1) map[i][j].emptybox = new empty_box;
-                if (map[i][j].contain_item == 1) {
-                    Location temp(i, j);
-                    map[i][j].item = new Item(temp, map[i][j].which_item);
-                }
-            }
-        }
-
-
-        PVE_background.loadFromFile("../PVE_image/background0.png");
-        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-        SDL_RenderClear(gRenderer);
-        PVE_background.render(NULL);
-        SDL_RenderPresent( gRenderer );
-    }
-    else if(random_num==2){
-        map[1][0].wall = map[2][0].wall = map[11][0].wall = map[12][0].wall = map[13][0].wall = 1;
-        map[12][1].wall = 1;
-        map[4][2].wall = map[5][2].wall = 1;
-        map[6][3].wall = map[7][3].wall = map[8][3].wall = map[9][3].wall = map[14][3].wall = map[15][3].wall = 1;
-        map[2][4].wall = map[3][4].wall = map[6][4].wall = map[7][4].wall = map[8][4].wall = map[9][4].wall = map[13][4].wall = map[14][4].wall = 1;
-        map[3][5].wall = map[6][5].wall = map[7][5].wall = map[8][5].wall = map[9][5].wall = 1;
-        map[3][6].wall = map[6][6].wall = map[7][6].wall = map[8][6].wall = map[9][6].wall = 1;
-        map[15][7].wall = 1;
-        map[15][8].wall = 1;
-        map[0][9].wall = map[1][9].wall = map[0][9].wall = map[7][9].wall = map[14][9].wall = map[15][9].wall = 1;
-        map[0][10].wall = map[7][10].wall = map[9][10].wall = map[10][10].wall = map[11][10].wall = 1;
-
-        map[1][2].contain_item = map[2][5].contain_item = map[5][7].contain_item = map[7][2].contain_item = 1;
-        map[14][3].contain_item =map[14][5].contain_item =map[14][8].contain_item =  map[3][4].contain_item =1;
-        map[10][3].contain_item = map[2][9].contain_item = 1;
-
-        map[1][2].which_item = map[2][5].which_item = map[2][9].which_item = 0;
-        map[5][7].which_item = map[7][2].which_item = 1;
-        map[14][3].which_item = 2;
-        map[14][5].which_item = 3;
-        map[14][8].which_item = 4;
-        map[3][4].which_item =  5;
-        map[10][3].which_item = 11;
-
-        map[5][3].contain_emptybox = map[10][8].contain_emptybox =map[7][4].contain_emptybox = map[2][9].contain_emptybox =  1;
-
-        for(int i = 0; i<16; i++) {
-            for (int j = 0; j < 11; j++) {
-                if (map[i][j].contain_emptybox == 1) map[i][j].emptybox = new empty_box;
-                if (map[i][j].contain_item == 1) {
-                    Location temp(i, j);
-                    map[i][j].item = new Item(temp, map[i][j].which_item);
-                }
-            }
-        }
-
-
-        PVE_background.loadFromFile("../PVE_image/background0.png");
-        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-        SDL_RenderClear(gRenderer);
-        PVE_background.render(NULL);
-        SDL_RenderPresent(gRenderer);
-    }
 }
 void PVE_Show_data(){
     static SDL_Rect photo_sticker[3] = {{1000,0,100,100}, {1000,250,100,100}, {1000,500,100,100}};

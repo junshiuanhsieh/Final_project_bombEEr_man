@@ -57,7 +57,9 @@ int Bomb::bomb_up(){
             return i;
         }
         else if(map[bombUp.x][bombUp.y].wall) {
-            if(Mode == 1) boss.boss_life --;
+            if(Mode == 1 &&bombUp.x <=9 && bombUp.x >=6 &bombUp.y >=3 & bombUp.y <= 6){
+                boss.boss_life--;
+            }
             return i-1;
         }
         else if(map[bombUp.x][bombUp.y].contain_emptybox){
@@ -92,7 +94,9 @@ int Bomb::bomb_down(){
             return i;
         }
         else if(map[bombDown.x][bombDown.y].wall) {
-            if(Mode == 1) boss.boss_life --;
+            if(Mode == 1 &&bombDown.x <=9 && bombDown.x >=6 &bombDown.y >=3 & bombDown.y <= 6){
+                boss.boss_life--;
+            }
             return i-1;
         }
         else if(map[bombDown.x][bombDown.y].contain_emptybox){
@@ -127,7 +131,9 @@ int Bomb::bomb_left(){
             return i;
         }
         else if(map[bombLeft.x][bombLeft.y].wall) {
-            if(Mode == 1) boss.boss_life --;
+            if(Mode == 1 &&bombLeft.x <=9 && bombLeft.x >=6 &bombLeft.y >=3 & bombLeft.y <= 6){
+                boss.boss_life--;
+            }
             return i-1;
         }
         else if(map[bombLeft.x][bombLeft.y].contain_emptybox){
@@ -162,7 +168,9 @@ int Bomb::bomb_right(){
             return i;
         }
         else if(map[bombRight.x][bombRight.y].wall) {
-            if(Mode == 1) boss.boss_life --;
+            if(Mode == 1 &&bombRight.x <=9 && bombRight.x >=6 &bombRight.y >=3 & bombRight.y <= 6){
+                boss.boss_life--;
+            }
             return i-1;
         }
         else if(map[bombRight.x][bombRight.y].contain_emptybox){
@@ -177,10 +185,10 @@ int Bomb::bomb_right(){
     return bomb_distance;
 }
 Bomb** Bomb::bomb_explode(int num, Bomb** _bomb){
-    player[owner].bomb_left++;
+    if(owner != -1) player[owner].bomb_left++;
     clk = 0;
-    cout << "bomb " << num << " exploded" << endl;
-    for(int i = 0; i<bomb_num; i++) cout << "before  " << (*_bomb)[i].bomb_loc.x << " " << (*_bomb)[i].bomb_loc.y << "  owner= " << (*_bomb)[i].owner << "  number= " << (*_bomb)[i].number << endl;
+    //cout << "bomb " << num << " exploded" << endl;
+    //for(int i = 0; i<bomb_num; i++) cout << "before  " << (*_bomb)[i].bomb_loc.x << " " << (*_bomb)[i].bomb_loc.y << "  owner= " << (*_bomb)[i].owner << "  number= " << (*_bomb)[i].number << endl;
     map[bomb_loc.x][bomb_loc.y].contain_bomb = 0;
     map[bomb_loc.x][bomb_loc.y].bomb = NULL;
     bomb_num--;
@@ -191,12 +199,9 @@ Bomb** Bomb::bomb_explode(int num, Bomb** _bomb){
         newpointerbomb[i] = (*_bomb)[i+1];
         newpointerbomb[i].number--;
     }
-    for(int i = 0; i<bomb_num; i++) cout << "after  " << newpointerbomb[i].bomb_loc.x << " " << newpointerbomb[i].bomb_loc.y << "  owner= " << newpointerbomb[i].owner << "  number= " << newpointerbomb[i].number << endl;
-
     newpointerbomb = *changemap(&newpointerbomb);
-    for(int i = 0; i<bomb_num; i++) cout << "after change " << newpointerbomb[i].bomb_loc.x << " " << newpointerbomb[i].bomb_loc.y << "  owner= " << newpointerbomb[i].owner << "  number= " << newpointerbomb[i].number << endl;
-
-    cout << "bomb_num" << bomb_num << endl;
+    //for(int i = 0; i<bomb_num; i++) cout << "after change " << newpointerbomb[i].bomb_loc.x << " " << newpointerbomb[i].bomb_loc.y << "  owner= " << newpointerbomb[i].owner << "  number= " << newpointerbomb[i].number << endl;
+    //cout << "bomb_num" << bomb_num << endl;
     if(bomb_num==0) newpointerbomb = NULL;
     Bomb * temppointer;
     temppointer = *_bomb;
@@ -226,7 +231,7 @@ Bomb** Bomb::changemap(Bomb** newpointerbomb){
         bomb_farest[LEFT] = bomb_left();
         bomb_farest[RIGHT] = bomb_right();
     }
-    cout << bomb_farest[UP] << " " << bomb_farest[DOWN] << " " << bomb_farest[LEFT] << " " << bomb_farest[RIGHT] << endl;
+    //cout << bomb_farest[UP] << " " << bomb_farest[DOWN] << " " << bomb_farest[LEFT] << " " << bomb_farest[RIGHT] << endl;
     map[bomb_loc.x][bomb_loc.y].explode_blending = 255;
 
     for(int i = 1; i<=bomb_farest[UP]; i++){
@@ -248,10 +253,10 @@ Bomb** Bomb::changemap(Bomb** newpointerbomb){
             locleft(bomb_loc.x-bomb_farest[LEFT], bomb_loc.y),
             locright(bomb_loc.x+bomb_farest[RIGHT], bomb_loc.y);
 
-    if(map[bomb_loc.x][bomb_loc.y-bomb_farest[UP]].contain_bomb) {bombup = 1; cout << "up" << endl;}
-    if(map[bomb_loc.x][bomb_loc.y+bomb_farest[DOWN]].contain_bomb) {bombdown = 1; cout << "down" << endl;}
-    if(map[bomb_loc.x-bomb_farest[LEFT]][bomb_loc.y].contain_bomb) {bombleft = 1; cout << "left" << endl;}
-    if(map[bomb_loc.x+bomb_farest[RIGHT]][bomb_loc.y].contain_bomb) {bombright = 1; cout << "right" << endl;}
+    if(map[bomb_loc.x][bomb_loc.y-bomb_farest[UP]].contain_bomb) bombup = 1;
+    if(map[bomb_loc.x][bomb_loc.y+bomb_farest[DOWN]].contain_bomb) bombdown = 1;
+    if(map[bomb_loc.x-bomb_farest[LEFT]][bomb_loc.y].contain_bomb) bombleft = 1;
+    if(map[bomb_loc.x+bomb_farest[RIGHT]][bomb_loc.y].contain_bomb) bombright = 1;
 
 
     if(bombup && map[locup.x][locup.y].contain_bomb)
@@ -263,7 +268,7 @@ Bomb** Bomb::changemap(Bomb** newpointerbomb){
     if(bombright && map[locright.x][locright.y].contain_bomb)
         *newpointerbomb = *map[locright.x][locright.y].bomb->bomb_explode(map[locright.x][locright.y].bomb->number, newpointerbomb);
 
-    for(int i = 0; i<bomb_num; i++) cout << (*newpointerbomb)[i].bomb_loc.x << " " << (*newpointerbomb)[i].bomb_loc.y << "  owner= " << (*newpointerbomb)[i].owner << "  number= " << (*newpointerbomb)[i].number << endl;
+    //for(int i = 0; i<bomb_num; i++) cout << (*newpointerbomb)[i].bomb_loc.x << " " << (*newpointerbomb)[i].bomb_loc.y << "  owner= " << (*newpointerbomb)[i].owner << "  number= " << (*newpointerbomb)[i].number << endl;
 
     bomb = *newpointerbomb;
 

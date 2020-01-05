@@ -24,6 +24,7 @@ Player::Player(){
     bomb_available = 1;
     bomb_left = 1;
     rate = 7;
+    player_num = -1;
 }
 Player::Player(int num) : player_num(num){
     alive = true;
@@ -167,7 +168,7 @@ void Player::finish_moving(){
     player_point.y = 105 + player_loc.y*60;
 }
 Bomb** Player::putbomb(Bomb ** _bomb){
-    cout << "player " << player_num << " put bomb " << bomb_num << endl;
+    //cout << "player " << player_num << " put bomb " << bomb_num << endl;
     bomb_num++;
     Bomb newbomb(player_loc,bomb_distance, player_num, bomb_num-1);
     if(*_bomb == NULL){

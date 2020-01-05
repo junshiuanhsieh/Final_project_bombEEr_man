@@ -12,7 +12,7 @@ enum Direction{ UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 
 class Player {
     friend int main(int, char*args[]);
-    friend int quit_restart_home();
+    friend int quit_restart_home(bool);
     friend class Boss;
     friend int PVE();
     friend int PVP();
@@ -46,7 +46,7 @@ private:
 class Boss : public Player {
 
     friend int main(int, char*args[]);
-    friend int quit_restart_home();
+    friend int quit_restart_home(bool);
     friend class Boss;
     friend int PVE();
     friend void PVE_initialize();

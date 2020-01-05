@@ -35,8 +35,7 @@ int PVP(){
     }
     int map_random;
     srand(time(0));
-    map_random = rand()%3;
-    map_random = 0;
+    map_random = rand()%2;
     PVP_map_initialize(map_random);
     PVP_initialize();
 
@@ -281,7 +280,6 @@ int PVP(){
 
 void PVP_initialize(){
     bomb_texture.loadFromFile("../item_image/bomb.png");
-    itembox_texture.loadFromFile("../item_image/box.png");
     emptybox_texture.loadFromFile("../item_image/empty_box.png");
     explode_texture.loadFromFile("../item_image/explode.png");
     cross_texture.loadFromFile("../item_image/cross.png");
@@ -329,20 +327,14 @@ void PVP_map_initialize(int random_num){
     cout << "random = " << random_num << endl;
     if(random_num==0){
         map[3][0].wall = map[6][0].wall = map[7][0].wall = map[8][0].wall = 1;
-        map[2][1].wall = map[3][1].wall = map[3][1].wall = map[6][1].wall = map[7][1].wall = map[8][1].wall = map[10][1].wall = map[11][1].wall = map[12][1].wall = 1;
         map[2][1].wall = map[3][1].wall = map[6][1].wall = map[7][1].wall = map[8][1].wall = map[10][1].wall = map[11][1].wall = map[12][1].wall = 1;
-        map[1][4].wall = map[4][4].wall = map[5][4].wall = map[6][4].wall = map[9][4].wall = map[10][4].wall = map[11][4].wall = 1;
         map[5][2].wall = map[14][2].wall = 1;
         map[14][3].wall = 1;
         map[1][4].wall = map[4][4].wall = map[5][4].wall = map[6][4].wall = map[9][4].wall = map[10][4].wall = map[11][4].wall = map[14][4].wall =1;
         map[1][5].wall = map[4][5].wall = map[5][5].wall = map[6][5].wall = map[9][5].wall = map[10][5].wall = map[11][5].wall = 1;
-        map[1][5].wall = map[4][5].wall = map[5][5].wall = map[6][5].wall = map[9][5].wall = map[10][5].wall = map[11][5].wall = 1;
-        map[0][6].wall = map[9][6].wall = map[11][6].wall = 1;
         map[0][6].wall = map[3][6].wall = map[9][6].wall = map[11][6].wall = 1;
-        map[0][8].wall = map[1][8].wall = 1;
         map[5][7].wall = map[14][7].wall = 1;
         map[0][8].wall = map[1][8].wall = map[9][8].wall = 1;
-        map[0][9].wall = map[1][9].wall = map[4][9].wall = map[7][9].wall = map[8][9].wall = map[12][9].wall = 1;
         map[0][9].wall = map[1][9].wall = map[4][9].wall = map[7][9].wall = map[8][9].wall = map[12][9].wall = 1;
         map[4][10].wall = map[7][10].wall = map[8][10].wall = map[12][10].wall = 1;
 
@@ -442,28 +434,82 @@ void PVP_map_initialize(int random_num){
         SDL_RenderPresent( gRenderer );
     }
     else if(random_num==1){
-        map[3][0].wall = map[6][0].wall = map[7][0].wall = map[8][0].wall = 1;
-        map[2][1].wall = map[3][1].wall = map[3][1].wall = map[6][1].wall = map[7][1].wall = map[8][1].wall = map[10][1].wall = map[11][1].wall = map[12][1].wall = 1;
-        map[1][4].wall = map[4][4].wall = map[5][4].wall = map[6][4].wall = map[9][4].wall = map[10][4].wall = map[11][4].wall = 1;
-        map[1][5].wall = map[4][5].wall = map[5][5].wall = map[6][5].wall = map[9][5].wall = map[10][5].wall = map[11][5].wall = 1;
-        map[0][6].wall = map[9][6].wall = map[11][6].wall = 1;
-        map[0][8].wall = map[1][8].wall = 1;
-        map[0][9].wall = map[1][9].wall = map[4][9].wall = map[7][9].wall = map[8][9].wall = map[12][9].wall = 1;
-        map[4][10].wall = map[7][10].wall = map[8][10].wall = map[12][10].wall = 1;
+        map[1][0].wall = map[6][0].wall = map[7][0].wall = map[8][0].wall = 1;
+        map[2][1].wall = map[4][1].wall = map[6][1].wall = map[7][1].wall = map[8][1].wall = map[10][1].wall = map[11][1].wall = map[12][1].wall = 1;
+        map[14][2].wall = 1;
+        map[7][3].wall = 1;
+        map[1][4].wall = map[4][4].wall = map[5][4].wall = map[6][4].wall = map[9][4].wall = map[10][4].wall = map[11][4].wall =1;
+        map[1][5].wall = map[4][5].wall = map[5][5].wall = map[6][5].wall = map[9][5].wall = map[10][5].wall = map[11][5].wall = map[13][5].wall = 1;
+        map[0][6].wall = map[3][6].wall = map[9][6].wall = map[11][6].wall = 1;
+        map[5][7].wall = map[11][7].wall = 1;
+        map[0][8].wall = map[1][8].wall = map[14][8].wall =map[15][8].wall = 1;
+        map[0][9].wall = map[1][9].wall = map[4][9].wall = map[7][9].wall = map[8][9].wall = map[10][9].wall = 1;
+        map[4][10].wall = map[7][10].wall = map[8][10].wall = map[9][12].wall = map[12][10].wall = 1;
 
-        map[1][2].contain_item = map[2][5].contain_item = map[5][7].contain_item = map[7][2].contain_item = 1;
-        map[14][3].contain_item =map[14][5].contain_item =map[14][8].contain_item =  map[3][4].contain_item =1;
-        map[10][3].contain_item = map[2][9].contain_item = 1;
 
-        map[1][2].which_item = map[2][5].which_item = map[2][9].which_item = 0;
-        map[5][7].which_item = map[7][2].which_item = 1;
-        map[14][3].which_item = 2;
-        map[14][5].which_item = 3;
-        map[14][8].which_item = 4;
-        map[3][4].which_item =  5;
-        map[10][3].which_item = 11;
+        map[11][0].contain_item = 1;
+        map[5][1].contain_item = map[14][1].contain_item =1;
+        map[1][2].contain_item = map[3][2].contain_item =map[4][2].contain_item = map[6][2].contain_item = map[9][2].contain_item = 1;
+        map[10][2].contain_item =map[13][2].contain_item= 1;
+        map[0][3].contain_item = map[2][3].contain_item = map[3][3].contain_item = map[5][3].contain_item = map[8][3].contain_item = 1;
+        map[11][3].contain_item = map[12][3].contain_item =map[14][3].contain_item =map[15][3].contain_item = 1;
+        map[7][4].contain_item = map[8][4].contain_item = map[15][4].contain_item = 1;
+        map[2][5].contain_item = map[7][5].contain_item = map[8][5].contain_item = map[14][5].contain_item = 1;
+        map[4][6].contain_item = map[6][6].contain_item = map[14][6].contain_item = 1;
+        map[1][7].contain_item = map[2][7].contain_item = map[6][7].contain_item = map[8][7].contain_item = map[10][7].contain_item = map[13][7].contain_item = 1;
+        map[2][8].contain_item = map[4][8].contain_item = map[5][8].contain_item = map[7][8].contain_item =  map[11][8].contain_item = 1;
+        map[11][9].contain_item = map[13][9].contain_item = 1;
+        map[2][10].contain_item = map[10][10].contain_item = 1;
 
-        map[5][3].contain_emptybox = map[10][8].contain_emptybox =map[7][4].contain_emptybox = map[2][9].contain_emptybox =  1;
+        //here's the locations of box with items
+        map[11][0].contain_emptybox = 1;
+        map[5][1].contain_emptybox = map[14][1].contain_emptybox =1;
+        map[1][2].contain_emptybox = map[3][2].contain_emptybox =map[4][2].contain_emptybox = map[6][2].contain_emptybox = map[9][2].contain_emptybox = 1;
+        map[10][2].contain_emptybox =map[13][2].contain_emptybox= 1;
+        map[0][3].contain_emptybox = map[2][3].contain_emptybox = map[3][3].contain_emptybox = map[5][3].contain_emptybox = map[8][3].contain_emptybox = 1;
+        map[11][3].contain_emptybox = map[12][3].contain_emptybox =map[14][3].contain_emptybox =map[15][3].contain_emptybox = 1;
+        map[7][4].contain_emptybox = map[8][4].contain_emptybox = map[15][4].contain_emptybox = 1;
+        map[2][5].contain_emptybox = map[7][5].contain_emptybox = map[8][5].contain_emptybox = map[14][5].contain_emptybox = 1;
+        map[4][6].contain_emptybox = map[6][6].contain_emptybox = map[14][6].contain_emptybox = 1;
+        map[1][7].contain_emptybox = map[2][7].contain_emptybox = map[6][7].contain_emptybox = map[8][7].contain_emptybox = map[10][7].contain_emptybox = map[13][7].contain_emptybox = 1;
+        map[2][8].contain_emptybox = map[4][8].contain_emptybox = map[5][8].contain_emptybox = map[7][8].contain_emptybox =  map[11][8].contain_emptybox = 1;
+        map[11][9].contain_emptybox = map[13][9].contain_emptybox = 1;
+        map[2][10].contain_emptybox = map[10][10].contain_emptybox = 1;
+
+        //here's the locations of real empty boxes
+        int emptyboxes_x[41] ={ 3, 4, 5, 13, 13, 0, 2, 7, 11, 15, 1, 6, 9, 13, 0, 3, 13, 14, 0, 15, 2, 8, 12, 13, 15, 0, 3, 7, 9, 6, 8, 13, 2, 3, 6, 9, 12, 14,  2,  5, 13};
+        int emptyboxes_y[41] ={ 0, 0, 0,  0,  1, 2, 2, 2,  2,  2, 3, 3, 3,  3, 4, 4,  4,  4, 5,  5, 6, 6,  6,  6,  6, 7, 7, 7, 7, 8, 8,  8, 9, 9, 9, 9,  9,  9, 10, 10, 10};
+        for(int i = 0; i < 41 ;i++)map[emptyboxes_x[i]][emptyboxes_y[i]].contain_emptybox = 1;
+
+        int item0x[11] = {1, 6, 13, 3, 8, 11, 15, 14, 2, 7, 13};
+        int item0y[11] = {2, 2,  2, 3, 3,  3,  4,  6, 7, 8,  9};
+        for(int i = 0; i<11; i++) map[item0x[i]][item0y[i]].which_item = 0;
+
+        int  item1x[10] = { 14, 9, 0, 2, 5, 15, 13, 2, 5, 11};
+        int  item1y[10] = {  1, 2, 3, 3, 3,  3,  7, 8, 8,  9};
+        for(int i = 0; i<10; i++) map[item1x[i]][item1y[i]].which_item = 1;
+
+        int  item2x[2] = { 8, 6};
+        int  item2y[2] = { 4, 6};
+        for(int i = 0; i<2; i++) map[item2x[i]][item2y[i]].which_item = 2;
+
+        int  item3x[5] = { 11, 4, 6, 4,11};
+        int  item3y[5] = {  0, 2, 7, 8, 8};
+        for(int i = 0; i<5; i++) map[item3x[i]][item3y[i]].which_item = 3;
+
+        int  item4x[3]= {12, 7, 1};
+        int  item4y[3]= { 3, 5, 7};
+        for(int i = 0; i<3; i++) map[item4x[i]][item4y[i]].which_item = 4;
+
+        int  item5x[7] = { 5, 10, 2,  8, 14, 10,  2};
+        int  item5y[7] = { 1,  2, 5,  5,  5,  7, 10};
+        for(int i = 0; i<7; i++) map[item5x[i]][item5y[i]].which_item = 5;
+
+        int  item11x[6] = { 3, 14, 7, 4, 8, 10};
+        int  item11y[6] = { 2,  3, 4, 6, 7, 10};
+        for(int i = 0; i<6; i++) map[item11x[i]][item11y[i]].which_item = 11;
+
+
 
         for(int i = 0; i<16; i++) {
             for (int j = 0; j < 11; j++) {
@@ -475,48 +521,7 @@ void PVP_map_initialize(int random_num){
             }
         }
 
-
-        PVP_background.loadFromFile("../PVP_image/background0.png");
-        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-        SDL_RenderClear(gRenderer);
-        PVP_background.render(NULL);
-        SDL_RenderPresent( gRenderer );
-    }
-    else if(random_num==2){
-        map[3][0].wall = map[6][0].wall = map[7][0].wall = map[8][0].wall = 1;
-        map[2][1].wall = map[3][1].wall = map[3][1].wall = map[6][1].wall = map[7][1].wall = map[8][1].wall = map[10][1].wall = map[11][1].wall = map[12][1].wall = 1;
-        map[1][4].wall = map[4][4].wall = map[5][4].wall = map[6][4].wall = map[9][4].wall = map[10][4].wall = map[11][4].wall = 1;
-        map[1][5].wall = map[4][5].wall = map[5][5].wall = map[6][5].wall = map[9][5].wall = map[10][5].wall = map[11][5].wall = 1;
-        map[0][6].wall = map[9][6].wall = map[11][6].wall = 1;
-        map[0][8].wall = map[1][8].wall = 1;
-        map[0][9].wall = map[1][9].wall = map[4][9].wall = map[7][9].wall = map[8][9].wall = map[12][9].wall = 1;
-        map[4][10].wall = map[7][10].wall = map[8][10].wall = map[12][10].wall = 1;
-
-        map[1][2].contain_item = map[2][5].contain_item = map[5][7].contain_item = map[7][2].contain_item = 1;
-        map[14][3].contain_item =map[14][5].contain_item =map[14][8].contain_item =  map[3][4].contain_item =1;
-        map[10][3].contain_item = map[2][9].contain_item = 1;
-
-        map[1][2].which_item = map[2][5].which_item = map[2][9].which_item = 0;
-        map[5][7].which_item = map[7][2].which_item = 1;
-        map[14][3].which_item = 2;
-        map[14][5].which_item = 3;
-        map[14][8].which_item = 4;
-        map[3][4].which_item =  5;
-        map[10][3].which_item = 11;
-
-        map[5][3].contain_emptybox = map[10][8].contain_emptybox =map[7][4].contain_emptybox = map[2][9].contain_emptybox =  1;
-
-        for(int i = 0; i<16; i++) {
-            for (int j = 0; j < 11; j++) {
-                if (map[i][j].contain_emptybox == 1) map[i][j].emptybox = new empty_box;
-                if (map[i][j].contain_item == 1) {
-                    Location temp(i, j);
-                    map[i][j].item = new Item(temp, map[i][j].which_item);
-                }
-            }
-        }
-
-        PVP_background.loadFromFile("../PVP_image/background0.png");
+        PVP_background.loadFromFile("../PVP_image/background1.png");
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         PVP_background.render(NULL);

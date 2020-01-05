@@ -28,7 +28,7 @@ void Scrolling();
 void Choosecharacter();
 void Tutorial_start();
 void Tutorial();
-int quit_restart_home();
+int quit_restart_home(bool PVE_win);
 
 int main(int argc, char* args[]){
     init();
@@ -47,15 +47,18 @@ int main(int argc, char* args[]){
             if(Mode == 1) endmode = PVE();
             else if(Mode == 2) endmode = PVP();
 
+            bool PVE_win = 0;
+
             if(endmode==1) break;
             else if(endmode==2) continue;
             else if(endmode==3) {quit = 1; break;}
+            else if(endmode==4) PVE_win = 1;
 
             for(int i = 0; i<Player_number; i++) cout << "player " << i << " rank " << player[i].rank << " " << endl;
 
-            endmode = quit_restart_home();
+            endmode = quit_restart_home(PVE_win);
 
-            if(endmode == 3) break;
+            if(endmode == 3 || quit) break;
         }
         if(endmode == 3 || quit) break;
     }
@@ -553,15 +556,14 @@ void Tutorial(){
         }
     }
 }
-int quit_restart_home(){
-    Texture win_background, lose_background, cup, gameend_backgroung, characterpicture[5];
+int quit_restart_home(bool PVE_win){
+    Texture win_background, lose_background, cup, gameend_backgroung, characterpicture[5], nowinner;
     CircleButton home_button, restart_button, quit_button;
 
-    bool win = 0;
-    SDL_Rect win_clip = {0, 0, 900, 200}, lose_clip = {0, 200, 900, 200}, win_lose_dest = {300, 500, 600, 135};
+    //SDL_Rect win_clip = {0, 0, 900, 200}, lose_clip = {0, 200, 900, 200}, win_lose_dest = {300, 500, 600, 135};
     SDL_Rect home_dest = {350, 620, 100, 100}, restart_dest = {550, 620, 100, 100}, quit_dest = {750, 620, 100, 100};
     SDL_Point home_cen = {400, 670}, restart_cen = {600, 670}, quit_cen = {800, 670};
-    SDL_Rect showrank[Player_number], cupdest[Player_number];
+    SDL_Rect showrank[Player_number], cupdest[Player_number], nowinner_dest = {350, 50, 500, 100};
     if(Player_number==2){
         showrank[0].x = 300; showrank[0].y = 100; showrank[0].w = 200; showrank[0].h = 500;
         showrank[1].x = 700; showrank[1].y = 100; showrank[1].w = 200; showrank[1].h = 500;
@@ -583,6 +585,7 @@ int quit_restart_home(){
     win_background.loadFromFile("../PVE_image/win_background.png");
     lose_background.loadFromFile("../PVE_image/lose_background.png");
     cup.loadFromFile("../PVP_image/cup.png");
+    nowinner.loadFromFile("../PVP_image/noonewins.png");
     gameend_backgroung.loadFromFile("../PVP_image/gameend_background.png");
     gameend_backgroung.setBlendMode(SDL_BLENDMODE_BLEND);
     gameend_backgroung.setAlpha(180);
@@ -622,7 +625,7 @@ int quit_restart_home(){
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         if(Mode==1){
-            if(win) win_background.render(NULL);
+            if(PVE_win) win_background.render(NULL);
             else lose_background.render(NULL);
         }
         else if(Mode==2){
@@ -631,7 +634,8 @@ int quit_restart_home(){
                 characterpicture[i].render(&showrank[i]);
             }
             if(no1 != -1) cup.render(&cupdest[no1]);
-            else if (!noonewins){
+            if(noonewins) nowinner.render(&nowinner_dest);
+            else{
                 cup.render(&cupdest[twowinner[0]]);
                 cup.render(&cupdest[twowinner[1]]);
             }

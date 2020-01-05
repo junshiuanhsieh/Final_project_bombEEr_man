@@ -692,15 +692,15 @@ Item.h
 Bomb.h
 /Users/shiuanhsieh/CLionProjects/bombEEr_man/Bomb.h
 
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/PVE.cpp
-PVE.h
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/PVE.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/PVP.cpp
+PVP.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/PVP.h
 cstdlib
 -
 ctime
 -
 
-/Users/shiuanhsieh/CLionProjects/bombEEr_man/PVE.h
+/Users/shiuanhsieh/CLionProjects/bombEEr_man/PVP.h
 iostream
 -
 string
